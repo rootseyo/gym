@@ -126,17 +126,38 @@ window.syncWorkoutsToAdminServer = function syncWorkoutsToAdminServer(extraData 
   if (adminSyncTimeout) clearTimeout(adminSyncTimeout);
 
   adminSyncTimeout = setTimeout(() => {
+    let savedKakao = currentKakaoUser;
+    if (!savedKakao || !savedKakao.kakaoId) {
+      try {
+        const raw = localStorage.getItem('fit_tracker_kakao_user');
+        if (raw) {
+          savedKakao = JSON.parse(raw);
+          if (savedKakao && savedKakao.kakaoId) {
+            currentKakaoUser = savedKakao;
+          }
+        }
+      } catch (e) {}
+    }
+
     const localCollected = window.searchAndCollectAllLocalWorkouts();
     const vid = getOrInitVisitorId();
 
     const adminEndpoint = 'https://admin.brightnetworks.kr/api/gym/sync';
     const payload = {
       visitorId: vid,
-      workouts: (typeof state !== 'undefined' && state.workouts) || localCollected.workouts || {},
+      workouts: (typeof state !== 'undefined' && state.workouts && Object.keys(state.workouts).length > 0)
+        ? state.workouts
+        : (localCollected.workouts || {}),
       customPresets: (typeof state !== 'undefined' && state.customPresets) || localCollected.customPresets || [],
-      ...(currentKakaoUser || {}),
+      kakaoId: (extraData && extraData.kakaoId) || (savedKakao && savedKakao.kakaoId) || null,
+      nickname: (extraData && extraData.nickname) || (savedKakao && savedKakao.nickname) || null,
+      email: (extraData && extraData.email) || (savedKakao && savedKakao.email) || null,
+      profileImage: (extraData && extraData.profileImage) || (savedKakao && savedKakao.profileImage) || null,
+      ...(savedKakao || {}),
       ...extraData
     };
+
+    console.log(`📤 [Admin Sync] Sending sync request (KakaoID: ${payload.kakaoId || 'Guest'}, VisitorID: ${vid}, WorkoutDays: ${Object.keys(payload.workouts).length})`);
 
     fetch(adminEndpoint, {
       method: 'POST',
@@ -144,44 +165,48 @@ window.syncWorkoutsToAdminServer = function syncWorkoutsToAdminServer(extraData 
       body: JSON.stringify(payload),
       credentials: 'include'
     }).then(res => res.json()).then(data => {
-      if (data.success && data.workouts && typeof state !== 'undefined') {
-        let hasNew = false;
-        Object.keys(data.workouts).forEach(dateStr => {
-          if (!state.workouts[dateStr]) {
-            state.workouts[dateStr] = data.workouts[dateStr];
-            hasNew = true;
-          } else {
-            const localList = state.workouts[dateStr];
-            const remoteList = data.workouts[dateStr];
-            if (Array.isArray(remoteList)) {
-              remoteList.forEach(remEx => {
-                if (remEx && remEx.name && !localList.some(locEx => locEx.name === remEx.name)) {
-                  localList.push(remEx);
-                  hasNew = true;
-                }
-              });
+      if (data.success) {
+        if (data.workouts && typeof state !== 'undefined') {
+          let hasNew = false;
+          Object.keys(data.workouts).forEach(dateStr => {
+            if (!state.workouts[dateStr]) {
+              state.workouts[dateStr] = data.workouts[dateStr];
+              hasNew = true;
+            } else {
+              const localList = state.workouts[dateStr];
+              const remoteList = data.workouts[dateStr];
+              if (Array.isArray(remoteList)) {
+                remoteList.forEach(remEx => {
+                  if (remEx && remEx.name && !localList.some(locEx => locEx.name === remEx.name)) {
+                    localList.push(remEx);
+                    hasNew = true;
+                  }
+                });
+              }
             }
+          });
+          if (hasNew && typeof saveState === 'function') {
+            saveState();
+            if (typeof updateUI === 'function') updateUI();
           }
-        });
-        if (hasNew && typeof saveState === 'function') {
-          saveState();
-          if (typeof updateUI === 'function') updateUI();
         }
         lastSyncTimestamp = Date.now();
         updateSyncTimestampDisplay();
-        console.log('✅ Synced with Admin Server DB successfully.');
+        console.log('✅ [Admin Sync] Successfully synchronized with Admin Server DB:', data.user);
 
         if (showNotice) {
-          const workoutDays = Object.keys(state.workouts).length;
-          alert(`🎉 ${currentKakaoUser?.nickname || '카카오 사용자'}님 환영합니다!\n로컬스토리지에 저장된 총 ${workoutDays}일치의 운동 기록이 Admin 서버에 성공적으로 자동 동기화되었습니다.`);
+          const workoutDays = Object.keys(state.workouts || {}).length;
+          alert(`🎉 ${data.user?.nickname || savedKakao?.nickname || '카카오 사용자'}님 환영합니다!\n로컬스토리지에 저장된 총 ${workoutDays}일치의 운동 기록이 Admin 서버(식별번호: ${data.user?.kakaoId || savedKakao?.kakaoId || '-'})에 성공적으로 동기화되었습니다.`);
         }
+      } else {
+        console.warn('⚠️ [Admin Sync] Admin server responded with error:', data);
       }
     }).catch(err => {
-      console.warn('Admin server sync error:', err);
+      console.warn('❌ [Admin Sync] Admin server sync request failed:', err);
     });
 
     // Send analytics login/sync ping
-    if (currentKakaoUser && currentKakaoUser.kakaoId) {
+    if (payload.kakaoId) {
       try {
         fetch('https://admin.brightnetworks.kr/api/analytics/collect', {
           method: 'POST',
