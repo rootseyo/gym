@@ -327,9 +327,18 @@ function updateAuthUIState(user) {
 
   if (isKakaoLoggedIn) {
     if (authModalBtn) authModalBtn.classList.add('logged-in');
-    if (authBadgeDot) authBadgeDot.classList.remove('hidden');
-    if (authLoggedOutView) authLoggedOutView.classList.add('hidden');
-    if (authLoggedInView) authLoggedInView.classList.remove('hidden');
+    if (authBadgeDot) {
+      authBadgeDot.classList.remove('hidden');
+      authBadgeDot.style.display = 'block';
+    }
+    if (authLoggedOutView) {
+      authLoggedOutView.classList.add('hidden');
+      authLoggedOutView.style.display = 'none';
+    }
+    if (authLoggedInView) {
+      authLoggedInView.classList.remove('hidden');
+      authLoggedInView.style.display = 'block';
+    }
 
     const name = currentKakaoUser.nickname || '카카오 연동 사용자';
     const kakaoId = currentKakaoUser.kakaoId || '-';
@@ -342,16 +351,31 @@ function updateAuthUIState(user) {
       if (email) {
         authUserEmail.textContent = email;
         authUserEmailRow.classList.remove('hidden');
+        authUserEmailRow.style.display = 'flex';
       } else {
         authUserEmailRow.classList.add('hidden');
+        authUserEmailRow.style.display = 'none';
       }
     }
   } else {
     // Logged Out State: strictly show login view and hide logout/delete buttons
     if (authModalBtn) authModalBtn.classList.remove('logged-in');
-    if (authBadgeDot) authBadgeDot.classList.add('hidden');
-    if (authLoggedOutView) authLoggedOutView.classList.remove('hidden');
-    if (authLoggedInView) authLoggedInView.classList.add('hidden');
+    if (authBadgeDot) {
+      authBadgeDot.classList.add('hidden');
+      authBadgeDot.style.display = 'none';
+    }
+    if (authLoggedOutView) {
+      authLoggedOutView.classList.remove('hidden');
+      authLoggedOutView.style.display = 'block';
+    }
+    if (authLoggedInView) {
+      authLoggedInView.classList.add('hidden');
+      authLoggedInView.style.display = 'none';
+    }
+    if (authUserEmailRow) {
+      authUserEmailRow.classList.add('hidden');
+      authUserEmailRow.style.display = 'none';
+    }
     if (authUserKakaoId) authUserKakaoId.textContent = '-';
   }
 

@@ -56,6 +56,11 @@ body {
   overflow-x: hidden;
 }
 
+/* Global Utility */
+.hidden {
+  display: none !important;
+}
+
 /* App Container */
 .app-container {
   max-width: 680px;
@@ -2018,6 +2023,12 @@ body {
   padding-right: 4px;
   display: flex;
   flex-direction: column;
+}
+
+.auth-view-container.hidden,
+#authLoggedInView.hidden,
+#authLoggedOutView.hidden {
+  display: none !important;
 }
 
 .auth-btn {
