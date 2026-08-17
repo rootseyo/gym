@@ -150,75 +150,85 @@ const EXERCISE_DATABASE = [
   // 가슴 (Chest)
   { name: '벤치프레스', category: '가슴', weight: 60, reps: 12, restSeconds: 150 },
   { name: '인클라인 벤치프레스', category: '가슴', weight: 50, reps: 12, restSeconds: 120 },
+  { name: '디클라인 벤치프레스', category: '가슴', weight: 55, reps: 12, restSeconds: 120 },
   { name: '덤벨 벤치프레스', category: '가슴', weight: 20, reps: 12, restSeconds: 90 },
   { name: '인클라인 덤벨프레스', category: '가슴', weight: 18, reps: 12, restSeconds: 90 },
   { name: '덤벨 플라이', category: '가슴', weight: 12, reps: 12, restSeconds: 60 },
-  { name: '케이블 플라이', category: '가슴', weight: 15, reps: 15, restSeconds: 60 },
   { name: '체스트 프레스 머신', category: '가슴', weight: 40, reps: 12, restSeconds: 90 },
-  { name: '딥스', category: '가슴', weight: 0, reps: 12, restSeconds: 90 },
+  { name: '인클라인 체스트프레스 머신', category: '가슴', weight: 35, reps: 12, restSeconds: 90 },
   { name: '펙덱 플라이', category: '가슴', weight: 30, reps: 12, restSeconds: 60 },
+  { name: '케이블 크로스오버', category: '가슴', weight: 15, reps: 15, restSeconds: 60 },
+  { name: '스미스머신 벤치프레스', category: '가슴', weight: 50, reps: 12, restSeconds: 120 },
+  { name: '딥스', category: '가슴', weight: 0, reps: 12, restSeconds: 90 },
   { name: '푸쉬업', category: '가슴', weight: 0, reps: 15, restSeconds: 60 },
 
   // 등 (Back)
   { name: '렛풀다운', category: '등', weight: 45, reps: 12, restSeconds: 90 },
-  { name: '바벨 로우', category: '등', weight: 50, reps: 12, restSeconds: 120 },
-  { name: '덤벨 로우', category: '등', weight: 20, reps: 12, restSeconds: 90 },
   { name: '시티드 케이블 로우', category: '등', weight: 40, reps: 12, restSeconds: 90 },
-  { name: '풀업', category: '등', weight: 0, reps: 10, restSeconds: 90 },
-  { name: '친업', category: '등', weight: 0, reps: 10, restSeconds: 90 },
-  { name: '풀다운', category: '등', weight: 45, reps: 12, restSeconds: 90 },
   { name: '풀업 (턱걸이)', category: '등', weight: 0, reps: 10, restSeconds: 90 },
-  { name: '암 풀다운', category: '등', weight: 25, reps: 12, restSeconds: 60 },
-  { name: '티바 로우', category: '등', weight: 35, reps: 12, restSeconds: 90 },
+  { name: '친업', category: '등', weight: 0, reps: 10, restSeconds: 90 },
   { name: '어시스트 풀업', category: '등', weight: 30, reps: 10, restSeconds: 90 },
+  { name: '바벨 로우', category: '등', weight: 50, reps: 12, restSeconds: 120 },
+  { name: '원암 덤벨 로우', category: '등', weight: 20, reps: 12, restSeconds: 90 },
+  { name: '티바 로우', category: '등', weight: 35, reps: 12, restSeconds: 90 },
+  { name: '암 풀다운', category: '등', weight: 25, reps: 12, restSeconds: 60 },
+  { name: '하이 로우 머신', category: '등', weight: 40, reps: 12, restSeconds: 90 },
+  { name: '백 익스텐션', category: '등', weight: 0, reps: 15, restSeconds: 60 },
 
-  // 하체 (Legs)
+  // 하체 (Legs & Glutes)
   { name: '스쿼트', category: '하체', weight: 80, reps: 12, restSeconds: 180 },
+  { name: '스미스머신 스쿼트', category: '하체', weight: 70, reps: 12, restSeconds: 150 },
+  { name: '핵스쿼트', category: '하체', weight: 60, reps: 12, restSeconds: 150 },
   { name: '레그프레스', category: '하체', weight: 100, reps: 12, restSeconds: 120 },
   { name: '레그 익스텐션', category: '하체', weight: 35, reps: 15, restSeconds: 90 },
   { name: '레그컬', category: '하체', weight: 30, reps: 15, restSeconds: 90 },
-  { name: '런지', category: '하체', weight: 12, reps: 12, restSeconds: 90 },
+  { name: '라잉 레그컬', category: '하체', weight: 30, reps: 12, restSeconds: 90 },
+  { name: '이너싸이 (어덕션)', category: '하체', weight: 30, reps: 15, restSeconds: 60 },
+  { name: '아웃싸이 (어브덕션)', category: '하체', weight: 35, reps: 15, restSeconds: 60 },
   { name: '힙 쓰러스터', category: '하체', weight: 60, reps: 12, restSeconds: 120 },
-  { name: '이너바이 (아웃다이)', category: '하체', weight: 30, reps: 15, restSeconds: 60 },
+  { name: '런지', category: '하체', weight: 12, reps: 12, restSeconds: 90 },
+  { name: '불가리안 스플릿 스쿼트', category: '하체', weight: 10, reps: 10, restSeconds: 90 },
   { name: '카프 레이즈', category: '하체', weight: 40, reps: 20, restSeconds: 60 },
-  { name: '덤벨 런지', category: '하체', weight: 10, reps: 12, restSeconds: 90 },
 
   // 어깨 (Shoulders)
-  { name: '숄더프레스', category: '어깨', weight: 30, reps: 12, restSeconds: 120 },
   { name: '오버헤드 프레스 (OHP)', category: '어깨', weight: 40, reps: 10, restSeconds: 150 },
   { name: '덤벨 숄더프레스', category: '어깨', weight: 16, reps: 12, restSeconds: 90 },
+  { name: '숄더프레스 머신', category: '어깨', weight: 30, reps: 12, restSeconds: 120 },
+  { name: '아놀드 프레스', category: '어깨', weight: 14, reps: 12, restSeconds: 90 },
   { name: '사이드 레터럴 레이즈', category: '어깨', weight: 8, reps: 15, restSeconds: 60 },
+  { name: '케이블 사이드 레터럴 레이즈', category: '어깨', weight: 7.5, reps: 15, restSeconds: 60 },
   { name: '프론트 레이즈', category: '어깨', weight: 7, reps: 12, restSeconds: 60 },
   { name: '페이스 풀', category: '어깨', weight: 20, reps: 15, restSeconds: 60 },
   { name: '리어 델토이드 머신', category: '어깨', weight: 25, reps: 15, restSeconds: 60 },
-  { name: '아놀드 프레스', category: '어깨', weight: 14, reps: 12, restSeconds: 90 },
+  { name: '슈러그', category: '어깨', weight: 60, reps: 15, restSeconds: 60 },
 
   // 팔 (Arms)
-  { name: '덤벨 컬', category: '팔', weight: 12, reps: 12, restSeconds: 60 },
   { name: '바벨 컬', category: '팔', weight: 25, reps: 12, restSeconds: 60 },
+  { name: '덤벨 컬', category: '팔', weight: 12, reps: 12, restSeconds: 60 },
   { name: '해머 컬', category: '팔', weight: 12, reps: 12, restSeconds: 60 },
-  { name: '트라이셉스 푸쉬다운', category: '팔', weight: 25, reps: 15, restSeconds: 60 },
-  { name: '라잉 트라이셉스 익스텐션', category: '팔', weight: 20, reps: 12, restSeconds: 60 },
   { name: '프리처 컬', category: '팔', weight: 20, reps: 12, restSeconds: 60 },
-  { name: '오버헤드 트라이셉스 익스텐션', category: '팔', weight: 14, reps: 12, restSeconds: 60 },
+  { name: '트라이셉스 푸쉬다운', category: '팔', weight: 25, reps: 15, restSeconds: 60 },
+  { name: '스컬 크러셔 (라잉 익스텐션)', category: '팔', weight: 20, reps: 12, restSeconds: 60 },
+  { name: '오버헤드 트라이셉스 익스텐션', category: '팔', weight: 15, reps: 12, restSeconds: 60 },
+
+  // 복근/코어 (Core & Abs)
+  { name: '플랭크', category: '복근/코어', weight: 0, reps: 60, restSeconds: 45 },
+  { name: '크런치', category: '복근/코어', weight: 0, reps: 20, restSeconds: 45 },
+  { name: '행잉 레그레이즈', category: '복근/코어', weight: 0, reps: 15, restSeconds: 45 },
+  { name: '케이블 크런치', category: '복근/코어', weight: 30, reps: 15, restSeconds: 45 },
+
+  // 전신 (Full Body)
+  { name: '데드리프트', category: '전신', weight: 100, reps: 8, restSeconds: 180 },
+  { name: '루마니안 데드리프트', category: '전신', weight: 80, reps: 10, restSeconds: 120 },
+  { name: '스모 데드리프트', category: '전신', weight: 100, reps: 8, restSeconds: 180 },
+  { name: '케틀벨 스윙', category: '전신', weight: 16, reps: 20, restSeconds: 60 },
 
   // 유산소 (Cardio)
-  { name: '러닝', category: '유산소', type: 'cardio', weight: 9.0, reps: 20, restSeconds: 30 },
   { name: '런닝머신', category: '유산소', type: 'cardio', weight: 8.5, reps: 20, restSeconds: 30 },
   { name: '사이클', category: '유산소', type: 'cardio', weight: 15.0, reps: 30, restSeconds: 30 },
   { name: '천국의 계단 (스텝밀)', category: '유산소', type: 'cardio', weight: 8.0, reps: 15, restSeconds: 30 },
   { name: '일립티컬', category: '유산소', type: 'cardio', weight: 10.0, reps: 20, restSeconds: 30 },
-  { name: '로잉머신', category: '유산소', type: 'cardio', weight: 2.0, reps: 15, restSeconds: 30 },
-
-  // 전신 & 복근 (Full Body & Core)
-  { name: '데드리프트', category: '전신', weight: 100, reps: 10, restSeconds: 180 },
-  { name: '컨벤셔널 데드리프트', category: '전신', weight: 100, reps: 8, restSeconds: 180 },
-  { name: '루마니안 데드리프트', category: '전신', weight: 80, reps: 10, restSeconds: 120 },
-  { name: '스모 데드리프트', category: '전신', weight: 100, reps: 8, restSeconds: 180 },
-  { name: '플랭크', category: '복근/코어', weight: 0, reps: 60, restSeconds: 45 },
-  { name: '크런치', category: '복근/코어', weight: 0, reps: 20, restSeconds: 45 },
-  { name: '레그레이즈', category: '복근/코어', weight: 0, reps: 15, restSeconds: 45 },
-  { name: '케이블 크런치', category: '복근/코어', weight: 30, reps: 15, restSeconds: 45 }
+  { name: '로잉머신', category: '유산소', type: 'cardio', weight: 2.0, reps: 15, restSeconds: 30 }
 ];
 
 function getDefaultRestForExercise(name, category) {
