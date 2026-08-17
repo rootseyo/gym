@@ -233,9 +233,12 @@
               <div class="selection-title-wrap">
                 <i class="fa-solid fa-chart-line text-cyan"></i>
                 <span class="selection-title">비교할 운동 선택</span>
-                <span class="selection-count-badge" id="selectedExerciseCountBadge">0 / 6개 선택</span>
+                <span class="selection-count-badge" id="selectedExerciseCountBadge">0개 선택됨</span>
               </div>
               <div class="selection-action-wrap">
+                <button type="button" class="btn-select-all" id="btnSelectAllChartExercises" title="현재 목록의 모든 운동 일괄 선택">
+                  <i class="fa-solid fa-check-double"></i> 전체 선택
+                </button>
                 <button type="button" class="btn-clear-selection" id="btnClearChartSelection" title="선택 전체 해제">
                   <i class="fa-solid fa-rotate-left"></i> 선택 초기화
                 </button>
@@ -246,6 +249,7 @@
             <div class="quick-preset-bar" id="quickChartPresetBar">
               <span class="preset-label"><i class="fa-solid fa-bolt text-yellow"></i> 퀵 프리셋:</span>
               <div class="quick-preset-buttons">
+                <button type="button" class="quick-preset-btn highlight-preset" data-preset="all">✨ 전체 운동</button>
                 <button type="button" class="quick-preset-btn" data-preset="big3">🏋️ 3대 운동</button>
                 <button type="button" class="quick-preset-btn" data-preset="chest">가슴</button>
                 <button type="button" class="quick-preset-btn" data-preset="back">등</button>

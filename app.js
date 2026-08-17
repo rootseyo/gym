@@ -774,7 +774,13 @@ const colorPalette = [
   { border: '#8b5cf6', bg: 'rgba(139, 92, 246, 0.15)' }, // Violet
   { border: '#f97316', bg: 'rgba(249, 115, 22, 0.15)' }, // Orange
   { border: '#ec4899', bg: 'rgba(236, 72, 153, 0.15)' }, // Pink
-  { border: '#ffd166', bg: 'rgba(255, 209, 102, 0.15)' } // Gold
+  { border: '#ffd166', bg: 'rgba(255, 209, 102, 0.15)' }, // Gold
+  { border: '#06b6d4', bg: 'rgba(6, 182, 212, 0.15)' },  // Sky
+  { border: '#10b981', bg: 'rgba(16, 185, 129, 0.15)' }, // Mint
+  { border: '#a855f7', bg: 'rgba(168, 85, 247, 0.15)' }, // Purple
+  { border: '#ef4444', bg: 'rgba(239, 68, 68, 0.15)' },  // Red
+  { border: '#eab308', bg: 'rgba(234, 179, 8, 0.15)' },  // Yellow
+  { border: '#3b82f6', bg: 'rgba(59, 130, 246, 0.15)' }, // Blue
 ];
 
 let chartSelectionCategoryFilter = 'ALL';
@@ -820,14 +826,14 @@ function renderExerciseMultiSelectChips() {
   const container = document.getElementById('exerciseMultiSelectContainer');
 
   if (countBadge) {
-    countBadge.textContent = `${state.selectedExercisesForGraph.length} / 6개 선택`;
+    countBadge.textContent = `${state.selectedExercisesForGraph.length}개 선택됨`;
   }
 
   // 1. Render Active Selected Pills (Color-coded legend with removal buttons)
   if (activeBar) {
     activeBar.innerHTML = '';
     if (state.selectedExercisesForGraph.length === 0) {
-      activeBar.innerHTML = '<span style="font-size:0.75rem; color:var(--text-muted);"><i class="fa-solid fa-hand-pointer" style="margin-right:4px;"></i> 비교할 운동을 아래 목록이나 퀵 프리셋에서 선택해 주세요 (최대 6개).</span>';
+      activeBar.innerHTML = '<span style="font-size:0.75rem; color:var(--text-muted);"><i class="fa-solid fa-hand-pointer" style="margin-right:4px;"></i> 비교할 운동을 아래 목록이나 퀵 프리셋에서 선택해 주세요 (전체 선택 가능).</span>';
     } else {
       state.selectedExercisesForGraph.forEach((name, idx) => {
         const color = colorPalette[idx % colorPalette.length];
@@ -916,8 +922,8 @@ function renderExerciseMultiSelectChips() {
         if (isSelected) {
           state.selectedExercisesForGraph = state.selectedExercisesForGraph.filter(n => n !== name);
         } else {
-          if (state.selectedExercisesForGraph.length >= 6) {
-            alert('비교 그래프는 최대 6개 운동까지 선택 가능합니다.');
+          if (state.selectedExercisesForGraph.length >= 24) {
+            alert('비교 그래프는 최대 24개 운동까지 선택 가능합니다.');
             return;
           }
           state.selectedExercisesForGraph.push(name);
@@ -933,6 +939,45 @@ function renderExerciseMultiSelectChips() {
 
 // Initialize Graph Selection Controls & Listeners
 function setupChartSelectionControls() {
+  // Select All Button
+  const btnSelectAll = document.getElementById('btnSelectAllChartExercises');
+  if (btnSelectAll) {
+    btnSelectAll.addEventListener('click', () => {
+      const allNames = getUniqueExerciseNames();
+      if (allNames.length === 0) {
+        alert('등록된 운동 기록이 없습니다.');
+        return;
+      }
+
+      // Filter by current active category & search query if any
+      const targets = allNames.filter(name => {
+        if (chartSelectionCategoryFilter !== 'ALL') {
+          const cat = getExerciseCategoryByName(name);
+          if (cat !== chartSelectionCategoryFilter) return false;
+        }
+        if (chartSelectionSearchQuery) {
+          if (!name.toLowerCase().includes(chartSelectionSearchQuery)) return false;
+        }
+        return true;
+      });
+
+      if (targets.length === 0) {
+        alert('현재 필터 조건에 해당하는 운동이 없습니다.');
+        return;
+      }
+
+      // Add all target names without duplicates
+      targets.forEach(name => {
+        if (!state.selectedExercisesForGraph.includes(name)) {
+          state.selectedExercisesForGraph.push(name);
+        }
+      });
+
+      renderExerciseMultiSelectChips();
+      renderExerciseWeightChart();
+    });
+  }
+
   // Clear Selection Button
   const btnClear = document.getElementById('btnClearChartSelection');
   if (btnClear) {
@@ -951,11 +996,12 @@ function setupChartSelectionControls() {
       const allNames = getUniqueExerciseNames();
       let targets = [];
 
-      if (presetType === 'big3') {
+      if (presetType === 'all') {
+        targets = [...allNames];
+      } else if (presetType === 'big3') {
         const big3Keywords = ['벤치프레스', '스쿼트', '데드리프트'];
         targets = allNames.filter(n => big3Keywords.some(k => n.includes(k))).slice(0, 3);
         if (targets.length === 0) {
-          // Fallback defaults
           targets = ['바벨 벤치프레스', '바벨 백스쿼트', '컨벤셔널 데드리프트'].filter(n => allNames.includes(n));
         }
       } else {
@@ -969,7 +1015,7 @@ function setupChartSelectionControls() {
         };
         const targetCat = catMap[presetType];
         if (targetCat) {
-          targets = allNames.filter(n => getExerciseCategoryByName(n) === targetCat).slice(0, 5);
+          targets = allNames.filter(n => getExerciseCategoryByName(n) === targetCat);
         }
       }
 
