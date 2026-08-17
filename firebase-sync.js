@@ -1,11 +1,203 @@
 /**
- * FitTracker Pro - Authentication & Cloud Sync Engine
+ * FitTracker Pro - Authentication, LocalStorage Aggregator & Cloud Sync Engine
  */
 
 let currentUser = null;
 let currentKakaoUser = null;
 let cloudSyncTimeout = null;
+let adminSyncTimeout = null;
 let lastSyncTimestamp = null;
+
+// Get or initialize unique visitor ID in LocalStorage
+function getOrInitVisitorId() {
+  let vid = localStorage.getItem('fit_tracker_visitor_id');
+  if (!vid) {
+    vid = 'gym_' + Math.random().toString(36).substring(2, 15) + Date.now().toString(36);
+    localStorage.setItem('fit_tracker_visitor_id', vid);
+  }
+  return vid;
+}
+
+// Deep LocalStorage Scanner & Aggregator
+window.searchAndCollectAllLocalWorkouts = function searchAndCollectAllLocalWorkouts() {
+  const mergedWorkouts = {};
+  const mergedPresets = [];
+
+  // 1. Check primary state
+  if (typeof state !== 'undefined' && state.workouts && typeof state.workouts === 'object') {
+    Object.keys(state.workouts).forEach(dateKey => {
+      if (Array.isArray(state.workouts[dateKey]) && state.workouts[dateKey].length > 0) {
+        mergedWorkouts[dateKey] = JSON.parse(JSON.stringify(state.workouts[dateKey]));
+      }
+    });
+  }
+
+  // 2. Scan all known LocalStorage workout keys
+  const targetWorkoutKeys = [
+    'fit_tracker_workouts_v1',
+    'fit_tracker_workouts',
+    'fit_tracker_exercises'
+  ];
+
+  targetWorkoutKeys.forEach(k => {
+    try {
+      const raw = localStorage.getItem(k);
+      if (raw) {
+        const parsed = JSON.parse(raw);
+        if (parsed && typeof parsed === 'object') {
+          Object.keys(parsed).forEach(dateKey => {
+            if (/^\d{4}-\d{2}-\d{2}$/.test(dateKey) && Array.isArray(parsed[dateKey])) {
+              if (!mergedWorkouts[dateKey]) {
+                mergedWorkouts[dateKey] = parsed[dateKey];
+              } else {
+                parsed[dateKey].forEach(ex => {
+                  if (ex && ex.name && !mergedWorkouts[dateKey].some(e => e.name === ex.name)) {
+                    mergedWorkouts[dateKey].push(ex);
+                  }
+                });
+              }
+            }
+          });
+        }
+      }
+    } catch (e) {
+      console.warn('Error reading workout key:', k, e);
+    }
+  });
+
+  // 3. Scan all arbitrary localStorage keys for date-formatted keys
+  for (let i = 0; i < localStorage.length; i++) {
+    const key = localStorage.key(i);
+    if (!key) continue;
+
+    if (/^\d{4}-\d{2}-\d{2}$/.test(key)) {
+      try {
+        const raw = localStorage.getItem(key);
+        if (raw) {
+          const parsed = JSON.parse(raw);
+          if (Array.isArray(parsed) && parsed.length > 0) {
+            if (!mergedWorkouts[key]) {
+              mergedWorkouts[key] = parsed;
+            }
+          }
+        }
+      } catch (e) {}
+    }
+  }
+
+  // 4. Presets scanner
+  const presetKeys = ['fit_tracker_custom_presets_v1', 'fit_tracker_custom_presets'];
+  presetKeys.forEach(pk => {
+    try {
+      const raw = localStorage.getItem(pk);
+      if (raw) {
+        const parsed = JSON.parse(raw);
+        if (Array.isArray(parsed)) {
+          parsed.forEach(p => {
+            if (p && p.name && !mergedPresets.some(mp => mp.name === p.name)) {
+              mergedPresets.push(p);
+            }
+          });
+        }
+      }
+    } catch (e) {}
+  });
+
+  // Sync back into live state if missing
+  if (typeof state !== 'undefined') {
+    let stateChanged = false;
+    Object.keys(mergedWorkouts).forEach(d => {
+      if (!state.workouts[d]) {
+        state.workouts[d] = mergedWorkouts[d];
+        stateChanged = true;
+      }
+    });
+    if (stateChanged && typeof saveState === 'function') {
+      saveState();
+      if (typeof updateUI === 'function') updateUI();
+    }
+  }
+
+  return { workouts: mergedWorkouts, customPresets: mergedPresets };
+};
+
+// Global Admin Sync Helper
+window.syncWorkoutsToAdminServer = function syncWorkoutsToAdminServer(extraData = {}, showNotice = false) {
+  if (adminSyncTimeout) clearTimeout(adminSyncTimeout);
+
+  adminSyncTimeout = setTimeout(() => {
+    const localCollected = window.searchAndCollectAllLocalWorkouts();
+    const vid = getOrInitVisitorId();
+
+    const adminEndpoint = 'https://admin.brightnetworks.kr/api/gym/sync';
+    const payload = {
+      visitorId: vid,
+      workouts: (typeof state !== 'undefined' && state.workouts) || localCollected.workouts || {},
+      customPresets: (typeof state !== 'undefined' && state.customPresets) || localCollected.customPresets || [],
+      ...(currentKakaoUser || {}),
+      ...extraData
+    };
+
+    fetch(adminEndpoint, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload),
+      credentials: 'include'
+    }).then(res => res.json()).then(data => {
+      if (data.success && data.workouts && typeof state !== 'undefined') {
+        let hasNew = false;
+        Object.keys(data.workouts).forEach(dateStr => {
+          if (!state.workouts[dateStr]) {
+            state.workouts[dateStr] = data.workouts[dateStr];
+            hasNew = true;
+          } else {
+            const localList = state.workouts[dateStr];
+            const remoteList = data.workouts[dateStr];
+            if (Array.isArray(remoteList)) {
+              remoteList.forEach(remEx => {
+                if (remEx && remEx.name && !localList.some(locEx => locEx.name === remEx.name)) {
+                  localList.push(remEx);
+                  hasNew = true;
+                }
+              });
+            }
+          }
+        });
+        if (hasNew && typeof saveState === 'function') {
+          saveState();
+          if (typeof updateUI === 'function') updateUI();
+        }
+        lastSyncTimestamp = Date.now();
+        updateSyncTimestampDisplay();
+        console.log('✅ Synced with Admin Server DB successfully.');
+
+        if (showNotice) {
+          const workoutDays = Object.keys(state.workouts).length;
+          alert(`🎉 ${currentKakaoUser?.nickname || '카카오 사용자'}님 환영합니다!\n로컬스토리지에 저장된 총 ${workoutDays}일치의 운동 기록이 Admin 서버에 성공적으로 자동 동기화되었습니다.`);
+        }
+      }
+    }).catch(err => {
+      console.warn('Admin server sync error:', err);
+    });
+
+    // Send analytics login/sync ping
+    if (currentKakaoUser && currentKakaoUser.kakaoId) {
+      try {
+        fetch('https://admin.brightnetworks.kr/api/analytics/collect', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            siteId: 'gym-app',
+            path: '/kakao-sync',
+            visitorId: vid,
+            userAgent: navigator.userAgent,
+            screenWidth: window.innerWidth
+          })
+        }).catch(() => {});
+      } catch (e) {}
+    }
+  }, 250);
+};
 
 // Initialize Kakao SDK immediately
 window.initKakaoSDK = function() {
@@ -43,7 +235,10 @@ window.onKakaoNativeLoginSuccess = function(userData) {
   localStorage.setItem('fit_tracker_kakao_user', JSON.stringify(currentKakaoUser));
 
   updateAuthUIState(currentKakaoUser);
-  syncWorkoutsToAdminServer(currentKakaoUser);
+  
+  // Collect local storage and sync to Admin DB
+  window.searchAndCollectAllLocalWorkouts();
+  window.syncWorkoutsToAdminServer(currentKakaoUser, true);
 
   if (typeof firebase !== 'undefined' && firebase.auth && firebase.auth()) {
     firebase.auth().signInAnonymously().catch(() => {});
@@ -51,8 +246,6 @@ window.onKakaoNativeLoginSuccess = function(userData) {
 
   const authModal = document.getElementById('authModal');
   if (authModal) authModal.classList.add('hidden');
-
-  alert(`${nickname}님, 클라우드 동기화 완료!`);
 };
 
 window.onKakaoNativeLoginFailure = function(errorMsg) {
@@ -98,7 +291,10 @@ window.signInWithKakao = function signInWithKakao() {
             localStorage.setItem('fit_tracker_kakao_user', JSON.stringify(currentKakaoUser));
 
             updateAuthUIState(currentKakaoUser);
-            syncWorkoutsToAdminServer(currentKakaoUser);
+            
+            // Search all LocalStorage records and synchronize with Admin DB
+            window.searchAndCollectAllLocalWorkouts();
+            window.syncWorkoutsToAdminServer(currentKakaoUser, true);
 
             if (typeof firebase !== 'undefined' && firebase.auth && firebase.auth()) {
               firebase.auth().signInAnonymously().catch(() => {});
@@ -106,8 +302,6 @@ window.signInWithKakao = function signInWithKakao() {
 
             const authModal = document.getElementById('authModal');
             if (authModal) authModal.classList.add('hidden');
-
-            alert(`${nickname}님, 클라우드 동기화 완료!`);
           },
           fail: function(err) {
             console.error('Kakao API error:', err);
@@ -126,7 +320,6 @@ window.signInWithKakao = function signInWithKakao() {
     const existing = document.querySelector('script[src*="kakao.min.js"]');
     if (existing) {
       existing.onload = proceedLogin;
-      // If script is already in DOM, trigger load check
       setTimeout(proceedLogin, 500);
     } else {
       const script = document.createElement('script');
@@ -167,12 +360,14 @@ window.deleteAccountAndData = function deleteAccountAndData() {
   const confirmed = confirm('정말로 계정을 탈퇴하고 저장된 모든 운동 기록 및 클라우드 데이터를 삭제하시겠습니까?\n이 작업은 취소할 수 없으며 모든 데이터가 즉시 영구 삭제됩니다.');
   if (!confirmed) return;
 
+  const vid = getOrInitVisitorId();
+
   // 1. Delete data on Admin Server DB
   const adminEndpoint = 'https://admin.brightnetworks.kr/api/gym/sync';
   fetch(adminEndpoint, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ delete: true, ...(currentKakaoUser || {}) }),
+    body: JSON.stringify({ delete: true, visitorId: vid, ...(currentKakaoUser || {}) }),
     credentials: 'include'
   }).catch(e => console.warn('Admin delete sync error:', e));
 
@@ -210,6 +405,7 @@ window.deleteAccountAndData = function deleteAccountAndData() {
     state.customPresets = [];
   }
   localStorage.removeItem('fit_tracker_workouts_v1');
+  localStorage.removeItem('fit_tracker_workouts');
   localStorage.removeItem('fit_tracker_custom_presets_v1');
   localStorage.removeItem('fit_tracker_kakao_user');
 
@@ -226,43 +422,6 @@ window.deleteAccountAndData = function deleteAccountAndData() {
 
   const authModal = document.getElementById('authModal');
   if (authModal) authModal.classList.add('hidden');
-};
-
-// Global Admin Sync Helper
-window.syncWorkoutsToAdminServer = function syncWorkoutsToAdminServer(extraData = {}) {
-  const adminEndpoint = 'https://admin.brightnetworks.kr/api/gym/sync';
-  const payload = {
-    workouts: (typeof state !== 'undefined' && state.workouts) || {},
-    customPresets: (typeof state !== 'undefined' && state.customPresets) || [],
-    ...(currentKakaoUser || {}),
-    ...extraData
-  };
-
-  fetch(adminEndpoint, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(payload),
-    credentials: 'include'
-  }).then(res => res.json()).then(data => {
-    if (data.success && data.workouts && typeof state !== 'undefined') {
-      let hasNew = false;
-      Object.keys(data.workouts).forEach(dateStr => {
-        if (!state.workouts[dateStr]) {
-          state.workouts[dateStr] = data.workouts[dateStr];
-          hasNew = true;
-        }
-      });
-      if (hasNew && typeof saveState === 'function') {
-        saveState();
-        if (typeof updateUI === 'function') updateUI();
-      }
-      lastSyncTimestamp = Date.now();
-      updateSyncTimestampDisplay();
-      console.log('Synced with Admin Server DB successfully.');
-    }
-  }).catch(err => {
-    console.warn('Admin server sync error:', err);
-  });
 };
 
 // Initialize Firebase & Kakao Sync Engine (Safe Wrapper)
