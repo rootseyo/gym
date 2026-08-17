@@ -543,7 +543,6 @@ function sanitizeExerciseSets(ex) {
   ex.sets.forEach((s, idx) => {
     s.setNumber = idx + 1;
     if (!s.type) s.type = 'working'; // 'working' | 'warmup' | 'failure' | 'drop'
-    if (s.rir === undefined) s.rir = 2; // Default RIR 2 (2 reps before failure)
   });
   ex.targetSets = ex.sets.length;
 }
@@ -1267,20 +1266,6 @@ function toggleSetType(exId, setIdx) {
   updateUI();
 }
 
-function toggleSetRir(exId, setIdx) {
-  const list = state.workouts[state.currentDate] || [];
-  const ex = list.find(e => e.id === exId);
-  if (!ex || !ex.sets[setIdx]) return;
-
-  const rirCycle = [2, 1, 0, 3];
-  const current = ex.sets[setIdx].rir !== undefined ? ex.sets[setIdx].rir : 2;
-  const nextRir = rirCycle[(rirCycle.indexOf(current) + 1) % rirCycle.length];
-
-  ex.sets[setIdx].rir = nextRir;
-  saveState();
-  updateUI();
-}
-
 function adjustSetField(exId, setIdx, field, delta) {
   const list = state.workouts[state.currentDate] || [];
   const ex = list.find(e => e.id === exId);
@@ -1374,9 +1359,6 @@ function renderExerciseList(exercises) {
       const typeClass = `type-${s.type || 'working'}`;
       const rowClass = isWarmup ? 'set-row-warmup' : (s.type === 'failure' ? 'set-row-failure' : (s.type === 'drop' ? 'set-row-drop' : ''));
 
-      const rirVal = s.rir !== undefined ? s.rir : 2;
-      const rirLabel = rirVal === 0 ? 'RIR 0 (한계)' : (rirVal === 1 ? 'RIR 1' : (rirVal === 2 ? 'RIR 2' : 'RIR 3+'));
-
       setsRowsHtml += `
         <tr class="${rowClass}">
           <td>
@@ -1416,15 +1398,6 @@ function renderExerciseList(exercises) {
               <button type="button" class="step-quick-btn" onclick="adjustSetField('${ex.id}', ${setIdx}, 'actualReps', 1)" title="1 증가">+</button>
             </div>
           </td>
-          ${!isCardio ? `
-            <td class="rir-cell">
-              <button type="button" class="rir-btn rir-${rirVal}"
-                onclick="toggleSetRir('${ex.id}', ${setIdx})"
-                title="RIR (실패 지점까지 남은 횟수) 토글">
-                ${rirLabel}
-              </button>
-            </td>
-          ` : ''}
           <td>
             <button class="complete-set-btn ${s.completed ? 'completed' : ''}"
               data-exercise-id="${ex.id}" data-set-index="${setIdx}"
@@ -1488,7 +1461,6 @@ function renderExerciseList(exercises) {
               <th>${weightLabel}</th>
               <th>${isCardio ? '목표(분)' : '목표(회)'}</th>
               <th>${isCardio ? '실제(분)' : '실제(회)'}</th>
-              ${!isCardio ? '<th>RIR</th>' : ''}
               <th>완료</th>
               <th>삭제</th>
             </tr>
@@ -1720,7 +1692,6 @@ function addExercise(name, category, defaultWeight = 40, defaultReps = 12, restS
       weight: initWeight,
       targetReps: numReps,
       actualReps: numReps,
-      rir: 2,
       completed: false
     });
   }
@@ -1846,7 +1817,6 @@ function addSetToExercise(exId) {
     weight: Number(lastSet.weight) || (isCardio ? 9.0 : 40),
     targetReps: Number(lastSet.targetReps) || (isCardio ? 20 : 12),
     actualReps: Number(lastSet.actualReps) || Number(lastSet.targetReps) || (isCardio ? 20 : 12),
-    rir: lastSet.rir !== undefined ? lastSet.rir : 2,
     completed: false
   });
 
@@ -2245,7 +2215,6 @@ function generateRoutineCodeData() {
       tr: Number(s.targetReps) || 12,
       ar: Number(s.actualReps) || Number(s.targetReps) || 12,
       tp: s.type || 'working',
-      rir: s.rir !== undefined ? s.rir : 2,
       cmp: s.completed ? 1 : 0
     }))
   }));
@@ -2308,7 +2277,6 @@ function generateWorkoutSummaryText() {
       const targetReps = Number(set.targetReps) || 0;
       const actualReps = Number(set.actualReps) || 0;
       const setTypeTag = set.type === 'warmup' ? '[웜업 W]' : (set.type === 'failure' ? '[실패 F]' : (set.type === 'drop' ? '[드롭 D]' : '[본세트]'));
-      const rirStr = set.rir !== undefined ? ` · RIR ${set.rir}` : '';
 
       if (cardio) {
         if (set.completed) {
@@ -2320,7 +2288,7 @@ function generateWorkoutSummaryText() {
       } else if (set.completed) {
         const setVolume = weight * actualReps;
         const volDesc = set.type === 'warmup' ? '(웜업 볼륨 제외)' : `· 볼륨 ${formatWorkoutNumber(setVolume)}kg`;
-        lines.push(`- ${setIndex + 1}세트 ${setTypeTag}: ${formatWorkoutNumber(weight)}kg × ${formatWorkoutNumber(actualReps)}회 (목표 ${formatWorkoutNumber(targetReps)}회)${rirStr} ${volDesc} · 완료`);
+        lines.push(`- ${setIndex + 1}세트 ${setTypeTag}: ${formatWorkoutNumber(weight)}kg × ${formatWorkoutNumber(actualReps)}회 (목표 ${formatWorkoutNumber(targetReps)}회) ${volDesc} · 완료`);
       } else {
         lines.push(`- ${setIndex + 1}세트 ${setTypeTag}: ${formatWorkoutNumber(weight)}kg × 목표 ${formatWorkoutNumber(targetReps)}회 · 미완료`);
       }
@@ -2338,7 +2306,7 @@ function generateWorkoutCodePrompt() {
 내 운동 요청을 바탕으로 아래 스키마의 JSON만 응답하세요. 설명이나 인사말, 마크다운 코드 블록(\`\`\`)은 포함하지 마세요.
 
 형식:
-{"type":"FIT_TRACKER_ROUTINE","v":1,"data":[{"idx":0,"n":"벤치프레스","c":"가슴","t":"strength","rst":150,"s":[{"w":60,"tr":12,"ar":12,"tp":"working","rir":2,"cmp":0}]}]}
+{"type":"FIT_TRACKER_ROUTINE","v":1,"data":[{"idx":0,"n":"벤치프레스","c":"가슴","t":"strength","rst":150,"s":[{"w":60,"tr":12,"ar":12,"tp":"working","cmp":0}]}]}
 
 필드 규칙:
 - data: 운동 종목 배열
@@ -2352,7 +2320,6 @@ function generateWorkoutCodePrompt() {
 - tr: 근력은 목표 횟수, 유산소는 목표 시간(분)
 - ar: 새 루틴에서는 tr과 같은 값
 - tp: 세트 타입. working(본세트), warmup(웜업), failure(실패지점), drop(드롭세트)
-- rir: 실패까지 남은 횟수 (0~3)
 - cmp: 새 루틴에서는 항상 0
 
 각 운동에 현실적인 중량, 횟수, 세트 수를 넣고 모든 숫자는 따옴표 없는 숫자로 작성하세요.
@@ -2456,7 +2423,6 @@ function parseAndImportRoutineCode(codeStr) {
         const targetReps = Number(s.tr);
         const actualReps = Number(s.ar);
         const setType = ['working', 'warmup', 'failure', 'drop'].includes(s.tp) ? s.tp : 'working';
-        const rir = Number.isInteger(s.rir) ? s.rir : 2;
 
         return {
           setNumber: idx + 1,
@@ -2466,12 +2432,11 @@ function parseAndImportRoutineCode(codeStr) {
           actualReps: Number.isFinite(actualReps) && actualReps >= 0
             ? actualReps
             : (Number.isFinite(targetReps) && targetReps > 0 ? targetReps : (type === 'cardio' ? 20 : 12)),
-          rir: rir,
           completed: s.cmp === 1
         };
       });
       const importedSets = fullSets.length > 0 ? fullSets : [
-        { setNumber: 1, type: 'working', weight: type === 'cardio' ? 9.0 : 40, targetReps: type === 'cardio' ? 20 : 12, actualReps: type === 'cardio' ? 20 : 12, rir: 2, completed: false }
+        { setNumber: 1, type: 'working', weight: type === 'cardio' ? 9.0 : 40, targetReps: type === 'cardio' ? 20 : 12, actualReps: type === 'cardio' ? 20 : 12, completed: false }
       ];
 
       importedExercises.push({

@@ -2511,50 +2511,6 @@ tr.set-row-warmup input[type="number"] {
   color: #fdba74;
 }
 
-/* RIR (Reps in Reserve) Controls */
-.rir-cell {
-  white-space: nowrap;
-}
-
-.rir-btn {
-  padding: 4px 6px;
-  background: var(--bg-input);
-  border: 1px solid var(--border-color);
-  border-radius: var(--radius-sm);
-  color: var(--text-muted);
-  font-size: 0.75rem;
-  font-weight: 700;
-  cursor: pointer;
-  transition: var(--transition-fast);
-  min-width: 44px;
-}
-
-.rir-btn:hover {
-  border-color: var(--accent-cyan);
-  color: var(--text-main);
-}
-
-.rir-btn.rir-0 {
-  color: #ef4444;
-  border-color: rgba(239, 68, 68, 0.4);
-  background: rgba(239, 68, 68, 0.1);
-}
-
-.rir-btn.rir-1 {
-  color: #f97316;
-  border-color: rgba(249, 115, 22, 0.4);
-}
-
-.rir-btn.rir-2 {
-  color: var(--accent-emerald);
-  border-color: rgba(0, 230, 118, 0.4);
-}
-
-.rir-btn.rir-3 {
-  color: var(--accent-cyan);
-  border-color: rgba(0, 242, 254, 0.4);
-}
-
 /* Exercise Card Top Badges (Rest Time, 1RM, PR) */
 .ex-card-badges {
   display: flex;
