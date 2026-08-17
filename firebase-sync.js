@@ -433,20 +433,24 @@ function initFirebaseSync() {
       if (parsed && parsed.kakaoId) {
         currentKakaoUser = parsed;
         updateAuthUIState(currentKakaoUser);
-        syncWorkoutsToAdminServer(currentKakaoUser);
+        window.syncWorkoutsToAdminServer(currentKakaoUser);
       } else {
         currentKakaoUser = null;
         localStorage.removeItem('fit_tracker_kakao_user');
         updateAuthUIState(null);
+        window.syncWorkoutsToAdminServer();
       }
     } catch (e) {
       console.warn('Saved Kakao user parse error:', e);
       currentKakaoUser = null;
       updateAuthUIState(null);
+      window.syncWorkoutsToAdminServer();
     }
   } else {
     currentKakaoUser = null;
     updateAuthUIState(null);
+    // Guest auto-sync on startup
+    window.syncWorkoutsToAdminServer();
   }
 
   try {
@@ -468,6 +472,18 @@ function initFirebaseSync() {
 
   // Initialize Kakao SDK on page load
   window.initKakaoSDK();
+
+  // Trigger sync on online/visibility change events
+  window.addEventListener('online', () => {
+    console.log('🌐 Network online detected. Triggering Admin sync...');
+    window.syncWorkoutsToAdminServer(currentKakaoUser || {});
+  });
+
+  document.addEventListener('visibilitychange', () => {
+    if (!document.hidden) {
+      window.syncWorkoutsToAdminServer(currentKakaoUser || {});
+    }
+  });
 }
 
 // Update UI badges & status text based on auth state
