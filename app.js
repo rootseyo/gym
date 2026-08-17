@@ -766,6 +766,7 @@ function renderExerciseHintDropdown(query) {
 
 // Multi-Exercise Graph Selection & Chart Engine
 let exerciseChart = null;
+let muscleBalanceChart = null;
 
 const colorPalette = [
   { border: '#00f2fe', bg: 'rgba(0, 242, 254, 0.15)' },  // Cyan
@@ -776,17 +777,18 @@ const colorPalette = [
   { border: '#ffd166', bg: 'rgba(255, 209, 102, 0.15)' } // Gold
 ];
 
-function getAllUniqueExerciseNames() {
+function getUniqueExerciseNames() {
   const namesSet = new Set();
   Object.values(state.workouts).forEach(exerciseList => {
     if (Array.isArray(exerciseList)) {
       exerciseList.forEach(ex => {
-        if (ex && ex.name) namesSet.add(ex.name);
+        if (ex && ex.name && ex.name.trim()) namesSet.add(ex.name.trim());
       });
     }
   });
   return Array.from(namesSet);
 }
+const getAllUniqueExerciseNames = getUniqueExerciseNames;
 
 function renderExerciseMultiSelectChips() {
   const container = document.getElementById('exerciseMultiSelectContainer');
@@ -1042,8 +1044,9 @@ function renderExerciseWeightChart() {
     });
   });
 
-  if (exerciseChart) {
+  if (exerciseChart && typeof exerciseChart.destroy === 'function') {
     exerciseChart.destroy();
+    exerciseChart = null;
   }
 
   let yTitle = '추정 1RM (kg)';
@@ -1156,8 +1159,9 @@ function renderMuscleBalanceChart() {
   const setsData = categories.map(c => categoryStats[c].sets);
   const colors = categories.map(c => categoryStats[c].color);
 
-  if (muscleBalanceChart) {
+  if (muscleBalanceChart && typeof muscleBalanceChart.destroy === 'function') {
     muscleBalanceChart.destroy();
+    muscleBalanceChart = null;
   }
 
   muscleBalanceChart = new Chart(ctx, {
