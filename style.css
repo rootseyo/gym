@@ -1636,17 +1636,18 @@ body {
 }
 
 .sets-table th {
-  font-size: 0.78rem;
+  font-size: 0.76rem;
   color: var(--text-muted);
   text-align: center;
-  padding-bottom: 10px;
-  font-weight: 500;
+  padding: 4px 4px 10px 4px;
+  font-weight: 600;
   white-space: nowrap;
 }
 
 .sets-table td {
-  padding: 8px 6px;
+  padding: 6px 4px;
   text-align: center;
+  vertical-align: middle;
 }
 
 .set-num-badge {
@@ -1657,35 +1658,40 @@ body {
 }
 
 .sets-table input[type="number"] {
-  width: 68px;
+  width: 100%;
+  min-width: 46px;
+  max-width: 72px;
   background: var(--bg-input);
   border: 1px solid var(--border-color);
   color: var(--text-main);
-  padding: 8px 8px;
+  padding: 7px 4px;
   border-radius: var(--radius-sm);
   text-align: center;
   font-weight: 600;
   font-family: inherit;
   font-size: 0.92rem;
+  box-sizing: border-box;
+  transition: var(--transition-fast);
 }
 
 .sets-table input[type="number"]:focus {
   outline: none;
   border-color: var(--accent-cyan);
+  background: rgba(0, 242, 254, 0.05);
 }
 
 .complete-set-btn {
   background: var(--bg-card-hover);
   border: 1px solid var(--border-color);
   color: var(--text-muted);
-  width: 38px;
-  height: 38px;
+  width: 36px;
+  height: 36px;
   border-radius: var(--radius-sm);
   display: inline-flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  font-size: 1rem;
+  font-size: 0.95rem;
   flex-shrink: 0;
   transition: var(--transition-fast);
 }
@@ -1702,13 +1708,13 @@ body {
   background: rgba(239, 68, 68, 0.1);
   border: 1px solid rgba(239, 68, 68, 0.25);
   color: #ef4444;
-  width: 34px;
-  height: 34px;
+  width: 32px;
+  height: 32px;
   border-radius: var(--radius-sm);
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  font-size: 0.95rem;
+  font-size: 0.88rem;
   cursor: pointer;
   flex-shrink: 0;
   transition: var(--transition-fast);

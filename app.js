@@ -1127,101 +1127,173 @@ function renderExerciseWeightChart() {
 
   updateChartKpiStats(selectedNames);
 
-  if (!selectedNames || selectedNames.length === 0) {
-    if (exerciseChart) exerciseChart.destroy();
+  const isDailyTotalMode = state.chartMetric === 'daily_total';
+
+  // If not daily_total mode and no exercise is selected, destroy chart
+  if (!isDailyTotalMode && (!selectedNames || selectedNames.length === 0)) {
+    if (exerciseChart && typeof exerciseChart.destroy === 'function') {
+      exerciseChart.destroy();
+      exerciseChart = null;
+    }
     return;
   }
 
-  const graphPeriods = getGraphPeriods(selectedNames);
+  const targetNamesForPeriods = (isDailyTotalMode && selectedNames.length === 0) ? [] : selectedNames;
+  const graphPeriods = getGraphPeriods(targetNamesForPeriods);
 
   if (graphPeriods.length === 0) {
-    if (exerciseChart) exerciseChart.destroy();
+    if (exerciseChart && typeof exerciseChart.destroy === 'function') {
+      exerciseChart.destroy();
+      exerciseChart = null;
+    }
     return;
   }
 
   const dateLabels = graphPeriods.map(period => period.label);
   const datasets = [];
 
-  selectedNames.forEach((exName, idx) => {
-    const color = colorPalette[idx % colorPalette.length];
+  if (isDailyTotalMode) {
+    // ----------------------------------------------------
+    // Daily Total Weight (일별 전체 운동 합산 총 중량)
+    // ----------------------------------------------------
     const seriesData = [];
-
-    const isCardio = isCardioExercise({ name: exName, category: EXERCISE_DATABASE.find(p => p.name === exName)?.category });
+    const isFilteredBySelected = selectedNames.length > 0;
 
     graphPeriods.forEach(period => {
-      let metricValue = 0;
+      let dailySum = 0;
       let hasData = false;
 
       period.dates.forEach(dateKey => {
         const list = state.workouts[dateKey] || [];
-        const ex = list.find(e => e.name === exName);
-        if (!ex || !Array.isArray(ex.sets)) return;
+        list.forEach(ex => {
+          if (!ex || !Array.isArray(ex.sets)) return;
+          if (isFilteredBySelected && !selectedNames.includes(ex.name)) return;
 
-        ex.sets.forEach(s => {
-          if (!s || !s.completed) return;
-          hasData = true;
-          const w = Number(s.weight) || 0;
-          const reps = Number(s.actualReps) || 0;
-
-          if (state.chartMetric === 'orm') {
-            if (!isCardio && w > 0 && reps > 0) {
-              const orm = Math.round(w * (1 + reps / 30));
-              if (orm > metricValue) metricValue = orm;
-            } else if (isCardio) {
-              if (w > metricValue) metricValue = w;
+          ex.sets.forEach(s => {
+            if (!s || !s.completed) return;
+            hasData = true;
+            const w = Number(s.weight) || 0;
+            const reps = Number(s.actualReps) || 0;
+            if (w > 0 && reps > 0) {
+              dailySum += (w * reps);
             }
-          } else if (state.chartMetric === 'max') {
-            if (w > metricValue) metricValue = w;
-          } else if (state.chartMetric === 'volume') {
-            if (isCardio) {
-              metricValue += (w * reps) / 60;
-            } else {
-              metricValue += (w * reps);
-            }
-          } else if (state.chartMetric === 'reps') {
-            metricValue += reps;
-          }
+          });
         });
       });
 
-      if (state.chartMetric === 'volume' && isCardio) {
-        metricValue = Math.round(metricValue * 100) / 100;
-      }
-
-      seriesData.push(hasData ? metricValue : null);
+      seriesData.push(hasData ? Math.round(dailySum) : 0);
     });
 
-    let metricLabel = '추정 1RM (kg)';
-    if (state.chartMetric === 'max') metricLabel = isCardio ? '최고 속도 (km/h)' : '최고 무게 (kg)';
-    if (state.chartMetric === 'volume') metricLabel = isCardio ? '총 이동 거리 (km)' : '총 볼륨 (kg)';
-    if (state.chartMetric === 'reps') metricLabel = isCardio ? '총 운동 시간 (분)' : '총 반복 횟수 (회)';
+    const gradient = ctx.createLinearGradient(0, 0, 0, 260);
+    gradient.addColorStop(0, 'rgba(0, 242, 254, 0.45)');
+    gradient.addColorStop(1, 'rgba(0, 242, 254, 0.02)');
 
-    // Create subtle gradient area for single selection
-    let bgFill = color.bg;
-    if (selectedNames.length === 1) {
-      const gradient = ctx.createLinearGradient(0, 0, 0, 260);
-      gradient.addColorStop(0, 'rgba(0, 242, 254, 0.35)');
-      gradient.addColorStop(1, 'rgba(0, 242, 254, 0.0)');
-      bgFill = gradient;
-    }
+    const labelTitle = isFilteredBySelected
+      ? `선택 운동 일별 총 볼륨 (${selectedNames.length}개 종목 합산)`
+      : '전체 운동 일별 총 리프팅 무게 (kg)';
 
     datasets.push({
-      label: `${exName} (${metricLabel})`,
+      label: labelTitle,
       data: seriesData,
       type: 'line',
-      borderColor: color.border,
-      backgroundColor: bgFill,
-      pointBackgroundColor: color.border,
+      borderColor: '#00f2fe',
+      backgroundColor: gradient,
+      pointBackgroundColor: '#00e676',
       pointBorderColor: '#0b0f17',
       pointBorderWidth: 2,
-      pointRadius: 5,
-      pointHoverRadius: 8,
-      borderWidth: 3,
+      pointRadius: 6,
+      pointHoverRadius: 9,
+      borderWidth: 3.5,
       tension: 0.35,
-      fill: selectedNames.length === 1,
+      fill: true,
       spanGaps: true
     });
-  });
+
+  } else {
+    // ----------------------------------------------------
+    // Individual Selected Exercises (1RM, Max, Volume, Reps)
+    // ----------------------------------------------------
+    selectedNames.forEach((exName, idx) => {
+      const color = colorPalette[idx % colorPalette.length];
+      const seriesData = [];
+
+      const isCardio = isCardioExercise({ name: exName, category: EXERCISE_DATABASE.find(p => p.name === exName)?.category });
+
+      graphPeriods.forEach(period => {
+        let metricValue = 0;
+        let hasData = false;
+
+        period.dates.forEach(dateKey => {
+          const list = state.workouts[dateKey] || [];
+          const ex = list.find(e => e.name === exName);
+          if (!ex || !Array.isArray(ex.sets)) return;
+
+          ex.sets.forEach(s => {
+            if (!s || !s.completed) return;
+            hasData = true;
+            const w = Number(s.weight) || 0;
+            const reps = Number(s.actualReps) || 0;
+
+            if (state.chartMetric === 'orm') {
+              if (!isCardio && w > 0 && reps > 0) {
+                const orm = Math.round(w * (1 + reps / 30));
+                if (orm > metricValue) metricValue = orm;
+              } else if (isCardio) {
+                if (w > metricValue) metricValue = w;
+              }
+            } else if (state.chartMetric === 'max') {
+              if (w > metricValue) metricValue = w;
+            } else if (state.chartMetric === 'volume') {
+              if (isCardio) {
+                metricValue += (w * reps) / 60;
+              } else {
+                metricValue += (w * reps);
+              }
+            } else if (state.chartMetric === 'reps') {
+              metricValue += reps;
+            }
+          });
+        });
+
+        if (state.chartMetric === 'volume' && isCardio) {
+          metricValue = Math.round(metricValue * 100) / 100;
+        }
+
+        seriesData.push(hasData ? metricValue : null);
+      });
+
+      let metricLabel = '추정 1RM (kg)';
+      if (state.chartMetric === 'max') metricLabel = isCardio ? '최고 속도 (km/h)' : '최고 무게 (kg)';
+      if (state.chartMetric === 'volume') metricLabel = isCardio ? '총 이동 거리 (km)' : '총 볼륨 (kg)';
+      if (state.chartMetric === 'reps') metricLabel = isCardio ? '총 운동 시간 (분)' : '총 반복 횟수 (회)';
+
+      // Create subtle gradient area for single selection
+      let bgFill = color.bg;
+      if (selectedNames.length === 1) {
+        const gradient = ctx.createLinearGradient(0, 0, 0, 260);
+        gradient.addColorStop(0, 'rgba(0, 242, 254, 0.35)');
+        gradient.addColorStop(1, 'rgba(0, 242, 254, 0.0)');
+        bgFill = gradient;
+      }
+
+      datasets.push({
+        label: `${exName} (${metricLabel})`,
+        data: seriesData,
+        type: 'line',
+        borderColor: color.border,
+        backgroundColor: bgFill,
+        pointBackgroundColor: color.border,
+        pointBorderColor: '#0b0f17',
+        pointBorderWidth: 2,
+        pointRadius: 5,
+        pointHoverRadius: 8,
+        borderWidth: 3,
+        tension: 0.35,
+        fill: selectedNames.length === 1,
+        spanGaps: true
+      });
+    });
+  }
 
   if (exerciseChart && typeof exerciseChart.destroy === 'function') {
     exerciseChart.destroy();
@@ -1230,7 +1302,8 @@ function renderExerciseWeightChart() {
 
   let yTitle = '추정 1RM (kg)';
   if (state.chartMetric === 'max') yTitle = '최고 수치 (kg / km/h)';
-  if (state.chartMetric === 'volume') yTitle = '총 볼륨 (kg / km)';
+  if (state.chartMetric === 'volume') yTitle = '종목별 볼륨 (kg / km)';
+  if (state.chartMetric === 'daily_total') yTitle = '일별 총 무게 (kg / ton)';
   if (state.chartMetric === 'reps') yTitle = '반복수 / 시간';
 
   exerciseChart = new Chart(ctx, {
@@ -1248,7 +1321,7 @@ function renderExerciseWeightChart() {
       },
       plugins: {
         legend: {
-          display: selectedNames.length > 1,
+          display: selectedNames.length > 1 || isDailyTotalMode,
           labels: {
             color: '#94a3b8',
             font: { family: 'Outfit', size: 11, weight: '600' }
@@ -1268,6 +1341,10 @@ function renderExerciseWeightChart() {
               const label = context.dataset.label || '';
               const val = context.parsed.y;
               if (val === null || val === undefined || isNaN(val)) return null;
+              if (state.chartMetric === 'daily_total' || state.chartMetric === 'volume') {
+                const tonStr = val >= 1000 ? ` (${(val / 1000).toFixed(2)}톤)` : '';
+                return `${label}: ${val.toLocaleString()} kg${tonStr}`;
+              }
               return `${label}: ${val.toLocaleString()}`;
             }
           }
@@ -1712,6 +1789,10 @@ function renderExerciseList(exercises) {
 
     let setsRowsHtml = '';
     ex.sets.forEach((s, setIdx) => {
+      // Normalize completion status to prevent any unexpected uncheck
+      const isSetCompleted = Boolean(s.completed === true || s.completed === 1 || s.completed === 'true' || s.isCompleted === true || s.done === true);
+      s.completed = isSetCompleted;
+
       const isWarmup = s.type === 'warmup';
       const typeLabel = isWarmup ? 'W' : (s.type === 'failure' ? 'F' : (s.type === 'drop' ? 'D' : `${s.setNumber}`));
       const typeClass = `type-${s.type || 'working'}`;
@@ -1727,37 +1808,25 @@ function renderExerciseList(exercises) {
             </button>
           </td>
           <td>
-            <div class="input-stepper-wrap">
-              <button type="button" class="step-quick-btn" onclick="adjustSetField('${ex.id}', ${setIdx}, 'weight', ${isCardio ? -0.5 : -2.5})" title="감소">-</button>
-              <input type="number" step="${isCardio ? '0.5' : '2.5'}" min="0" value="${s.weight}" 
-                oninput="updateSetData('${ex.id}', ${setIdx}, 'weight', this.value)"
-                onchange="updateSetData('${ex.id}', ${setIdx}, 'weight', this.value)"
-                title="${weightLabel}">
-              <button type="button" class="step-quick-btn" onclick="adjustSetField('${ex.id}', ${setIdx}, 'weight', ${isCardio ? 0.5 : 2.5})" title="증가">+</button>
-            </div>
+            <input type="number" step="${isCardio ? '0.5' : '2.5'}" min="0" value="${s.weight}" 
+              oninput="updateSetData('${ex.id}', ${setIdx}, 'weight', this.value)"
+              onchange="updateSetData('${ex.id}', ${setIdx}, 'weight', this.value)"
+              title="${weightLabel}">
           </td>
           <td>
-            <div class="input-stepper-wrap">
-              <button type="button" class="step-quick-btn" onclick="adjustSetField('${ex.id}', ${setIdx}, 'targetReps', -1)" title="1 감소">-</button>
-              <input type="number" min="1" value="${s.targetReps}" 
-                oninput="updateSetData('${ex.id}', ${setIdx}, 'targetReps', this.value)"
-                onchange="updateSetData('${ex.id}', ${setIdx}, 'targetReps', this.value)"
-                title="${isCardio ? '목표시간(분)' : '목표횟수(회)'}">
-              <button type="button" class="step-quick-btn" onclick="adjustSetField('${ex.id}', ${setIdx}, 'targetReps', 1)" title="1 증가">+</button>
-            </div>
+            <input type="number" min="1" value="${s.targetReps}" 
+              oninput="updateSetData('${ex.id}', ${setIdx}, 'targetReps', this.value)"
+              onchange="updateSetData('${ex.id}', ${setIdx}, 'targetReps', this.value)"
+              title="${isCardio ? '목표시간(분)' : '목표횟수(회)'}">
           </td>
           <td>
-            <div class="input-stepper-wrap">
-              <button type="button" class="step-quick-btn" onclick="adjustSetField('${ex.id}', ${setIdx}, 'actualReps', -1)" title="1 감소">-</button>
-              <input type="number" min="0" value="${s.actualReps}" 
-                oninput="updateSetData('${ex.id}', ${setIdx}, 'actualReps', this.value)"
-                onchange="updateSetData('${ex.id}', ${setIdx}, 'actualReps', this.value)"
-                title="${isCardio ? '실제시간(분)' : '실제횟수(회)'}">
-              <button type="button" class="step-quick-btn" onclick="adjustSetField('${ex.id}', ${setIdx}, 'actualReps', 1)" title="1 증가">+</button>
-            </div>
+            <input type="number" min="0" value="${s.actualReps}" 
+              oninput="updateSetData('${ex.id}', ${setIdx}, 'actualReps', this.value)"
+              onchange="updateSetData('${ex.id}', ${setIdx}, 'actualReps', this.value)"
+              title="${isCardio ? '실제시간(분)' : '실제횟수(회)'}">
           </td>
           <td>
-            <button class="complete-set-btn ${s.completed ? 'completed' : ''}"
+            <button class="complete-set-btn ${isSetCompleted ? 'completed' : ''}"
               data-exercise-id="${ex.id}" data-set-index="${setIdx}"
               onclick="toggleSetComplete('${ex.id}', ${setIdx})" title="세트 완료 체크">
               <i class="fa-solid fa-check"></i>
@@ -2802,8 +2871,8 @@ function executeImportPreviousWorkouts() {
         setNumber: s.setNumber,
         weight: s.weight,
         targetReps: s.targetReps,
-        actualReps: s.targetReps,
-        completed: false
+        actualReps: s.actualReps !== undefined ? s.actualReps : s.targetReps,
+        completed: Boolean(s.completed === true || s.completed === 1 || s.completed === 'true' || s.isCompleted === true)
       }));
 
       state.workouts[state.currentDate].push({
