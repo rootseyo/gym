@@ -1,7 +1,7 @@
 /**
  * FitTracker - Illustrated Equipment & Exercise Encyclopedia Module
- * Complete Catalog of 55+ Gym Equipment, Free Weights, Machines & Cardio.
- * Features custom SVG vector illustrations for every category.
+ * Complete Master Catalog of 78+ Gym Equipment, Free Weights, Specialized Machines & Cardio.
+ * Features custom SVG vector illustrations for every machine & movement category.
  */
 
 // SVG Vector Icon Path Library (ViewBox 0 0 64 64, Stroke-based, Neon accentable)
@@ -186,7 +186,40 @@ const EQUIPMENT_SVGS = {
     </svg>
   `,
 
-  // 14. 레그프레스 머신 (45-Degree Incline Leg Press)
+  // 14. V-스쿼트 머신 (V-Squat Machine)
+  'v-squat': `
+    <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" class="equip-svg">
+      <path d="M8 56h48" stroke="var(--text-dim)" stroke-width="1.8" />
+      <path d="M14 56l18-38 18 38" stroke="var(--text-muted)" stroke-width="2.5" />
+      <rect x="22" y="24" width="20" height="10" rx="2" fill="var(--bg-input)" stroke="var(--accent-cyan)" />
+      <path d="M22 20h20" stroke="var(--accent-orange)" stroke-width="3.5" stroke-linecap="round" />
+      <rect x="12" y="50" width="40" height="6" rx="1" fill="var(--bg-dark)" stroke="var(--accent-emerald)" />
+    </svg>
+  `,
+
+  // 15. 펜듈럼 스쿼트 (Pendulum Squat Machine)
+  'pendulum-squat': `
+    <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" class="equip-svg">
+      <path d="M8 56h48" stroke="var(--text-dim)" stroke-width="1.8" />
+      <circle cx="20" cy="18" r="4" fill="var(--bg-dark)" stroke="var(--accent-orange)" />
+      <path d="M20 18l24 30" stroke="var(--accent-cyan)" stroke-width="3.5" stroke-linecap="round" />
+      <rect x="36" y="38" width="16" height="12" rx="2" fill="var(--bg-input)" stroke="var(--accent-cyan)" />
+      <rect x="14" y="48" width="14" height="6" rx="1" fill="var(--accent-emerald)" stroke="none" />
+    </svg>
+  `,
+
+  // 16. 벨트 스쿼트 머신 (Belt Squat Machine)
+  'belt-squat': `
+    <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" class="equip-svg">
+      <path d="M8 56h48" stroke="var(--text-dim)" stroke-width="1.8" />
+      <rect x="18" y="50" width="28" height="6" rx="1" fill="var(--bg-input)" stroke="var(--accent-emerald)" />
+      <path d="M32 50V30" stroke="var(--accent-orange)" stroke-width="3" stroke-dasharray="2 1" />
+      <rect x="26" y="24" width="12" height="6" rx="3" fill="var(--accent-orange)" stroke="none" />
+      <path d="M48 56V18h-8" stroke="var(--text-muted)" stroke-width="2" />
+    </svg>
+  `,
+
+  // 17. 레그프레스 머신 (45-Degree Incline Leg Press)
   'leg-press': `
     <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" class="equip-svg">
       <path d="M8 56h48" stroke="var(--text-dim)" stroke-width="1.8" />
@@ -199,7 +232,7 @@ const EQUIPMENT_SVGS = {
     </svg>
   `,
 
-  // 15. 레그 익스텐션 & 레그컬 머신 (Leg Extension / Curl)
+  // 18. 레그 익스텐션 & 레그컬 머신 (Leg Extension / Curl)
   'leg-extension': `
     <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" class="equip-svg">
       <path d="M10 56h44" stroke="var(--text-dim)" stroke-width="1.8" />
@@ -213,7 +246,7 @@ const EQUIPMENT_SVGS = {
     </svg>
   `,
 
-  // 16. 이너싸이 / 아웃싸이 머신 (Adduction / Abduction)
+  // 19. 이너싸이 / 아웃싸이 머신 (Adduction / Abduction)
   'inner-outer-thigh': `
     <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" class="equip-svg">
       <path d="M10 56h44" stroke="var(--text-dim)" stroke-width="1.8" />
@@ -225,7 +258,7 @@ const EQUIPMENT_SVGS = {
     </svg>
   `,
 
-  // 17. 힙 쓰러스터 (Hip Thrust Bench & Barbell)
+  // 20. 힙 쓰러스터 (Hip Thrust Bench & Barbell)
   'hip-thrust': `
     <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" class="equip-svg">
       <path d="M8 56h48" stroke="var(--text-dim)" stroke-width="1.8" />
@@ -238,7 +271,18 @@ const EQUIPMENT_SVGS = {
     </svg>
   `,
 
-  // 18. 숄더프레스 머신 / OHP (Overhead Press)
+  // 21. 글루트 킥백 머신 (Glute Kickback Machine)
+  'glute-kickback': `
+    <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" class="equip-svg">
+      <path d="M10 56h44" stroke="var(--text-dim)" stroke-width="1.8" />
+      <rect x="16" y="28" width="16" height="18" rx="2" fill="var(--bg-input)" stroke="var(--accent-pink)" />
+      <path d="M24 46v10M16 28l-4-6" stroke="var(--text-muted)" stroke-width="2" />
+      <path d="M32 38l16-4" stroke="var(--accent-cyan)" stroke-width="3" stroke-linecap="round" />
+      <rect x="46" y="30" width="6" height="12" rx="2" fill="var(--accent-orange)" stroke="none" />
+    </svg>
+  `,
+
+  // 22. 숄더프레스 머신 / OHP (Overhead Press)
   'shoulder-press': `
     <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" class="equip-svg">
       <path d="M10 56h44" stroke="var(--text-dim)" stroke-width="1.8" />
@@ -252,7 +296,19 @@ const EQUIPMENT_SVGS = {
     </svg>
   `,
 
-  // 19. 케이블 크로스오버 / 푸쉬다운 (Cable Crossover Tower)
+  // 23. 사이드 레터럴 레이즈 머신 (Lateral Raise Machine)
+  'lateral-machine': `
+    <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" class="equip-svg">
+      <path d="M10 56h44" stroke="var(--text-dim)" stroke-width="1.8" />
+      <rect x="26" y="40" width="12" height="6" rx="1.5" fill="var(--bg-input)" stroke="var(--accent-violet)" />
+      <rect x="29" y="20" width="6" height="20" rx="1.5" fill="var(--bg-input)" stroke="var(--accent-violet)" />
+      <path d="M20 30l-8-6M44 30l8-6" stroke="var(--accent-cyan)" stroke-width="3" stroke-linecap="round" />
+      <circle cx="12" cy="24" r="3.5" fill="var(--accent-orange)" stroke="none" />
+      <circle cx="52" cy="24" r="3.5" fill="var(--accent-orange)" stroke="none" />
+    </svg>
+  `,
+
+  // 24. 케이블 크로스오버 / 푸쉬다운 (Cable Crossover Tower)
   'cable-cross': `
     <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" class="equip-svg">
       <path d="M6 56h52" stroke="var(--text-dim)" stroke-width="1.8" />
@@ -267,7 +323,34 @@ const EQUIPMENT_SVGS = {
     </svg>
   `,
 
-  // 20. 바벨 컬 / 프리처 벤치 (Barbell Curl)
+  // 25. 랜드마인 (Landmine Multi Station)
+  'landmine': `
+    <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" class="equip-svg">
+      <path d="M8 56h48" stroke="var(--text-dim)" stroke-width="1.8" />
+      <circle cx="14" cy="54" r="5" fill="var(--bg-dark)" stroke="var(--accent-orange)" stroke-width="2" />
+      <path d="M14 54L48 18" stroke="var(--text-main)" stroke-width="3.5" stroke-linecap="round" />
+      <circle cx="42" cy="24" r="7" fill="var(--bg-dark)" stroke="var(--accent-cyan)" stroke-width="2" />
+      <circle cx="48" cy="18" r="3" fill="var(--accent-orange)" stroke="none" />
+    </svg>
+  `,
+
+  // 26. 트랩바 / 헥스바 (Trap Bar / Hex Bar)
+  'trap-bar': `
+    <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" class="equip-svg">
+      <path d="M8 56h48" stroke="var(--text-dim)" stroke-width="1.8" />
+      <!-- Hexagon Center -->
+      <polygon points="32,20 44,28 44,40 32,48 20,40 20,28" fill="var(--bg-input)" stroke="var(--accent-cyan)" stroke-width="2.5" />
+      <!-- Side Sleeves -->
+      <path d="M4 34h16M44 34h16" stroke="var(--text-main)" stroke-width="3" />
+      <!-- Plates -->
+      <rect x="6" y="24" width="4" height="20" rx="1.5" fill="var(--bg-dark)" stroke="var(--accent-emerald)" />
+      <rect x="54" y="24" width="4" height="20" rx="1.5" fill="var(--bg-dark)" stroke="var(--accent-emerald)" />
+      <circle cx="20" cy="34" r="2.5" fill="var(--accent-orange)" stroke="none" />
+      <circle cx="44" cy="34" r="2.5" fill="var(--accent-orange)" stroke="none" />
+    </svg>
+  `,
+
+  // 27. 바벨 컬 / 프리처 벤치 (Barbell Curl)
   'barbell-curl': `
     <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" class="equip-svg">
       <path d="M8 32h10l4-4h6l4 4h6l4-4h6l4 4h8" stroke="var(--text-main)" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" />
@@ -280,7 +363,7 @@ const EQUIPMENT_SVGS = {
     </svg>
   `,
 
-  // 21. 프리처 컬 벤치 / 머신 (Preacher Curl Station)
+  // 28. 프리처 컬 벤치 / 머신 (Preacher Curl Station)
   'preacher-curl': `
     <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" class="equip-svg">
       <path d="M10 56h44" stroke="var(--text-dim)" stroke-width="1.8" />
@@ -292,7 +375,7 @@ const EQUIPMENT_SVGS = {
     </svg>
   `,
 
-  // 22. 데드리프트 바벨 (Deadlift Platform)
+  // 29. 데드리프트 바벨 (Deadlift Platform)
   'deadlift': `
     <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" class="equip-svg">
       <path d="M6 54h52" stroke="var(--text-dim)" stroke-width="2" />
@@ -306,7 +389,7 @@ const EQUIPMENT_SVGS = {
     </svg>
   `,
 
-  // 23. 케틀벨 (Kettlebell)
+  // 30. 케틀벨 (Kettlebell)
   'kettlebell': `
     <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" class="equip-svg">
       <path d="M12 56h40" stroke="var(--text-dim)" stroke-width="1.8" />
@@ -317,7 +400,19 @@ const EQUIPMENT_SVGS = {
     </svg>
   `,
 
-  // 24. 앱도미널 / 캡틴스 체어 (Captain's Chair / Hanging Leg Raise)
+  // 31. 앱도미널 머신 / 크런치 머신 (Abdominal Crunch Machine)
+  'ab-machine': `
+    <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" class="equip-svg">
+      <path d="M10 56h44" stroke="var(--text-dim)" stroke-width="1.8" />
+      <rect x="22" y="42" width="16" height="6" rx="1.5" fill="var(--bg-input)" stroke="var(--accent-cyan)" />
+      <path d="M28 42V20" stroke="var(--text-muted)" stroke-width="3" />
+      <path d="M28 22l14 8" stroke="var(--accent-orange)" stroke-width="3" stroke-linecap="round" />
+      <circle cx="42" cy="30" r="4" fill="var(--accent-orange)" stroke="none" />
+      <rect x="42" y="26" width="10" height="24" rx="1" fill="var(--bg-dark)" stroke="var(--border-color)" />
+    </svg>
+  `,
+
+  // 32. 캡틴스 체어 / 행잉 레그레이즈 (Captain's Chair)
   'captains-chair': `
     <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" class="equip-svg">
       <path d="M12 56h40" stroke="var(--text-dim)" stroke-width="1.8" />
@@ -328,7 +423,7 @@ const EQUIPMENT_SVGS = {
     </svg>
   `,
 
-  // 25. 매트 & 코어 (Yoga / Fitness Mat & Core)
+  // 33. 매트 & 코어 (Yoga / Fitness Mat & Core)
   'mat-core': `
     <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" class="equip-svg">
       <path d="M10 48c0-4 4-7 10-7h32c4 0 6 3 6 7s-2 7-6 7H20c-6 0-10-3-10-7z" fill="var(--bg-input)" stroke="var(--accent-emerald)" stroke-width="2" />
@@ -338,7 +433,7 @@ const EQUIPMENT_SVGS = {
     </svg>
   `,
 
-  // 26. 런닝머신 / 트레드밀 (Treadmill)
+  // 34. 런닝머신 / 트레드밀 (Treadmill)
   'treadmill': `
     <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" class="equip-svg">
       <path d="M8 56h48" stroke="var(--text-dim)" stroke-width="1.8" />
@@ -351,7 +446,7 @@ const EQUIPMENT_SVGS = {
     </svg>
   `,
 
-  // 27. 실내 사이클 / 스핀 바이크 (Stationary Bike)
+  // 35. 실내 사이클 / 스핀 바이크 (Stationary Bike)
   'stationary-bike': `
     <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" class="equip-svg">
       <path d="M10 56h44" stroke="var(--text-dim)" stroke-width="1.8" />
@@ -365,7 +460,7 @@ const EQUIPMENT_SVGS = {
     </svg>
   `,
 
-  // 28. 천국의 계단 / 스텝밀 (Stairmaster / StepMill)
+  // 36. 천국의 계단 / 스텝밀 (Stairmaster / StepMill)
   'stairmaster': `
     <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" class="equip-svg">
       <path d="M8 56h48" stroke="var(--text-dim)" stroke-width="1.8" />
@@ -376,7 +471,45 @@ const EQUIPMENT_SVGS = {
     </svg>
   `,
 
-  // 29. 일립티컬 머신 (Elliptical Cross Trainer)
+  // 37. 아크 트레이너 (Cybex Arc Trainer)
+  'arc-trainer': `
+    <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" class="equip-svg">
+      <path d="M8 56h48" stroke="var(--text-dim)" stroke-width="1.8" />
+      <path d="M16 48c8-16 24-16 32 0" stroke="var(--accent-cyan)" stroke-width="3" stroke-linecap="round" />
+      <circle cx="20" cy="46" r="3" fill="var(--accent-orange)" stroke="none" />
+      <circle cx="44" cy="46" r="3" fill="var(--accent-orange)" stroke="none" />
+      <path d="M32 38l6-22" stroke="var(--text-muted)" stroke-width="2.5" />
+      <path d="M34 18h12" stroke="var(--accent-emerald)" stroke-width="3" stroke-linecap="round" />
+      <rect x="40" y="12" width="10" height="7" rx="1.5" fill="var(--bg-input)" stroke="var(--accent-cyan)" />
+    </svg>
+  `,
+
+  // 38. 스키에르그 (Concept2 SkiErg)
+  'skierg': `
+    <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" class="equip-svg">
+      <path d="M12 56h40" stroke="var(--text-dim)" stroke-width="2" />
+      <rect x="28" y="10" width="8" height="46" rx="2" fill="var(--bg-input)" stroke="var(--text-muted)" />
+      <circle cx="32" cy="16" r="3" fill="var(--accent-cyan)" stroke="none" />
+      <path d="M32 16L18 36M32 16l14 20" stroke="var(--accent-orange)" stroke-width="2" stroke-dasharray="2 1" />
+      <circle cx="18" cy="36" r="2.5" fill="var(--accent-orange)" stroke="none" />
+      <circle cx="46" cy="36" r="2.5" fill="var(--accent-orange)" stroke="none" />
+      <circle cx="32" cy="44" r="6" fill="var(--bg-dark)" stroke="var(--accent-cyan)" stroke-width="2" />
+    </svg>
+  `,
+
+  // 39. 에어바이크 (Assault AirBike)
+  'airbike': `
+    <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" class="equip-svg">
+      <path d="M10 56h44" stroke="var(--text-dim)" stroke-width="1.8" />
+      <circle cx="44" cy="38" r="12" fill="var(--bg-dark)" stroke="var(--accent-cyan)" stroke-width="2.5" />
+      <path d="M44 26v24M32 38h24M36 29l16 18M36 47l16-18" stroke="var(--accent-cyan)" stroke-width="1.2" />
+      <path d="M22 52l12-16" stroke="var(--text-muted)" stroke-width="2.5" />
+      <path d="M38 34l-8-22" stroke="var(--accent-orange)" stroke-width="3" stroke-linecap="round" />
+      <circle cx="30" cy="12" r="2.5" fill="var(--accent-orange)" stroke="none" />
+    </svg>
+  `,
+
+  // 40. 일립티컬 머신 (Elliptical Cross Trainer)
   'elliptical': `
     <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" class="equip-svg">
       <path d="M8 56h48" stroke="var(--text-dim)" stroke-width="1.8" />
@@ -388,7 +521,7 @@ const EQUIPMENT_SVGS = {
     </svg>
   `,
 
-  // 30. 로잉 머신 (Rowing Machine)
+  // 41. 로잉 머신 (Rowing Machine)
   'rowing-machine': `
     <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" class="equip-svg">
       <path d="M8 54h48" stroke="var(--text-dim)" stroke-width="1.8" />
@@ -401,10 +534,10 @@ const EQUIPMENT_SVGS = {
   `
 };
 
-// Comprehensive Encyclopedia of 55+ Gym Exercises & Equipment
+// Master Encyclopedia of 78+ Gym Exercises & Equipment
 const EQUIPMENT_CATALOG = [
   // ==========================================
-  // 1. 가슴 (Chest)
+  // 1. 가슴 (Chest - 15종)
   // ==========================================
   {
     name: '벤치프레스',
@@ -448,7 +581,7 @@ const EQUIPMENT_CATALOG = [
     englishName: 'Dumbbell Flat Bench Press',
     iconType: 'dumbbell',
     equipmentType: '덤벨 & 플랫 벤치',
-    targetMuscles: '대흉근 안쪽/외측, 전면 삼각근',
+    targetMuscles: '대흉근 안쪽/외측 가동범위',
     defaultWeight: 20,
     defaultReps: 12,
     restSeconds: 90,
@@ -479,6 +612,18 @@ const EQUIPMENT_CATALOG = [
     tips: '팔꿈치를 살짝 구부린 상태를 유지하며 큰 나무를 안듯 가슴을 벌립니다.'
   },
   {
+    name: '인클라인 덤벨 플라이',
+    category: '가슴',
+    englishName: 'Incline Dumbbell Fly',
+    iconType: 'dumbbell',
+    equipmentType: '인클라인 벤치 & 덤벨',
+    targetMuscles: '대흉근 상부 외측 신장',
+    defaultWeight: 10,
+    defaultReps: 12,
+    restSeconds: 60,
+    tips: '윗가슴을 열어주며 어깨가 들리지 않도록 견갑을 밀착합니다.'
+  },
+  {
     name: '체스트 프레스 머신',
     category: '가슴',
     englishName: 'Seated Chest Press Machine',
@@ -501,6 +646,18 @@ const EQUIPMENT_CATALOG = [
     defaultReps: 12,
     restSeconds: 90,
     tips: '궤적이 고정되어 어깨 부상 위험 없이 윗가슴에 고중량을 실을 수 있습니다.'
+  },
+  {
+    name: '와이드 체스트 프레스 머신',
+    category: '가슴',
+    englishName: 'Wide Grip Chest Press',
+    iconType: 'chest-machine',
+    equipmentType: '플레이트 로디드 와이드 머신',
+    targetMuscles: '대흉근 외측 및 전체 프레임',
+    defaultWeight: 40,
+    defaultReps: 12,
+    restSeconds: 90,
+    tips: '넓은 그립으로 가슴 바깥쪽을 강하게 늘려 프레임을 넓힙니다.'
   },
   {
     name: '펙덱 플라이',
@@ -539,6 +696,18 @@ const EQUIPMENT_CATALOG = [
     tips: '바의 수직 궤적에 맞춰 벤치 위치를 정밀하게 세팅하세요.'
   },
   {
+    name: '시티드 딥스 머신',
+    category: '가슴',
+    englishName: 'Seated Dip Machine',
+    iconType: 'chest-machine',
+    equipmentType: '시티드 딥스 핀 머신',
+    targetMuscles: '대흉근 하부, 삼두근',
+    defaultWeight: 45,
+    defaultReps: 12,
+    restSeconds: 90,
+    tips: '앉아서 손잡이를 아래로 밀어내며 아랫가슴을 강력하게 수축합니다.'
+  },
+  {
     name: '딥스',
     category: '가슴',
     englishName: 'Parallel Bar Dips',
@@ -564,7 +733,7 @@ const EQUIPMENT_CATALOG = [
   },
 
   // ==========================================
-  // 2. 등 (Back)
+  // 2. 등 (Back - 14종)
   // ==========================================
   {
     name: '렛풀다운',
@@ -663,16 +832,28 @@ const EQUIPMENT_CATALOG = [
     tips: '가슴 패드가 있는 머신은 허리 부담 없이 등 중앙에 고중량을 집중할 수 있습니다.'
   },
   {
-    name: '암 풀다운',
+    name: '체스트 서포티드 로우',
     category: '등',
-    englishName: 'Straight-Arm Cable Pulldown',
-    iconType: 'lat-pulldown',
-    equipmentType: '케이블 로프 / 스트레이트 바',
-    targetMuscles: '광배근 외측 순수 고립, 대원근',
-    defaultWeight: 25,
+    englishName: 'Chest-Supported Incline Row',
+    iconType: 't-bar-row',
+    equipmentType: '인클라인 벤치 & 덤벨/머신',
+    targetMuscles: '등 중상부 순수 고립 (기립근 개입 0%)',
+    defaultWeight: 30,
     defaultReps: 12,
-    restSeconds: 60,
-    tips: '팔꿈치를 펴고 반원을 그리며 허벅지 쪽으로 바를 누릅니다.'
+    restSeconds: 90,
+    tips: '벤치에 가슴을 온전히 대고 견갑을 뒤로 접어 등을 쥐어짭니다.'
+  },
+  {
+    name: '로우 로우 머신',
+    category: '등',
+    englishName: 'ISO-Lateral Low Row Machine',
+    iconType: 'cable-row',
+    equipmentType: '해머스트렝스 로우 로우',
+    targetMuscles: '광배근 하부, 광배근 기시부',
+    defaultWeight: 35,
+    defaultReps: 12,
+    restSeconds: 90,
+    tips: '아래에서 배꼽 쪽으로 당기며 광배근 하부를 두껍게 채웁니다.'
   },
   {
     name: '하이 로우 머신',
@@ -685,6 +866,30 @@ const EQUIPMENT_CATALOG = [
     defaultReps: 12,
     restSeconds: 90,
     tips: '위에서 대각선 아래로 당겨 광배근 상중부를 강력하게 타격합니다.'
+  },
+  {
+    name: '원암 렛풀다운',
+    category: '등',
+    englishName: 'One-Arm Cable Pulldown',
+    iconType: 'lat-pulldown',
+    equipmentType: '케이블 머신 싱글 핸들',
+    targetMuscles: '광배근 편측 최대 수축',
+    defaultWeight: 20,
+    defaultReps: 12,
+    restSeconds: 60,
+    tips: '몸을 살짝 기울여 팔꿈치를 옆구리 안쪽으로 깊게 꽂아 넣습니다.'
+  },
+  {
+    name: '암 풀다운',
+    category: '등',
+    englishName: 'Straight-Arm Cable Pulldown',
+    iconType: 'lat-pulldown',
+    equipmentType: '케이블 로프 / 스트레이트 바',
+    targetMuscles: '광배근 외측 순수 고립, 대원근',
+    defaultWeight: 25,
+    defaultReps: 12,
+    restSeconds: 60,
+    tips: '팔꿈치를 펴고 반원을 그리며 허벅지 쪽으로 바를 누릅니다.'
   },
   {
     name: '백 익스텐션',
@@ -700,7 +905,7 @@ const EQUIPMENT_CATALOG = [
   },
 
   // ==========================================
-  // 3. 하체 (Legs & Glutes)
+  // 3. 하체 (Legs & Glutes - 17종)
   // ==========================================
   {
     name: '스쿼트',
@@ -713,6 +918,18 @@ const EQUIPMENT_CATALOG = [
     defaultReps: 12,
     restSeconds: 180,
     tips: '발끝과 무릎 방향을 일치시키고 고관절을 먼저 접으며 깊게 앉습니다.'
+  },
+  {
+    name: '프론트 스쿼트',
+    category: '하체',
+    englishName: 'Barbell Front Squat',
+    iconType: 'squat-rack',
+    equipmentType: '바벨 & 랙',
+    targetMuscles: '대퇴사두근 집중, 상체 직립 코어',
+    defaultWeight: 60,
+    defaultReps: 10,
+    restSeconds: 150,
+    tips: '팔꿈치를 높이 들어 바벨을 쇄골에 안정적으로 얹고 상체를 세워 앉습니다.'
   },
   {
     name: '스미스머신 스쿼트',
@@ -737,6 +954,42 @@ const EQUIPMENT_CATALOG = [
     defaultReps: 12,
     restSeconds: 150,
     tips: '상체가 패드에 밀착되어 코어 부담 없이 대퇴사두를 한계까지 몰아붙입니다.'
+  },
+  {
+    name: 'V-스쿼트',
+    category: '하체',
+    englishName: 'V-Squat Machine',
+    iconType: 'v-squat',
+    equipmentType: 'V스쿼트 머신',
+    targetMuscles: '정방향: 대퇴사두 / 리버스: 둔근, 햄스트링',
+    defaultWeight: 60,
+    defaultReps: 12,
+    restSeconds: 150,
+    tips: '역방향(리버스)으로 서서 힙힌지를 걸면 엉덩이와 햄스트링에 강력한 자극.'
+  },
+  {
+    name: '펜듈럼 스쿼트',
+    category: '하체',
+    englishName: 'Pendulum Squat Machine',
+    iconType: 'pendulum-squat',
+    equipmentType: '펜듈럼 진자 스쿼트 머신',
+    targetMuscles: '대퇴사두근 최대 고립 & 깊은 풀가동범위',
+    defaultWeight: 40,
+    defaultReps: 12,
+    restSeconds: 150,
+    tips: '진자 궤적으로 허리와 무릎 부담 없이 하체 앞쪽을 극한으로 태웁니다.'
+  },
+  {
+    name: '벨트 스쿼트',
+    category: '하체',
+    englishName: 'Belt Squat Machine',
+    iconType: 'belt-squat',
+    equipmentType: '벨트 스쿼트 머신',
+    targetMuscles: '척추 무부하 하체 전반 & 둔근',
+    defaultWeight: 60,
+    defaultReps: 12,
+    restSeconds: 120,
+    tips: '골반에 벨트를 차고 수행하여 척추 압박 없이 순수 다리 힘으로만 중량을 듭니다.'
   },
   {
     name: '레그프레스',
@@ -765,9 +1018,9 @@ const EQUIPMENT_CATALOG = [
   {
     name: '레그컬',
     category: '하체',
-    englishName: 'Lying / Seated Leg Curl',
+    englishName: 'Seated Leg Curl',
     iconType: 'leg-extension',
-    equipmentType: '레그 컬 머신',
+    equipmentType: '시티드 레그 컬 머신',
     targetMuscles: '햄스트링 (허벅지 뒤쪽)',
     defaultWeight: 30,
     defaultReps: 15,
@@ -823,6 +1076,18 @@ const EQUIPMENT_CATALOG = [
     tips: '정점에서 골반을 말아올려 엉덩이를 최대로 수축하고 턱은 당기세요.'
   },
   {
+    name: '글루트 킥백 머신',
+    category: '하체',
+    englishName: 'Glute Kickback Machine',
+    iconType: 'glute-kickback',
+    equipmentType: '글루트 킥백 핀 머신',
+    targetMuscles: '대둔근 상부, 힙업',
+    defaultWeight: 25,
+    defaultReps: 15,
+    restSeconds: 60,
+    tips: '허리를 꺾지 않고 다리를 뒤쪽 대각선 위로 힘차게 밀어 엉덩이를 쥡니다.'
+  },
+  {
     name: '런지',
     category: '하체',
     englishName: 'Walking / Static Lunge',
@@ -860,7 +1125,7 @@ const EQUIPMENT_CATALOG = [
   },
 
   // ==========================================
-  // 4. 어깨 (Shoulders)
+  // 4. 어깨 (Shoulders - 11종)
   // ==========================================
   {
     name: '오버헤드 프레스 (OHP)',
@@ -921,6 +1186,18 @@ const EQUIPMENT_CATALOG = [
     defaultReps: 15,
     restSeconds: 60,
     tips: '승모근 개입을 줄이고 주전자로 물을 따르듯 팔꿈치를 멀리 던져 올리세요.'
+  },
+  {
+    name: '사이드 레터럴 레이즈 머신',
+    category: '어깨',
+    englishName: 'Lateral Raise Machine',
+    iconType: 'lateral-machine',
+    equipmentType: '델토이드 핀 머신',
+    targetMuscles: '측면 삼각근 순수 고립',
+    defaultWeight: 20,
+    defaultReps: 15,
+    restSeconds: 60,
+    tips: '팔꿈치 패드를 어깨 높이까지 밀어 올려 승모근 개입 없이 측면 삼각근을 고립합니다.'
   },
   {
     name: '케이블 사이드 레터럴 레이즈',
@@ -984,7 +1261,7 @@ const EQUIPMENT_CATALOG = [
   },
 
   // ==========================================
-  // 5. 팔 (Arms - Biceps & Triceps)
+  // 5. 팔 (Arms - 8종)
   // ==========================================
   {
     name: '바벨 컬',
@@ -1023,11 +1300,23 @@ const EQUIPMENT_CATALOG = [
     tips: '손바닥이 마주보게 잡고 망치질하듯 들어 올려 팔의 입체감을 키웁니다.'
   },
   {
+    name: '바이셉스 컬 머신',
+    category: '팔',
+    englishName: 'Seated Biceps Curl Machine',
+    iconType: 'preacher-curl',
+    equipmentType: '암 컬 핀 머신',
+    targetMuscles: '상완이두근 순수 고립',
+    defaultWeight: 25,
+    defaultReps: 12,
+    restSeconds: 60,
+    tips: '패드에 팔을 고정하고 손잡이를 끝까지 감아올립니다.'
+  },
+  {
     name: '프리처 컬',
     category: '팔',
-    englishName: 'Preacher Curl Machine / Bench',
+    englishName: 'Preacher Curl Bench / EZ-Bar',
     iconType: 'preacher-curl',
-    equipmentType: '프리처 벤치 & EZ바/머신',
+    equipmentType: '프리처 벤치 & EZ바',
     targetMuscles: '상완이두근 하부 고립',
     defaultWeight: 20,
     defaultReps: 12,
@@ -1072,7 +1361,7 @@ const EQUIPMENT_CATALOG = [
   },
 
   // ==========================================
-  // 6. 복근/코어 (Core & Abs)
+  // 6. 복근/코어 (Core & Abs - 6종)
   // ==========================================
   {
     name: '플랭크',
@@ -1099,6 +1388,18 @@ const EQUIPMENT_CATALOG = [
     tips: '허리를 바닥에 붙인 채로 갈비뼈를 골반 쪽으로 말아 올립니다.'
   },
   {
+    name: '앱도미널 머신',
+    category: '복근/코어',
+    englishName: 'Abdominal Crunch Machine',
+    iconType: 'ab-machine',
+    equipmentType: '앱도미널 핀 머신',
+    targetMuscles: '복직근 전체 중량 강화',
+    defaultWeight: 35,
+    defaultReps: 15,
+    restSeconds: 45,
+    tips: '손잡이를 잡고 복근을 둥글게 말아 내리며 중량 저항을 줍니다.'
+  },
+  {
     name: '행잉 레그레이즈',
     category: '복근/코어',
     englishName: 'Hanging / Captains Chair Leg Raise',
@@ -1122,9 +1423,21 @@ const EQUIPMENT_CATALOG = [
     restSeconds: 45,
     tips: '엉덩이를 고정하고 등을 둥글게 새우처럼 말아 복근을 수축합니다.'
   },
+  {
+    name: '토르소 로테이션 머신',
+    category: '복근/코어',
+    englishName: 'Torso Rotation Machine',
+    iconType: 'ab-machine',
+    equipmentType: '로테이션 핀 머신',
+    targetMuscles: '외복사근, 내복사근 (옆구리/허리 라인)',
+    defaultWeight: 25,
+    defaultReps: 15,
+    restSeconds: 45,
+    tips: '골반을 고정하고 상체 코어의 힘으로만 회전하여 옆구리를 쥡니다.'
+  },
 
   // ==========================================
-  // 7. 전신 (Full Body)
+  // 7. 전신 (Full Body - 7종)
   // ==========================================
   {
     name: '데드리프트',
@@ -1163,20 +1476,56 @@ const EQUIPMENT_CATALOG = [
     tips: '넓은 보폭과 외회전으로 고관절을 바벨에 가깝게 붙여 수직으로 뽑습니다.'
   },
   {
+    name: '트랩바 데드리프트',
+    category: '전신',
+    englishName: 'Trap Bar / Hex Bar Deadlift',
+    iconType: 'trap-bar',
+    equipmentType: '헥스 바 & 원판',
+    targetMuscles: '하체 전반, 둔근, 척추 부담 감소',
+    defaultWeight: 100,
+    defaultReps: 8,
+    restSeconds: 180,
+    tips: '무게중심이 몸 중앙에 위치해 허리 부상 없이 안전하게 고중량을 뽑을 수 있습니다.'
+  },
+  {
+    name: '랜드마인 프레스',
+    category: '전신',
+    englishName: 'Landmine Standing Press',
+    iconType: 'landmine',
+    equipmentType: '바벨 랜드마인 스테이션',
+    targetMuscles: '전면 삼각근, 윗가슴, 코어',
+    defaultWeight: 20,
+    defaultReps: 12,
+    restSeconds: 90,
+    tips: '사선 궤적으로 밀어 올려 어깨 충돌 없이 자연스러운 프레스가 가능합니다.'
+  },
+  {
     name: '케틀벨 스윙',
     category: '전신',
     englishName: 'Kettlebell Russian Swing',
     iconType: 'kettlebell',
     equipmentType: '케틀벨',
-    targetMuscles: '둔근 파워, 햄스트링, 심폐 지구력',
+    targetMuscles: '둔근 힌지 파워, 햄스트링, 심폐 지구력',
     defaultWeight: 16,
     defaultReps: 20,
     restSeconds: 60,
     tips: '스쿼트가 아닌 힙힌지(Hip-Hinge) 폭발적인 엉덩이 튕김으로 케틀벨을 띄웁니다.'
   },
+  {
+    name: '파워 클린',
+    category: '전신',
+    englishName: 'Barbell Power Clean',
+    iconType: 'deadlift',
+    equipmentType: '바벨 & 범퍼 플레이트',
+    targetMuscles: '순발력, 둔근, 승모근, 전신 협응력',
+    defaultWeight: 50,
+    defaultReps: 5,
+    restSeconds: 180,
+    tips: '하체의 폭발적인 신전으로 바벨을 띄워 어깨 전면 랙 포지션으로 받아냅니다.'
+  },
 
   // ==========================================
-  // 8. 유산소 (Cardio)
+  // 8. 유산소 (Cardio - 8종)
   // ==========================================
   {
     name: '런닝머신',
@@ -1215,6 +1564,42 @@ const EQUIPMENT_CATALOG = [
     tips: '손잡이에 체중을 기대지 말고 뒤꿈치로 계단을 밀어내며 힙을 활성화하세요.'
   },
   {
+    name: '아크 트레이너',
+    category: '유산소',
+    englishName: 'Cybex Arc Trainer',
+    iconType: 'arc-trainer',
+    equipmentType: '아크 트레이너 머신',
+    targetMuscles: '관절 무부하 힙업 & 폭발적 칼로리 연소',
+    defaultWeight: 15.0,
+    defaultReps: 20,
+    restSeconds: 30,
+    tips: '발을 아치 형태로 굴려 무릎 통증 없이 엉덩이와 햄스트링을 집중 자극합니다.'
+  },
+  {
+    name: '스키에르그',
+    category: '유산소',
+    englishName: 'Concept2 SkiErg',
+    iconType: 'skierg',
+    equipmentType: '스키에르그 에어 머신',
+    targetMuscles: '상체/코어/하체 전신 심폐 인터벌',
+    defaultWeight: 6.0,
+    defaultReps: 15,
+    restSeconds: 30,
+    tips: '크로스컨트리 스키를 타듯 코어를 접으며 손잡이를 아래로 강하게 뿌립니다.'
+  },
+  {
+    name: '에어바이크',
+    category: '유산소',
+    englishName: 'Assault AirBike',
+    iconType: 'airbike',
+    equipmentType: '에어바이크 팬 머신',
+    targetMuscles: '상하체 복합 극한의 인터벌 유산소',
+    defaultWeight: 10.0,
+    defaultReps: 15,
+    restSeconds: 30,
+    tips: '손잡이를 밀고 당기며 페달을 함께 굴리는 전신 산소 탱크 트레이닝입니다.'
+  },
+  {
     name: '일립티컬',
     category: '유산소',
     englishName: 'Elliptical Cross Trainer',
@@ -1251,10 +1636,16 @@ function getExerciseSvgIcon(exerciseName, category = '') {
   const lower = (exerciseName || '').toLowerCase();
   if (lower.includes('스미스')) return EQUIPMENT_SVGS['smith-machine'];
   if (lower.includes('핵스쿼트')) return EQUIPMENT_SVGS['hack-squat'];
+  if (lower.includes('v-스쿼트') || lower.includes('브이스쿼트') || lower.includes('v스쿼트')) return EQUIPMENT_SVGS['v-squat'];
+  if (lower.includes('펜듈럼')) return EQUIPMENT_SVGS['pendulum-squat'];
+  if (lower.includes('벨트 스쿼트') || lower.includes('벨트스쿼트')) return EQUIPMENT_SVGS['belt-squat'];
+  if (lower.includes('트랩바') || lower.includes('헥스바')) return EQUIPMENT_SVGS['trap-bar'];
+  if (lower.includes('랜드마인')) return EQUIPMENT_SVGS['landmine'];
   if (lower.includes('티바')) return EQUIPMENT_SVGS['t-bar-row'];
+  if (lower.includes('킥백')) return EQUIPMENT_SVGS['glute-kickback'];
   if (lower.includes('힙') || lower.includes('쓰러스터')) return EQUIPMENT_SVGS['hip-thrust'];
-  if (lower.includes('이너') || lower.includes('아웃') || lower.includes('싸이')) return EQUIPMENT_SVGS['inner-outer-thigh'];
-  if (lower.includes('익스텐션') && (category === '등' || lower.includes('백'))) return EQUIPMENT_SVGS['hyperextension'];
+  if (lower.includes('이너') || lower.includes('아웃') || lower.includes('싸이') || lower.includes('어덕션') || lower.includes('어브덕션')) return EQUIPMENT_SVGS['inner-outer-thigh'];
+  if (lower.includes('익스텐션') && (category === '등' || lower.includes('백') || lower.includes('하이퍼'))) return EQUIPMENT_SVGS['hyperextension'];
   if (lower.includes('익스텐션') && category === '하체') return EQUIPMENT_SVGS['leg-extension'];
   if (lower.includes('레그컬') || lower.includes('컬') && category === '하체') return EQUIPMENT_SVGS['leg-extension'];
   if (lower.includes('레그프레스')) return EQUIPMENT_SVGS['leg-press'];
@@ -1267,14 +1658,19 @@ function getExerciseSvgIcon(exerciseName, category = '') {
   if (lower.includes('인클라인') && lower.includes('벤치')) return EQUIPMENT_SVGS['incline-bench'];
   if (lower.includes('디클라인')) return EQUIPMENT_SVGS['decline-bench'];
   if (lower.includes('벤치') || lower.includes('체스트')) return EQUIPMENT_SVGS['bench-press'];
+  if (lower.includes('아크')) return EQUIPMENT_SVGS['arc-trainer'];
+  if (lower.includes('스키')) return EQUIPMENT_SVGS['skierg'];
+  if (lower.includes('에어바이크')) return EQUIPMENT_SVGS['airbike'];
   if (lower.includes('계단') || lower.includes('스텝밀')) return EQUIPMENT_SVGS['stairmaster'];
   if (lower.includes('일립티컬')) return EQUIPMENT_SVGS['elliptical'];
   if (lower.includes('사이클') || lower.includes('바이크')) return EQUIPMENT_SVGS['stationary-bike'];
   if (lower.includes('로잉')) return EQUIPMENT_SVGS['rowing-machine'];
   if (lower.includes('러닝') || lower.includes('런닝') || category === '유산소') return EQUIPMENT_SVGS['treadmill'];
+  if (lower.includes('레터럴') && lower.includes('머신')) return EQUIPMENT_SVGS['lateral-machine'];
   if (lower.includes('프리처')) return EQUIPMENT_SVGS['preacher-curl'];
   if (lower.includes('바벨') && lower.includes('컬')) return EQUIPMENT_SVGS['barbell-curl'];
   if (lower.includes('케이블') || lower.includes('푸쉬다운') || lower.includes('페이스풀')) return EQUIPMENT_SVGS['cable-cross'];
+  if (lower.includes('앱도미널') || lower.includes('토르소')) return EQUIPMENT_SVGS['ab-machine'];
   if (lower.includes('플랭크') || lower.includes('크런치') || category === '복근/코어') return EQUIPMENT_SVGS['mat-core'];
   if (lower.includes('덤벨')) return EQUIPMENT_SVGS['dumbbell'];
 
