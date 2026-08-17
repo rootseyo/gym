@@ -792,66 +792,34 @@ function renderExerciseMultiSelectChips() {
   const container = document.getElementById('exerciseMultiSelectContainer');
   if (!container) return;
 
-  const allNames = getAllUniqueExerciseNames();
+  const uniqueNames = getUniqueExerciseNames();
   container.innerHTML = '';
 
-  if (allNames.length === 0) {
-    container.innerHTML = '<span style="color: var(--text-muted); font-size: 0.8rem;">기록된 운동이 없습니다</span>';
-    state.selectedExercisesForGraph = [];
+  if (uniqueNames.length === 0) {
+    container.innerHTML = '<span class="empty-text" style="font-size:0.8rem; color:var(--text-muted);">등록된 운동 기록이 없습니다.</span>';
     return;
   }
 
-  if (state.selectedExercisesForGraph.length === 0) {
-    state.selectedExercisesForGraph = [allNames[0]];
-  } else {
-    state.selectedExercisesForGraph = state.selectedExercisesForGraph.filter(name => allNames.includes(name));
-    if (state.selectedExercisesForGraph.length === 0) {
-      state.selectedExercisesForGraph = [allNames[0]];
-    }
-  }
-
-  const allChip = document.createElement('button');
-  allChip.type = 'button';
-  const isAllSelected = allNames.every(name => state.selectedExercisesForGraph.includes(name));
-  allChip.className = `graph-chip all-chip ${isAllSelected ? 'selected' : ''}`;
-  allChip.innerHTML = `<i class="fa-solid ${isAllSelected ? 'fa-square-check' : 'fa-square'}"></i> 전체`;
-  allChip.addEventListener('click', () => {
-    if (isAllSelected) {
-      state.selectedExercisesForGraph = [allNames[0]];
-    } else {
-      state.selectedExercisesForGraph = [...allNames];
-    }
-    renderExerciseMultiSelectChips();
-    renderExerciseWeightChart();
-  });
-  container.appendChild(allChip);
-
-  allNames.forEach(name => {
+  uniqueNames.forEach(name => {
     const isSelected = state.selectedExercisesForGraph.includes(name);
     const chip = document.createElement('button');
     chip.type = 'button';
-    chip.className = `graph-chip ${isSelected ? 'selected' : ''}`;
-    chip.innerHTML = `<i class="fa-solid ${isSelected ? 'fa-check-circle' : 'fa-circle'}"></i> ${name}`;
+    chip.className = `exercise-select-chip ${isSelected ? 'active' : ''}`;
+    chip.innerHTML = `${escapeHtml(name)} ${isSelected ? '<i class="fa-solid fa-check"></i>' : '<i class="fa-solid fa-plus"></i>'}`;
 
-    if (isSelected) {
-      const selectedIndex = state.selectedExercisesForGraph.indexOf(name);
-      const graphColor = colorPalette[selectedIndex % colorPalette.length];
-      chip.style.setProperty('--graph-chip-color', graphColor.border);
-      chip.style.setProperty('--graph-chip-bg', graphColor.bg);
-    }
-    
     chip.addEventListener('click', () => {
       if (isSelected) {
-        if (state.selectedExercisesForGraph.length > 1) {
-          state.selectedExercisesForGraph = state.selectedExercisesForGraph.filter(n => n !== name);
-        }
+        state.selectedExercisesForGraph = state.selectedExercisesForGraph.filter(n => n !== name);
       } else {
+        if (state.selectedExercisesForGraph.length >= 6) {
+          alert('비교 그래프는 최대 6개 운동까지 선택 가능합니다.');
+          return;
+        }
         state.selectedExercisesForGraph.push(name);
       }
       renderExerciseMultiSelectChips();
       renderExerciseWeightChart();
     });
-
     container.appendChild(chip);
   });
 }
@@ -893,7 +861,75 @@ function getGraphPeriods(selectedNames = []) {
   });
 }
 
+function updateChartKpiStats(selectedNames) {
+  const peakOrmEl = document.getElementById('kpiPeakOrm');
+  const peakWeightEl = document.getElementById('kpiPeakWeight');
+  const totalVolumeEl = document.getElementById('kpiTotalVolume');
+  const sessionCountEl = document.getElementById('kpiSessionCount');
+
+  if (!peakOrmEl || !peakWeightEl || !totalVolumeEl || !sessionCountEl) return;
+
+  if (!selectedNames || selectedNames.length === 0) {
+    peakOrmEl.textContent = '-';
+    peakWeightEl.textContent = '-';
+    totalVolumeEl.textContent = '-';
+    sessionCountEl.textContent = '-';
+    return;
+  }
+
+  let allTimePeakOrm = 0;
+  let allTimePeakWeight = 0;
+  let allTimeTotalVolume = 0;
+  let totalSessions = 0;
+  let isOnlyCardio = true;
+
+  Object.entries(state.workouts).forEach(([dateKey, list]) => {
+    if (!Array.isArray(list)) return;
+    let hadSession = false;
+
+    list.forEach(ex => {
+      if (!ex || !selectedNames.includes(ex.name)) return;
+      if (!Array.isArray(ex.sets)) return;
+
+      const isCardio = isCardioExercise(ex);
+      if (!isCardio) isOnlyCardio = false;
+
+      ex.sets.forEach(s => {
+        if (!s || !s.completed) return;
+        hadSession = true;
+        const w = Number(s.weight) || 0;
+        const r = Number(s.actualReps) || 0;
+
+        if (w > allTimePeakWeight) allTimePeakWeight = w;
+
+        if (!isCardio && w > 0 && r > 0) {
+          const orm = Math.round(w * (1 + r / 30));
+          if (orm > allTimePeakOrm) allTimePeakOrm = orm;
+        }
+
+        if (isCardio) {
+          allTimeTotalVolume += (w * r) / 60;
+        } else {
+          allTimeTotalVolume += (w * r);
+        }
+      });
+    });
+
+    if (hadSession) totalSessions++;
+  });
+
+  peakOrmEl.textContent = isOnlyCardio ? '해당없음' : (allTimePeakOrm > 0 ? `${allTimePeakOrm} kg` : '-');
+  peakWeightEl.textContent = allTimePeakWeight > 0 ? `${allTimePeakWeight} ${isOnlyCardio ? 'km/h' : 'kg'}` : '-';
+  totalVolumeEl.textContent = allTimeTotalVolume > 0 ? `${Math.round(allTimeTotalVolume).toLocaleString()} ${isOnlyCardio ? 'km' : 'kg'}` : '-';
+  sessionCountEl.textContent = `${totalSessions}회`;
+}
+
 function renderExerciseWeightChart() {
+  if (state.chartMainMode === 'balance') {
+    renderMuscleBalanceChart();
+    return;
+  }
+
   const canvas = document.getElementById('exerciseWeightChart');
   if (!canvas) return;
   const ctx = canvas.getContext('2d');
@@ -901,6 +937,14 @@ function renderExerciseWeightChart() {
   const selectedNames = state.selectedExercisesForGraph;
   document.getElementById('dailyGraphBtn')?.classList.toggle('active', state.graphPeriod === 'daily');
   document.getElementById('monthlyGraphBtn')?.classList.toggle('active', state.graphPeriod === 'monthly');
+
+  // Update Metric chips active UI
+  const metricChips = document.querySelectorAll('#chartMetricSelector .chart-metric-chip');
+  metricChips.forEach(chip => {
+    chip.classList.toggle('active', chip.dataset.metric === state.chartMetric);
+  });
+
+  updateChartKpiStats(selectedNames);
 
   if (!selectedNames || selectedNames.length === 0) {
     if (exerciseChart) exerciseChart.destroy();
@@ -915,130 +959,100 @@ function renderExerciseWeightChart() {
   }
 
   const dateLabels = graphPeriods.map(period => period.label);
-
   const datasets = [];
 
-  if (selectedNames.length === 1) {
-    const exName = selectedNames[0];
-    const maxValData = [];
-    const volumeData = [];
+  selectedNames.forEach((exName, idx) => {
+    const color = colorPalette[idx % colorPalette.length];
+    const seriesData = [];
+
+    const isCardio = isCardioExercise({ name: exName, category: EXERCISE_DATABASE.find(p => p.name === exName)?.category });
 
     graphPeriods.forEach(period => {
-      let maxVal = 0;
-      let totalVol = 0;
-      let containsCardio = false;
+      let metricValue = 0;
+      let hasData = false;
 
       period.dates.forEach(dateKey => {
         const list = state.workouts[dateKey] || [];
         const ex = list.find(e => e.name === exName);
+        if (!ex || !Array.isArray(ex.sets)) return;
 
-        if (ex && ex.sets) {
-          const isCardio = isCardioExercise(ex);
-          containsCardio = containsCardio || isCardio;
-          ex.sets.forEach(s => {
-            const w = Number(s.weight) || 0;
-            const reps = s.completed ? (Number(s.actualReps) || 0) : 0;
-            if (s.completed && w > maxVal) maxVal = w;
+        ex.sets.forEach(s => {
+          if (!s || !s.completed) return;
+          hasData = true;
+          const w = Number(s.weight) || 0;
+          const reps = Number(s.actualReps) || 0;
 
-            if (isCardio) {
-              totalVol += (w * reps) / 60;
-            } else {
-              totalVol += w * reps;
+          if (state.chartMetric === 'orm') {
+            if (!isCardio && w > 0 && reps > 0) {
+              const orm = Math.round(w * (1 + reps / 30));
+              if (orm > metricValue) metricValue = orm;
+            } else if (isCardio) {
+              if (w > metricValue) metricValue = w;
             }
-          });
-        }
-      });
-
-      if (containsCardio) {
-        totalVol = Math.round(totalVol * 100) / 100;
-      }
-
-      maxValData.push(maxVal);
-      volumeData.push(totalVol);
-    });
-
-    const isCardio = isCardioExercise({ name: exName, category: EXERCISE_DATABASE.find(p => p.name === exName)?.category });
-
-    datasets.push({
-      label: `${exName} ${isCardio ? '최고 속도 (km/h)' : '최고 무게 (kg)'}`,
-      data: maxValData,
-      type: 'line',
-      yAxisID: 'yMaxWeight',
-      borderColor: '#00f2fe',
-      backgroundColor: 'rgba(0, 242, 254, 0.2)',
-      pointBackgroundColor: '#00f2fe',
-      pointRadius: 5,
-      pointHoverRadius: 7,
-      borderWidth: 3,
-      tension: 0.35,
-      fill: false,
-      spanGaps: true
-    });
-
-    datasets.push({
-      label: `${exName} ${isCardio ? '이동 거리 (km)' : '총 볼륨 (kg)'}`,
-      data: volumeData,
-      type: 'bar',
-      yAxisID: 'yVolume',
-      backgroundColor: 'rgba(0, 230, 118, 0.45)',
-      borderColor: '#00e676',
-      borderWidth: 1,
-      borderRadius: 6,
-      barPercentage: 0.55
-    });
-
-  } else {
-    selectedNames.forEach((exName, idx) => {
-      const color = colorPalette[idx % colorPalette.length];
-      const maxValData = [];
-
-      graphPeriods.forEach(period => {
-        let maxVal = 0;
-        let hasCompletedSet = false;
-
-        period.dates.forEach(dateKey => {
-          const list = state.workouts[dateKey] || [];
-          const ex = list.find(e => e.name === exName);
-          if (ex && ex.sets) {
-            ex.sets.forEach(s => {
-              if (s && s.completed) {
-                hasCompletedSet = true;
-                const w = Number(s.weight) || 0;
-                if (w > maxVal) maxVal = w;
-              }
-            });
+          } else if (state.chartMetric === 'max') {
+            if (w > metricValue) metricValue = w;
+          } else if (state.chartMetric === 'volume') {
+            if (isCardio) {
+              metricValue += (w * reps) / 60;
+            } else {
+              metricValue += (w * reps);
+            }
+          } else if (state.chartMetric === 'reps') {
+            metricValue += reps;
           }
         });
-
-        maxValData.push(hasCompletedSet ? maxVal : null);
       });
 
-      datasets.push({
-        label: `${exName}`,
-        data: maxValData,
-        type: 'line',
-        yAxisID: 'yMaxWeight',
-        borderColor: color.border,
-        backgroundColor: color.bg,
-        pointBackgroundColor: color.border,
-        pointRadius: 5,
-        pointHoverRadius: 7,
-        borderWidth: 3,
-        tension: 0.35,
-        fill: false,
-        spanGaps: true
-      });
+      if (state.chartMetric === 'volume' && isCardio) {
+        metricValue = Math.round(metricValue * 100) / 100;
+      }
+
+      seriesData.push(hasData ? metricValue : null);
     });
-  }
+
+    let metricLabel = '추정 1RM (kg)';
+    if (state.chartMetric === 'max') metricLabel = isCardio ? '최고 속도 (km/h)' : '최고 무게 (kg)';
+    if (state.chartMetric === 'volume') metricLabel = isCardio ? '총 이동 거리 (km)' : '총 볼륨 (kg)';
+    if (state.chartMetric === 'reps') metricLabel = isCardio ? '총 운동 시간 (분)' : '총 반복 횟수 (회)';
+
+    // Create subtle gradient area for single selection
+    let bgFill = color.bg;
+    if (selectedNames.length === 1) {
+      const gradient = ctx.createLinearGradient(0, 0, 0, 260);
+      gradient.addColorStop(0, 'rgba(0, 242, 254, 0.35)');
+      gradient.addColorStop(1, 'rgba(0, 242, 254, 0.0)');
+      bgFill = gradient;
+    }
+
+    datasets.push({
+      label: `${exName} (${metricLabel})`,
+      data: seriesData,
+      type: 'line',
+      borderColor: color.border,
+      backgroundColor: bgFill,
+      pointBackgroundColor: color.border,
+      pointBorderColor: '#0b0f17',
+      pointBorderWidth: 2,
+      pointRadius: 5,
+      pointHoverRadius: 8,
+      borderWidth: 3,
+      tension: 0.35,
+      fill: selectedNames.length === 1,
+      spanGaps: true
+    });
+  });
 
   if (exerciseChart) {
     exerciseChart.destroy();
   }
 
-  const isMultiView = selectedNames.length > 1;
+  let yTitle = '추정 1RM (kg)';
+  if (state.chartMetric === 'max') yTitle = '최고 수치 (kg / km/h)';
+  if (state.chartMetric === 'volume') yTitle = '총 볼륨 (kg / km)';
+  if (state.chartMetric === 'reps') yTitle = '반복수 / 시간';
 
   exerciseChart = new Chart(ctx, {
-    type: 'bar',
+    type: 'line',
     data: {
       labels: dateLabels,
       datasets: datasets
@@ -1052,13 +1066,21 @@ function renderExerciseWeightChart() {
       },
       plugins: {
         legend: {
-          display: false,
+          display: selectedNames.length > 1,
           labels: {
             color: '#94a3b8',
-            font: { family: 'Outfit', size: 11 }
+            font: { family: 'Outfit', size: 11, weight: '600' }
           }
         },
         tooltip: {
+          backgroundColor: 'rgba(15, 23, 42, 0.95)',
+          titleColor: '#00f2fe',
+          bodyColor: '#f8fafc',
+          borderColor: 'rgba(0, 242, 254, 0.3)',
+          borderWidth: 1,
+          padding: 10,
+          boxPadding: 4,
+          usePointStyle: true,
           callbacks: {
             label: (context) => {
               const label = context.dataset.label || '';
@@ -1072,39 +1094,161 @@ function renderExerciseWeightChart() {
       scales: {
         x: {
           grid: { color: 'rgba(255,255,255,0.05)' },
-          ticks: { color: '#94a3b8' }
+          ticks: { color: '#94a3b8', font: { family: 'Outfit', size: 10 } }
         },
-        yMaxWeight: {
-          type: 'linear',
-          display: true,
-          position: 'left',
+        y: {
           title: {
             display: true,
-            text: '최고 수치 (kg / km/h)',
+            text: yTitle,
             color: '#00f2fe',
-            font: { family: 'Outfit', size: 11 }
+            font: { family: 'Outfit', size: 11, weight: '600' }
           },
           grid: { color: 'rgba(255,255,255,0.05)' },
-          ticks: { color: '#00f2fe' },
-          beginAtZero: true
-        },
-        yVolume: {
-          type: 'linear',
-          display: !isMultiView,
-          position: 'right',
-          title: {
-            display: true,
-            text: '총 볼륨 (kg / km)',
-            color: '#00e676',
-            font: { family: 'Outfit', size: 11 }
-          },
-          grid: { drawOnChartArea: false },
-          ticks: { color: '#00e676' },
+          ticks: { color: '#94a3b8', font: { family: 'Outfit', size: 10 } },
           beginAtZero: true
         }
       }
     }
   });
+}
+
+function renderMuscleBalanceChart() {
+  const canvas = document.getElementById('muscleBalanceChart');
+  const progressList = document.getElementById('muscleSetsProgressList');
+  if (!canvas || !progressList) return;
+
+  const ctx = canvas.getContext('2d');
+
+  // Compute Volume & Sets by Category over all logged dates
+  const categoryStats = {
+    '가슴': { sets: 0, volume: 0, color: '#00f2fe' },
+    '등': { sets: 0, volume: 0, color: '#00e676' },
+    '하체': { sets: 0, volume: 0, color: '#ff6b00' },
+    '어깨': { sets: 0, volume: 0, color: '#a855f7' },
+    '팔': { sets: 0, volume: 0, color: '#ec4899' },
+    '복근/코어': { sets: 0, volume: 0, color: '#ffd600' },
+    '유산소': { sets: 0, volume: 0, color: '#10b981' }
+  };
+
+  let totalSetsCount = 0;
+
+  Object.values(state.workouts).forEach(list => {
+    if (!Array.isArray(list)) return;
+    list.forEach(ex => {
+      if (!ex) return;
+      const cat = ex.category || '가슴';
+      if (!categoryStats[cat]) return;
+
+      if (Array.isArray(ex.sets)) {
+        ex.sets.forEach(s => {
+          if (!s || !s.completed) return;
+          categoryStats[cat].sets += 1;
+          totalSetsCount += 1;
+          const w = Number(s.weight) || 0;
+          const r = Number(s.actualReps) || 0;
+          categoryStats[cat].volume += (w * r);
+        });
+      }
+    });
+  });
+
+  const categories = Object.keys(categoryStats);
+  const setsData = categories.map(c => categoryStats[c].sets);
+  const colors = categories.map(c => categoryStats[c].color);
+
+  if (muscleBalanceChart) {
+    muscleBalanceChart.destroy();
+  }
+
+  muscleBalanceChart = new Chart(ctx, {
+    type: 'doughnut',
+    data: {
+      labels: categories,
+      datasets: [{
+        data: setsData,
+        backgroundColor: colors,
+        borderColor: '#0b0f17',
+        borderWidth: 2
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: {
+          position: 'right',
+          labels: {
+            color: '#94a3b8',
+            font: { family: 'Outfit', size: 11, weight: '600' },
+            boxWidth: 14
+          }
+        },
+        tooltip: {
+          backgroundColor: 'rgba(15, 23, 42, 0.95)',
+          callbacks: {
+            label: (ctx) => {
+              const label = ctx.label || '';
+              const sets = ctx.raw || 0;
+              const pct = totalSetsCount > 0 ? Math.round((sets / totalSetsCount) * 100) : 0;
+              return `${label}: ${sets}세트 (${pct}%)`;
+            }
+          }
+        }
+      },
+      cutout: '65%'
+    }
+  });
+
+  // Render Muscle Progress List with Hypertrophy Guideline Target (10~20 sets / week)
+  progressList.innerHTML = categories.map(cat => {
+    const data = categoryStats[cat];
+    const targetSets = 16; // optimal weekly hypertrophy volume
+    const percentage = Math.min(100, Math.round((data.sets / targetSets) * 100));
+
+    return `
+      <div class="muscle-progress-item">
+        <div class="muscle-progress-header">
+          <span class="muscle-progress-name">
+            <span style="display:inline-block; width:8px; height:8px; border-radius:50%; background:${data.color};"></span>
+            ${cat}
+          </span>
+          <span class="muscle-progress-stats">
+            ${data.sets}세트 / 권장 ${targetSets}세트 (${percentage}%)
+          </span>
+        </div>
+        <div class="muscle-progress-bar-bg">
+          <div class="muscle-progress-bar-fill" style="width: ${percentage}%; background: ${data.color};"></div>
+        </div>
+      </div>
+    `;
+  }).join('');
+}
+
+function switchChartMainMode(mode) {
+  state.chartMainMode = mode;
+  const btnProg = document.getElementById('btnChartModeProgression');
+  const btnBal = document.getElementById('btnChartModeBalance');
+  const viewProg = document.getElementById('chartProgressionView');
+  const viewBal = document.getElementById('chartBalanceView');
+
+  if (mode === 'progression') {
+    btnProg?.classList.add('active');
+    btnBal?.classList.remove('active');
+    viewProg?.classList.remove('hidden');
+    viewBal?.classList.add('hidden');
+    renderExerciseWeightChart();
+  } else {
+    btnBal?.classList.add('active');
+    btnProg?.classList.remove('active');
+    viewBal?.classList.remove('hidden');
+    viewProg?.classList.add('hidden');
+    renderMuscleBalanceChart();
+  }
+}
+
+function setChartMetric(metric) {
+  state.chartMetric = metric;
+  renderExerciseWeightChart();
 }
 
 // Live metrics update without destroying input focus (Hypertrophy & Effective Volume Engine)
@@ -2843,6 +2987,23 @@ document.addEventListener('DOMContentLoaded', () => {
   document.getElementById('todayBtn').addEventListener('click', () => {
     state.currentDate = getTodayString();
     updateUI();
+  });
+
+  // Chart Main Mode (Progression vs Balance) Listeners
+  const btnProg = document.getElementById('btnChartModeProgression');
+  const btnBal = document.getElementById('btnChartModeBalance');
+  if (btnProg) btnProg.addEventListener('click', () => switchChartMainMode('progression'));
+  if (btnBal) btnBal.addEventListener('click', () => switchChartMainMode('balance'));
+
+  // Chart Metric Selector Chips Listeners (1RM, Max, Volume, Reps)
+  const metricChips = document.querySelectorAll('#chartMetricSelector .chart-metric-chip');
+  metricChips.forEach(chip => {
+    chip.addEventListener('click', () => {
+      metricChips.forEach(c => c.classList.remove('active'));
+      chip.classList.add('active');
+      const metric = chip.dataset.metric || 'orm';
+      setChartMetric(metric);
+    });
   });
 
   document.getElementById('dailyGraphBtn').addEventListener('click', () => {

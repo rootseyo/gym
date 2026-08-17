@@ -155,15 +155,20 @@
       </div>
     </section>
 
-    <!-- BOTTOM SECTION: 운동 기구별 무게/속도 성장 비교 그래프 -->
+    <!-- BOTTOM SECTION: 프리미엄 운동 성장 & 볼륨 분석 차트 대시보드 -->
     <section class="section-card chart-section" id="exerciseChartSection">
       <div class="section-header flex-col">
         <div class="chart-heading-row">
-          <h2><i class="fa-solid fa-chart-line"></i> 기구/유산소 성장 비교 그래프</h2>
+          <h2><i class="fa-solid fa-chart-line text-cyan"></i> 운동 성장 & 볼륨 분석 차트</h2>
           <div class="chart-heading-actions">
-            <div class="graph-period-toggle" aria-label="그래프 조회 단위">
-              <button id="dailyGraphBtn" class="graph-period-btn active" type="button">일별</button>
-              <button id="monthlyGraphBtn" class="graph-period-btn" type="button">월별</button>
+            <!-- Main Chart Mode: Exercise Progression vs Muscle Balance -->
+            <div class="chart-mode-toggle" aria-label="차트 분석 모드">
+              <button id="btnChartModeProgression" class="chart-mode-btn active" type="button">
+                <i class="fa-solid fa-arrow-trend-up"></i> 종목별 성장
+              </button>
+              <button id="btnChartModeBalance" class="chart-mode-btn" type="button">
+                <i class="fa-solid fa-chart-pie"></i> 부위별 밸런스
+              </button>
             </div>
             <button id="toggleExerciseChartBtn" class="btn btn-secondary btn-xs chart-collapse-btn" type="button"
               aria-expanded="true" aria-controls="exerciseChartCollapsible">
@@ -174,20 +179,82 @@
       </div>
 
       <div id="exerciseChartCollapsible" class="chart-collapsible">
-        <div class="graph-selection-wrapper">
-          <span class="graph-select-label">비교할 운동 선택 (다중 선택 가능):</span>
-          <div class="exercise-multi-select-container" id="exerciseMultiSelectContainer">
-            <!-- Dynamic multi-select exercise chips rendered here -->
+        <!-- 1. Exercise Progression Mode View -->
+        <div id="chartProgressionView">
+          <!-- Metric Selectors & Period Toggle Bar -->
+          <div class="chart-control-toolbar">
+            <div class="chart-metric-selector" id="chartMetricSelector">
+              <button type="button" class="chart-metric-chip active" data-metric="orm">
+                <i class="fa-solid fa-trophy"></i> 추정 1RM
+              </button>
+              <button type="button" class="chart-metric-chip" data-metric="max">
+                <i class="fa-solid fa-weight-hanging"></i> 최고 무게
+              </button>
+              <button type="button" class="chart-metric-chip" data-metric="volume">
+                <i class="fa-solid fa-layer-group"></i> 총 볼륨
+              </button>
+              <button type="button" class="chart-metric-chip" data-metric="reps">
+                <i class="fa-solid fa-repeat"></i> 총 횟수
+              </button>
+            </div>
+
+            <div class="graph-period-toggle" aria-label="그래프 조회 단위">
+              <button id="dailyGraphBtn" class="graph-period-btn active" type="button">일별</button>
+              <button id="monthlyGraphBtn" class="graph-period-btn" type="button">월별</button>
+            </div>
+          </div>
+
+          <!-- Dynamic KPI Growth Summary Cards -->
+          <div class="chart-kpi-grid" id="chartKpiGrid">
+            <div class="kpi-stat-card">
+              <div class="kpi-label"><i class="fa-solid fa-trophy text-orange"></i> 역대 최고 1RM</div>
+              <div class="kpi-value text-cyan" id="kpiPeakOrm">-</div>
+            </div>
+            <div class="kpi-stat-card">
+              <div class="kpi-label"><i class="fa-solid fa-weight-hanging text-cyan"></i> 역대 최고 무게</div>
+              <div class="kpi-value text-main" id="kpiPeakWeight">-</div>
+            </div>
+            <div class="kpi-stat-card">
+              <div class="kpi-label"><i class="fa-solid fa-layer-group text-emerald"></i> 누적 총 볼륨</div>
+              <div class="kpi-value text-emerald" id="kpiTotalVolume">-</div>
+            </div>
+            <div class="kpi-stat-card">
+              <div class="kpi-label"><i class="fa-solid fa-fire text-pink"></i> 총 운동 세션</div>
+              <div class="kpi-value text-pink" id="kpiSessionCount">-</div>
+            </div>
+          </div>
+
+          <!-- Exercise Multi-Selection Chip Bar -->
+          <div class="graph-selection-wrapper">
+            <span class="graph-select-label">비교할 운동 선택 (다중 선택 가능):</span>
+            <div class="exercise-multi-select-container" id="exerciseMultiSelectContainer">
+              <!-- Dynamic multi-select exercise chips rendered here -->
+            </div>
+          </div>
+
+          <div class="chart-container">
+            <canvas id="exerciseWeightChart"></canvas>
           </div>
         </div>
 
-        <div class="chart-metric-tags">
-          <span class="tag-pill cyan"><i class="fa-solid fa-trophy"></i> 최고 무게 / 속도 (Max Weight/Speed)</span>
-          <span class="tag-pill emerald"><i class="fa-solid fa-layer-group"></i> 총 볼륨 / 거리 (Volume/Distance)</span>
-        </div>
+        <!-- 2. Muscle Balance Analysis View -->
+        <div id="chartBalanceView" class="hidden">
+          <div class="balance-summary-header">
+            <div class="balance-header-title">
+              <i class="fa-solid fa-shield-halved text-cyan"></i> 부위별 유효 세트수 & 볼륨 밸런스
+            </div>
+            <div class="balance-header-desc">
+              근성장 최적화 가이드라인 (부위당 주간 10~20 유효 세트) 달성도 분석
+            </div>
+          </div>
 
-        <div class="chart-container">
-          <canvas id="exerciseWeightChart"></canvas>
+          <div class="balance-chart-container">
+            <canvas id="muscleBalanceChart"></canvas>
+          </div>
+
+          <div class="muscle-sets-progress-list" id="muscleSetsProgressList">
+            <!-- Dynamic muscle balance breakdown bars rendered here -->
+          </div>
         </div>
       </div>
     </section>
