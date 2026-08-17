@@ -79,24 +79,24 @@
     <!-- Main Dashboard Metrics -->
     <section class="dashboard-cards">
       <div class="metric-card">
-        <div class="card-icon cyan"><i class="fa-solid fa-bullseye"></i></div>
+        <div class="card-icon cyan"><i class="fa-solid fa-dumbbell"></i></div>
         <div class="card-info">
-          <span class="card-label">목표 중량 / 시간</span>
-          <span class="card-value" id="totalTargetWeightDisplay">0 kg</span>
-        </div>
-      </div>
-      <div class="metric-card">
-        <div class="card-icon emerald"><i class="fa-solid fa-person-running"></i></div>
-        <div class="card-info">
-          <span class="card-label">실제 수행 / 거리</span>
+          <span class="card-label">유효 볼륨 (웜업 제외)</span>
           <span class="card-value" id="totalActualWeightDisplay">0 kg</span>
         </div>
       </div>
       <div class="metric-card">
-        <div class="card-icon violet"><i class="fa-solid fa-list-check"></i></div>
+        <div class="card-icon emerald"><i class="fa-solid fa-fire"></i></div>
         <div class="card-info">
-          <span class="card-label">완료 세트</span>
+          <span class="card-label">완료 세트 (본세트/전체)</span>
           <span class="card-value" id="completedSetsRatioDisplay">0 / 0</span>
+        </div>
+      </div>
+      <div class="metric-card">
+        <div class="card-icon violet"><i class="fa-solid fa-trophy"></i></div>
+        <div class="card-info">
+          <span class="card-label">오늘 최고 1RM / 목표</span>
+          <span class="card-value" id="totalTargetWeightDisplay">0 kg</span>
         </div>
       </div>
     </section>
@@ -448,6 +448,18 @@
             <label for="defaultRepsInput" id="labelRepsOrDuration">목표 횟수 (회)</label>
             <input type="number" id="defaultRepsInput" min="1" max="300" value="12">
           </div>
+        </div>
+
+        <div class="form-group margin-top-8">
+          <label for="defaultRestInput"><i class="fa-solid fa-stopwatch text-cyan"></i> 세트 간 기본 휴식시간</label>
+          <div class="rest-preset-chips" id="restPresetChips">
+            <button type="button" class="rest-chip" data-sec="30">30초</button>
+            <button type="button" class="rest-chip" data-sec="60">60초</button>
+            <button type="button" class="rest-chip active" data-sec="90">90초</button>
+            <button type="button" class="rest-chip" data-sec="120">120초</button>
+            <button type="button" class="rest-chip" data-sec="180">180초</button>
+          </div>
+          <input type="number" id="defaultRestInput" min="5" max="600" step="5" value="90" class="form-control margin-top-6" placeholder="기본 휴식시간 (초)">
         </div>
 
         <div class="modal-footer">

@@ -2424,3 +2424,228 @@ body {
   font-size: 0.78rem;
   line-height: 1.45;
 }
+
+/* =============================================================
+ * Advanced Hypertrophy & Progressive Overload UI Styles
+ * ============================================================= */
+
+/* Rest Presets Chips in Modals & Cards */
+.rest-preset-chips {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  margin-top: 6px;
+}
+
+.rest-chip {
+  padding: 6px 12px;
+  border-radius: var(--radius-full);
+  background: var(--bg-input);
+  border: 1px solid var(--border-color);
+  color: var(--text-muted);
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition-fast);
+}
+
+.rest-chip:hover {
+  border-color: var(--accent-cyan);
+  color: var(--text-main);
+}
+
+.rest-chip.active {
+  background: rgba(0, 242, 254, 0.15);
+  border-color: var(--accent-cyan);
+  color: var(--accent-cyan);
+  box-shadow: 0 0 10px rgba(0, 242, 254, 0.2);
+}
+
+/* Set Type Badges (Toggle between Working, Warm-up, Failure, Drop) */
+.set-type-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 3px 6px;
+  min-width: 32px;
+  font-size: 0.75rem;
+  font-weight: 800;
+  border-radius: var(--radius-sm);
+  border: 1px solid transparent;
+  cursor: pointer;
+  user-select: none;
+  transition: var(--transition-fast);
+}
+
+.set-type-btn.type-working {
+  background: rgba(0, 242, 254, 0.12);
+  color: var(--accent-cyan);
+  border-color: rgba(0, 242, 254, 0.3);
+}
+
+.set-type-btn.type-warmup {
+  background: rgba(249, 115, 22, 0.14);
+  color: var(--accent-orange);
+  border-color: rgba(249, 115, 22, 0.35);
+}
+
+.set-type-btn.type-failure {
+  background: rgba(239, 68, 68, 0.15);
+  color: #ef4444;
+  border-color: rgba(239, 68, 68, 0.4);
+}
+
+.set-type-btn.type-drop {
+  background: rgba(139, 92, 246, 0.15);
+  color: var(--accent-violet);
+  border-color: rgba(139, 92, 246, 0.4);
+}
+
+/* Visual differentiation for Warmup rows */
+tr.set-row-warmup td {
+  opacity: 0.72;
+}
+
+tr.set-row-warmup input[type="number"] {
+  border-color: rgba(249, 115, 22, 0.3);
+  color: #fdba74;
+}
+
+/* RIR (Reps in Reserve) Controls */
+.rir-cell {
+  white-space: nowrap;
+}
+
+.rir-btn {
+  padding: 4px 6px;
+  background: var(--bg-input);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  color: var(--text-muted);
+  font-size: 0.75rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: var(--transition-fast);
+  min-width: 44px;
+}
+
+.rir-btn:hover {
+  border-color: var(--accent-cyan);
+  color: var(--text-main);
+}
+
+.rir-btn.rir-0 {
+  color: #ef4444;
+  border-color: rgba(239, 68, 68, 0.4);
+  background: rgba(239, 68, 68, 0.1);
+}
+
+.rir-btn.rir-1 {
+  color: #f97316;
+  border-color: rgba(249, 115, 22, 0.4);
+}
+
+.rir-btn.rir-2 {
+  color: var(--accent-emerald);
+  border-color: rgba(0, 230, 118, 0.4);
+}
+
+.rir-btn.rir-3 {
+  color: var(--accent-cyan);
+  border-color: rgba(0, 242, 254, 0.4);
+}
+
+/* Exercise Card Top Badges (Rest Time, 1RM, PR) */
+.ex-card-badges {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+  margin-top: 4px;
+}
+
+.ex-stat-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  padding: 2px 8px;
+  border-radius: var(--radius-full);
+  border: 1px solid transparent;
+}
+
+.ex-stat-badge.rest-badge {
+  background: rgba(0, 242, 254, 0.08);
+  border-color: rgba(0, 242, 254, 0.25);
+  color: var(--accent-cyan);
+  cursor: pointer;
+}
+
+.ex-stat-badge.rest-badge:hover {
+  background: rgba(0, 242, 254, 0.18);
+}
+
+.ex-stat-badge.orm-badge {
+  background: rgba(139, 92, 246, 0.1);
+  border-color: rgba(139, 92, 246, 0.3);
+  color: #c4b5fd;
+}
+
+.ex-stat-badge.pr-badge {
+  background: linear-gradient(135deg, rgba(236, 72, 153, 0.2), rgba(249, 115, 22, 0.2));
+  border-color: rgba(236, 72, 153, 0.4);
+  color: #f472b6;
+  animation: pulse-glow 2s infinite;
+}
+
+/* Progressive Overload Recommendation Banner */
+.overload-guide-banner {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  background: rgba(0, 230, 118, 0.06);
+  border: 1px solid rgba(0, 230, 118, 0.2);
+  border-radius: var(--radius-sm);
+  color: #86efac;
+  font-size: 0.78rem;
+  line-height: 1.4;
+  margin-bottom: 10px;
+}
+
+.overload-guide-banner i {
+  color: var(--accent-emerald);
+  font-size: 0.9rem;
+  flex-shrink: 0;
+}
+
+/* Quick Input Stepper Controls in Rows */
+.input-stepper-wrap {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+}
+
+.step-quick-btn {
+  width: 22px;
+  height: 28px;
+  padding: 0;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--border-color);
+  color: var(--text-muted);
+  border-radius: 4px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.65rem;
+  cursor: pointer;
+  transition: var(--transition-fast);
+}
+
+.step-quick-btn:hover {
+  background: rgba(0, 242, 254, 0.15);
+  color: var(--accent-cyan);
+  border-color: var(--accent-cyan);
+}
+

@@ -145,81 +145,92 @@ function generateWeeklyDashboardShareUrl() {
   return url.toString();
 }
 
-// Comprehensive Exercise & Equipment Database with Pre-mapped Categories
+// Comprehensive Exercise & Equipment Database with Evidence-based Rest Seconds
 const EXERCISE_DATABASE = [
   // 가슴 (Chest)
-  { name: '벤치프레스', category: '가슴', weight: 60, reps: 12 },
-  { name: '인클라인 벤치프레스', category: '가슴', weight: 50, reps: 12 },
-  { name: '덤벨 벤치프레스', category: '가슴', weight: 20, reps: 12 },
-  { name: '인클라인 덤벨프레스', category: '가슴', weight: 18, reps: 12 },
-  { name: '덤벨 플라이', category: '가슴', weight: 12, reps: 12 },
-  { name: '케이블 플라이', category: '가슴', weight: 15, reps: 15 },
-  { name: '체스트 프레스 머신', category: '가슴', weight: 40, reps: 12 },
-  { name: '딥스', category: '가슴', weight: 0, reps: 12 },
-  { name: '펙덱 플라이', category: '가슴', weight: 30, reps: 12 },
-  { name: '푸쉬업', category: '가슴', weight: 0, reps: 15 },
+  { name: '벤치프레스', category: '가슴', weight: 60, reps: 12, restSeconds: 150 },
+  { name: '인클라인 벤치프레스', category: '가슴', weight: 50, reps: 12, restSeconds: 120 },
+  { name: '덤벨 벤치프레스', category: '가슴', weight: 20, reps: 12, restSeconds: 90 },
+  { name: '인클라인 덤벨프레스', category: '가슴', weight: 18, reps: 12, restSeconds: 90 },
+  { name: '덤벨 플라이', category: '가슴', weight: 12, reps: 12, restSeconds: 60 },
+  { name: '케이블 플라이', category: '가슴', weight: 15, reps: 15, restSeconds: 60 },
+  { name: '체스트 프레스 머신', category: '가슴', weight: 40, reps: 12, restSeconds: 90 },
+  { name: '딥스', category: '가슴', weight: 0, reps: 12, restSeconds: 90 },
+  { name: '펙덱 플라이', category: '가슴', weight: 30, reps: 12, restSeconds: 60 },
+  { name: '푸쉬업', category: '가슴', weight: 0, reps: 15, restSeconds: 60 },
 
   // 등 (Back)
-  { name: '렛풀다운', category: '등', weight: 45, reps: 12 },
-  { name: '바벨 로우', category: '등', weight: 50, reps: 12 },
-  { name: '덤벨 로우', category: '등', weight: 20, reps: 12 },
-  { name: '시티드 케이블 로우', category: '등', weight: 40, reps: 12 },
-  { name: '풀업', category: '등', weight: 0, reps: 10 },
-  { name: '친업', category: '등', weight: 0, reps: 10 },
-  { name: '풀다운', category: '등', weight: 45, reps: 12 },
-  { name: '풀업 (턱걸이)', category: '등', weight: 0, reps: 10 },
-  { name: '암 풀다운', category: '등', weight: 25, reps: 12 },
-  { name: '티바 로우', category: '등', weight: 35, reps: 12 },
-  { name: '어시스트 풀업', category: '등', weight: 30, reps: 10 },
+  { name: '렛풀다운', category: '등', weight: 45, reps: 12, restSeconds: 90 },
+  { name: '바벨 로우', category: '등', weight: 50, reps: 12, restSeconds: 120 },
+  { name: '덤벨 로우', category: '등', weight: 20, reps: 12, restSeconds: 90 },
+  { name: '시티드 케이블 로우', category: '등', weight: 40, reps: 12, restSeconds: 90 },
+  { name: '풀업', category: '등', weight: 0, reps: 10, restSeconds: 90 },
+  { name: '친업', category: '등', weight: 0, reps: 10, restSeconds: 90 },
+  { name: '풀다운', category: '등', weight: 45, reps: 12, restSeconds: 90 },
+  { name: '풀업 (턱걸이)', category: '등', weight: 0, reps: 10, restSeconds: 90 },
+  { name: '암 풀다운', category: '등', weight: 25, reps: 12, restSeconds: 60 },
+  { name: '티바 로우', category: '등', weight: 35, reps: 12, restSeconds: 90 },
+  { name: '어시스트 풀업', category: '등', weight: 30, reps: 10, restSeconds: 90 },
 
   // 하체 (Legs)
-  { name: '스쿼트', category: '하체', weight: 80, reps: 12 },
-  { name: '레그프레스', category: '하체', weight: 100, reps: 12 },
-  { name: '레그 익스텐션', category: '하체', weight: 35, reps: 15 },
-  { name: '레그컬', category: '하체', weight: 30, reps: 15 },
-  { name: '런지', category: '하체', weight: 12, reps: 12 },
-  { name: '힙 쓰러스터', category: '하체', weight: 60, reps: 12 },
-  { name: '이너바이 (아웃다이)', category: '하체', weight: 30, reps: 15 },
-  { name: '카프 레이즈', category: '하체', weight: 40, reps: 20 },
-  { name: '덤벨 런지', category: '하체', weight: 10, reps: 12 },
+  { name: '스쿼트', category: '하체', weight: 80, reps: 12, restSeconds: 180 },
+  { name: '레그프레스', category: '하체', weight: 100, reps: 12, restSeconds: 120 },
+  { name: '레그 익스텐션', category: '하체', weight: 35, reps: 15, restSeconds: 90 },
+  { name: '레그컬', category: '하체', weight: 30, reps: 15, restSeconds: 90 },
+  { name: '런지', category: '하체', weight: 12, reps: 12, restSeconds: 90 },
+  { name: '힙 쓰러스터', category: '하체', weight: 60, reps: 12, restSeconds: 120 },
+  { name: '이너바이 (아웃다이)', category: '하체', weight: 30, reps: 15, restSeconds: 60 },
+  { name: '카프 레이즈', category: '하체', weight: 40, reps: 20, restSeconds: 60 },
+  { name: '덤벨 런지', category: '하체', weight: 10, reps: 12, restSeconds: 90 },
 
   // 어깨 (Shoulders)
-  { name: '숄더프레스', category: '어깨', weight: 30, reps: 12 },
-  { name: '오버헤드 프레스 (OHP)', category: '어깨', weight: 40, reps: 10 },
-  { name: '덤벨 숄더프레스', category: '어깨', weight: 16, reps: 12 },
-  { name: '사이드 레터럴 레이즈', category: '어깨', weight: 8, reps: 15 },
-  { name: '프론트 레이즈', category: '어깨', weight: 7, reps: 12 },
-  { name: '페이스 풀', category: '어깨', weight: 20, reps: 15 },
-  { name: '리어 델토이드 머신', category: '어깨', weight: 25, reps: 15 },
-  { name: '아놀드 프레스', category: '어깨', weight: 14, reps: 12 },
+  { name: '숄더프레스', category: '어깨', weight: 30, reps: 12, restSeconds: 120 },
+  { name: '오버헤드 프레스 (OHP)', category: '어깨', weight: 40, reps: 10, restSeconds: 150 },
+  { name: '덤벨 숄더프레스', category: '어깨', weight: 16, reps: 12, restSeconds: 90 },
+  { name: '사이드 레터럴 레이즈', category: '어깨', weight: 8, reps: 15, restSeconds: 60 },
+  { name: '프론트 레이즈', category: '어깨', weight: 7, reps: 12, restSeconds: 60 },
+  { name: '페이스 풀', category: '어깨', weight: 20, reps: 15, restSeconds: 60 },
+  { name: '리어 델토이드 머신', category: '어깨', weight: 25, reps: 15, restSeconds: 60 },
+  { name: '아놀드 프레스', category: '어깨', weight: 14, reps: 12, restSeconds: 90 },
 
   // 팔 (Arms)
-  { name: '덤벨 컬', category: '팔', weight: 12, reps: 12 },
-  { name: '바벨 컬', category: '팔', weight: 25, reps: 12 },
-  { name: '해머 컬', category: '팔', weight: 12, reps: 12 },
-  { name: '트라이셉스 푸쉬다운', category: '팔', weight: 25, reps: 15 },
-  { name: '라잉 트라이셉스 익스텐션', category: '팔', weight: 20, reps: 12 },
-  { name: '프리처 컬', category: '팔', weight: 20, reps: 12 },
-  { name: '오버헤드 트라이셉스 익스텐션', category: '팔', weight: 14, reps: 12 },
+  { name: '덤벨 컬', category: '팔', weight: 12, reps: 12, restSeconds: 60 },
+  { name: '바벨 컬', category: '팔', weight: 25, reps: 12, restSeconds: 60 },
+  { name: '해머 컬', category: '팔', weight: 12, reps: 12, restSeconds: 60 },
+  { name: '트라이셉스 푸쉬다운', category: '팔', weight: 25, reps: 15, restSeconds: 60 },
+  { name: '라잉 트라이셉스 익스텐션', category: '팔', weight: 20, reps: 12, restSeconds: 60 },
+  { name: '프리처 컬', category: '팔', weight: 20, reps: 12, restSeconds: 60 },
+  { name: '오버헤드 트라이셉스 익스텐션', category: '팔', weight: 14, reps: 12, restSeconds: 60 },
 
   // 유산소 (Cardio)
-  { name: '러닝', category: '유산소', type: 'cardio', weight: 9.0, reps: 20 },
-  { name: '런닝머신', category: '유산소', type: 'cardio', weight: 8.5, reps: 20 },
-  { name: '사이클', category: '유산소', type: 'cardio', weight: 15.0, reps: 30 },
-  { name: '천국의 계단 (스텝밀)', category: '유산소', type: 'cardio', weight: 8.0, reps: 15 },
-  { name: '일립티컬', category: '유산소', type: 'cardio', weight: 10.0, reps: 20 },
-  { name: '로잉머신', category: '유산소', type: 'cardio', weight: 2.0, reps: 15 },
+  { name: '러닝', category: '유산소', type: 'cardio', weight: 9.0, reps: 20, restSeconds: 30 },
+  { name: '런닝머신', category: '유산소', type: 'cardio', weight: 8.5, reps: 20, restSeconds: 30 },
+  { name: '사이클', category: '유산소', type: 'cardio', weight: 15.0, reps: 30, restSeconds: 30 },
+  { name: '천국의 계단 (스텝밀)', category: '유산소', type: 'cardio', weight: 8.0, reps: 15, restSeconds: 30 },
+  { name: '일립티컬', category: '유산소', type: 'cardio', weight: 10.0, reps: 20, restSeconds: 30 },
+  { name: '로잉머신', category: '유산소', type: 'cardio', weight: 2.0, reps: 15, restSeconds: 30 },
 
   // 전신 & 복근 (Full Body & Core)
-  { name: '데드리프트', category: '전신', weight: 100, reps: 10 },
-  { name: '컨벤셔널 데드리프트', category: '전신', weight: 100, reps: 8 },
-  { name: '루마니안 데드리프트', category: '전신', weight: 80, reps: 10 },
-  { name: '스모 데드리프트', category: '전신', weight: 100, reps: 8 },
-  { name: '플랭크', category: '복근/코어', weight: 0, reps: 60 },
-  { name: '크런치', category: '복근/코어', weight: 0, reps: 20 },
-  { name: '레그레이즈', category: '복근/코어', weight: 0, reps: 15 },
-  { name: '케이블 크런치', category: '복근/코어', weight: 30, reps: 15 }
+  { name: '데드리프트', category: '전신', weight: 100, reps: 10, restSeconds: 180 },
+  { name: '컨벤셔널 데드리프트', category: '전신', weight: 100, reps: 8, restSeconds: 180 },
+  { name: '루마니안 데드리프트', category: '전신', weight: 80, reps: 10, restSeconds: 120 },
+  { name: '스모 데드리프트', category: '전신', weight: 100, reps: 8, restSeconds: 180 },
+  { name: '플랭크', category: '복근/코어', weight: 0, reps: 60, restSeconds: 45 },
+  { name: '크런치', category: '복근/코어', weight: 0, reps: 20, restSeconds: 45 },
+  { name: '레그레이즈', category: '복근/코어', weight: 0, reps: 15, restSeconds: 45 },
+  { name: '케이블 크런치', category: '복근/코어', weight: 30, reps: 15, restSeconds: 45 }
 ];
+
+function getDefaultRestForExercise(name, category) {
+  const match = EXERCISE_DATABASE.find(item => item.name === name);
+  if (match && match.restSeconds) return match.restSeconds;
+  if (category === '유산소') return 30;
+  if (category === '복근/코어') return 45;
+  if (category === '팔' || category === '어깨') return 60;
+  if (category === '등' || category === '가슴') return 90;
+  if (category === '하체' || category === '전신') return 120;
+  return 90;
+}
 
 // Hangul Chosung (초성) List
 const CHOSUNG_LIST = ['ㄱ', 'ㄲ', 'ㄴ', 'ㄷ', 'ㄸ', 'ㄹ', 'ㅁ', 'ㅂ', 'ㅃ', 'ㅅ', 'ㅆ', 'ㅇ', 'ㅈ', 'ㅉ', 'ㅊ', 'ㅋ', 'ㅌ', 'ㅍ', 'ㅎ'];
@@ -241,17 +252,17 @@ function getHangulChosung(str) {
 
 // Default Presets
 const defaultPresets = [
-  { name: '벤치프레스', category: '가슴', weight: 60, reps: 12, sets: 3 },
-  { name: '스쿼트', category: '하체', weight: 80, reps: 12, sets: 3 },
-  { name: '데드리프트', category: '전신', weight: 100, reps: 10, sets: 3 },
-  { name: '렛풀다운', category: '등', weight: 45, reps: 12, sets: 3 },
-  { name: '숄더프레스', category: '어깨', weight: 30, reps: 12, sets: 3 },
-  { name: '덤벨 컬', category: '팔', weight: 12, reps: 12, sets: 3 },
-  { name: '풀업', category: '등', weight: 0, reps: 10, sets: 3 },
-  { name: '친업', category: '등', weight: 0, reps: 10, sets: 3 },
-  { name: '풀다운', category: '등', weight: 45, reps: 12, sets: 3 },
-  { name: '러닝', category: '유산소', type: 'cardio', weight: 9.0, reps: 20, sets: 1 },
-  { name: '사이클', category: '유산소', type: 'cardio', weight: 15.0, reps: 30, sets: 1 }
+  { name: '벤치프레스', category: '가슴', weight: 60, reps: 12, sets: 3, restSeconds: 150 },
+  { name: '스쿼트', category: '하체', weight: 80, reps: 12, sets: 3, restSeconds: 180 },
+  { name: '데드리프트', category: '전신', weight: 100, reps: 10, sets: 3, restSeconds: 180 },
+  { name: '렛풀다운', category: '등', weight: 45, reps: 12, sets: 3, restSeconds: 90 },
+  { name: '숄더프레스', category: '어깨', weight: 30, reps: 12, sets: 3, restSeconds: 120 },
+  { name: '덤벨 컬', category: '팔', weight: 12, reps: 12, sets: 3, restSeconds: 60 },
+  { name: '풀업', category: '등', weight: 0, reps: 10, sets: 3, restSeconds: 90 },
+  { name: '친업', category: '등', weight: 0, reps: 10, sets: 3, restSeconds: 90 },
+  { name: '풀다운', category: '등', weight: 45, reps: 12, sets: 3, restSeconds: 90 },
+  { name: '러닝', category: '유산소', type: 'cardio', weight: 9.0, reps: 20, sets: 1, restSeconds: 30 },
+  { name: '사이클', category: '유산소', type: 'cardio', weight: 15.0, reps: 30, sets: 1, restSeconds: 30 }
 ];
 
 // Helper to check if an exercise is Cardio/Running
@@ -416,14 +427,84 @@ function playTimerVibration(type = 1) {
     : [250, 120, 250, 120, 450];
 
   if (navigator.vibrate) {
-    navigator.vibrate(pattern);
+    try {
+      navigator.vibrate(pattern);
+    } catch (e) {}
     return;
   }
 
   const iosVibrationBridge = window.webkit?.messageHandlers?.timerVibration;
   if (iosVibrationBridge) {
-    iosVibrationBridge.postMessage(type);
+    try { iosVibrationBridge.postMessage(type); } catch (e) {}
   }
+}
+
+// Screen Wake Lock API to prevent screen timeout during workout
+let screenWakeLock = null;
+async function requestScreenWakeLock() {
+  if ('wakeLock' in navigator && document.visibilityState === 'visible') {
+    try {
+      if (!screenWakeLock) {
+        screenWakeLock = await navigator.wakeLock.request('screen');
+        screenWakeLock.addEventListener('release', () => {
+          screenWakeLock = null;
+        });
+      }
+    } catch (err) {
+      // Non-critical, ignore if unsupported or denied
+    }
+  }
+}
+
+document.addEventListener('visibilitychange', () => {
+  if (document.visibilityState === 'visible') {
+    requestScreenWakeLock();
+  }
+});
+
+// Scientific Estimated 1RM Calculator (Epley Formula)
+function calculateEstimated1RM(weight, reps) {
+  const w = Number(weight) || 0;
+  const r = Number(reps) || 0;
+  if (w <= 0 || r <= 0) return 0;
+  if (r === 1) return w;
+  return Math.round(w * (1 + r / 30));
+}
+
+// Previous Session Insight (Progressive Overload Advisor)
+function getPreviousSessionInsight(exerciseName, currentDate) {
+  const allDates = Object.keys(state.workouts).sort();
+  const pastDates = allDates.filter(d => d < currentDate && Array.isArray(state.workouts[d]));
+
+  for (let i = pastDates.length - 1; i >= 0; i--) {
+    const pastWorkoutList = state.workouts[pastDates[i]];
+    const matchedEx = pastWorkoutList.find(e => e.name === exerciseName && Array.isArray(e.sets) && e.sets.some(s => s.completed));
+    if (matchedEx) {
+      const validCompletedSets = matchedEx.sets.filter(s => s.completed && s.type !== 'warmup');
+      if (validCompletedSets.length > 0) {
+        const maxWeight = Math.max(...validCompletedSets.map(s => Number(s.weight) || 0));
+        const maxReps = Math.max(...validCompletedSets.map(s => Number(s.actualReps) || Number(s.targetReps) || 0));
+        const allTargetReached = validCompletedSets.every(s => (Number(s.actualReps) || 0) >= (Number(s.targetReps) || 12));
+
+        let recommendation = '';
+        if (allTargetReached && validCompletedSets.length >= 3) {
+          recommendation = `🔥 지난 세션(${formatDateDisplay(pastDates[i]).slice(5, 12)}) 전 세트 달성! 오늘 첫 세트는 +2.5kg 증량에 도전해 보세요.`;
+        } else {
+          recommendation = `💡 지난 세션(${formatDateDisplay(pastDates[i]).slice(5, 12)}): 최고 ${maxWeight}kg × ${maxReps}회 (${validCompletedSets.length}세트 완료)`;
+        }
+
+        return {
+          date: pastDates[i],
+          maxWeight,
+          maxReps,
+          setsCount: validCompletedSets.length,
+          allTargetReached,
+          recommendation
+        };
+      }
+    }
+  }
+  return null;
 }
 
 // Helper Date Functions
@@ -453,11 +534,16 @@ function escapeHtml(str) {
     .replace(/'/g, '&#039;');
 }
 
-// Ensure exercise sets array remains clean & indexed 1..N
+// Ensure exercise sets array remains clean, typed & indexed 1..N
 function sanitizeExerciseSets(ex) {
   if (!ex || !Array.isArray(ex.sets)) return;
+  if (!ex.restSeconds) {
+    ex.restSeconds = getDefaultRestForExercise(ex.name, ex.category);
+  }
   ex.sets.forEach((s, idx) => {
     s.setNumber = idx + 1;
+    if (!s.type) s.type = 'working'; // 'working' | 'warmup' | 'failure' | 'drop'
+    if (s.rir === undefined) s.rir = 2; // Default RIR 2 (2 reps before failure)
   });
   ex.targetSets = ex.sets.length;
 }
@@ -549,6 +635,11 @@ function renderPresetChips() {
 
       if (preset.weight !== undefined) document.getElementById('defaultWeightInput').value = preset.weight;
       if (preset.reps !== undefined) document.getElementById('defaultRepsInput').value = preset.reps;
+
+      const restSec = preset.restSeconds || getDefaultRestForExercise(preset.name, preset.category);
+      const restInput = document.getElementById('defaultRestInput');
+      if (restInput) restInput.value = restSec;
+      updateRestPresetChips(restSec);
       
       const dropdown = document.getElementById('exerciseHintDropdown');
       if (dropdown) dropdown.classList.add('hidden');
@@ -625,8 +716,13 @@ function renderExerciseHintDropdown(query) {
       catSelect.value = item.category;
       updateAddFormLabels(item.category);
 
-      if (item.weight !== undefined) weightInput.value = item.weight;
-      if (item.reps !== undefined) repsInput.value = item.reps;
+      if (item.weight !== undefined && weightInput) weightInput.value = item.weight;
+      if (item.reps !== undefined && repsInput) repsInput.value = item.reps;
+
+      const restSec = item.restSeconds || getDefaultRestForExercise(item.name, item.category);
+      const restInput = document.getElementById('defaultRestInput');
+      if (restInput) restInput.value = restSec;
+      updateRestPresetChips(restSec);
 
       dropdown.innerHTML = '';
       dropdown.classList.add('hidden');
@@ -981,45 +1077,74 @@ function renderExerciseWeightChart() {
   });
 }
 
-// Live metrics update without destroying input focus
+// Live metrics update without destroying input focus (Hypertrophy & Effective Volume Engine)
 function updateMetricsOnly() {
   const exercises = state.workouts[state.currentDate] || [];
 
   let totalTarget = 0;
-  let totalActual = 0;
+  let totalActualEffectiveVolume = 0;
   let totalCardioMinutes = 0;
   let totalCardioDistance = 0;
   let totalSets = 0;
   let completedSets = 0;
+  let completedHardSets = 0;
+  let maxEstimated1RM = 0;
+  let max1RMExercise = '';
 
   exercises.forEach(ex => {
     const isCardio = isCardioExercise(ex);
     ex.sets.forEach(s => {
       totalSets++;
+      const isWarmup = s.type === 'warmup';
+      const weight = Number(s.weight) || 0;
+      const targetReps = Number(s.targetReps) || 0;
+      const actualReps = Number(s.actualReps) || 0;
+
       if (isCardio) {
-        totalCardioMinutes += (Number(s.targetReps) || 0);
+        totalCardioMinutes += targetReps;
         if (s.completed) {
           completedSets++;
-          const dist = ((Number(s.weight) || 0) * (Number(s.actualReps) || 0)) / 60;
+          completedHardSets++;
+          const dist = (weight * actualReps) / 60;
           totalCardioDistance += dist;
         }
       } else {
-        totalTarget += (Number(s.weight) || 0) * (Number(s.targetReps) || 0);
+        totalTarget += weight * targetReps;
         if (s.completed) {
           completedSets++;
-          totalActual += (Number(s.weight) || 0) * (Number(s.actualReps) || 0);
+          if (!isWarmup) {
+            completedHardSets++;
+            totalActualEffectiveVolume += weight * actualReps;
+            const est1RM = calculateEstimated1RM(weight, actualReps);
+            if (est1RM > maxEstimated1RM) {
+              maxEstimated1RM = est1RM;
+              max1RMExercise = ex.name;
+            }
+          }
         }
       }
     });
   });
 
-  const targetStr = totalCardioMinutes > 0 ? `${totalTarget.toLocaleString()} kg / 러닝 ${totalCardioMinutes}분` : `${totalTarget.toLocaleString()} kg`;
-  const actualStr = totalCardioDistance > 0 ? `${totalActual.toLocaleString()} kg / 러닝 ${totalCardioDistance.toFixed(1)}km` : `${totalActual.toLocaleString()} kg`;
+  const targetStr = totalCardioMinutes > 0
+    ? `${totalTarget.toLocaleString()} kg / 러닝 ${totalCardioMinutes}분`
+    : (maxEstimated1RM > 0 ? `${maxEstimated1RM} kg (${max1RMExercise})` : `${totalTarget.toLocaleString()} kg`);
 
-  document.getElementById('totalTargetWeightDisplay').textContent = targetStr;
-  document.getElementById('totalActualWeightDisplay').textContent = actualStr;
-  document.getElementById('completedSetsRatioDisplay').textContent = `${completedSets} / ${totalSets}`;
-  document.getElementById('exerciseCountBadge').textContent = `${exercises.length}개 종목`;
+  const actualStr = totalCardioDistance > 0
+    ? `${totalActualEffectiveVolume.toLocaleString()} kg / ${totalCardioDistance.toFixed(1)}km`
+    : `${totalActualEffectiveVolume.toLocaleString()} kg`;
+
+  const setsRatioStr = `${completedSets} / ${totalSets} (본세트 ${completedHardSets})`;
+
+  const targetWeightDisplay = document.getElementById('totalTargetWeightDisplay');
+  const actualWeightDisplay = document.getElementById('totalActualWeightDisplay');
+  const setsRatioDisplay = document.getElementById('completedSetsRatioDisplay');
+  const countBadge = document.getElementById('exerciseCountBadge');
+
+  if (targetWeightDisplay) targetWeightDisplay.textContent = targetStr;
+  if (actualWeightDisplay) actualWeightDisplay.textContent = actualStr;
+  if (setsRatioDisplay) setsRatioDisplay.textContent = setsRatioStr;
+  if (countBadge) countBadge.textContent = `${exercises.length}개 종목`;
 
   renderExerciseWeightChart();
 }
@@ -1128,6 +1253,69 @@ function updateUI() {
   updateFixedBottomTimerUI();
 }
 
+function toggleSetType(exId, setIdx) {
+  const list = state.workouts[state.currentDate] || [];
+  const ex = list.find(e => e.id === exId);
+  if (!ex || !ex.sets[setIdx]) return;
+
+  const typeCycle = ['working', 'warmup', 'failure', 'drop'];
+  const current = ex.sets[setIdx].type || 'working';
+  const nextType = typeCycle[(typeCycle.indexOf(current) + 1) % typeCycle.length];
+
+  ex.sets[setIdx].type = nextType;
+  saveState();
+  updateUI();
+}
+
+function toggleSetRir(exId, setIdx) {
+  const list = state.workouts[state.currentDate] || [];
+  const ex = list.find(e => e.id === exId);
+  if (!ex || !ex.sets[setIdx]) return;
+
+  const rirCycle = [2, 1, 0, 3];
+  const current = ex.sets[setIdx].rir !== undefined ? ex.sets[setIdx].rir : 2;
+  const nextRir = rirCycle[(rirCycle.indexOf(current) + 1) % rirCycle.length];
+
+  ex.sets[setIdx].rir = nextRir;
+  saveState();
+  updateUI();
+}
+
+function adjustSetField(exId, setIdx, field, delta) {
+  const list = state.workouts[state.currentDate] || [];
+  const ex = list.find(e => e.id === exId);
+  if (!ex || !ex.sets[setIdx]) return;
+
+  let val = Number(ex.sets[setIdx][field]) || 0;
+  val = Math.max(0, val + delta);
+  val = Math.round(val * 10) / 10;
+
+  ex.sets[setIdx][field] = val;
+  if (field === 'targetReps' && !ex.sets[setIdx].completed) {
+    ex.sets[setIdx].actualReps = val;
+  }
+  saveState();
+  updateMetricsOnly();
+  renderExerciseList(list);
+}
+
+function changeExerciseRestSeconds(exId) {
+  const list = state.workouts[state.currentDate] || [];
+  const ex = list.find(e => e.id === exId);
+  if (!ex) return;
+
+  const currentRest = ex.restSeconds || getDefaultRestForExercise(ex.name, ex.category);
+  const input = prompt(`[${ex.name}] 세트 간 기본 휴식 시간(초)을 설정하세요 (예: 60, 90, 120, 150, 180):`, currentRest);
+  if (input !== null) {
+    const parsed = parseInt(input, 10);
+    if (!isNaN(parsed) && parsed >= 5 && parsed <= 600) {
+      ex.restSeconds = parsed;
+      saveState();
+      updateUI();
+    }
+  }
+}
+
 function renderExerciseList(exercises) {
   const container = document.getElementById('exerciseList');
   const emptyState = document.getElementById('emptyState');
@@ -1151,15 +1339,28 @@ function renderExerciseList(exercises) {
     const isCollapsed = Boolean(ex.collapsed);
     card.className = `exercise-card ${isCollapsed ? 'collapsed' : ''}`;
 
+    const restSec = ex.restSeconds || getDefaultRestForExercise(ex.name, ex.category);
+
+    // Compute peak estimated 1RM for this exercise
+    let peakOrm = 0;
+    ex.sets.forEach(s => {
+      if (s.completed && s.type !== 'warmup') {
+        const orm = calculateEstimated1RM(s.weight, s.actualReps);
+        if (orm > peakOrm) peakOrm = orm;
+      }
+    });
+
+    const insight = getPreviousSessionInsight(ex.name, state.currentDate);
+
     const orderButtonsHtml = `
-      <div class="exercise-order-controls" aria-label="${ex.name} 순서 변경">
+      <div class="exercise-order-controls" aria-label="${escapeHtml(ex.name)} 순서 변경">
         ${exerciseIndex > 0 ? `
-          <button class="order-exercise-btn" onclick="moveExercise('${ex.id}', -1)" title="위로 이동" aria-label="${ex.name} 위로 이동">
+          <button class="order-exercise-btn" onclick="moveExercise('${ex.id}', -1)" title="위로 이동" aria-label="${escapeHtml(ex.name)} 위로 이동">
             <i class="fa-solid fa-chevron-up"></i>
           </button>
         ` : ''}
         ${exerciseIndex < exercises.length - 1 ? `
-          <button class="order-exercise-btn" onclick="moveExercise('${ex.id}', 1)" title="아래로 이동" aria-label="${ex.name} 아래로 이동">
+          <button class="order-exercise-btn" onclick="moveExercise('${ex.id}', 1)" title="아래로 이동" aria-label="${escapeHtml(ex.name)} 아래로 이동">
             <i class="fa-solid fa-chevron-down"></i>
           </button>
         ` : ''}
@@ -1168,32 +1369,67 @@ function renderExerciseList(exercises) {
 
     let setsRowsHtml = '';
     ex.sets.forEach((s, setIdx) => {
+      const isWarmup = s.type === 'warmup';
+      const typeLabel = isWarmup ? 'W' : (s.type === 'failure' ? 'F' : (s.type === 'drop' ? 'D' : `${s.setNumber}`));
+      const typeClass = `type-${s.type || 'working'}`;
+      const rowClass = isWarmup ? 'set-row-warmup' : (s.type === 'failure' ? 'set-row-failure' : (s.type === 'drop' ? 'set-row-drop' : ''));
+
+      const rirVal = s.rir !== undefined ? s.rir : 2;
+      const rirLabel = rirVal === 0 ? 'RIR 0 (한계)' : (rirVal === 1 ? 'RIR 1' : (rirVal === 2 ? 'RIR 2' : 'RIR 3+'));
+
       setsRowsHtml += `
-        <tr>
-          <td><span class="set-num-badge">${s.setNumber}세트</span></td>
+        <tr class="${rowClass}">
           <td>
-            <input type="number" step="${isCardio ? '0.5' : '2.5'}" min="0" value="${s.weight}" 
-              oninput="updateSetData('${ex.id}', ${setIdx}, 'weight', this.value)"
-              onchange="updateSetData('${ex.id}', ${setIdx}, 'weight', this.value)"
-              title="${weightLabel}">
+            <button type="button" class="set-type-btn ${typeClass}"
+              onclick="toggleSetType('${ex.id}', ${setIdx})"
+              title="터치하여 세트 타입 변경 (본세트 / 웜업 W / 실패 F / 드롭 D)">
+              ${typeLabel}
+            </button>
           </td>
           <td>
-            <input type="number" min="1" value="${s.targetReps}" 
-              oninput="updateSetData('${ex.id}', ${setIdx}, 'targetReps', this.value)"
-              onchange="updateSetData('${ex.id}', ${setIdx}, 'targetReps', this.value)"
-              title="${isCardio ? '목표시간(분)' : '목표횟수(회)'}">
+            <div class="input-stepper-wrap">
+              <button type="button" class="step-quick-btn" onclick="adjustSetField('${ex.id}', ${setIdx}, 'weight', ${isCardio ? -0.5 : -2.5})" title="감소">-</button>
+              <input type="number" step="${isCardio ? '0.5' : '2.5'}" min="0" value="${s.weight}" 
+                oninput="updateSetData('${ex.id}', ${setIdx}, 'weight', this.value)"
+                onchange="updateSetData('${ex.id}', ${setIdx}, 'weight', this.value)"
+                title="${weightLabel}">
+              <button type="button" class="step-quick-btn" onclick="adjustSetField('${ex.id}', ${setIdx}, 'weight', ${isCardio ? 0.5 : 2.5})" title="증가">+</button>
+            </div>
           </td>
           <td>
-            <input type="number" min="0" value="${s.actualReps}" 
-              oninput="updateSetData('${ex.id}', ${setIdx}, 'actualReps', this.value)"
-              onchange="updateSetData('${ex.id}', ${setIdx}, 'actualReps', this.value)"
-              title="${isCardio ? '실제시간(분)' : '실제횟수(회)'}">
+            <div class="input-stepper-wrap">
+              <button type="button" class="step-quick-btn" onclick="adjustSetField('${ex.id}', ${setIdx}, 'targetReps', -1)" title="1 감소">-</button>
+              <input type="number" min="1" value="${s.targetReps}" 
+                oninput="updateSetData('${ex.id}', ${setIdx}, 'targetReps', this.value)"
+                onchange="updateSetData('${ex.id}', ${setIdx}, 'targetReps', this.value)"
+                title="${isCardio ? '목표시간(분)' : '목표횟수(회)'}">
+              <button type="button" class="step-quick-btn" onclick="adjustSetField('${ex.id}', ${setIdx}, 'targetReps', 1)" title="1 증가">+</button>
+            </div>
           </td>
+          <td>
+            <div class="input-stepper-wrap">
+              <button type="button" class="step-quick-btn" onclick="adjustSetField('${ex.id}', ${setIdx}, 'actualReps', -1)" title="1 감소">-</button>
+              <input type="number" min="0" value="${s.actualReps}" 
+                oninput="updateSetData('${ex.id}', ${setIdx}, 'actualReps', this.value)"
+                onchange="updateSetData('${ex.id}', ${setIdx}, 'actualReps', this.value)"
+                title="${isCardio ? '실제시간(분)' : '실제횟수(회)'}">
+              <button type="button" class="step-quick-btn" onclick="adjustSetField('${ex.id}', ${setIdx}, 'actualReps', 1)" title="1 증가">+</button>
+            </div>
+          </td>
+          ${!isCardio ? `
+            <td class="rir-cell">
+              <button type="button" class="rir-btn rir-${rirVal}"
+                onclick="toggleSetRir('${ex.id}', ${setIdx})"
+                title="RIR (실패 지점까지 남은 횟수) 토글">
+                ${rirLabel}
+              </button>
+            </td>
+          ` : ''}
           <td>
             <button class="complete-set-btn ${s.completed ? 'completed' : ''}"
               data-exercise-id="${ex.id}" data-set-index="${setIdx}"
               onclick="toggleSetComplete('${ex.id}', ${setIdx})" title="세트 완료 체크">
-              <i class="fa-solid ${s.completed ? 'fa-check' : 'fa-check'}"></i>
+              <i class="fa-solid fa-check"></i>
             </button>
           </td>
           <td>
@@ -1208,9 +1444,9 @@ function renderExerciseList(exercises) {
     card.innerHTML = `
       <div class="exercise-card-header" onclick="toggleExerciseCardCollapse('${ex.id}')" title="터치하여 이 운동 세트 접기/펼치기">
         <div class="exercise-meta">
-          <span class="category-tag" style="${isCardio ? 'background: rgba(0, 230, 118, 0.15); color: var(--accent-emerald);' : ''}">${ex.category || '기타'}</span>
+          <span class="category-tag" style="${isCardio ? 'background: rgba(0, 230, 118, 0.15); color: var(--accent-emerald);' : ''}">${escapeHtml(ex.category || '기타')}</span>
           <span class="exercise-title editable-title" onclick="event.stopPropagation(); openEditExerciseModal('${ex.id}')" title="터치하여 운동 종목 교체">
-            ${ex.name} <i class="fa-solid fa-pen-to-square title-edit-icon"></i>
+            ${escapeHtml(ex.name)} <i class="fa-solid fa-pen-to-square title-edit-icon"></i>
           </span>
           <span class="exercise-completion-status ${allSetsCompleted ? 'completed' : 'in-progress'}"
             title="${allSetsCompleted ? '모든 세트 완료' : '진행 중'}" aria-label="${allSetsCompleted ? '모든 세트 완료' : '진행 중'}">
@@ -1226,7 +1462,25 @@ function renderExerciseList(exercises) {
         </div>
       </div>
 
+      <div class="ex-card-badges" style="padding: 0 16px 8px 16px;">
+        <span class="ex-stat-badge rest-badge" onclick="changeExerciseRestSeconds('${ex.id}')" title="터치하여 이 운동의 기본 휴식시간 변경">
+          <i class="fa-solid fa-stopwatch"></i> 휴식 ${restSec}초
+        </span>
+        ${!isCardio && peakOrm > 0 ? `
+          <span class="ex-stat-badge orm-badge" title="Epley 공식 기반 오늘 최고 추정 1RM">
+            <i class="fa-solid fa-trophy"></i> 최고 1RM ${peakOrm}kg
+          </span>
+        ` : ''}
+      </div>
+
       <div class="exercise-card-body">
+        ${insight ? `
+          <div class="overload-guide-banner">
+            <i class="fa-solid fa-lightbulb"></i>
+            <span>${escapeHtml(insight.recommendation)}</span>
+          </div>
+        ` : ''}
+
         <table class="sets-table">
           <thead>
             <tr>
@@ -1234,6 +1488,7 @@ function renderExerciseList(exercises) {
               <th>${weightLabel}</th>
               <th>${isCardio ? '목표(분)' : '목표(회)'}</th>
               <th>${isCardio ? '실제(분)' : '실제(회)'}</th>
+              ${!isCardio ? '<th>RIR</th>' : ''}
               <th>완료</th>
               <th>삭제</th>
             </tr>
@@ -1285,6 +1540,18 @@ function moveExercise(exId, direction) {
 
 let editingExerciseId = null;
 
+function updateRestPresetChips(seconds) {
+  const chips = document.querySelectorAll('#restPresetChips .rest-chip');
+  chips.forEach(chip => {
+    const sec = Number(chip.dataset.sec);
+    if (sec === Number(seconds)) {
+      chip.classList.add('active');
+    } else {
+      chip.classList.remove('active');
+    }
+  });
+}
+
 function openAddExerciseModal() {
   editingExerciseId = null;
   const modal = document.getElementById('addExerciseModal');
@@ -1298,6 +1565,12 @@ function openAddExerciseModal() {
   document.getElementById('exerciseCategorySelect').value = '가슴';
   document.getElementById('defaultWeightInput').value = 40;
   document.getElementById('defaultRepsInput').value = 12;
+
+  const defaultRest = getDefaultRestForExercise('', '가슴');
+  const restInput = document.getElementById('defaultRestInput');
+  if (restInput) restInput.value = defaultRest;
+  updateRestPresetChips(defaultRest);
+
   updateAddFormLabels('가슴');
 
   initAudioContext();
@@ -1333,6 +1606,11 @@ function openEditExerciseModal(exId) {
     document.getElementById('defaultRepsInput').value = isCardio ? 20 : 12;
   }
 
+  const restSec = ex.restSeconds || getDefaultRestForExercise(ex.name, ex.category);
+  const restInput = document.getElementById('defaultRestInput');
+  if (restInput) restInput.value = restSec;
+  updateRestPresetChips(restSec);
+
   initAudioContext();
   renderPresetChips();
   if (modal) modal.classList.remove('hidden');
@@ -1344,7 +1622,7 @@ function closeAddExerciseModal() {
   if (modal) modal.classList.add('hidden');
 }
 
-function replaceExercise(exId, name, category, defaultWeight = 40, defaultReps = 12) {
+function replaceExercise(exId, name, category, defaultWeight = 40, defaultReps = 12, restSeconds = 90) {
   const trimmedName = name.trim();
   if (!trimmedName) return;
 
@@ -1370,6 +1648,7 @@ function replaceExercise(exId, name, category, defaultWeight = 40, defaultReps =
   ex.name = trimmedName;
   ex.category = mappedCategory;
   ex.type = isCardio ? 'cardio' : 'strength';
+  ex.restSeconds = Number(restSeconds) || getDefaultRestForExercise(trimmedName, mappedCategory);
 
   if (Array.isArray(ex.sets)) {
     ex.sets.forEach(s => {
@@ -1400,7 +1679,8 @@ function replaceExercise(exId, name, category, defaultWeight = 40, defaultReps =
       type: isCardio ? 'cardio' : 'strength',
       weight: initWeight,
       reps: numReps,
-      sets: ex.sets ? ex.sets.length : (isCardio ? 1 : 3)
+      sets: ex.sets ? ex.sets.length : (isCardio ? 1 : 3),
+      restSeconds: ex.restSeconds
     });
   }
 
@@ -1409,7 +1689,7 @@ function replaceExercise(exId, name, category, defaultWeight = 40, defaultReps =
 }
 
 // Exercise Actions & Automatic Custom Preset Addition
-function addExercise(name, category, defaultWeight = 40, defaultReps = 12) {
+function addExercise(name, category, defaultWeight = 40, defaultReps = 12, restSeconds = 90) {
   const trimmedName = name.trim();
   if (!trimmedName) return;
 
@@ -1436,12 +1716,16 @@ function addExercise(name, category, defaultWeight = 40, defaultReps = 12) {
   for (let i = 1; i <= numSets; i++) {
     initialSets.push({
       setNumber: i,
+      type: 'working',
       weight: initWeight,
       targetReps: numReps,
       actualReps: numReps,
+      rir: 2,
       completed: false
     });
   }
+
+  const finalRest = Number(restSeconds) || getDefaultRestForExercise(trimmedName, mappedCategory);
 
   const newExercise = {
     id: 'ex_' + Date.now() + '_' + Math.random().toString(36).substring(2, 7),
@@ -1450,6 +1734,7 @@ function addExercise(name, category, defaultWeight = 40, defaultReps = 12) {
     type: isCardio ? 'cardio' : 'strength',
     targetSets: numSets,
     collapsed: false,
+    restSeconds: finalRest,
     sets: initialSets
   };
 
@@ -1468,7 +1753,8 @@ function addExercise(name, category, defaultWeight = 40, defaultReps = 12) {
       type: isCardio ? 'cardio' : 'strength',
       weight: initWeight,
       reps: numReps,
-      sets: numSets
+      sets: numSets,
+      restSeconds: finalRest
     });
   }
 
@@ -1552,13 +1838,15 @@ function addSetToExercise(exId) {
   if (!ex) return;
 
   const isCardio = isCardioExercise(ex);
-  const lastSet = ex.sets[ex.sets.length - 1] || (isCardio ? { weight: 9.0, targetReps: 20 } : { weight: 40, targetReps: 12 });
+  const lastSet = ex.sets[ex.sets.length - 1] || (isCardio ? { weight: 9.0, targetReps: 20, type: 'working' } : { weight: 40, targetReps: 12, type: 'working' });
 
   ex.sets.push({
     setNumber: ex.sets.length + 1,
+    type: lastSet.type || 'working',
     weight: Number(lastSet.weight) || (isCardio ? 9.0 : 40),
     targetReps: Number(lastSet.targetReps) || (isCardio ? 20 : 12),
     actualReps: Number(lastSet.actualReps) || Number(lastSet.targetReps) || (isCardio ? 20 : 12),
+    rir: lastSet.rir !== undefined ? lastSet.rir : 2,
     completed: false
   });
 
@@ -1637,6 +1925,7 @@ function scrollToNextCompleteButton(nextSet) {
 
 function toggleSetComplete(exId, setIndex) {
   initAudioContext();
+  requestScreenWakeLock();
 
   const list = state.workouts[state.currentDate] || [];
   const ex = list.find(e => e.id === exId);
@@ -1662,19 +1951,22 @@ function toggleSetComplete(exId, setIndex) {
   updateUI();
 
   if (willBeCompleted) {
-    startRestTimer();
+    const restSec = ex.restSeconds || getDefaultRestForExercise(ex.name, ex.category);
+    startRestTimer(restSec, `[${ex.name}]`);
     scrollToNextCompleteButton(nextSet);
   }
 }
 
 // Fixed Bottom Bar Rest Timer Engine
-function startRestTimer(seconds = state.timer.defaultSeconds) {
+function startRestTimer(seconds = state.timer.defaultSeconds, label = '') {
   initAudioContext();
+  requestScreenWakeLock();
 
   state.timer.totalSeconds = seconds;
   state.timer.remainingSeconds = seconds;
   state.timer.status = 'running';
   state.timer.hasBeeped10s = false;
+  state.timer.currentLabel = label;
 
   updateFixedBottomTimerUI();
 
@@ -1947,10 +2239,13 @@ function generateRoutineCodeData() {
     n: ex.name,
     c: ex.category || '기타',
     t: ex.type || 'strength',
+    rst: ex.restSeconds || getDefaultRestForExercise(ex.name, ex.category),
     s: ex.sets.map(s => ({
       w: Number(s.weight) || 0,
       tr: Number(s.targetReps) || 12,
       ar: Number(s.actualReps) || Number(s.targetReps) || 12,
+      tp: s.type || 'working',
+      rir: s.rir !== undefined ? s.rir : 2,
       cmp: s.completed ? 1 : 0
     }))
   }));
@@ -1969,7 +2264,8 @@ function generateWorkoutSummaryText() {
 
   let totalSets = 0;
   let completedSets = 0;
-  let strengthVolume = 0;
+  let hardSets = 0;
+  let effectiveVolume = 0;
   let cardioDistance = 0;
 
   exercises.forEach(ex => {
@@ -1981,21 +2277,22 @@ function generateWorkoutSummaryText() {
       completedSets++;
       if (cardio) {
         cardioDistance += ((Number(set.weight) || 0) * (Number(set.actualReps) || 0)) / 60;
-      } else {
-        strengthVolume += (Number(set.weight) || 0) * (Number(set.actualReps) || 0);
+      } else if (set.type !== 'warmup') {
+        hardSets++;
+        effectiveVolume += (Number(set.weight) || 0) * (Number(set.actualReps) || 0);
       }
     });
   });
 
   const summaryParts = [
     `${exercises.length}개 종목`,
-    `${completedSets}/${totalSets}세트 완료`
+    `${completedSets}/${totalSets}세트 완료 (본세트 ${hardSets}세트)`
   ];
-  if (strengthVolume > 0) summaryParts.push(`완료 볼륨 ${formatWorkoutNumber(strengthVolume)}kg`);
+  if (effectiveVolume > 0) summaryParts.push(`유효 본세트 볼륨 ${formatWorkoutNumber(effectiveVolume)}kg`);
   if (cardioDistance > 0) summaryParts.push(`유산소 거리 ${formatWorkoutNumber(cardioDistance)}km`);
 
   const lines = [
-    'FitTracker 운동 기록',
+    'FitTracker 운동 기록 (Hypertrophy Analysis)',
     `날짜: ${formatDateDisplay(state.currentDate)}`,
     `요약: ${summaryParts.join(' · ')}`,
     ''
@@ -2003,12 +2300,15 @@ function generateWorkoutSummaryText() {
 
   exercises.forEach((ex, exerciseIndex) => {
     const cardio = isCardioExercise(ex);
-    lines.push(`${exerciseIndex + 1}. ${ex.name} (${ex.category || '기타'})`);
+    const restSec = ex.restSeconds || getDefaultRestForExercise(ex.name, ex.category);
+    lines.push(`${exerciseIndex + 1}. ${ex.name} (${ex.category || '기타'}, 휴식 ${restSec}초)`);
 
     (ex.sets || []).forEach((set, setIndex) => {
       const weight = Number(set.weight) || 0;
       const targetReps = Number(set.targetReps) || 0;
       const actualReps = Number(set.actualReps) || 0;
+      const setTypeTag = set.type === 'warmup' ? '[웜업 W]' : (set.type === 'failure' ? '[실패 F]' : (set.type === 'drop' ? '[드롭 D]' : '[본세트]'));
+      const rirStr = set.rir !== undefined ? ` · RIR ${set.rir}` : '';
 
       if (cardio) {
         if (set.completed) {
@@ -2019,9 +2319,10 @@ function generateWorkoutSummaryText() {
         }
       } else if (set.completed) {
         const setVolume = weight * actualReps;
-        lines.push(`- ${setIndex + 1}세트: ${formatWorkoutNumber(weight)}kg × ${formatWorkoutNumber(actualReps)}회 (목표 ${formatWorkoutNumber(targetReps)}회) · 볼륨 ${formatWorkoutNumber(setVolume)}kg · 완료`);
+        const volDesc = set.type === 'warmup' ? '(웜업 볼륨 제외)' : `· 볼륨 ${formatWorkoutNumber(setVolume)}kg`;
+        lines.push(`- ${setIndex + 1}세트 ${setTypeTag}: ${formatWorkoutNumber(weight)}kg × ${formatWorkoutNumber(actualReps)}회 (목표 ${formatWorkoutNumber(targetReps)}회)${rirStr} ${volDesc} · 완료`);
       } else {
-        lines.push(`- ${setIndex + 1}세트: ${formatWorkoutNumber(weight)}kg × 목표 ${formatWorkoutNumber(targetReps)}회 · 미완료`);
+        lines.push(`- ${setIndex + 1}세트 ${setTypeTag}: ${formatWorkoutNumber(weight)}kg × 목표 ${formatWorkoutNumber(targetReps)}회 · 미완료`);
       }
     });
 
@@ -2037,7 +2338,7 @@ function generateWorkoutCodePrompt() {
 내 운동 요청을 바탕으로 아래 스키마의 JSON만 응답하세요. 설명이나 인사말, 마크다운 코드 블록(\`\`\`)은 포함하지 마세요.
 
 형식:
-{"type":"FIT_TRACKER_ROUTINE","v":1,"data":[{"idx":0,"n":"벤치프레스","c":"가슴","t":"strength","s":[{"w":60,"tr":12,"ar":12,"cmp":0}]}]}
+{"type":"FIT_TRACKER_ROUTINE","v":1,"data":[{"idx":0,"n":"벤치프레스","c":"가슴","t":"strength","rst":150,"s":[{"w":60,"tr":12,"ar":12,"tp":"working","rir":2,"cmp":0}]}]}
 
 필드 규칙:
 - data: 운동 종목 배열
@@ -2045,10 +2346,13 @@ function generateWorkoutCodePrompt() {
 - n: 운동 이름
 - c: 부위. 가슴, 등, 하체, 어깨, 팔, 복근/코어, 유산소, 전신, 기타 중 하나
 - t: 근력 운동은 strength, 유산소 운동은 cardio
+- rst: 세트 간 기본 휴식시간(초). 30~180
 - s: 세트 배열
 - w: 근력은 중량(kg), 유산소는 속도(km/h)
 - tr: 근력은 목표 횟수, 유산소는 목표 시간(분)
 - ar: 새 루틴에서는 tr과 같은 값
+- tp: 세트 타입. working(본세트), warmup(웜업), failure(실패지점), drop(드롭세트)
+- rir: 실패까지 남은 횟수 (0~3)
 - cmp: 새 루틴에서는 항상 0
 
 각 운동에 현실적인 중량, 횟수, 세트 수를 넣고 모든 숫자는 따옴표 없는 숫자로 작성하세요.
@@ -2142,6 +2446,7 @@ function parseAndImportRoutineCode(codeStr) {
       const requestedCategory = String(item.c || '기타');
       const category = allowedCategories.includes(requestedCategory) ? requestedCategory : '기타';
       const type = item.t === 'cardio' || category === '유산소' ? 'cardio' : 'strength';
+      const restSec = Number(item.rst) || getDefaultRestForExercise(name, category);
       const sets = Array.isArray(item.s) ? item.s.slice(0, 100) : [];
 
       if (!name || /[<>"'&\\]/.test(name)) return;
@@ -2150,19 +2455,23 @@ function parseAndImportRoutineCode(codeStr) {
         const weight = Number(s.w);
         const targetReps = Number(s.tr);
         const actualReps = Number(s.ar);
+        const setType = ['working', 'warmup', 'failure', 'drop'].includes(s.tp) ? s.tp : 'working';
+        const rir = Number.isInteger(s.rir) ? s.rir : 2;
 
         return {
           setNumber: idx + 1,
+          type: setType,
           weight: Number.isFinite(weight) && weight >= 0 ? weight : (type === 'cardio' ? 9.0 : 40),
           targetReps: Number.isFinite(targetReps) && targetReps > 0 ? targetReps : (type === 'cardio' ? 20 : 12),
           actualReps: Number.isFinite(actualReps) && actualReps >= 0
             ? actualReps
             : (Number.isFinite(targetReps) && targetReps > 0 ? targetReps : (type === 'cardio' ? 20 : 12)),
+          rir: rir,
           completed: s.cmp === 1
         };
       });
       const importedSets = fullSets.length > 0 ? fullSets : [
-        { setNumber: 1, weight: type === 'cardio' ? 9.0 : 40, targetReps: type === 'cardio' ? 20 : 12, actualReps: type === 'cardio' ? 20 : 12, completed: false }
+        { setNumber: 1, type: 'working', weight: type === 'cardio' ? 9.0 : 40, targetReps: type === 'cardio' ? 20 : 12, actualReps: type === 'cardio' ? 20 : 12, rir: 2, completed: false }
       ];
 
       importedExercises.push({
@@ -2172,6 +2481,7 @@ function parseAndImportRoutineCode(codeStr) {
         type: type,
         targetSets: importedSets.length,
         collapsed: false,
+        restSeconds: restSec,
         sets: importedSets
       });
     });
@@ -2406,15 +2716,7 @@ document.addEventListener('DOMContentLoaded', () => {
     updateUI();
   });
 
-  // Dynamic Form Category Change Listener
-  const catSelect = document.getElementById('exerciseCategorySelect');
-  if (catSelect) {
-    catSelect.addEventListener('change', (e) => {
-      updateAddFormLabels(e.target.value);
-    });
-  }
-
-  // Exercise Name Autocomplete & Auto Category Mapping Listeners
+  // Exercise Name Autocomplete & Auto Category & Rest Time Mapping Listeners
   const exerciseNameInput = document.getElementById('exerciseNameInput');
   if (exerciseNameInput) {
     exerciseNameInput.addEventListener('input', (e) => {
@@ -2423,10 +2725,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
       const match = EXERCISE_DATABASE.find(item => item.name.toLowerCase() === val.trim().toLowerCase());
       if (match) {
-        catSelect.value = match.category;
-        updateAddFormLabels(match.category);
+        const catSelect = document.getElementById('exerciseCategorySelect');
+        if (catSelect) {
+          catSelect.value = match.category;
+          updateAddFormLabels(match.category);
+        }
         if (match.weight !== undefined) document.getElementById('defaultWeightInput').value = match.weight;
         if (match.reps !== undefined) document.getElementById('defaultRepsInput').value = match.reps;
+        const restSec = match.restSeconds || getDefaultRestForExercise(match.name, match.category);
+        const restInput = document.getElementById('defaultRestInput');
+        if (restInput) restInput.value = restSec;
+        updateRestPresetChips(restSec);
       }
     });
 
@@ -2520,6 +2829,37 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
+  // Rest Preset Chips Click & Input Listeners in Add/Edit Modal
+  const restChips = document.querySelectorAll('#restPresetChips .rest-chip');
+  restChips.forEach(chip => {
+    chip.addEventListener('click', () => {
+      const sec = chip.dataset.sec;
+      const restInput = document.getElementById('defaultRestInput');
+      if (restInput) restInput.value = sec;
+      updateRestPresetChips(sec);
+    });
+  });
+
+  const defaultRestInput = document.getElementById('defaultRestInput');
+  if (defaultRestInput) {
+    defaultRestInput.addEventListener('input', (e) => {
+      updateRestPresetChips(e.target.value);
+    });
+  }
+
+  // Dynamic Form Category Change Listener
+  const catSelect = document.getElementById('exerciseCategorySelect');
+  if (catSelect) {
+    catSelect.addEventListener('change', (e) => {
+      updateAddFormLabels(e.target.value);
+      const name = document.getElementById('exerciseNameInput').value;
+      const restVal = getDefaultRestForExercise(name, e.target.value);
+      const restInput = document.getElementById('defaultRestInput');
+      if (restInput) restInput.value = restVal;
+      updateRestPresetChips(restVal);
+    });
+  }
+
   // Add & Edit Exercise Modal Listeners
   document.getElementById('addExerciseBtn').addEventListener('click', openAddExerciseModal);
   document.getElementById('emptyAddBtn').addEventListener('click', openAddExerciseModal);
@@ -2532,12 +2872,13 @@ document.addEventListener('DOMContentLoaded', () => {
     const category = document.getElementById('exerciseCategorySelect').value;
     const weight = document.getElementById('defaultWeightInput').value;
     const reps = document.getElementById('defaultRepsInput').value;
+    const restSec = document.getElementById('defaultRestInput') ? document.getElementById('defaultRestInput').value : 90;
 
     if (name) {
       if (editingExerciseId) {
-        replaceExercise(editingExerciseId, name, category, weight, reps);
+        replaceExercise(editingExerciseId, name, category, weight, reps, restSec);
       } else {
-        addExercise(name, category, weight, reps);
+        addExercise(name, category, weight, reps, restSec);
       }
       closeAddExerciseModal();
       document.getElementById('exerciseNameInput').value = '';
