@@ -270,25 +270,36 @@ function initFirebaseSync() {
   const savedKakao = localStorage.getItem('fit_tracker_kakao_user');
   if (savedKakao) {
     try {
-      currentKakaoUser = JSON.parse(savedKakao);
-      updateAuthUIState(currentKakaoUser);
-      syncWorkoutsToAdminServer(currentKakaoUser);
+      const parsed = JSON.parse(savedKakao);
+      if (parsed && parsed.kakaoId) {
+        currentKakaoUser = parsed;
+        updateAuthUIState(currentKakaoUser);
+        syncWorkoutsToAdminServer(currentKakaoUser);
+      } else {
+        currentKakaoUser = null;
+        localStorage.removeItem('fit_tracker_kakao_user');
+        updateAuthUIState(null);
+      }
     } catch (e) {
       console.warn('Saved Kakao user parse error:', e);
+      currentKakaoUser = null;
+      updateAuthUIState(null);
     }
+  } else {
+    currentKakaoUser = null;
+    updateAuthUIState(null);
   }
 
   try {
     if (typeof initFirebaseApp === 'function' && initFirebaseApp()) {
       firebase.auth().onAuthStateChanged((user) => {
         currentUser = user;
-        updateAuthUIState(user);
+        // UI auth state strictly reflects Kakao login
+        updateAuthUIState(currentKakaoUser);
 
         if (user) {
-          console.log('Firebase User Logged In:', user.uid, user.email || user.displayName || 'User');
+          console.log('Firebase User Logged In:', user.uid);
           pullWorkoutsFromCloud();
-        } else if (!currentKakaoUser) {
-          updateAuthUIState(null);
         }
       });
     }
@@ -311,17 +322,18 @@ function updateAuthUIState(user) {
   const authLoggedOutView = document.getElementById('authLoggedOutView');
   const authLoggedInView = document.getElementById('authLoggedInView');
 
-  const activeUser = user || currentKakaoUser;
+  // Strictly check if valid Kakao account is connected
+  const isKakaoLoggedIn = Boolean(currentKakaoUser && currentKakaoUser.kakaoId);
 
-  if (activeUser) {
+  if (isKakaoLoggedIn) {
     if (authModalBtn) authModalBtn.classList.add('logged-in');
     if (authBadgeDot) authBadgeDot.classList.remove('hidden');
     if (authLoggedOutView) authLoggedOutView.classList.add('hidden');
     if (authLoggedInView) authLoggedInView.classList.remove('hidden');
 
-    const name = activeUser.displayName || activeUser.nickname || (activeUser.isAnonymous ? '게스트 사용자' : '카카오 연동 사용자');
-    const kakaoId = activeUser.kakaoId || activeUser.uid || '연동 완료';
-    const email = activeUser.email || '';
+    const name = currentKakaoUser.nickname || '카카오 연동 사용자';
+    const kakaoId = currentKakaoUser.kakaoId || '-';
+    const email = currentKakaoUser.email || '';
 
     if (authUserName) authUserName.textContent = name;
     if (authUserKakaoId) authUserKakaoId.textContent = kakaoId;
@@ -335,6 +347,7 @@ function updateAuthUIState(user) {
       }
     }
   } else {
+    // Logged Out State: strictly show login view and hide logout/delete buttons
     if (authModalBtn) authModalBtn.classList.remove('logged-in');
     if (authBadgeDot) authBadgeDot.classList.add('hidden');
     if (authLoggedOutView) authLoggedOutView.classList.remove('hidden');
@@ -349,12 +362,14 @@ function updateSyncTimestampDisplay() {
   const syncTimeEl = document.getElementById('lastCloudSyncTime');
   if (!syncTimeEl) return;
 
-  if (lastSyncTimestamp) {
+  const isKakaoLoggedIn = Boolean(currentKakaoUser && currentKakaoUser.kakaoId);
+
+  if (lastSyncTimestamp && isKakaoLoggedIn) {
     const timeStr = new Date(lastSyncTimestamp).toLocaleTimeString('ko-KR', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
     syncTimeEl.textContent = `마지막 동기화: ${timeStr}`;
     syncTimeEl.style.color = 'var(--accent-emerald)';
-  } else if (currentUser || currentKakaoUser) {
-    syncTimeEl.textContent = '동기화 상태: 연결됨';
+  } else if (isKakaoLoggedIn) {
+    syncTimeEl.textContent = '동기화 상태: 카카오 연동 활성';
     syncTimeEl.style.color = 'var(--accent-emerald)';
   } else {
     syncTimeEl.textContent = '동기화 상태: 미연동 (로컬 전용)';

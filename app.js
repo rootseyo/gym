@@ -2854,6 +2854,9 @@ document.addEventListener('DOMContentLoaded', () => {
   const authModalBtn = document.getElementById('authModalBtn');
   if (authModalBtn) {
     authModalBtn.addEventListener('click', () => {
+      if (typeof updateAuthUIState === 'function') {
+        updateAuthUIState(typeof currentKakaoUser !== 'undefined' ? currentKakaoUser : null);
+      }
       document.getElementById('authModal').classList.remove('hidden');
     });
   }
