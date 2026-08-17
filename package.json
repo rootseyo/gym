@@ -1,6 +1,6 @@
 {
   "name": "fittracker-pro",
-  "version": "1.0.0",
+  "version": "1.0.6",
   "description": "FitTracker Pro Local Dev Server",
   "scripts": {
     "dev": "npx -y serve -l 3000 .",
