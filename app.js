@@ -1195,6 +1195,10 @@ function deleteAllExercisesForCurrentDate() {
   if (!confirm(`${selectedDate}의 운동 ${exercises.length}개를 모두 삭제하시겠습니까?`)) return;
 
   delete state.workouts[state.currentDate];
+  state.deletedDates = state.deletedDates || [];
+  if (!state.deletedDates.includes(state.currentDate)) {
+    state.deletedDates.push(state.currentDate);
+  }
   state.selectedExercisesForGraph = [];
   saveState();
   updateUI();
@@ -1975,35 +1979,24 @@ function addExercise(name, category, defaultWeight = 40, defaultReps = 12, restS
 }
 
 function handleDeleteExerciseTap(exId, button) {
-  if (!button) return;
-
-  if (button.dataset.deleteArmed === 'true') {
-    clearTimeout(button.deleteResetTimer);
-    deleteExercise(exId, { skipConfirm: true });
-    return;
-  }
-
-  document.querySelectorAll('.exercise-delete-btn.delete-armed').forEach(activeButton => {
-    activeButton.classList.remove('delete-armed');
-    activeButton.dataset.deleteArmed = 'false';
-    activeButton.title = '한 번 더 누르면 삭제';
-    clearTimeout(activeButton.deleteResetTimer);
-  });
-
-  button.dataset.deleteArmed = 'true';
-  button.classList.add('delete-armed');
-  button.title = '한 번 더 누르면 삭제됩니다';
-  button.deleteResetTimer = setTimeout(() => {
-    button.classList.remove('delete-armed');
-    button.dataset.deleteArmed = 'false';
-    button.title = '한 번 더 누르면 삭제';
-  }, 2500);
+  deleteExercise(exId);
 }
 
 function deleteExercise(exId, options = {}) {
   if (!options.skipConfirm && !confirm('이 운동 종목을 삭제하시겠습니까?')) return;
   const list = state.workouts[state.currentDate] || [];
-  state.workouts[state.currentDate] = list.filter(e => e.id !== exId);
+  const updatedList = list.filter(e => String(e.id) !== String(exId));
+  
+  if (updatedList.length === 0) {
+    delete state.workouts[state.currentDate];
+    state.deletedDates = state.deletedDates || [];
+    if (!state.deletedDates.includes(state.currentDate)) {
+      state.deletedDates.push(state.currentDate);
+    }
+  } else {
+    state.workouts[state.currentDate] = updatedList;
+  }
+  
   saveState();
   updateUI();
 }

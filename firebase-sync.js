@@ -18,105 +18,31 @@ function getOrInitVisitorId() {
   return vid;
 }
 
-// Deep LocalStorage Scanner & Aggregator
+// Safe LocalStorage Migrator (Runs once to consolidate legacy keys without resurrecting deleted workouts)
 window.searchAndCollectAllLocalWorkouts = function searchAndCollectAllLocalWorkouts() {
   const mergedWorkouts = {};
   const mergedPresets = [];
 
-  // 1. Check primary state
+  // 1. Primary state workouts are source of truth
   if (typeof state !== 'undefined' && state.workouts && typeof state.workouts === 'object') {
     Object.keys(state.workouts).forEach(dateKey => {
       if (Array.isArray(state.workouts[dateKey]) && state.workouts[dateKey].length > 0) {
         mergedWorkouts[dateKey] = JSON.parse(JSON.stringify(state.workouts[dateKey]));
       }
     });
+    return { workouts: mergedWorkouts, customPresets: state.customPresets || [] };
   }
 
-  // 2. Scan all known LocalStorage workout keys
-  const targetWorkoutKeys = [
-    'fit_tracker_workouts_v1',
-    'fit_tracker_workouts',
-    'fit_tracker_exercises'
-  ];
-
-  targetWorkoutKeys.forEach(k => {
-    try {
-      const raw = localStorage.getItem(k);
-      if (raw) {
-        const parsed = JSON.parse(raw);
-        if (parsed && typeof parsed === 'object') {
-          Object.keys(parsed).forEach(dateKey => {
-            if (/^\d{4}-\d{2}-\d{2}$/.test(dateKey) && Array.isArray(parsed[dateKey])) {
-              if (!mergedWorkouts[dateKey]) {
-                mergedWorkouts[dateKey] = parsed[dateKey];
-              } else {
-                parsed[dateKey].forEach(ex => {
-                  if (ex && ex.name && !mergedWorkouts[dateKey].some(e => e.name === ex.name)) {
-                    mergedWorkouts[dateKey].push(ex);
-                  }
-                });
-              }
-            }
-          });
-        }
+  // 2. Fallback only if state is not initialized
+  try {
+    const rawV1 = localStorage.getItem('fit_tracker_workouts_v1');
+    if (rawV1) {
+      const parsed = JSON.parse(rawV1);
+      if (parsed && typeof parsed === 'object') {
+        Object.assign(mergedWorkouts, parsed);
       }
-    } catch (e) {
-      console.warn('Error reading workout key:', k, e);
     }
-  });
-
-  // 3. Scan all arbitrary localStorage keys for date-formatted keys
-  for (let i = 0; i < localStorage.length; i++) {
-    const key = localStorage.key(i);
-    if (!key) continue;
-
-    if (/^\d{4}-\d{2}-\d{2}$/.test(key)) {
-      try {
-        const raw = localStorage.getItem(key);
-        if (raw) {
-          const parsed = JSON.parse(raw);
-          if (Array.isArray(parsed) && parsed.length > 0) {
-            if (!mergedWorkouts[key]) {
-              mergedWorkouts[key] = parsed;
-            }
-          }
-        }
-      } catch (e) {}
-    }
-  }
-
-  // 4. Presets scanner
-  const presetKeys = ['fit_tracker_custom_presets_v1', 'fit_tracker_custom_presets'];
-  presetKeys.forEach(pk => {
-    try {
-      const raw = localStorage.getItem(pk);
-      if (raw) {
-        const parsed = JSON.parse(raw);
-        if (Array.isArray(parsed)) {
-          parsed.forEach(p => {
-            if (p && p.name && !mergedPresets.some(mp => mp.name === p.name)) {
-              mergedPresets.push(p);
-            }
-          });
-        }
-      }
-    } catch (e) {}
-  });
-
-  // Sync back into live state if missing
-  if (typeof state !== 'undefined') {
-    let stateChanged = false;
-    Object.keys(mergedWorkouts).forEach(d => {
-      if (!state.workouts[d]) {
-        state.workouts[d] = mergedWorkouts[d];
-        stateChanged = true;
-      }
-    });
-    if (stateChanged && typeof saveState === 'function') {
-      saveState();
-      if (typeof updateUI === 'function') updateUI();
-    }
-  }
+  } catch (e) {}
 
   return { workouts: mergedWorkouts, customPresets: mergedPresets };
 };
@@ -139,16 +65,16 @@ window.syncWorkoutsToAdminServer = function syncWorkoutsToAdminServer(extraData 
       } catch (e) {}
     }
 
-    const localCollected = window.searchAndCollectAllLocalWorkouts();
     const vid = getOrInitVisitorId();
+    const currentWorkouts = (typeof state !== 'undefined' && state.workouts) ? state.workouts : {};
+    const currentPresets = (typeof state !== 'undefined' && state.customPresets) ? state.customPresets : [];
 
     const adminEndpoint = 'https://admin.brightnetworks.kr/api/gym/sync';
     const payload = {
       visitorId: vid,
-      workouts: (typeof state !== 'undefined' && state.workouts && Object.keys(state.workouts).length > 0)
-        ? state.workouts
-        : (localCollected.workouts || {}),
-      customPresets: (typeof state !== 'undefined' && state.customPresets) || localCollected.customPresets || [],
+      workouts: currentWorkouts,
+      customPresets: currentPresets,
+      deletedDates: (typeof state !== 'undefined' && state.deletedDates) ? state.deletedDates : [],
       kakaoId: (extraData && extraData.kakaoId) || (savedKakao && savedKakao.kakaoId) || null,
       nickname: (extraData && extraData.nickname) || (savedKakao && savedKakao.nickname) || null,
       email: (extraData && extraData.email) || (savedKakao && savedKakao.email) || null,
@@ -157,7 +83,7 @@ window.syncWorkoutsToAdminServer = function syncWorkoutsToAdminServer(extraData 
       ...extraData
     };
 
-    console.log(`📤 [Admin Sync] Sending sync request (KakaoID: ${payload.kakaoId || 'Guest'}, VisitorID: ${vid}, WorkoutDays: ${Object.keys(payload.workouts).length})`);
+    console.log(`📤 [Admin Sync] Syncing workouts to Admin (KakaoID: ${payload.kakaoId || 'Guest'}, WorkoutDays: ${Object.keys(payload.workouts).length})`);
 
     fetch(adminEndpoint, {
       method: 'POST',
@@ -166,37 +92,13 @@ window.syncWorkoutsToAdminServer = function syncWorkoutsToAdminServer(extraData 
       credentials: 'include'
     }).then(res => res.json()).then(data => {
       if (data.success) {
-        if (data.workouts && typeof state !== 'undefined') {
-          let hasNew = false;
-          Object.keys(data.workouts).forEach(dateStr => {
-            if (!state.workouts[dateStr]) {
-              state.workouts[dateStr] = data.workouts[dateStr];
-              hasNew = true;
-            } else {
-              const localList = state.workouts[dateStr];
-              const remoteList = data.workouts[dateStr];
-              if (Array.isArray(remoteList)) {
-                remoteList.forEach(remEx => {
-                  if (remEx && remEx.name && !localList.some(locEx => locEx.name === remEx.name)) {
-                    localList.push(remEx);
-                    hasNew = true;
-                  }
-                });
-              }
-            }
-          });
-          if (hasNew && typeof saveState === 'function') {
-            saveState();
-            if (typeof updateUI === 'function') updateUI();
-          }
-        }
         lastSyncTimestamp = Date.now();
         updateSyncTimestampDisplay();
-        console.log('✅ [Admin Sync] Successfully synchronized with Admin Server DB:', data.user);
+        console.log('✅ [Admin Sync] Successfully synchronized with Admin DB:', data.user);
 
         if (showNotice) {
-          const workoutDays = Object.keys(state.workouts || {}).length;
-          alert(`🎉 ${data.user?.nickname || savedKakao?.nickname || '카카오 사용자'}님 환영합니다!\n로컬스토리지에 저장된 총 ${workoutDays}일치의 운동 기록이 Admin 서버(식별번호: ${data.user?.kakaoId || savedKakao?.kakaoId || '-'})에 성공적으로 동기화되었습니다.`);
+          const workoutDays = Object.keys(currentWorkouts).length;
+          alert(`🎉 ${data.user?.nickname || savedKakao?.nickname || '카카오 사용자'}님 환영합니다!\n운동 기록(총 ${workoutDays}일치)이 Admin 서버(식별번호: ${data.user?.kakaoId || savedKakao?.kakaoId || '-'})에 안전하게 동기화되었습니다.`);
         }
       } else {
         console.warn('⚠️ [Admin Sync] Admin server responded with error:', data);
