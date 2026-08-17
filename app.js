@@ -3185,15 +3185,6 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
   }
-  const manualSyncBtn = document.getElementById('manualSyncBtn');
-  if (manualSyncBtn) {
-    manualSyncBtn.addEventListener('click', () => {
-      if (typeof syncWorkoutsToAdminServer === 'function') {
-        syncWorkoutsToAdminServer();
-        alert('클라우드로 동기화되었습니다!');
-      }
-    });
-  }
 
   if (typeof initFirebaseSync === 'function') {
     initFirebaseSync();
