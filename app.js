@@ -1414,13 +1414,22 @@ function renderExerciseList(exercises) {
       `;
     });
 
+    const svgThumb = typeof getExerciseSvgIcon === 'function' ? getExerciseSvgIcon(ex.name, ex.category) : '';
+
     card.innerHTML = `
       <div class="exercise-card-header" onclick="toggleExerciseCardCollapse('${ex.id}')" title="터치하여 이 운동 세트 접기/펼치기">
         <div class="exercise-meta">
-          <span class="category-tag" style="${isCardio ? 'background: rgba(0, 230, 118, 0.15); color: var(--accent-emerald);' : ''}">${escapeHtml(ex.category || '기타')}</span>
-          <span class="exercise-title editable-title" onclick="event.stopPropagation(); openEditExerciseModal('${ex.id}')" title="터치하여 운동 종목 교체">
-            ${escapeHtml(ex.name)} <i class="fa-solid fa-pen-to-square title-edit-icon"></i>
-          </span>
+          <div class="ex-equip-thumb" title="${escapeHtml(ex.name)}">
+            ${svgThumb}
+          </div>
+          <div>
+            <div style="display: flex; align-items: center; gap: 6px; flex-wrap: wrap;">
+              <span class="category-tag" style="${isCardio ? 'background: rgba(0, 230, 118, 0.15); color: var(--accent-emerald);' : ''}">${escapeHtml(ex.category || '기타')}</span>
+              <span class="exercise-title editable-title" onclick="event.stopPropagation(); openEditExerciseModal('${ex.id}')" title="터치하여 운동 종목 교체">
+                ${escapeHtml(ex.name)} <i class="fa-solid fa-pen-to-square title-edit-icon"></i>
+              </span>
+            </div>
+          </div>
           <span class="exercise-completion-status ${allSetsCompleted ? 'completed' : 'in-progress'}"
             title="${allSetsCompleted ? '모든 세트 완료' : '진행 중'}" aria-label="${allSetsCompleted ? '모든 세트 완료' : '진행 중'}">
             <i class="fa-solid ${allSetsCompleted ? 'fa-circle-check' : 'fa-circle-half-stroke'}"></i>
@@ -1511,6 +1520,9 @@ function moveExercise(exId, direction) {
 }
 
 let editingExerciseId = null;
+let activeEncyclopediaCategory = 'all';
+let activeEncyclopediaSearch = '';
+let selectedEncyclopediaItem = null;
 
 function updateRestPresetChips(seconds) {
   const chips = document.querySelectorAll('#restPresetChips .rest-chip');
@@ -1524,14 +1536,136 @@ function updateRestPresetChips(seconds) {
   });
 }
 
+function switchAddExerciseModalTab(tabName) {
+  const encTabBtn = document.getElementById('tabEncyclopediaBtn');
+  const directTabBtn = document.getElementById('tabDirectInputBtn');
+  const encPanel = document.getElementById('encyclopediaPanel');
+  const directPanel = document.getElementById('directInputPanel');
+
+  if (!encTabBtn || !directTabBtn || !encPanel || !directPanel) return;
+
+  if (tabName === 'encyclopedia') {
+    encTabBtn.classList.add('active');
+    directTabBtn.classList.remove('active');
+    encPanel.classList.remove('hidden');
+    directPanel.classList.add('hidden');
+    renderEquipmentEncyclopedia(activeEncyclopediaCategory, activeEncyclopediaSearch);
+  } else {
+    directTabBtn.classList.add('active');
+    encTabBtn.classList.remove('active');
+    directPanel.classList.remove('hidden');
+    encPanel.classList.add('hidden');
+    renderPresetChips();
+  }
+}
+
+function renderEquipmentEncyclopedia(category = 'all', search = '') {
+  activeEncyclopediaCategory = category;
+  activeEncyclopediaSearch = search;
+
+  const grid = document.getElementById('encyclopediaGrid');
+  if (!grid || typeof EQUIPMENT_CATALOG === 'undefined') return;
+
+  const queryChosung = getHangulChosung(search.trim());
+  const lowerSearch = search.trim().toLowerCase();
+
+  const filtered = EQUIPMENT_CATALOG.filter(item => {
+    if (category !== 'all' && item.category !== category) {
+      return false;
+    }
+    if (lowerSearch) {
+      const matchName = item.name.toLowerCase().includes(lowerSearch);
+      const matchEng = (item.englishName || '').toLowerCase().includes(lowerSearch);
+      const matchMuscles = (item.targetMuscles || '').toLowerCase().includes(lowerSearch);
+      const matchChosung = getHangulChosung(item.name).includes(queryChosung);
+      if (!matchName && !matchEng && !matchMuscles && !matchChosung) {
+        return false;
+      }
+    }
+    return true;
+  });
+
+  if (filtered.length === 0) {
+    grid.innerHTML = `
+      <div style="grid-column: 1 / -1; padding: 24px 0; text-align: center; color: var(--text-muted); font-size: 0.85rem;">
+        <i class="fa-solid fa-circle-question" style="font-size: 1.5rem; margin-bottom: 6px; display: block; color: var(--text-dim);"></i>
+        일치하는 운동 기구가 없습니다.<br>상단 '직접 입력' 탭에서 새 운동을 등록해 보세요.
+      </div>
+    `;
+    return;
+  }
+
+  const currentInputName = document.getElementById('exerciseNameInput')?.value || '';
+
+  grid.innerHTML = filtered.map(item => {
+    const isSelected = selectedEncyclopediaItem?.name === item.name || currentInputName === item.name;
+    const svgIcon = (typeof getExerciseSvgIcon === 'function') ? getExerciseSvgIcon(item.name, item.category) : '';
+    
+    return `
+      <div class="enc-card ${isSelected ? 'selected' : ''}" data-name="${escapeHtml(item.name)}" onclick="selectEncyclopediaItem('${escapeHtml(item.name)}')">
+        <div class="enc-card-svg-wrap">
+          ${svgIcon}
+        </div>
+        <div class="enc-card-name">${escapeHtml(item.name)}</div>
+        <div class="enc-card-eng">${escapeHtml(item.englishName || '')}</div>
+        <div class="enc-card-badge-row">
+          <span class="enc-badge cat">${escapeHtml(item.category)}</span>
+          <span class="enc-badge">${item.category === '유산소' ? `${item.defaultWeight}km/h` : `${item.defaultWeight}kg`}</span>
+          <span class="enc-badge">${item.restSeconds}초</span>
+        </div>
+      </div>
+    `;
+  }).join('');
+}
+
+function selectEncyclopediaItem(exerciseName) {
+  if (typeof EQUIPMENT_CATALOG === 'undefined') return;
+  const item = EQUIPMENT_CATALOG.find(e => e.name === exerciseName);
+  if (!item) return;
+
+  selectedEncyclopediaItem = item;
+
+  const nameInput = document.getElementById('exerciseNameInput');
+  const catSelect = document.getElementById('exerciseCategorySelect');
+  const weightInput = document.getElementById('defaultWeightInput');
+  const repsInput = document.getElementById('defaultRepsInput');
+  const restInput = document.getElementById('defaultRestInput');
+
+  if (nameInput) nameInput.value = item.name;
+  if (catSelect) {
+    catSelect.value = item.category;
+    updateAddFormLabels(item.category);
+  }
+  if (weightInput) weightInput.value = item.defaultWeight;
+  if (repsInput) repsInput.value = item.defaultReps;
+  if (restInput) restInput.value = item.restSeconds;
+  updateRestPresetChips(item.restSeconds);
+
+  // Update Selected Summary Banner
+  const banner = document.getElementById('encyclopediaSelectedBanner');
+  const bannerIcon = document.getElementById('encSelectedIcon');
+  const bannerTitle = document.getElementById('encSelectedTitle');
+  const bannerDesc = document.getElementById('encSelectedDesc');
+
+  if (banner && bannerIcon && bannerTitle && bannerDesc) {
+    banner.classList.remove('hidden');
+    bannerIcon.innerHTML = getExerciseSvgIcon(item.name, item.category);
+    bannerTitle.textContent = `${item.name} (${item.equipmentType || item.category})`;
+    bannerDesc.textContent = `💡 ${item.tips || item.targetMuscles}`;
+  }
+
+  renderEquipmentEncyclopedia(activeEncyclopediaCategory, activeEncyclopediaSearch);
+}
+
 function openAddExerciseModal() {
   editingExerciseId = null;
+  selectedEncyclopediaItem = null;
   const modal = document.getElementById('addExerciseModal');
   const modalTitle = document.getElementById('addExerciseModalTitle');
   const submitBtn = document.getElementById('submitAddExerciseBtn');
 
-  if (modalTitle) modalTitle.innerHTML = '<i class="fa-solid fa-plus-circle"></i> 운동 기구 / 종목 추가';
-  if (submitBtn) submitBtn.textContent = '운동 추가하기';
+  if (modalTitle) modalTitle.innerHTML = '<i class="fa-solid fa-dumbbell text-cyan"></i> 운동 기구 / 종목 선택';
+  if (submitBtn) submitBtn.innerHTML = '<i class="fa-solid fa-plus"></i> 운동 추가하기';
 
   document.getElementById('exerciseNameInput').value = '';
   document.getElementById('exerciseCategorySelect').value = '가슴';
@@ -1545,8 +1679,24 @@ function openAddExerciseModal() {
 
   updateAddFormLabels('가슴');
 
+  // Reset selected banner
+  const banner = document.getElementById('encyclopediaSelectedBanner');
+  if (banner) banner.classList.add('hidden');
+
+  // Reset search input
+  const searchInput = document.getElementById('encyclopediaSearchInput');
+  if (searchInput) searchInput.value = '';
+  activeEncyclopediaSearch = '';
+
+  // Reset category filter chip active state
+  const filterChips = document.querySelectorAll('.enc-filter-chip');
+  filterChips.forEach(chip => {
+    chip.classList.toggle('active', chip.dataset.cat === 'all');
+  });
+  activeEncyclopediaCategory = 'all';
+
   initAudioContext();
-  renderPresetChips();
+  switchAddExerciseModalTab('encyclopedia');
   if (modal) modal.classList.remove('hidden');
 }
 
@@ -1561,7 +1711,7 @@ function openEditExerciseModal(exId) {
   const submitBtn = document.getElementById('submitAddExerciseBtn');
 
   if (modalTitle) modalTitle.innerHTML = '<i class="fa-solid fa-pen-to-square"></i> 운동 기구 / 종목 교체';
-  if (submitBtn) submitBtn.textContent = '운동 교체하기';
+  if (submitBtn) submitBtn.innerHTML = '<i class="fa-solid fa-check"></i> 운동 교체하기';
 
   const isCardio = isCardioExercise(ex);
   const firstSet = ex.sets && ex.sets[0];
@@ -1584,12 +1734,14 @@ function openEditExerciseModal(exId) {
   updateRestPresetChips(restSec);
 
   initAudioContext();
-  renderPresetChips();
+  switchAddExerciseModalTab('encyclopedia');
+  selectEncyclopediaItem(ex.name);
   if (modal) modal.classList.remove('hidden');
 }
 
 function closeAddExerciseModal() {
   editingExerciseId = null;
+  selectedEncyclopediaItem = null;
   const modal = document.getElementById('addExerciseModal');
   if (modal) modal.classList.add('hidden');
 }
@@ -2793,6 +2945,31 @@ document.addEventListener('DOMContentLoaded', () => {
       document.getElementById('inputRoutineCode').value = '';
     }
   });
+
+  // Encyclopedia Tab Switching Listeners
+  const tabEncBtn = document.getElementById('tabEncyclopediaBtn');
+  const tabDirBtn = document.getElementById('tabDirectInputBtn');
+  if (tabEncBtn) tabEncBtn.addEventListener('click', () => switchAddExerciseModalTab('encyclopedia'));
+  if (tabDirBtn) tabDirBtn.addEventListener('click', () => switchAddExerciseModalTab('direct'));
+
+  // Encyclopedia Category Filter Chips Listeners
+  const filterChips = document.querySelectorAll('.enc-filter-chip');
+  filterChips.forEach(chip => {
+    chip.addEventListener('click', () => {
+      filterChips.forEach(c => c.classList.remove('active'));
+      chip.classList.add('active');
+      const cat = chip.dataset.cat || 'all';
+      renderEquipmentEncyclopedia(cat, activeEncyclopediaSearch);
+    });
+  });
+
+  // Encyclopedia Live Search Input Listener
+  const encSearchInput = document.getElementById('encyclopediaSearchInput');
+  if (encSearchInput) {
+    encSearchInput.addEventListener('input', (e) => {
+      renderEquipmentEncyclopedia(activeEncyclopediaCategory, e.target.value);
+    });
+  }
 
   // Rest Preset Chips Click & Input Listeners in Add/Edit Modal
   const restChips = document.querySelectorAll('#restPresetChips .rest-chip');
