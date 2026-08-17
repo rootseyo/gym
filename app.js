@@ -1554,6 +1554,7 @@ let editingExerciseId = null;
 let activeEncyclopediaCategory = 'all';
 let activeEncyclopediaSearch = '';
 let selectedEncyclopediaItem = null;
+let activeRoutineLevel = 'all';
 
 function updateRestPresetChips(seconds) {
   const chips = document.querySelectorAll('#restPresetChips .rest-chip');
@@ -1569,25 +1570,146 @@ function updateRestPresetChips(seconds) {
 
 function switchAddExerciseModalTab(tabName) {
   const encTabBtn = document.getElementById('tabEncyclopediaBtn');
+  const routinesTabBtn = document.getElementById('tabRoutinesBtn');
   const directTabBtn = document.getElementById('tabDirectInputBtn');
   const encPanel = document.getElementById('encyclopediaPanel');
+  const routinesPanel = document.getElementById('routinesPanel');
   const directPanel = document.getElementById('directInputPanel');
+  const tuningSec = document.querySelector('.enc-tuning-section');
+  const modalFooter = document.querySelector('#addExerciseModal .modal-footer');
 
   if (!encTabBtn || !directTabBtn || !encPanel || !directPanel) return;
 
+  // Reset tab active states
+  [encTabBtn, routinesTabBtn, directTabBtn].forEach(b => b && b.classList.remove('active'));
+  [encPanel, routinesPanel, directPanel].forEach(p => p && p.classList.add('hidden'));
+
   if (tabName === 'encyclopedia') {
     encTabBtn.classList.add('active');
-    directTabBtn.classList.remove('active');
     encPanel.classList.remove('hidden');
-    directPanel.classList.add('hidden');
+    if (tuningSec) tuningSec.classList.remove('hidden');
+    if (modalFooter) modalFooter.classList.remove('hidden');
     renderEquipmentEncyclopedia(activeEncyclopediaCategory, activeEncyclopediaSearch);
+  } else if (tabName === 'routines') {
+    if (routinesTabBtn) routinesTabBtn.classList.add('active');
+    if (routinesPanel) routinesPanel.classList.remove('hidden');
+    if (tuningSec) tuningSec.classList.add('hidden');
+    if (modalFooter) modalFooter.classList.add('hidden');
+    renderRoutineRecommendations(activeRoutineLevel);
   } else {
     directTabBtn.classList.add('active');
-    encTabBtn.classList.remove('active');
     directPanel.classList.remove('hidden');
-    encPanel.classList.add('hidden');
+    if (tuningSec) tuningSec.classList.remove('hidden');
+    if (modalFooter) modalFooter.classList.remove('hidden');
     renderPresetChips();
   }
+}
+
+function renderRoutineRecommendations(level = 'all') {
+  activeRoutineLevel = level;
+  const container = document.getElementById('routinePacksContainer');
+  if (!container || typeof RECOMMENDED_ROUTINES === 'undefined') return;
+
+  const filtered = RECOMMENDED_ROUTINES.filter(r => level === 'all' || r.level === level);
+
+  if (filtered.length === 0) {
+    container.innerHTML = `
+      <div style="padding: 24px 0; text-align: center; color: var(--text-muted); font-size: 0.85rem;">
+        해당 레벨의 추천 루틴이 없습니다.
+      </div>
+    `;
+    return;
+  }
+
+  container.innerHTML = filtered.map(pack => {
+    const levelClass = pack.level === 'beginner' ? 'beg' : (pack.level === 'intermediate' ? 'int' : 'exp');
+    
+    const exChipsHtml = pack.exercises.map(ex => {
+      const svgIcon = typeof getExerciseSvgIcon === 'function' ? getExerciseSvgIcon(ex.name, ex.category) : '';
+      return `
+        <div class="routine-pack-ex-chip" title="${escapeHtml(ex.name)} (${ex.sets}세트)">
+          <div class="ex-mini-icon">${svgIcon}</div>
+          <span>${escapeHtml(ex.name)}</span>
+          <span class="ex-sets-count">${ex.sets}세트</span>
+        </div>
+      `;
+    }).join('');
+
+    return `
+      <div class="routine-pack-card ${levelClass}">
+        <div class="routine-pack-header">
+          <div class="routine-pack-title">${escapeHtml(pack.title)}</div>
+          <span class="routine-pack-level-badge badge-${pack.badgeColor}">${escapeHtml(pack.levelLabel)}</span>
+        </div>
+        <div class="routine-pack-desc">${escapeHtml(pack.subtitle)}</div>
+        <div class="routine-pack-meta">
+          <span class="routine-meta-item"><i class="fa-solid fa-stopwatch text-cyan"></i> 약 ${pack.estimatedMinutes}분</span>
+          <span class="routine-meta-item"><i class="fa-solid fa-bullseye text-emerald"></i> ${escapeHtml(pack.target)}</span>
+          <span class="routine-meta-item"><i class="fa-solid fa-dumbbell text-orange"></i> ${pack.exercises.length}개 종목</span>
+        </div>
+        <div class="routine-pack-ex-list">
+          ${exChipsHtml}
+        </div>
+        <button type="button" class="btn-apply-routine" onclick="applyRoutinePack('${pack.id}')">
+          <i class="fa-solid fa-plus-circle"></i> 이 루틴 전체 추가하기 (${pack.exercises.length}종목)
+        </button>
+      </div>
+    `;
+  }).join('');
+}
+
+function applyRoutinePack(routineId) {
+  if (typeof RECOMMENDED_ROUTINES === 'undefined') return;
+  const pack = RECOMMENDED_ROUTINES.find(r => r.id === routineId);
+  if (!pack) return;
+
+  if (!state.workouts[state.currentDate]) {
+    state.workouts[state.currentDate] = [];
+  }
+
+  const existingCount = state.workouts[state.currentDate].length;
+  if (existingCount > 0) {
+    if (!confirm(`오늘 이미 ${existingCount}개의 운동이 등록되어 있습니다.\n"${pack.title}" (${pack.exercises.length}개 종목)을(를) 추가하시겠습니까?`)) {
+      return;
+    }
+  }
+
+  pack.exercises.forEach(exSpec => {
+    const isCardio = exSpec.category === '유산소' || exSpec.name.includes('러닝') || exSpec.name.includes('사이클') || exSpec.name.includes('계단');
+    const numSets = Math.max(1, Number(exSpec.sets) || 3);
+    const weightVal = Number(exSpec.weight) || (isCardio ? 8.0 : 40);
+    const repsVal = Number(exSpec.reps) || (isCardio ? 20 : 12);
+    const restVal = Number(exSpec.restSeconds) || 90;
+
+    const sets = [];
+    for (let i = 1; i <= numSets; i++) {
+      sets.push({
+        setNumber: i,
+        weight: weightVal,
+        targetReps: repsVal,
+        actualReps: repsVal,
+        completed: false,
+        type: 'work'
+      });
+    }
+
+    const newExercise = {
+      id: generateId(),
+      name: exSpec.name,
+      category: exSpec.category || '가슴',
+      type: isCardio ? 'cardio' : 'weight',
+      restSeconds: restVal,
+      sets: sets
+    };
+
+    state.workouts[state.currentDate].push(newExercise);
+  });
+
+  saveState();
+  updateUI();
+  closeAddExerciseModal();
+
+  alert(`🎯 "${pack.title}" (${pack.exercises.length}개 종목)이 오늘 운동 일지에 등록되었습니다!`);
 }
 
 function renderEquipmentEncyclopedia(category = 'all', search = '') {
@@ -2977,11 +3099,24 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  // Encyclopedia Tab Switching Listeners
+  // Modal Tabs Switching Listeners
   const tabEncBtn = document.getElementById('tabEncyclopediaBtn');
+  const tabRoutinesBtn = document.getElementById('tabRoutinesBtn');
   const tabDirBtn = document.getElementById('tabDirectInputBtn');
   if (tabEncBtn) tabEncBtn.addEventListener('click', () => switchAddExerciseModalTab('encyclopedia'));
+  if (tabRoutinesBtn) tabRoutinesBtn.addEventListener('click', () => switchAddExerciseModalTab('routines'));
   if (tabDirBtn) tabDirBtn.addEventListener('click', () => switchAddExerciseModalTab('direct'));
+
+  // Recommended Routine Level Filter Chips Listeners
+  const routineLevelChips = document.querySelectorAll('.routine-level-chip');
+  routineLevelChips.forEach(chip => {
+    chip.addEventListener('click', () => {
+      routineLevelChips.forEach(c => c.classList.remove('active'));
+      chip.classList.add('active');
+      const lvl = chip.dataset.lvl || 'all';
+      renderRoutineRecommendations(lvl);
+    });
+  });
 
   // Encyclopedia Category Filter Chips Listeners
   const filterChips = document.querySelectorAll('.enc-filter-chip');

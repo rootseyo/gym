@@ -409,13 +409,16 @@
         <button id="closeAddModalBtn" class="close-btn">&times;</button>
       </div>
 
-      <!-- Mode Selector Tabs: Encyclopedia vs Direct Input -->
-      <div class="modal-tab-header">
+      <!-- Mode Selector Tabs: Encyclopedia vs Recommended Routines vs Direct Input -->
+      <div class="modal-tab-header modal-tab-header-3">
         <button type="button" id="tabEncyclopediaBtn" class="modal-tab-btn active">
-          <i class="fa-solid fa-book-atlas text-cyan"></i> 운동 기구 도감
+          <i class="fa-solid fa-book-atlas text-cyan"></i> 기구 도감
+        </button>
+        <button type="button" id="tabRoutinesBtn" class="modal-tab-btn">
+          <i class="fa-solid fa-fire text-orange"></i> 추천 루틴 세트
         </button>
         <button type="button" id="tabDirectInputBtn" class="modal-tab-btn">
-          <i class="fa-solid fa-pen text-emerald"></i> 직접 입력 / 프리셋
+          <i class="fa-solid fa-pen text-emerald"></i> 직접 입력
         </button>
       </div>
 
@@ -456,7 +459,21 @@
           </div>
         </div>
 
-        <!-- 2. Direct Input & Custom Presets Panel -->
+        <!-- 2. Recommended Routine Packs Panel (Beginner, Intermediate, Expert) -->
+        <div id="routinesPanel" class="modal-panel-container hidden">
+          <div class="routine-level-filter-bar" id="routineLevelFilterBar">
+            <button type="button" class="routine-level-chip active" data-lvl="all">전체 레벨</button>
+            <button type="button" class="routine-level-chip chip-beg" data-lvl="beginner">🟢 비기너 (초급)</button>
+            <button type="button" class="routine-level-chip chip-int" data-lvl="intermediate">🟡 인터미디엇 (중급)</button>
+            <button type="button" class="routine-level-chip chip-exp" data-lvl="expert">🔴 익스퍼트 (고급)</button>
+          </div>
+
+          <div class="routine-packs-container" id="routinePacksContainer">
+            <!-- Dynamic routine pack cards rendered here -->
+          </div>
+        </div>
+
+        <!-- 3. Direct Input & Custom Presets Panel -->
         <div id="directInputPanel" class="modal-panel-container hidden">
           <div class="form-group">
             <label>추천 및 사용자 등록 운동 프리셋</label>
@@ -613,6 +630,7 @@
   <script src="firebase-config.js"></script>
   <script src="firebase-sync.js"></script>
   <script src="equipment-encyclopedia.js"></script>
+  <script src="routine-recommendations.js"></script>
   <script src="app.js"></script>
   <script>
     (function() {
