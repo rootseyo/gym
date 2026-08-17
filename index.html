@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  
+  <!-- Page & Android Home Screen Title -->
+  <title>FitTracker</title>
+  
+  <!-- SEO Meta Description -->
+  <meta name="description" content="FitTracker - 나만의 헬스 운동 루틴 관리, 세트 및 중량 기록, 유산소 러닝 거리 계산, 쉬는 시간 타이머 및 성과 그래프를 제공하는 스마트 운동 기록 웹 앱">
+  <meta name="keywords" content="FitTracker, 핏트래커, 헬스 앱, 운동 기록, 루틴 관리, 세트 기록, 헬스 타이머, 러닝 거리 계산, 헬스 일지">
+  <meta name="author" content="FitTracker Pro">
+
+  <!-- OpenGraph / Social Media Link Preview -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="FitTracker">
+  <meta property="og:description" content="스마트 헬스 운동 루틴 관리, 세트/중량 기록, 러닝 거리 계산 및 휴식 타이머 웹 앱">
+  <meta property="og:site_name" content="FitTracker">
+
+  <!-- Favicon Settings -->
+  <link rel="icon" type="image/png" href="favicon.png">
+  <link rel="apple-touch-icon" href="icon-192.png">
+
+  <!-- Web App & PWA Home Screen Settings -->
+  <meta name="application-name" content="FitTracker">
+  <meta name="apple-mobile-web-app-title" content="FitTracker">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="theme-color" content="#0b0f17">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+  
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="style.css">
+  <link rel="manifest" href="manifest.webmanifest">
+</head>
+<body>
+
+  <div class="app-container">
+    <!-- Header -->
+    <header class="app-header">
+      <div class="header-brand">
+        <i class="fa-solid fa-dumbbell brand-icon"></i>
+        <h1>FitTracker</h1>
+      </div>
+      <div class="header-actions">
+        <button id="authModalBtn" class="icon-btn auth-btn" title="클라우드 동기화 및 로그인" aria-label="클라우드 동기화 및 로그인">
+          <i class="fa-solid fa-cloud-arrow-up"></i>
+          <span id="authBadgeDot" class="auth-badge-dot hidden"></span>
+        </button>
+        <button id="addExerciseBtn" class="btn btn-primary btn-sm">
+          <i class="fa-solid fa-plus"></i> 운동
+        </button>
+      </div>
+    </header>
+
+    <!-- Date Navigation -->
+    <section class="date-bar">
+      <button id="prevDateBtn" class="date-nav-btn"><i class="fa-solid fa-chevron-left"></i></button>
+      <div class="current-date-picker">
+        <i class="fa-regular fa-calendar"></i>
+        <input type="date" id="workoutDateInput">
+        <span id="dateDisplay">2026. 07. 28 (화)</span>
+      </div>
+      <button id="nextDateBtn" class="date-nav-btn"><i class="fa-solid fa-chevron-right"></i></button>
+      <button id="todayBtn" class="btn btn-outline btn-xs">오늘</button>
+    </section>
+
+    <!-- Main Dashboard Metrics -->
+    <section class="dashboard-cards">
+      <div class="metric-card">
+        <div class="card-icon cyan"><i class="fa-solid fa-bullseye"></i></div>
+        <div class="card-info">
+          <span class="card-label">목표 중량 / 시간</span>
+          <span class="card-value" id="totalTargetWeightDisplay">0 kg</span>
+        </div>
+      </div>
+      <div class="metric-card">
+        <div class="card-icon emerald"><i class="fa-solid fa-person-running"></i></div>
+        <div class="card-info">
+          <span class="card-label">실제 수행 / 거리</span>
+          <span class="card-value" id="totalActualWeightDisplay">0 kg</span>
+        </div>
+      </div>
+      <div class="metric-card">
+        <div class="card-icon violet"><i class="fa-solid fa-list-check"></i></div>
+        <div class="card-info">
+          <span class="card-label">완료 세트</span>
+          <span class="card-value" id="completedSetsRatioDisplay">0 / 0</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- TOP SECTION: 오늘의 운동 목록 (Collapsible Header & Badge Next to Title) -->
+    <section class="section-card exercises-section" id="exercisesSectionCard">
+      <div class="section-header flex-col">
+        <div class="title-with-badge" id="exerciseSectionHeaderTitle" title="터치하여 운동 목록 접기/펼치기">
+          <h2>
+            <i class="fa-solid fa-list-ul"></i> 오늘의 운동 목록
+            <span class="badge" id="exerciseCountBadge">0개 종목</span>
+            <i class="fa-solid fa-chevron-up toggle-chevron" id="exerciseToggleChevron"></i>
+          </h2>
+        </div>
+        <div class="header-right-actions">
+          <div class="header-action-group">
+            <button id="copyWorkoutSummaryBtn" class="btn btn-outline btn-xs" title="ChatGPT 등에서 분석할 수 있도록 운동 내용을 텍스트로 복사">
+              <i class="fa-regular fa-copy"></i> 운동 내용 복사
+            </button>
+            <button id="importYesterdayBtn" class="btn btn-outline btn-xs" title="이전 운동 기록을 날짜별로 선택하여 불러오기">
+              <i class="fa-solid fa-rotate-left"></i> 이전 운동 불러오기
+            </button>
+            <button id="toggleAllExercisesBtn" class="btn btn-secondary btn-xs" title="모든 운동의 세트 내용 펼치기">
+              <i class="fa-solid fa-angles-down"></i> 전체 펼치기
+            </button>
+            <div class="header-more-menu">
+              <button id="workoutMoreMenuBtn" class="btn btn-secondary btn-xs header-more-menu-toggle" type="button"
+                title="운동 목록 더보기" aria-label="운동 목록 더보기" aria-expanded="false" aria-controls="workoutMoreMenu">
+                <i class="fa-solid fa-ellipsis"></i>
+              </button>
+              <div id="workoutMoreMenu" class="header-overflow-menu hidden">
+                <button id="textShareBtn" class="overflow-menu-item" type="button">
+                  <i class="fa-solid fa-code"></i> 운동 코드
+                </button>
+                <button id="deleteAllExercisesBtn" class="overflow-menu-item danger" type="button">
+                  <i class="fa-solid fa-trash-can"></i> 전체 삭제
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div id="exerciseListCollapsible" class="collapsible-content">
+        <div id="exerciseList" class="exercise-list">
+          <!-- Dynamic exercise cards rendered here -->
+        </div>
+
+        <div id="emptyState" class="empty-state">
+          <i class="fa-solid fa-dumbbell empty-icon"></i>
+          <p>오늘 등록된 운동이 없습니다.</p>
+          <div class="empty-actions">
+            <button id="emptyAddBtn" class="btn btn-primary"><i class="fa-solid fa-plus"></i> 첫 운동 추가하기</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- BOTTOM SECTION: 운동 기구별 무게/속도 성장 비교 그래프 -->
+    <section class="section-card chart-section" id="exerciseChartSection">
+      <div class="section-header flex-col">
+        <div class="chart-heading-row">
+          <h2><i class="fa-solid fa-chart-line"></i> 기구/유산소 성장 비교 그래프</h2>
+          <div class="chart-heading-actions">
+            <div class="graph-period-toggle" aria-label="그래프 조회 단위">
+              <button id="dailyGraphBtn" class="graph-period-btn active" type="button">일별</button>
+              <button id="monthlyGraphBtn" class="graph-period-btn" type="button">월별</button>
+            </div>
+            <button id="toggleExerciseChartBtn" class="btn btn-secondary btn-xs chart-collapse-btn" type="button"
+              aria-expanded="true" aria-controls="exerciseChartCollapsible">
+              <i class="fa-solid fa-chevron-up"></i> 접기
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div id="exerciseChartCollapsible" class="chart-collapsible">
+        <div class="graph-selection-wrapper">
+          <span class="graph-select-label">비교할 운동 선택 (다중 선택 가능):</span>
+          <div class="exercise-multi-select-container" id="exerciseMultiSelectContainer">
+            <!-- Dynamic multi-select exercise chips rendered here -->
+          </div>
+        </div>
+
+        <div class="chart-metric-tags">
+          <span class="tag-pill cyan"><i class="fa-solid fa-trophy"></i> 최고 무게 / 속도 (Max Weight/Speed)</span>
+          <span class="tag-pill emerald"><i class="fa-solid fa-layer-group"></i> 총 볼륨 / 거리 (Volume/Distance)</span>
+        </div>
+
+        <div class="chart-container">
+          <canvas id="exerciseWeightChart"></canvas>
+        </div>
+      </div>
+    </section>
+
+    <a id="androidAppDownloadLink" href="https://play.google.com/store/apps/details?id=kr.brightnetworks.fittracker"
+      target="_blank" rel="noopener noreferrer"
+      class="btn-android-download hidden"
+      title="Google Play 스토어에서 FitTracker Pro 앱 다운로드">
+      <div class="android-download-icon-wrap">
+        <i class="fa-brands fa-google-play"></i>
+      </div>
+      <div class="android-download-text-wrap">
+        <span class="android-download-sub">Google Play 공식 앱</span>
+        <span class="android-download-title">FitTracker Pro 앱 다운로드</span>
+      </div>
+      <div class="android-download-badge">
+        <i class="fa-solid fa-download"></i> 앱 설치
+      </div>
+    </a>
+
+    <footer class="app-footer">
+      <p>Powered by <a href="https://brightnetworks.kr" target="_blank" rel="noopener noreferrer">BrightNetworks</a></p>
+      <div class="footer-legal-row margin-top-4">
+        <a href="privacy.html" target="_blank" class="footer-legal-link">개인정보 처리방침</a>
+        <span class="footer-legal-divider">|</span>
+        <a href="terms.html" target="_blank" class="footer-legal-link">서비스 이용약관</a>
+      </div>
+      <button id="openReleaseNotesBtn" class="release-notes-link margin-top-6" type="button">
+        <i class="fa-regular fa-note-sticky"></i> Release notes
+      </button>
+    </footer>
+
+  </div>
+
+  <!-- Fixed Bottom Rest Timer Bar (Mobile Fixed Controls) -->
+  <div id="fixedBottomTimerBar" class="fixed-bottom-bar">
+    <div class="bottom-timer-info">
+      <div class="timer-countdown-mini">
+        <i class="fa-solid fa-stopwatch timer-icon-mini"></i>
+        <span id="bottomTimerDisplay">00:30</span>
+      </div>
+      <span id="bottomTimerStatus" class="bottom-timer-sub">세트 완료 시 자동 시작</span>
+    </div>
+    <div class="bottom-timer-btn-group">
+      <button id="soundToggleBtn" class="icon-btn sound-on" title="오디오 비프음 설정">
+        <i class="fa-solid fa-volume-high"></i>
+      </button>
+      <div class="timer-duration-controls" aria-label="기본 휴식시간 조절">
+        <button id="bottomTimerMinusBtn" class="timer-step-btn" type="button" title="휴식시간 5초 줄이기" aria-label="휴식시간 5초 줄이기">
+          <i class="fa-solid fa-minus"></i>
+        </button>
+        <span id="bottomTimerDuration" class="timer-duration-value" aria-live="polite">30초</span>
+        <button id="bottomTimerPlusBtn" class="timer-step-btn" type="button" title="휴식시간 5초 늘리기" aria-label="휴식시간 5초 늘리기">
+          <i class="fa-solid fa-plus"></i>
+        </button>
+      </div>
+      <!-- Right Button: 시작 / 중지 / 재시작 -->
+      <button id="bottomTimerToggleBtn" class="btn btn-primary btn-bottom-right">
+        <i class="fa-solid fa-play"></i> 시작
+      </button>
+    </div>
+  </div>
+
+  <!-- Release notes -->
+  <div id="releaseNotesModal" class="modal hidden">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3><i class="fa-regular fa-note-sticky"></i> Release notes</h3>
+        <button id="closeReleaseNotesModalBtn" class="close-btn">&times;</button>
+      </div>
+
+      <div class="release-notes-list">
+        <section class="release-note-group">
+          <div class="release-note-date">
+            <time datetime="2026-07-30">2026.07.30</time>
+            <span>Latest</span>
+          </div>
+          <article>
+            <h4><i class="fa-solid fa-pen-to-square"></i> 운동 항목 교체 및 변경</h4>
+            <p>운동 카드의 종목 이름을 터치하면 팝업을 통해 다른 운동 기구/종목으로 빠르게 교체할 수 있습니다.</p>
+          </article>
+        </section>
+
+        <section class="release-note-group">
+          <div class="release-note-date">
+            <time datetime="2026-07-29">2026.07.29</time>
+          </div>
+          <article>
+            <h4><i class="fa-regular fa-copy"></i> 운동 내용 내보내기</h4>
+            <p>완료한 세트와 중량, 횟수, 볼륨, 유산소 기록을 읽기 쉬운 텍스트로 복사해 AI에 붙여넣을 수 있습니다.</p>
+          </article>
+          <article>
+            <h4><i class="fa-solid fa-file-import"></i> 운동 루틴 불러오기</h4>
+            <p>운동 코드, 공유 URL 또는 AI가 만든 JSON을 붙여넣어 선택한 날짜의 운동 루틴을 새롭게 구성할 수 있습니다.</p>
+          </article>
+          <article>
+            <h4><i class="fa-solid fa-wand-magic-sparkles"></i> AI 프롬프트 생성</h4>
+            <p>FitTracker 형식에 맞는 운동 코드를 AI가 생성하도록 안내하는 프롬프트를 한 번에 복사할 수 있습니다.</p>
+          </article>
+        </section>
+      </div>
+
+      <div class="modal-footer">
+        <button id="closeReleaseNotesFooterBtn" class="btn btn-secondary">닫기</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ChatGPT-friendly workout export options -->
+  <div id="workoutExportModal" class="modal hidden">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3><i class="fa-solid fa-wand-magic-sparkles"></i> ChatGPT로 내보내기</h3>
+        <button id="closeWorkoutExportModalBtn" class="close-btn">&times;</button>
+      </div>
+
+      <div class="io-box output-box">
+        <h4>내 운동 분석하기</h4>
+        <p class="export-option-description">현재 날짜의 운동 기록을 읽기 쉬운 텍스트로 복사합니다. ChatGPT에 붙여넣고 분석을 요청해 보세요.</p>
+        <button id="copyWorkoutContentBtn" class="btn btn-export btn-md full-width">
+          <i class="fa-regular fa-copy"></i> 운동 내용 복사
+        </button>
+      </div>
+
+      <div class="io-box input-box margin-top-12">
+        <h4>새 운동 루틴 만들기</h4>
+        <p class="export-option-description">형식 안내 프롬프트를 ChatGPT에 붙여넣으세요. 완성된 JSON은 상단의 ‘운동 코드’에서 불러올 수 있습니다.</p>
+        <button id="copyWorkoutCodePromptBtn" class="btn btn-import btn-md full-width">
+          <i class="fa-regular fa-copy"></i> 운동 코드 생성 프롬프트 복사
+        </button>
+      </div>
+
+      <div class="modal-footer">
+        <button id="closeWorkoutExportFooterBtn" class="btn btn-secondary">닫기</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Streamlined Clean Text Routine Code Share Modal -->
+  <div id="codeModal" class="modal hidden">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3><i class="fa-solid fa-code"></i> 운동 루틴 코드 공유</h3>
+        <button id="closeCodeModalBtn" class="close-btn">&times;</button>
+      </div>
+
+      <!-- Section 1: Output -->
+      <div class="io-box output-box">
+        <div class="form-group">
+          <textarea id="generatedRoutineCode" readonly rows="3" class="output-textarea" placeholder="아래 버튼을 터치하여 루틴 코드를 생성하세요"></textarea>
+        </div>
+        <button id="copyGeneratedCodeBtn" class="btn btn-export btn-md full-width">
+          <i class="fa-regular fa-copy"></i> 운동 코드 생성하기
+        </button>
+        <button id="copyGeneratedUrlBtn" class="btn btn-outline btn-md full-width margin-top-8">
+          <i class="fa-solid fa-link"></i> 운동 URL + 코드 생성하기
+        </button>
+      </div>
+
+      <!-- Section 2: Input -->
+      <div class="io-box input-box margin-top-12">
+        <div class="form-group">
+          <textarea id="inputRoutineCode" placeholder="FITROUTINE_v1_... 코드, 운동 URL 또는 ChatGPT가 만든 JSON을 붙여넣으세요" rows="3" class="input-textarea"></textarea>
+          <p class="import-replace-notice"><i class="fa-solid fa-triangle-exclamation"></i> 불러오면 선택한 날짜의 기존 운동을 지우고 새 운동으로 교체합니다.</p>
+        </div>
+        <button id="importRoutineCodeBtn" class="btn btn-import btn-md full-width">
+          <i class="fa-solid fa-download"></i> 운동 코드 불러오기
+        </button>
+      </div>
+
+      <div class="modal-footer">
+        <button id="closeCodeFooterBtn" class="btn btn-secondary">닫기</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Import Previous Workout Modal with Date Picker -->
+  <div id="importPreviousModal" class="modal hidden">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3><i class="fa-solid fa-rotate-left"></i> 이전 운동 불러오기</h3>
+        <button id="closeImportPreviousModalBtn" class="close-btn">&times;</button>
+      </div>
+
+      <div class="form-group">
+        <label for="importDateSelect"><i class="fa-regular fa-calendar-check"></i> 기록된 운동 날짜 선택</label>
+        <select id="importDateSelect" class="form-control">
+          <!-- Options rendered dynamically -->
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="importDatePicker"><i class="fa-regular fa-calendar"></i> 직접 날짜 지정</label>
+        <input type="date" id="importDatePicker" class="form-control">
+      </div>
+
+      <!-- Preview Box -->
+      <div class="io-box preview-box margin-top-12">
+        <h4 id="importPreviewTitle" class="preview-title"><i class="fa-solid fa-list-check"></i> 운동 목록 미리보기</h4>
+        <div id="importPreviewList" class="import-preview-list">
+          <!-- Preview items rendered dynamically -->
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" id="cancelImportPreviousBtn" class="btn btn-secondary">취소</button>
+        <button type="button" id="confirmImportPreviousBtn" class="btn btn-primary">
+          <i class="fa-solid fa-download"></i> 불러오기
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Add Exercise Modal -->
+  <div id="addExerciseModal" class="modal hidden">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 id="addExerciseModalTitle"><i class="fa-solid fa-plus-circle"></i> 운동 기구 / 종목 추가</h3>
+        <button id="closeAddModalBtn" class="close-btn">&times;</button>
+      </div>
+      <form id="addExerciseForm" autocomplete="off">
+        <div class="form-group">
+          <label>추천 및 사용자 등록 운동 프리셋</label>
+          <div class="preset-chips" id="presetChips">
+            <!-- Dynamic presets rendered here -->
+          </div>
+        </div>
+
+        <div class="form-group relative-container">
+          <label for="exerciseNameInput">운동 명칭 / 기구 이름 (초성 검색 가능: ㅂㅊ, ㄹㄴ)</label>
+          <input type="text" id="exerciseNameInput" placeholder="예: 벤치프레스, 스쿼트, 러닝" autocomplete="off" required>
+          <!-- Autocomplete Hint Dropdown List -->
+          <div id="exerciseHintDropdown" class="hint-dropdown hidden"></div>
+        </div>
+
+        <div class="form-group">
+          <label for="exerciseCategorySelect">부위 / 카테고리</label>
+          <select id="exerciseCategorySelect">
+            <option value="가슴">가슴</option>
+            <option value="등">등</option>
+            <option value="하체">하체</option>
+            <option value="어깨">어깨</option>
+            <option value="팔">팔</option>
+            <option value="복근/코어">복근/코어</option>
+            <option value="유산소">유산소 (러닝/사이클)</option>
+            <option value="전신">전신</option>
+            <option value="기타">기타</option>
+          </select>
+        </div>
+
+        <!-- Single Row Mobile Optimized Inputs -->
+        <div class="form-row inline-mobile-row">
+          <div class="form-group half">
+            <label for="defaultWeightInput" id="labelWeightOrSpeed">기본 무게 (kg)</label>
+            <input type="number" id="defaultWeightInput" min="0" step="0.5" value="40">
+          </div>
+          <div class="form-group half">
+            <label for="defaultRepsInput" id="labelRepsOrDuration">목표 횟수 (회)</label>
+            <input type="number" id="defaultRepsInput" min="1" max="300" value="12">
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" id="cancelAddBtn" class="btn btn-secondary">취소</button>
+          <button type="submit" id="submitAddExerciseBtn" class="btn btn-primary">운동 추가하기</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Firebase Auth & Cloud Sync Modal -->
+  <div id="authModal" class="modal auth-modal-custom hidden">
+    <div class="modal-content auth-modal-content">
+      <div class="modal-header">
+        <h3><i class="fa-solid fa-cloud-arrow-up text-emerald"></i> 클라우드 데이터 동기화</h3>
+        <button id="closeAuthModalBtn" class="close-btn">&times;</button>
+      </div>
+
+      <div class="auth-modal-body">
+        <div id="lastCloudSyncTime" class="sync-status-indicator">
+          <i class="fa-solid fa-circle-notch fa-spin"></i> 동기화 상태 확인 중...
+        </div>
+
+        <!-- View when Logged Out -->
+        <div id="authLoggedOutView" class="auth-view-container">
+          <p class="auth-description">
+            카카오 계정으로 로그인하면 스마트폰, 태블릿, PC 등 모든 기기에서 운동 일지가 실시간 안전하게 자동 동기화됩니다.
+          </p>
+
+          <div class="social-login-group">
+            <button id="kakaoLoginBtn" class="btn btn-kakao full-width btn-lg">
+              <i class="fa-solid fa-comment"></i> 카카오 계정으로 로그인
+            </button>
+          </div>
+        </div>
+
+        <!-- View when Logged In -->
+        <div id="authLoggedInView" class="auth-view-container hidden">
+          <div class="user-profile-card">
+            <div class="user-avatar-wrap">
+              <i class="fa-solid fa-user-check user-avatar-icon"></i>
+            </div>
+            <div class="user-info-text">
+              <div class="user-name-badge">
+                <span id="authUserName" class="user-name-title">카카오 사용자</span>
+                <span class="badge-tag kakao-badge"><i class="fa-solid fa-comment"></i> 카카오 연동</span>
+              </div>
+              <div class="user-id-row">
+                <span class="id-label">사용자 식별 번호:</span>
+                <code id="authUserKakaoId" class="user-id-code">-</code>
+              </div>
+              <div id="authUserEmailRow" class="user-email-row">
+                <span id="authUserEmail" class="user-email-text"></span>
+              </div>
+            </div>
+          </div>
+
+          <div class="sync-status-card margin-top-12">
+            <div class="sync-status-header">
+              <span class="status-pulse-dot"></span>
+              <span class="sync-status-title">실시간 클라우드 자동 동기화 활성</span>
+            </div>
+            <p class="sync-status-desc">운동 일지, 세트 기록, 커스텀 프리셋이 클라우드 서버에 실시간 안전하게 자동 보관 중입니다.</p>
+            <button id="manualSyncBtn" class="btn btn-secondary full-width btn-sm margin-top-8">
+              <i class="fa-solid fa-rotate"></i> 지금 즉시 수동 동기화
+            </button>
+          </div>
+
+          <div class="logged-in-actions margin-top-14">
+            <button id="logoutBtn" class="btn btn-secondary full-width btn-md margin-bottom-8">
+              <i class="fa-solid fa-arrow-right-from-bracket"></i> 로그아웃
+            </button>
+            <button id="deleteAccountBtn" class="btn btn-danger-outline full-width btn-sm">
+              <i class="fa-solid fa-trash-can"></i> 회원 탈퇴 및 데이터 삭제
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal-footer margin-top-16">
+        <div class="modal-legal-links text-center margin-bottom-8">
+          <a href="privacy.html" target="_blank" class="legal-link">개인정보 처리방침</a>
+          <span class="legal-divider">|</span>
+          <a href="terms.html" target="_blank" class="legal-link">서비스 이용약관</a>
+        </div>
+        <button id="closeAuthFooterBtn" class="btn btn-secondary full-width btn-md">닫기</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Kakao JS SDK v1.43.0 & Firebase JS SDK (v10 Compat) -->
+  <script src="https://t1.kakaocdn.net/kakao_js_sdk/1.43.0/kakao.min.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
+  <script src="firebase-config.js"></script>
+  <script src="firebase-sync.js"></script>
+  <script src="app.js"></script>
+  <script>
+    (function() {
+      var data = {
+        siteId: 'gym-app',
+        path: window.location.pathname,
+        referrer: document.referrer,
+        userAgent: navigator.userAgent,
+        screenWidth: window.innerWidth
+      };
+      var endpoint = 'https://admin.brightnetworks.kr/api/analytics/collect';
+      if (navigator.sendBeacon) {
+        navigator.sendBeacon(endpoint, JSON.stringify(data));
+      } else {
+        fetch(endpoint, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(data),
+          keepalive: true
+        });
+      }
+    })();
+  </script>
+</body>
+</html>

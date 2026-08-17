@@ -1,0 +1,77 @@
+# Fastlane Android Deployment Pipeline
+default_platform(:android)
+
+platform :android do
+  desc "Build signed release AAB (Android App Bundle)"
+  lane :build do
+    gradle(
+      task: "bundleRelease",
+      project_dir: "./"
+    )
+  end
+
+  desc "Build and deploy to Google Play Internal Test Track"
+  lane :internal do
+    build
+    upload_to_play_store(
+      track: "internal",
+      aab: "app/build/outputs/bundle/release/app-release.aab",
+      skip_upload_apk: true,
+      skip_upload_metadata: true,
+      skip_upload_images: true,
+      skip_upload_screenshots: true,
+      skip_upload_changelogs: true,
+      release_status: "completed"
+    )
+  end
+
+  desc "Build and deploy to Google Play Closed/Open Alpha Track"
+  lane :alpha do
+    build
+    upload_to_play_store(
+      track: "alpha",
+      aab: "app/build/outputs/bundle/release/app-release.aab",
+      skip_upload_apk: true,
+      skip_upload_metadata: true,
+      skip_upload_images: true,
+      skip_upload_screenshots: true,
+      skip_upload_changelogs: true,
+      release_status: "completed"
+    )
+  end
+
+  desc "Build and deploy to Google Play Closed/Open Beta Track"
+  lane :beta do
+    build
+    upload_to_play_store(
+      track: "beta",
+      aab: "app/build/outputs/bundle/release/app-release.aab",
+      skip_upload_apk: true,
+      skip_upload_metadata: true,
+      skip_upload_images: true,
+      skip_upload_screenshots: true,
+      skip_upload_changelogs: true,
+      release_status: "completed"
+    )
+  end
+
+  desc "Build and deploy to Google Play Production Track"
+  lane :production do
+    build
+    upload_to_play_store(
+      track: "production",
+      aab: "app/build/outputs/bundle/release/app-release.aab",
+      skip_upload_apk: true,
+      skip_upload_metadata: true,
+      skip_upload_images: true,
+      skip_upload_screenshots: true,
+      skip_upload_changelogs: true,
+      release_status: "completed"
+    )
+  end
+
+  desc "Alias for production deploy"
+  lane :deploy do
+    production
+  end
+end

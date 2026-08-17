@@ -1,0 +1,6 @@
+<resources>
+    <style name="Theme.FitTracker" parent="Theme.AppCompat.NoActionBar">
+        <item name="android:windowBackground">#0b0f17</item>
+        <item name="android:windowLightStatusBar">false</item>
+    </style>
+</resources>

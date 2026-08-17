@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>위클리 대시보드 | FitTracker</title>
+  <meta name="description" content="운동 날짜를 우선 표시하고 부족한 날짜는 미래 일정으로 채우는 FitTracker 7일 위클리 대시보드">
+  <meta name="theme-color" content="#0b0f17">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="weekly.css">
+</head>
+<body class="weekly-page">
+  <main class="weekly-shell">
+    <header class="weekly-header">
+      <div>
+        <a href="./" class="back-link"><i class="fa-solid fa-arrow-left"></i> 메인으로</a>
+        <h1><i class="fa-solid fa-calendar-week"></i> 위클리 대시보드</h1>
+        <p>운동 날짜를 우선 표시하고 부족한 날짜는 미래 일정으로 채워 총 7일을 관리하세요.</p>
+      </div>
+      <div class="weekly-header-actions">
+        <button id="exportWeeklyBtn" class="btn btn-export btn-sm" type="button">
+          <i class="fa-solid fa-share-nodes"></i> 내보내기
+        </button>
+        <button id="openWeeklyImportBtn" class="btn btn-import btn-sm" type="button">
+          <i class="fa-solid fa-file-import"></i> 가져오기
+        </button>
+        <button id="refreshDashboardBtn" class="btn btn-secondary btn-sm" type="button">
+          <i class="fa-solid fa-rotate"></i> 새로고침
+        </button>
+      </div>
+    </header>
+
+    <section class="weekly-summary" aria-label="대시보드 요약">
+      <div><span>표시 날짜</span><strong id="visibleDateCount">4일</strong></div>
+      <div><span>운동 종목</span><strong id="visibleExerciseCount">0개</strong></div>
+      <div><span>전체 세트</span><strong id="visibleSetCount">0세트</strong></div>
+    </section>
+
+    <section id="weeklyGrid" class="weekly-grid" aria-live="polite"></section>
+  </main>
+
+  <div id="weeklyImportModal" class="modal hidden">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3><i class="fa-solid fa-file-import"></i> 위클리 코드 가져오기</h3>
+        <button id="closeWeeklyImportBtn" class="close-btn" type="button" aria-label="닫기">&times;</button>
+      </div>
+      <div class="form-group">
+        <label for="weeklyImportInput">위클리 공유 URL 또는 코드</label>
+        <textarea id="weeklyImportInput" class="input-textarea" rows="5"
+          placeholder="https://gym.brightnetworks.kr/weekly?week=FITWEEK_v1_... 또는 FITWEEK_v1_..."></textarea>
+        <p class="weekly-import-notice"><i class="fa-solid fa-circle-info"></i> 공유된 위클리 날짜 범위의 기존 운동을 최신 내용으로 교체합니다.</p>
+      </div>
+      <div class="modal-footer">
+        <button id="cancelWeeklyImportBtn" class="btn btn-secondary" type="button">취소</button>
+        <button id="submitWeeklyImportBtn" class="btn btn-import" type="button">
+          <i class="fa-solid fa-download"></i> 가져오기
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div id="weeklyToast" class="weekly-toast" role="status" aria-live="polite"></div>
+  <script src="weekly.js"></script>
+</body>
+</html>

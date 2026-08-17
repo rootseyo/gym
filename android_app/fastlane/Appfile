@@ -1,0 +1,3 @@
+# Google Play Console App Configuration
+json_key_file(File.expand_path("../../gcp_service_key.json", __dir__))
+package_name("kr.brightnetworks.fittracker")

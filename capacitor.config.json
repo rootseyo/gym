@@ -1,0 +1,16 @@
+{
+  "appId": "kr.brightnetworks.fittracker",
+  "appName": "FitTracker Pro",
+  "webDir": ".",
+  "bundledWebRuntime": false,
+  "server": {
+    "url": "http://gym.brightnetworks.kr",
+    "cleartext": true
+  },
+  "plugins": {
+    "SplashScreen": {
+      "launchShowDuration": 1000,
+      "backgroundColor": "#0b0f17"
+    }
+  }
+}
