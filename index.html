@@ -224,9 +224,59 @@
             </div>
           </div>
 
-          <!-- Exercise Multi-Selection Chip Bar -->
-          <div class="graph-selection-wrapper">
-            <span class="graph-select-label">비교할 운동 선택 (다중 선택 가능):</span>
+          <!-- Exercise Multi-Selection Card (Filter, Quick Presets, Search & Color Match) -->
+          <div class="graph-selection-card">
+            <div class="graph-selection-header">
+              <div class="selection-title-wrap">
+                <i class="fa-solid fa-chart-line text-cyan"></i>
+                <span class="selection-title">비교할 운동 선택</span>
+                <span class="selection-count-badge" id="selectedExerciseCountBadge">0 / 6개 선택</span>
+              </div>
+              <div class="selection-action-wrap">
+                <button type="button" class="btn-clear-selection" id="btnClearChartSelection" title="선택 전체 해제">
+                  <i class="fa-solid fa-rotate-left"></i> 선택 초기화
+                </button>
+              </div>
+            </div>
+
+            <!-- Quick Selection Presets -->
+            <div class="quick-preset-bar" id="quickChartPresetBar">
+              <span class="preset-label"><i class="fa-solid fa-bolt text-yellow"></i> 퀵 프리셋:</span>
+              <div class="quick-preset-buttons">
+                <button type="button" class="quick-preset-btn" data-preset="big3">🏋️ 3대 운동</button>
+                <button type="button" class="quick-preset-btn" data-preset="chest">가슴</button>
+                <button type="button" class="quick-preset-btn" data-preset="back">등</button>
+                <button type="button" class="quick-preset-btn" data-preset="legs">하체</button>
+                <button type="button" class="quick-preset-btn" data-preset="shoulders">어깨</button>
+                <button type="button" class="quick-preset-btn" data-preset="arms">팔</button>
+                <button type="button" class="quick-preset-btn" data-preset="cardio">유산소</button>
+              </div>
+            </div>
+
+            <!-- Category Filter Tabs & Search Bar -->
+            <div class="selection-filter-bar">
+              <div class="selection-category-pills" id="chartCategoryFilterPills">
+                <button type="button" class="cat-pill active" data-cat="ALL">전체</button>
+                <button type="button" class="cat-pill" data-cat="가슴">가슴</button>
+                <button type="button" class="cat-pill" data-cat="등">등</button>
+                <button type="button" class="cat-pill" data-cat="하체">하체</button>
+                <button type="button" class="cat-pill" data-cat="어깨">어깨</button>
+                <button type="button" class="cat-pill" data-cat="팔">팔</button>
+                <button type="button" class="cat-pill" data-cat="복근/코어">코어</button>
+                <button type="button" class="cat-pill" data-cat="유산소">유산소</button>
+              </div>
+              <div class="selection-search-wrap">
+                <i class="fa-solid fa-magnifying-glass search-icon"></i>
+                <input type="text" id="chartExerciseSearchInput" placeholder="운동 검색..." autocomplete="off">
+              </div>
+            </div>
+
+            <!-- Active Selected Pills (With color legend dots) -->
+            <div class="selected-pills-active-bar" id="selectedPillsActiveBar">
+              <!-- Active colored chips rendered here -->
+            </div>
+
+            <!-- Available Multi-Select Exercise Chips -->
             <div class="exercise-multi-select-container" id="exerciseMultiSelectContainer">
               <!-- Dynamic multi-select exercise chips rendered here -->
             </div>
