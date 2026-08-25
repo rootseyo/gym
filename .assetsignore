@@ -1,3 +1,5 @@
+# Fallback allowlist if the asset directory is ever pointed at the repository root.
+# Production currently deploys only the generated dist/ directory.
 *
 !index.html
 !app.js
@@ -9,6 +11,7 @@
 !favicon.png
 !icon-192.png
 !icon-512.png
+!og-fittracker.png
 !manifest.webmanifest
 !sw.js
 !firebase-config.js
@@ -18,4 +21,3 @@
 !terms.html
 !equipment-encyclopedia.js
 !routine-recommendations.js
-

@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct ContentView: View {
-    private let targetURL = URL(string: "http://gym.brightnetworks.kr")!
+    private let targetURL = URL(string: "https://gym.brightnetworks.kr")!
 
     var body: some View {
         ZStack {

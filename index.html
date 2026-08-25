@@ -17,9 +17,26 @@
   <meta property="og:title" content="FitTracker">
   <meta property="og:description" content="스마트 헬스 운동 루틴 관리, 세트/중량 기록, 러닝 거리 계산 및 휴식 타이머 웹 앱">
   <meta property="og:site_name" content="FitTracker">
+  <meta property="og:locale" content="ko_KR">
+  <meta property="og:url" content="https://gym.brightnetworks.kr/">
+  <meta property="og:image" content="https://gym.brightnetworks.kr/og-fittracker.png">
+  <meta property="og:image:secure_url" content="https://gym.brightnetworks.kr/og-fittracker.png">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="바벨을 든 픽셀 아트 운동선수와 FitTracker 성장 그래프">
+
+  <!-- Twitter / X Large Image Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="FitTracker">
+  <meta name="twitter:description" content="운동 기록이 쌓이면 성장이 보입니다">
+  <meta name="twitter:image" content="https://gym.brightnetworks.kr/og-fittracker.png">
+  <meta name="twitter:image:alt" content="바벨을 든 픽셀 아트 운동선수와 FitTracker 성장 그래프">
+
+  <link rel="canonical" href="https://gym.brightnetworks.kr/">
 
   <!-- Favicon Settings -->
-  <link rel="icon" type="image/png" href="favicon.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="favicon.png?v=android-icon-v1">
   <link rel="apple-touch-icon" href="icon-192.png">
 
   <!-- Web App & PWA Home Screen Settings -->
@@ -231,16 +248,30 @@
       <button id="soundToggleBtn" class="icon-btn sound-on" title="오디오 비프음 설정">
         <i class="fa-solid fa-volume-high"></i>
       </button>
-      <div class="timer-duration-controls" aria-label="기본 휴식시간 조절">
-        <button id="bottomTimerMinusBtn" class="timer-step-btn" type="button" title="휴식시간 5초 줄이기" aria-label="휴식시간 5초 줄이기">
-          <i class="fa-solid fa-minus"></i>
-        </button>
-        <span id="bottomTimerDuration" class="timer-duration-value" aria-live="polite">30초</span>
-        <button id="bottomTimerPlusBtn" class="timer-step-btn" type="button" title="휴식시간 5초 늘리기" aria-label="휴식시간 5초 늘리기">
-          <i class="fa-solid fa-plus"></i>
-        </button>
-      </div>
-      <!-- Right Button: 시작 / 중지 / 재시작 -->
+      <label class="timer-duration-controls" for="bottomTimerDurationSelect" aria-label="기본 휴식시간 선택">
+        <select id="bottomTimerDurationSelect" class="timer-duration-select" aria-label="기본 휴식시간 선택">
+          <option value="30" selected>30초</option>
+          <option value="40">40초</option>
+          <option value="50">50초</option>
+          <option value="60">60초</option>
+          <option value="70">70초</option>
+          <option value="80">80초</option>
+          <option value="90">90초</option>
+          <option value="100">100초</option>
+          <option value="110">110초</option>
+          <option value="120">120초</option>
+          <option value="130">130초</option>
+          <option value="140">140초</option>
+          <option value="150">150초</option>
+          <option value="160">160초</option>
+          <option value="170">170초</option>
+          <option value="180">180초</option>
+        </select>
+      </label>
+      <button id="bottomTimerResetBtn" class="icon-btn timer-reset-btn" type="button" title="타이머 중지 및 초기화" aria-label="타이머 중지 및 초기화">
+        <i class="fa-solid fa-rotate-left"></i>
+      </button>
+      <!-- Right Button: 시작 / 일시정지 / 재시작 -->
       <button id="bottomTimerToggleBtn" class="btn btn-primary btn-bottom-right">
         <i class="fa-solid fa-play"></i> 시작
       </button>

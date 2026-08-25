@@ -311,6 +311,7 @@ const state = {
   currentDate: getTodayString(),
   workouts: {}, // Schema: { 'YYYY-MM-DD': [ { id, name, category, type, collapsed, sets: [...] } ] }
   customPresets: [], // Stores user-created custom preset labels
+  deletedDates: [], // Dates explicitly removed locally and pending cloud deletion
   soundEnabled: true,
   selectedExercisesForGraph: [], // Multi-select array of exercise names for graph comparison
   graphPeriod: 'daily', // 'daily' | 'monthly'
@@ -325,6 +326,17 @@ const state = {
     hasBeeped10s: false
   }
 };
+
+const REST_TIMER_MIN_SECONDS = 30;
+const REST_TIMER_MAX_SECONDS = 180;
+const REST_TIMER_STEP_SECONDS = 10;
+
+function normalizeRestTimerDuration(seconds) {
+  const parsedSeconds = Number(seconds);
+  if (!Number.isFinite(parsedSeconds)) return REST_TIMER_MIN_SECONDS;
+  const steppedSeconds = Math.round(parsedSeconds / REST_TIMER_STEP_SECONDS) * REST_TIMER_STEP_SECONDS;
+  return Math.min(REST_TIMER_MAX_SECONDS, Math.max(REST_TIMER_MIN_SECONDS, steppedSeconds));
+}
 
 let deferredInstallPrompt = null;
 
@@ -610,9 +622,19 @@ function loadState() {
     state.soundEnabled = savedSound === 'true';
   }
 
+  const savedDeletedDates = localStorage.getItem('fit_tracker_deleted_dates_v1');
+  if (savedDeletedDates) {
+    try {
+      const parsedDeletedDates = JSON.parse(savedDeletedDates);
+      state.deletedDates = Array.isArray(parsedDeletedDates) ? parsedDeletedDates : [];
+    } catch (e) {
+      state.deletedDates = [];
+    }
+  }
+
   const savedRestSeconds = Number(localStorage.getItem('fit_tracker_rest_seconds'));
-  if (Number.isFinite(savedRestSeconds) && savedRestSeconds >= 5) {
-    const normalizedSeconds = Math.min(600, Math.round(savedRestSeconds / 5) * 5);
+  if (Number.isFinite(savedRestSeconds)) {
+    const normalizedSeconds = normalizeRestTimerDuration(savedRestSeconds);
     state.timer.defaultSeconds = normalizedSeconds;
     state.timer.totalSeconds = normalizedSeconds;
     state.timer.remainingSeconds = normalizedSeconds;
@@ -620,8 +642,13 @@ function loadState() {
 }
 
 function saveState() {
+  state.deletedDates = (state.deletedDates || []).filter(dateStr => {
+    const exercises = state.workouts[dateStr];
+    return !Array.isArray(exercises) || exercises.length === 0;
+  });
   localStorage.setItem('fit_tracker_workouts_v1', JSON.stringify(state.workouts));
   localStorage.setItem('fit_tracker_custom_presets_v1', JSON.stringify(state.customPresets));
+  localStorage.setItem('fit_tracker_deleted_dates_v1', JSON.stringify(state.deletedDates));
   localStorage.setItem('fit_tracker_sound_enabled', String(state.soundEnabled));
   localStorage.setItem('fit_tracker_rest_seconds', String(state.timer.defaultSeconds));
 
@@ -835,9 +862,7 @@ function renderChartDateDetails(period) {
           category: cat,
           totalSets: 0,
           completedSets: 0,
-          volume: 0,
-          maxWeight: 0,
-          setDetails: []
+          volume: 0
         });
       }
 
@@ -857,8 +882,6 @@ function renderChartDateDetails(period) {
           const vol = (w * r);
           totalVolume += vol;
           item.volume += vol;
-          if (w > item.maxWeight) item.maxWeight = w;
-          item.setDetails.push(`${w}kg×${r}`);
         }
       });
     });
@@ -869,21 +892,13 @@ function renderChartDateDetails(period) {
 
   const exerciseItemsHtml = Array.from(exerciseMap.values())
     .filter(item => item.completedSets > 0 || item.totalSets > 0)
-    .map(item => {
-      const topSetsStr = item.setDetails.slice(0, 3).join(', ') + (item.setDetails.length > 3 ? ' 외' : '');
-      return `
+    .map(item => `
         <div class="detail-exercise-item">
-          <div class="detail-ex-name">
-            <span class="detail-ex-cat">${escapeHtml(item.category)}</span>
-            <span>${escapeHtml(item.name)}</span>
-          </div>
-          <div class="detail-ex-vol">
-            <span>${topSetsStr || `${item.totalSets}세트`}</span>
-            <b style="margin-left: 6px;">${item.volume.toLocaleString()} kg</b>
-          </div>
+          <span class="detail-ex-cat">${escapeHtml(item.category)}</span>
+          <span class="detail-ex-name" title="${escapeHtml(item.name)}">${escapeHtml(item.name)}</span>
+          <strong class="detail-ex-vol" aria-label="총 중량 ${item.volume.toLocaleString()}킬로그램">${item.volume.toLocaleString()} kg</strong>
         </div>
-      `;
-    }).join('');
+      `).join('');
 
   card.innerHTML = `
     <div class="chart-point-detail-content">
@@ -1284,6 +1299,211 @@ function changeExerciseRestSeconds(exId) {
   }
 }
 
+const EXERCISE_LONG_PRESS_MS = 450;
+const EXERCISE_SWIPE_ACTION_WIDTH = 84;
+let exerciseGestureClickSuppressedUntil = 0;
+
+function closeExerciseSwipeItem(item) {
+  if (!item) return;
+  item.classList.remove('swipe-open');
+  const surface = item.querySelector('.exercise-card');
+  const deleteButton = item.querySelector('.exercise-swipe-delete');
+  if (surface) surface.style.transform = '';
+  if (deleteButton) deleteButton.tabIndex = -1;
+}
+
+function handleExerciseCardHeaderClick(exId, event) {
+  const item = event.currentTarget.closest('.exercise-swipe-item');
+
+  if (Date.now() < exerciseGestureClickSuppressedUntil) {
+    event.preventDefault();
+    event.stopPropagation();
+    return;
+  }
+
+  if (item?.classList.contains('swipe-open')) {
+    closeExerciseSwipeItem(item);
+    return;
+  }
+
+  toggleExerciseCardCollapse(exId);
+}
+
+function handleExerciseTitleClick(exId, event) {
+  event.stopPropagation();
+  if (Date.now() < exerciseGestureClickSuppressedUntil) {
+    event.preventDefault();
+    return;
+  }
+  openEditExerciseModal(exId);
+}
+
+function persistExerciseOrderFromList(container) {
+  const exercises = state.workouts[state.currentDate] || [];
+  const exerciseById = new Map(exercises.map(exercise => [String(exercise.id), exercise]));
+  const orderedExercises = Array.from(container.querySelectorAll('.exercise-swipe-item'))
+    .map(item => exerciseById.get(String(item.dataset.exerciseId)))
+    .filter(Boolean);
+
+  if (orderedExercises.length !== exercises.length) return;
+  state.workouts[state.currentDate] = orderedExercises;
+  saveState();
+}
+
+function setupExerciseItemGestures(item, container) {
+  const surface = item.querySelector('.exercise-card');
+  const header = item.querySelector('.exercise-card-header');
+  if (!surface || !header) return;
+
+  let gesture = null;
+
+  const clearLongPress = () => {
+    if (gesture?.longPressTimer) {
+      clearTimeout(gesture.longPressTimer);
+      gesture.longPressTimer = null;
+    }
+  };
+
+  const finishGesture = (gestureId, cancelled = false) => {
+    if (!gesture || gestureId !== gesture.id) return;
+    clearLongPress();
+
+    if (gesture.dragging) {
+      item.classList.remove('is-dragging');
+      persistExerciseOrderFromList(container);
+      exerciseGestureClickSuppressedUntil = Date.now() + 700;
+      gesture = null;
+      updateUI();
+      return;
+    }
+
+    surface.classList.remove('is-swiping');
+    surface.style.transform = '';
+
+    if (gesture.swiping && !cancelled) {
+      const shouldOpen = gesture.currentOffset < -(EXERCISE_SWIPE_ACTION_WIDTH * 0.42);
+      container.querySelectorAll('.exercise-swipe-item.swipe-open').forEach(openItem => {
+        if (openItem !== item) closeExerciseSwipeItem(openItem);
+      });
+      item.classList.toggle('swipe-open', shouldOpen);
+      const deleteButton = item.querySelector('.exercise-swipe-delete');
+      if (deleteButton) deleteButton.tabIndex = shouldOpen ? 0 : -1;
+      exerciseGestureClickSuppressedUntil = Date.now() + 500;
+    } else if (cancelled) {
+      item.classList.toggle('swipe-open', gesture.startOffset < 0);
+    }
+
+    gesture = null;
+  };
+
+  const startGesture = (id, clientX, clientY, capturePointer = null) => {
+    const startOffset = item.classList.contains('swipe-open') ? -EXERCISE_SWIPE_ACTION_WIDTH : 0;
+    gesture = {
+      id,
+      startX: clientX,
+      startY: clientY,
+      currentOffset: startOffset,
+      startOffset,
+      dragging: false,
+      swiping: false,
+      longPressTimer: null,
+      capturePointer
+    };
+
+    gesture.longPressTimer = setTimeout(() => {
+      if (!gesture || gesture.id !== id) return;
+      gesture.dragging = true;
+      closeExerciseSwipeItem(item);
+      item.classList.add('is-dragging');
+      exerciseGestureClickSuppressedUntil = Date.now() + 700;
+      gesture.capturePointer?.();
+      if (navigator.vibrate) navigator.vibrate(30);
+    }, EXERCISE_LONG_PRESS_MS);
+  };
+
+  const moveGesture = (gestureId, clientX, clientY, event) => {
+    if (!gesture || gestureId !== gesture.id) return;
+    const deltaX = clientX - gesture.startX;
+    const deltaY = clientY - gesture.startY;
+
+    if (gesture.dragging) {
+      event.preventDefault();
+      const target = document.elementFromPoint(clientX, clientY)?.closest('.exercise-swipe-item');
+      if (target && target !== item && target.parentElement === container) {
+        const rect = target.getBoundingClientRect();
+        if (clientY < rect.top + (rect.height / 2)) {
+          container.insertBefore(item, target);
+        } else {
+          container.insertBefore(item, target.nextSibling);
+        }
+      }
+      return;
+    }
+
+    if (!gesture.swiping && Math.abs(deltaY) > 10 && Math.abs(deltaY) > Math.abs(deltaX)) {
+      clearLongPress();
+      return;
+    }
+
+    if (Math.abs(deltaX) > 8 && Math.abs(deltaX) > Math.abs(deltaY)) {
+      clearLongPress();
+      gesture.swiping = true;
+      surface.classList.add('is-swiping');
+      gesture.capturePointer?.();
+    }
+
+    if (gesture.swiping) {
+      event.preventDefault();
+      gesture.currentOffset = Math.max(-EXERCISE_SWIPE_ACTION_WIDTH, Math.min(0, gesture.startOffset + deltaX));
+      surface.style.transform = `translateX(${gesture.currentOffset}px)`;
+    }
+  };
+
+  header.addEventListener('pointerdown', event => {
+    if (event.pointerType === 'touch' || !event.isPrimary || event.button !== 0) return;
+    if (event.target.closest('button, input, select, textarea, a')) return;
+    startGesture(event.pointerId, event.clientX, event.clientY, () => header.setPointerCapture?.(event.pointerId));
+  });
+
+  header.addEventListener('pointermove', event => {
+    if (event.pointerType === 'touch') return;
+    moveGesture(event.pointerId, event.clientX, event.clientY, event);
+  });
+
+  header.addEventListener('pointerup', event => {
+    if (event.pointerType !== 'touch') finishGesture(event.pointerId);
+  });
+  header.addEventListener('pointercancel', event => {
+    if (event.pointerType !== 'touch') finishGesture(event.pointerId, true);
+  });
+
+  header.addEventListener('touchstart', event => {
+    if (event.touches.length !== 1) return;
+    if (event.target.closest('button, input, select, textarea, a')) return;
+    const touch = event.touches[0];
+    startGesture(touch.identifier, touch.clientX, touch.clientY);
+  }, { passive: true });
+
+  header.addEventListener('touchmove', event => {
+    if (!gesture) return;
+    const touch = Array.from(event.touches).find(candidate => candidate.identifier === gesture.id);
+    if (touch) moveGesture(touch.identifier, touch.clientX, touch.clientY, event);
+  }, { passive: false });
+
+  header.addEventListener('touchend', event => {
+    const touch = Array.from(event.changedTouches).find(candidate => candidate.identifier === gesture?.id);
+    if (touch) finishGesture(touch.identifier);
+  });
+  header.addEventListener('touchcancel', event => {
+    const touch = Array.from(event.changedTouches).find(candidate => candidate.identifier === gesture?.id);
+    if (touch) finishGesture(touch.identifier, true);
+  });
+
+  header.addEventListener('contextmenu', event => {
+    if (gesture?.dragging) event.preventDefault();
+  });
+}
+
 function renderExerciseList(exercises) {
   const container = document.getElementById('exerciseList');
   const emptyState = document.getElementById('emptyState');
@@ -1297,15 +1517,20 @@ function renderExerciseList(exercises) {
   emptyState.style.display = 'none';
   container.innerHTML = '';
 
-  exercises.forEach((ex, exerciseIndex) => {
+  exercises.forEach(ex => {
     sanitizeExerciseSets(ex);
 
     const isCardio = isCardioExercise(ex);
     const weightLabel = isCardio ? '속도(km/h)' : '무게(kg)';
     const allSetsCompleted = ex.sets.length > 0 && ex.sets.every(set => set.completed);
+    const item = document.createElement('div');
+    item.className = 'exercise-swipe-item';
+    item.dataset.exerciseId = ex.id;
+
     const card = document.createElement('div');
     const isCollapsed = Boolean(ex.collapsed);
     card.className = `exercise-card ${isCollapsed ? 'collapsed' : ''}`;
+    card.dataset.exerciseId = ex.id;
 
     const restSec = ex.restSeconds || getDefaultRestForExercise(ex.name, ex.category);
 
@@ -1319,21 +1544,6 @@ function renderExerciseList(exercises) {
     });
 
     const insight = getPreviousSessionInsight(ex.name, state.currentDate);
-
-    const orderButtonsHtml = `
-      <div class="exercise-order-controls" aria-label="${escapeHtml(ex.name)} 순서 변경">
-        ${exerciseIndex > 0 ? `
-          <button class="order-exercise-btn" onclick="moveExercise('${ex.id}', -1)" title="위로 이동" aria-label="${escapeHtml(ex.name)} 위로 이동">
-            <i class="fa-solid fa-chevron-up"></i>
-          </button>
-        ` : ''}
-        ${exerciseIndex < exercises.length - 1 ? `
-          <button class="order-exercise-btn" onclick="moveExercise('${ex.id}', 1)" title="아래로 이동" aria-label="${escapeHtml(ex.name)} 아래로 이동">
-            <i class="fa-solid fa-chevron-down"></i>
-          </button>
-        ` : ''}
-      </div>
-    `;
 
     let setsRowsHtml = '';
     ex.sets.forEach((s, setIdx) => {
@@ -1392,30 +1602,25 @@ function renderExerciseList(exercises) {
     const svgThumb = typeof getExerciseSvgIcon === 'function' ? getExerciseSvgIcon(ex.name, ex.category) : '';
 
     card.innerHTML = `
-      <div class="exercise-card-header" onclick="toggleExerciseCardCollapse('${ex.id}')" title="터치하여 이 운동 세트 접기/펼치기">
+      <div class="exercise-card-header" onclick="handleExerciseCardHeaderClick('${ex.id}', event)"
+        title="탭하여 세트 펼치기 · 길게 눌러 순서 변경 · 왼쪽으로 밀어 삭제">
         <div class="exercise-meta">
           <div class="ex-equip-thumb" title="${escapeHtml(ex.name)}">
             ${svgThumb}
           </div>
-          <div>
-            <div style="display: flex; align-items: center; gap: 6px; flex-wrap: wrap;">
-              <span class="category-tag" style="${isCardio ? 'background: rgba(0, 230, 118, 0.15); color: var(--accent-emerald);' : ''}">${escapeHtml(ex.category || '기타')}</span>
-              <span class="exercise-title editable-title" onclick="event.stopPropagation(); openEditExerciseModal('${ex.id}')" title="터치하여 운동 종목 교체">
-                ${escapeHtml(ex.name)} <i class="fa-solid fa-pen-to-square title-edit-icon"></i>
-              </span>
-            </div>
-          </div>
+          <span class="category-tag" style="${isCardio ? 'background: rgba(0, 230, 118, 0.15); color: var(--accent-emerald);' : ''}">${escapeHtml(ex.category || '기타')}</span>
+          <span class="exercise-title editable-title" onclick="handleExerciseTitleClick('${ex.id}', event)" title="터치하여 운동 종목 교체">
+            <span class="exercise-title-text">${escapeHtml(ex.name)}</span><i class="fa-solid fa-pen-to-square title-edit-icon"></i>
+          </span>
+          <span class="exercise-set-summary">${ex.sets.filter(set => set.completed).length}/${ex.sets.length}</span>
           <span class="exercise-completion-status ${allSetsCompleted ? 'completed' : 'in-progress'}"
             title="${allSetsCompleted ? '모든 세트 완료' : '진행 중'}" aria-label="${allSetsCompleted ? '모든 세트 완료' : '진행 중'}">
             <i class="fa-solid ${allSetsCompleted ? 'fa-circle-check' : 'fa-circle-half-stroke'}"></i>
           </span>
-          <i class="fa-solid fa-chevron-up ex-toggle-chevron"></i>
         </div>
-        <div class="exercise-actions" onclick="event.stopPropagation()">
-          ${orderButtonsHtml}
-          <button class="icon-action-btn exercise-delete-btn" onclick="handleDeleteExerciseTap('${ex.id}', this)" title="한 번 더 누르면 삭제" aria-label="운동 삭제">
-            <i class="fa-solid fa-trash-can"></i>
-          </button>
+        <div class="exercise-actions" aria-hidden="true">
+          <span class="exercise-drag-grip" title="길게 눌러 순서 변경"><i class="fa-solid fa-grip-lines"></i></span>
+          <i class="fa-solid fa-chevron-up ex-toggle-chevron"></i>
         </div>
       </div>
 
@@ -1465,7 +1670,17 @@ function renderExerciseList(exercises) {
       </div>
     `;
 
-    container.appendChild(card);
+    const deleteButton = document.createElement('button');
+    deleteButton.type = 'button';
+    deleteButton.className = 'exercise-swipe-delete';
+    deleteButton.tabIndex = -1;
+    deleteButton.setAttribute('aria-label', `${ex.name} 삭제`);
+    deleteButton.innerHTML = '<i class="fa-solid fa-trash-can"></i><span>삭제</span>';
+    deleteButton.addEventListener('click', () => deleteExercise(ex.id));
+
+    item.append(deleteButton, card);
+    container.appendChild(item);
+    setupExerciseItemGestures(item, container);
   });
 }
 
@@ -1476,18 +1691,6 @@ function focusExerciseGraph(exerciseName) {
   if (chartSec) {
     chartSec.scrollIntoView({ behavior: 'smooth' });
   }
-}
-
-function moveExercise(exId, direction) {
-  const exercises = state.workouts[state.currentDate] || [];
-  const currentIndex = exercises.findIndex(exercise => exercise.id === exId);
-  const targetIndex = currentIndex + direction;
-
-  if (currentIndex < 0 || targetIndex < 0 || targetIndex >= exercises.length) return;
-
-  [exercises[currentIndex], exercises[targetIndex]] = [exercises[targetIndex], exercises[currentIndex]];
-  saveState();
-  updateUI();
 }
 
 let editingExerciseId = null;
@@ -1642,7 +1845,7 @@ function applyRoutinePack(routineId) {
       sets: sets
     };
 
-    state.workouts[state.currentDate].push(newExercise);
+    insertExerciseByCompletionStatus(state.workouts[state.currentDate], newExercise);
   });
 
   saveState();
@@ -1949,12 +2152,12 @@ function addExercise(name, category, defaultWeight = 40, defaultReps = 12, restS
     category: mappedCategory,
     type: isCardio ? 'cardio' : 'strength',
     targetSets: numSets,
-    collapsed: false,
+    collapsed: true,
     restSeconds: finalRest,
     sets: initialSets
   };
 
-  state.workouts[state.currentDate].push(newExercise);
+  insertExerciseByCompletionStatus(state.workouts[state.currentDate], newExercise);
   if (!state.selectedExercisesForGraph.includes(trimmedName)) {
     state.selectedExercisesForGraph.push(trimmedName);
   }
@@ -1976,10 +2179,6 @@ function addExercise(name, category, defaultWeight = 40, defaultReps = 12, restS
 
   saveState();
   updateUI();
-}
-
-function handleDeleteExerciseTap(exId, button) {
-  deleteExercise(exId);
 }
 
 function deleteExercise(exId, options = {}) {
@@ -2092,6 +2291,31 @@ function findNextIncompleteSet(exId, setIndex) {
   return null;
 }
 
+function isExerciseFullyCompleted(exercise) {
+  return Array.isArray(exercise?.sets)
+    && exercise.sets.length > 0
+    && exercise.sets.every(set => set.completed);
+}
+
+function insertExerciseByCompletionStatus(exercises, exercise) {
+  if (isExerciseFullyCompleted(exercise)) {
+    exercises.push(exercise);
+    return;
+  }
+
+  const firstCompletedIndex = exercises.findIndex(isExerciseFullyCompleted);
+  const insertIndex = firstCompletedIndex === -1 ? exercises.length : firstCompletedIndex;
+  exercises.splice(insertIndex, 0, exercise);
+}
+
+function moveExerciseToCompletionSection(exercises, exercise) {
+  const currentIndex = exercises.indexOf(exercise);
+  if (currentIndex === -1) return;
+
+  exercises.splice(currentIndex, 1);
+  insertExerciseByCompletionStatus(exercises, exercise);
+}
+
 function scrollToNextCompleteButton(nextSet) {
   if (!nextSet) return;
 
@@ -2136,6 +2360,7 @@ function toggleSetComplete(exId, setIndex) {
   if (!ex || !ex.sets[setIndex]) return;
 
   const targetSet = ex.sets[setIndex];
+  const wasAllSetsCompleted = ex.sets.length > 0 && ex.sets.every(set => set.completed);
   const willBeCompleted = !targetSet.completed;
   targetSet.completed = willBeCompleted;
   const allSetsCompleted = ex.sets.length > 0 && ex.sets.every(set => set.completed);
@@ -2149,6 +2374,10 @@ function toggleSetComplete(exId, setIndex) {
   if (nextSet) {
     const nextExercise = list.find(item => item.id === nextSet.exerciseId);
     if (nextExercise) nextExercise.collapsed = false;
+  }
+
+  if (allSetsCompleted || wasAllSetsCompleted) {
+    moveExerciseToCompletionSection(list, ex);
   }
 
   saveState();
@@ -2218,18 +2447,29 @@ function resetRestTimer(seconds = state.timer.defaultSeconds) {
   if (state.timer.intervalId) {
     clearInterval(state.timer.intervalId);
   }
+  state.timer.intervalId = null;
   state.timer.totalSeconds = seconds;
   state.timer.remainingSeconds = seconds;
   state.timer.status = 'idle';
   state.timer.hasBeeped10s = false;
+  state.timer.currentLabel = '';
   updateFixedBottomTimerUI();
 }
 
-function adjustRestDuration(deltaSeconds) {
+function setRestDuration(seconds) {
+  const parsedSeconds = Number(seconds);
+  if (!Number.isFinite(parsedSeconds)) {
+    updateFixedBottomTimerUI();
+    return;
+  }
+
   const previousDefault = state.timer.defaultSeconds;
-  const nextDefault = Math.min(600, Math.max(5, previousDefault + deltaSeconds));
+  const nextDefault = normalizeRestTimerDuration(parsedSeconds);
   const appliedDelta = nextDefault - previousDefault;
-  if (appliedDelta === 0) return;
+  if (appliedDelta === 0) {
+    updateFixedBottomTimerUI();
+    return;
+  }
 
   state.timer.defaultSeconds = nextDefault;
 
@@ -2257,9 +2497,7 @@ function updateFixedBottomTimerUI() {
   const display = document.getElementById('bottomTimerDisplay');
   const statusSub = document.getElementById('bottomTimerStatus');
   const toggleBtn = document.getElementById('bottomTimerToggleBtn');
-  const durationDisplay = document.getElementById('bottomTimerDuration');
-  const minusBtn = document.getElementById('bottomTimerMinusBtn');
-  const plusBtn = document.getElementById('bottomTimerPlusBtn');
+  const durationSelect = document.getElementById('bottomTimerDurationSelect');
 
   if (!display || !statusSub || !toggleBtn) return;
 
@@ -2268,14 +2506,14 @@ function updateFixedBottomTimerUI() {
   const secs = String(remaining % 60).padStart(2, '0');
 
   display.textContent = `${mins}:${secs}`;
-  if (durationDisplay) durationDisplay.textContent = `${state.timer.defaultSeconds}초`;
-  if (minusBtn) minusBtn.disabled = state.timer.defaultSeconds <= 5;
-  if (plusBtn) plusBtn.disabled = state.timer.defaultSeconds >= 600;
+  if (durationSelect) {
+    durationSelect.value = String(state.timer.defaultSeconds);
+  }
 
   if (state.timer.status === 'running') {
     statusSub.textContent = remaining <= 10 ? '🔥 세트 준비 10초 전!' : '다음 세트 휴식 진행 중...';
     statusSub.style.color = remaining <= 10 ? '#ef4444' : 'var(--accent-emerald)';
-    toggleBtn.innerHTML = '<i class="fa-solid fa-pause"></i> 중지';
+    toggleBtn.innerHTML = '<i class="fa-solid fa-pause"></i> 일시정지';
     toggleBtn.className = 'btn btn-accent btn-bottom-right';
   } else if (state.timer.status === 'paused') {
     statusSub.textContent = '⏸️ 휴식 시간 일시정지됨';
@@ -2405,10 +2643,10 @@ function executeImportPreviousWorkouts() {
         weight: s.weight,
         targetReps: s.targetReps,
         actualReps: s.actualReps !== undefined ? s.actualReps : s.targetReps,
-        completed: Boolean(s.completed === true || s.completed === 1 || s.completed === 'true' || s.isCompleted === true)
+        completed: false
       }));
 
-      state.workouts[state.currentDate].push({
+      insertExerciseByCompletionStatus(state.workouts[state.currentDate], {
         id: 'ex_' + Date.now() + '_' + Math.random().toString(36).substring(2, 7),
         name: prevEx.name,
         category: prevEx.category,
@@ -2679,7 +2917,7 @@ function parseAndImportRoutineCode(codeStr) {
         category: category,
         type: type,
         targetSets: importedSets.length,
-        collapsed: false,
+        collapsed: true,
         restSeconds: restSec,
         sets: importedSets
       });
@@ -2953,8 +3191,10 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // Fixed Bottom Bar Button Listeners
-  document.getElementById('bottomTimerMinusBtn').addEventListener('click', () => adjustRestDuration(-5));
-  document.getElementById('bottomTimerPlusBtn').addEventListener('click', () => adjustRestDuration(5));
+  const bottomTimerDurationSelect = document.getElementById('bottomTimerDurationSelect');
+  bottomTimerDurationSelect.addEventListener('change', (event) => setRestDuration(event.target.value));
+
+  document.getElementById('bottomTimerResetBtn').addEventListener('click', () => resetRestTimer());
 
   document.getElementById('bottomTimerToggleBtn').addEventListener('click', () => {
     if (state.timer.status === 'running') {

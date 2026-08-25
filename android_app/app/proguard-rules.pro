@@ -18,6 +18,14 @@
 -dontwarn com.kakao.sdk.**
 
 # 4. OkHttp / Okio / Network Rules (used by Kakao SDK)
+# Retrofit 2.9's bundled rules predate R8 full mode. Without keeping service
+# return types, R8 strips retrofit2.Call<T>'s generic signature and Kakao's
+# access-token check crashes as soon as the app enters the foreground.
+-keepattributes RuntimeVisibleAnnotations,RuntimeVisibleParameterAnnotations,AnnotationDefault
+-if interface * { @retrofit2.http.* public *** *(...); }
+-keep,allowoptimization,allowshrinking,allowobfuscation class <3>
+-keep,allowoptimization,allowshrinking,allowobfuscation class retrofit2.Response
+
 -dontwarn okhttp3.**
 -dontwarn okio.**
 -dontwarn org.bouncycastle.**

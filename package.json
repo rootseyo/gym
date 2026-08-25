@@ -4,6 +4,8 @@
   "description": "FitTracker Pro Local Dev Server",
   "scripts": {
     "dev": "npx -y serve -l 3000 .",
+    "build:web": "node scripts/build-web.mjs",
+    "deploy": "npm run build:web && wrangler deploy",
     "build:android:aab": "cd android_app && ./gradlew bundleRelease",
     "build:android:apk": "cd android_app && ./gradlew assembleRelease",
     "deploy:android:internal": "cd android_app && fastlane internal",

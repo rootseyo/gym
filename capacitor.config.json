@@ -4,8 +4,8 @@
   "webDir": ".",
   "bundledWebRuntime": false,
   "server": {
-    "url": "http://gym.brightnetworks.kr",
-    "cleartext": true
+    "url": "https://gym.brightnetworks.kr",
+    "cleartext": false
   },
   "plugins": {
     "SplashScreen": {

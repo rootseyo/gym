@@ -9,6 +9,7 @@ gcp_service_key.json
 *.keystore
 
 # Build Outputs
+dist/
 android_app/app/build/
 android_app/.gradle/
 android_app/.kotlin/

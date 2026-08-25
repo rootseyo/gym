@@ -16,6 +16,7 @@ import android.webkit.CookieManager
 import android.webkit.JavascriptInterface
 import android.webkit.WebChromeClient
 import android.webkit.WebResourceRequest
+import android.webkit.WebResourceResponse
 import android.webkit.WebSettings
 import android.webkit.WebView
 import android.webkit.WebViewClient
@@ -30,18 +31,29 @@ import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.updatePadding
 import com.kakao.sdk.auth.model.OAuthToken
+import com.kakao.sdk.common.model.AuthError
+import com.kakao.sdk.common.model.AuthErrorCause
 import com.kakao.sdk.common.model.ClientError
 import com.kakao.sdk.common.model.ClientErrorCause
+import com.kakao.sdk.common.util.Utility
 import com.kakao.sdk.user.UserApiClient
 import org.json.JSONObject
+import java.io.ByteArrayInputStream
 import java.net.URISyntaxException
+import java.nio.charset.StandardCharsets
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var webView: WebView
     private var popupDialog: Dialog? = null
-    private val TARGET_URL = "http://gym.brightnetworks.kr"
+    private val TARGET_URL = "https://gym.brightnetworks.kr"
+    private val LEGACY_STORAGE_EXPORT_URL = "http://gym.brightnetworks.kr/__android_storage_export__"
+    private val SECURE_STORAGE_IMPORT_URL = "https://gym.brightnetworks.kr/__android_storage_import__"
+    private val MIGRATION_PREFERENCES = "fittracker_migrations"
+    private val HTTPS_STORAGE_MIGRATION_KEY = "http_to_https_storage_v1"
+    private val LEGACY_STORAGE_BACKUP_KEY = "http_storage_backup_v1"
     private val TAG = "FitTrackerApp"
+    @Volatile private var pendingLegacyStorageSnapshot = "{}"
 
     @SuppressLint("SetJavaScriptEnabled")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -56,7 +68,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         // Print KeyHash for Kakao Console Registration Verification
-        val keyHash = com.kakao.sdk.common.util.Utility.getKeyHash(this)
+        val keyHash = Utility.getKeyHash(this)
         Log.e(TAG, "========================================")
         Log.e(TAG, "★ CURRENT RUNTIME KAKAO KEY HASH: $keyHash")
         Log.e(TAG, "========================================")
@@ -96,7 +108,18 @@ class MainActivity : AppCompatActivity() {
             }
         })
 
-        webView.loadUrl(TARGET_URL)
+        startWebViewWithStorageMigration()
+    }
+
+    private fun startWebViewWithStorageMigration() {
+        val preferences = getSharedPreferences(MIGRATION_PREFERENCES, MODE_PRIVATE)
+        if (preferences.getBoolean(HTTPS_STORAGE_MIGRATION_KEY, false)) {
+            webView.loadUrl(TARGET_URL)
+            return
+        }
+
+        Log.i(TAG, "Starting one-time HTTP to HTTPS local storage migration")
+        webView.loadUrl(LEGACY_STORAGE_EXPORT_URL)
     }
 
     @SuppressLint("SetJavaScriptEnabled")
@@ -125,6 +148,16 @@ class MainActivity : AppCompatActivity() {
         }
 
         targetWebView.webViewClient = object : WebViewClient() {
+            override fun shouldInterceptRequest(
+                view: WebView?,
+                request: WebResourceRequest?
+            ): WebResourceResponse? {
+                if (!isPopup) {
+                    migrationResponseFor(request?.url?.toString())?.let { return it }
+                }
+                return super.shouldInterceptRequest(view, request)
+            }
+
             override fun shouldOverrideUrlLoading(view: WebView?, request: WebResourceRequest?): Boolean {
                 val url = request?.url?.toString() ?: return false
                 return handleUrlScheme(view, url)
@@ -138,6 +171,7 @@ class MainActivity : AppCompatActivity() {
 
             override fun onPageFinished(view: WebView?, url: String?) {
                 super.onPageFinished(view, url)
+                if (url == LEGACY_STORAGE_EXPORT_URL || url == SECURE_STORAGE_IMPORT_URL) return
                 // Inject bridge override to ensure kakaoLoginBtn directly triggers Android Native KakaoTalk App and renders user info
                 val js = """
                     (function() {
@@ -211,6 +245,143 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    private fun migrationResponseFor(url: String?): WebResourceResponse? {
+        val html = when (url) {
+            LEGACY_STORAGE_EXPORT_URL -> legacyStorageExportHtml()
+            SECURE_STORAGE_IMPORT_URL -> secureStorageImportHtml()
+            else -> return null
+        }
+
+        return WebResourceResponse(
+            "text/html",
+            "utf-8",
+            ByteArrayInputStream(html.toByteArray(StandardCharsets.UTF_8))
+        )
+    }
+
+    private fun legacyStorageExportHtml(): String = """
+        <!doctype html>
+        <html><head><meta charset="utf-8"></head><body><script>
+        (function() {
+            var snapshot = {};
+            try {
+                for (var i = 0; i < localStorage.length; i++) {
+                    var key = localStorage.key(i);
+                    if (key !== null) snapshot[key] = localStorage.getItem(key);
+                }
+            } catch (e) {}
+            AndroidBridge.onLegacyStorageExported(JSON.stringify(snapshot));
+        })();
+        </script></body></html>
+    """.trimIndent()
+
+    private fun secureStorageImportHtml(): String = """
+        <!doctype html>
+        <html><head><meta charset="utf-8"></head><body><script>
+        (function() {
+            function parseJson(raw, fallback) {
+                if (!raw) return fallback;
+                try { return JSON.parse(raw); } catch (e) { return fallback; }
+            }
+
+            function mergeWorkoutObject(target, source) {
+                if (!source || typeof source !== 'object' || Array.isArray(source)) return target;
+                Object.keys(source).forEach(function(dateKey) {
+                    var legacyExercises = source[dateKey];
+                    if (!Array.isArray(legacyExercises)) return;
+                    if (!Array.isArray(target[dateKey]) || target[dateKey].length === 0) {
+                        target[dateKey] = legacyExercises;
+                        return;
+                    }
+
+                    var existing = {};
+                    target[dateKey].forEach(function(exercise) {
+                        var identity = String((exercise && exercise.id) || '') + '|' +
+                            String((exercise && exercise.name) || '');
+                        existing[identity] = true;
+                    });
+                    legacyExercises.forEach(function(exercise) {
+                        var identity = String((exercise && exercise.id) || '') + '|' +
+                            String((exercise && exercise.name) || '');
+                        if (!existing[identity]) {
+                            target[dateKey].push(exercise);
+                            existing[identity] = true;
+                        }
+                    });
+                });
+                return target;
+            }
+
+            function mergeArrayByIdentity(target, source) {
+                if (!Array.isArray(target)) target = [];
+                if (!Array.isArray(source)) return target;
+                var existing = {};
+                target.forEach(function(item) {
+                    existing[String((item && item.id) || (item && item.name) || JSON.stringify(item))] = true;
+                });
+                source.forEach(function(item) {
+                    var identity = String((item && item.id) || (item && item.name) || JSON.stringify(item));
+                    if (!existing[identity]) {
+                        target.push(item);
+                        existing[identity] = true;
+                    }
+                });
+                return target;
+            }
+
+            var success = false;
+            var workoutDayCount = 0;
+            try {
+                var snapshot = parseJson(AndroidBridge.getPendingLegacyStorageSnapshot(), {});
+                var primaryKey = 'fit_tracker_workouts_v1';
+                var secureWorkouts = parseJson(localStorage.getItem(primaryKey), {});
+                secureWorkouts = mergeWorkoutObject(
+                    secureWorkouts,
+                    parseJson(snapshot[primaryKey], {})
+                );
+                secureWorkouts = mergeWorkoutObject(
+                    secureWorkouts,
+                    parseJson(snapshot.fit_tracker_workouts, {})
+                );
+                if (Object.keys(secureWorkouts).length > 0) {
+                    localStorage.setItem(primaryKey, JSON.stringify(secureWorkouts));
+                }
+                workoutDayCount = Object.keys(secureWorkouts).length;
+
+                var presetKey = 'fit_tracker_custom_presets_v1';
+                var securePresets = mergeArrayByIdentity(
+                    parseJson(localStorage.getItem(presetKey), []),
+                    parseJson(snapshot[presetKey], [])
+                );
+                if (securePresets.length > 0) {
+                    localStorage.setItem(presetKey, JSON.stringify(securePresets));
+                }
+
+                var deletedKey = 'fit_tracker_deleted_dates_v1';
+                var deletedDates = Array.from(new Set(
+                    parseJson(localStorage.getItem(deletedKey), [])
+                        .concat(parseJson(snapshot[deletedKey], []))
+                ));
+                if (deletedDates.length > 0) {
+                    localStorage.setItem(deletedKey, JSON.stringify(deletedDates));
+                }
+
+                Object.keys(snapshot).forEach(function(key) {
+                    if (key === primaryKey || key === 'fit_tracker_workouts' ||
+                        key === presetKey || key === deletedKey) return;
+                    if (localStorage.getItem(key) === null && snapshot[key] !== null) {
+                        localStorage.setItem(key, snapshot[key]);
+                    }
+                });
+                success = true;
+            } catch (e) {
+                success = false;
+            }
+            AndroidBridge.onLegacyStorageImported(success, workoutDayCount);
+        })();
+        </script></body></html>
+    """.trimIndent()
+
     private var isLoggingIn = false
 
     /**
@@ -219,6 +390,52 @@ class MainActivity : AppCompatActivity() {
     inner class AndroidBridge {
         @JavascriptInterface
         fun isAndroidApp(): Boolean = true
+
+        @JavascriptInterface
+        fun onLegacyStorageExported(snapshot: String) {
+            val validatedSnapshot = try {
+                JSONObject(snapshot)
+                snapshot
+            } catch (_: Exception) {
+                "{}"
+            }
+
+            pendingLegacyStorageSnapshot = validatedSnapshot
+            getSharedPreferences(MIGRATION_PREFERENCES, MODE_PRIVATE)
+                .edit()
+                .putString(LEGACY_STORAGE_BACKUP_KEY, validatedSnapshot)
+                .apply()
+            Log.i(TAG, "Exported ${JSONObject(validatedSnapshot).length()} legacy storage entries")
+
+            runOnUiThread {
+                webView.loadUrl(SECURE_STORAGE_IMPORT_URL)
+            }
+        }
+
+        @JavascriptInterface
+        fun getPendingLegacyStorageSnapshot(): String {
+            if (pendingLegacyStorageSnapshot != "{}") return pendingLegacyStorageSnapshot
+            return getSharedPreferences(MIGRATION_PREFERENCES, MODE_PRIVATE)
+                .getString(LEGACY_STORAGE_BACKUP_KEY, "{}") ?: "{}"
+        }
+
+        @JavascriptInterface
+        fun onLegacyStorageImported(success: Boolean, workoutDayCount: Int) {
+            if (success) {
+                getSharedPreferences(MIGRATION_PREFERENCES, MODE_PRIVATE)
+                    .edit()
+                    .putBoolean(HTTPS_STORAGE_MIGRATION_KEY, true)
+                    .apply()
+                Log.i(TAG, "HTTP to HTTPS local storage migration completed ($workoutDayCount workout days)")
+            } else {
+                Log.w(TAG, "HTTP to HTTPS local storage migration failed; it will retry next launch")
+            }
+            pendingLegacyStorageSnapshot = "{}"
+
+            runOnUiThread {
+                webView.loadUrl(TARGET_URL)
+            }
+        }
 
         @JavascriptInterface
         fun loginWithKakao() {
@@ -253,11 +470,10 @@ class MainActivity : AppCompatActivity() {
             isLoggingIn = false
             if (error != null) {
                 Log.e(TAG, "Kakao Login failed", error)
-                val msg = error.message ?: "카카오 로그인 실패"
-                sendKakaoLoginResult(false, null, msg)
+                sendKakaoLoginResult(false, null, kakaoLoginErrorMessage(error))
             } else if (token != null) {
-                Log.i(TAG, "Kakao Login success with token: ${token.accessToken}")
-                fetchKakaoUserProfile(token.accessToken)
+                Log.i(TAG, "Kakao Account login success")
+                fetchKakaoUserProfile()
             }
         }
 
@@ -267,13 +483,29 @@ class MainActivity : AppCompatActivity() {
             UserApiClient.instance.loginWithKakaoTalk(this) { token, error ->
                 if (error != null) {
                     Log.e(TAG, "KakaoTalk login failed/closed: ${error.javaClass.simpleName} -> ${error.message}", error)
-                    // If KakaoTalk app fails or closes unexpectedly, fallback to Kakao Account login
+
+                    // A user cancellation must not unexpectedly open the browser.
+                    if (error is ClientError && error.reason == ClientErrorCause.Cancelled) {
+                        isLoggingIn = false
+                        return@loginWithKakaoTalk
+                    }
+
+                    // Platform configuration errors affect both login methods. Opening Chrome here
+                    // only hides the real cause and makes the app appear to ignore KakaoTalk.
+                    if (isKakaoPlatformConfigurationError(error)) {
+                        isLoggingIn = false
+                        sendKakaoLoginResult(false, null, kakaoLoginErrorMessage(error))
+                        return@loginWithKakaoTalk
+                    }
+
+                    // KakaoTalk is installed but has no usable Kakao account, so use the
+                    // Kakao Account browser flow as recommended by Kakao.
                     Log.i(TAG, "Falling back to loginWithKakaoAccount (browser/web)...")
                     UserApiClient.instance.loginWithKakaoAccount(this, callback = callback)
                 } else if (token != null) {
                     isLoggingIn = false
-                    Log.i(TAG, "KakaoTalk login success! Fetching profile...")
-                    fetchKakaoUserProfile(token.accessToken)
+                    Log.i(TAG, "KakaoTalk login success; fetching profile")
+                    fetchKakaoUserProfile()
                 }
             }
         } else {
@@ -283,10 +515,33 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    private fun isKakaoPlatformConfigurationError(error: Throwable): Boolean {
+        if (error is AuthError &&
+            (error.reason == AuthErrorCause.Misconfigured || error.reason == AuthErrorCause.InvalidClient)
+        ) {
+            return true
+        }
+
+        val message = error.message.orEmpty().lowercase()
+        return message.contains("keyhash validation failed") ||
+            message.contains("key hash validation failed") ||
+            message.contains("android_key_hash") ||
+            message.contains("koe009")
+    }
+
+    private fun kakaoLoginErrorMessage(error: Throwable): String {
+        if (isKakaoPlatformConfigurationError(error)) {
+            val keyHash = Utility.getKeyHash(this)
+            return "카카오 앱 설정 오류입니다. Kakao Developers의 네이티브 앱 키에 " +
+                "Android 패키지명 $packageName 과 현재 앱 키 해시 $keyHash 를 등록해 주세요."
+        }
+        return error.message ?: "카카오 로그인에 실패했습니다."
+    }
+
     /**
      * Request Kakao User Profile and pass back to WebView
      */
-    private fun fetchKakaoUserProfile(accessToken: String) {
+    private fun fetchKakaoUserProfile() {
         UserApiClient.instance.me { user, error ->
             if (error != null) {
                 Log.e(TAG, "Failed to get Kakao user profile", error)
@@ -307,7 +562,6 @@ class MainActivity : AppCompatActivity() {
                     put("nickname", nickname)
                     put("email", email)
                     put("profileImage", profileImage)
-                    put("accessToken", accessToken)
                 }
 
                 sendKakaoLoginResult(true, jsonObj.toString(), null)
@@ -322,7 +576,7 @@ class MainActivity : AppCompatActivity() {
         runOnUiThread {
             isLoggingIn = false
             if (success && jsonData != null) {
-                Log.i(TAG, "Executing login success script in WebView: $jsonData")
+                Log.i(TAG, "Sending Kakao login success to WebView")
                 val script = """
                     (function() {
                         try {
@@ -575,5 +829,3 @@ class MainActivity : AppCompatActivity() {
         resultMsg?.sendToTarget()
     }
 }
-
-

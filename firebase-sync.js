@@ -7,6 +7,8 @@ let currentKakaoUser = null;
 let cloudSyncTimeout = null;
 let adminSyncTimeout = null;
 let lastSyncTimestamp = null;
+const adminReadyKakaoIds = new Set();
+const adminPullPromises = new Map();
 
 // Get or initialize unique visitor ID in LocalStorage
 function getOrInitVisitorId() {
@@ -66,6 +68,19 @@ window.syncWorkoutsToAdminServer = function syncWorkoutsToAdminServer(extraData 
     }
 
     const vid = getOrInitVisitorId();
+    const kakaoId = String((extraData && extraData.kakaoId) || (savedKakao && savedKakao.kakaoId) || '').trim();
+
+    // A Kakao account must pull first so an older PC snapshot cannot overwrite
+    // newer workouts that were recorded on a phone.
+    if (kakaoId && !adminReadyKakaoIds.has(kakaoId)) {
+      window.pullWorkoutsFromAdminServer({ ...(savedKakao || {}), ...extraData }).then((pulled) => {
+        if (pulled) {
+          window.syncWorkoutsToAdminServer(extraData, showNotice);
+        }
+      });
+      return;
+    }
+
     const currentWorkouts = (typeof state !== 'undefined' && state.workouts) ? state.workouts : {};
     const currentPresets = (typeof state !== 'undefined' && state.customPresets) ? state.customPresets : [];
 
@@ -92,6 +107,9 @@ window.syncWorkoutsToAdminServer = function syncWorkoutsToAdminServer(extraData 
       credentials: 'include'
     }).then(res => res.json()).then(data => {
       if (data.success) {
+        if (data.workouts && typeof window.mergeAdminWorkoutsIntoLocalState === 'function') {
+          window.mergeAdminWorkoutsIntoLocalState(data.workouts, { cloudWins: false });
+        }
         lastSyncTimestamp = Date.now();
         updateSyncTimestampDisplay();
         console.log('✅ [Admin Sync] Successfully synchronized with Admin DB:', data.user);
@@ -124,6 +142,106 @@ window.syncWorkoutsToAdminServer = function syncWorkoutsToAdminServer(extraData 
       } catch (e) {}
     }
   }, 250);
+};
+
+function getSavedKakaoUser(fallback = {}) {
+  if (fallback && fallback.kakaoId) return fallback;
+  if (currentKakaoUser && currentKakaoUser.kakaoId) return currentKakaoUser;
+
+  try {
+    const raw = localStorage.getItem('fit_tracker_kakao_user');
+    const parsed = raw ? JSON.parse(raw) : null;
+    return parsed && parsed.kakaoId ? parsed : null;
+  } catch (e) {
+    return null;
+  }
+}
+
+window.mergeAdminWorkoutsIntoLocalState = function mergeAdminWorkoutsIntoLocalState(cloudWorkouts, options = {}) {
+  if (typeof state === 'undefined' || !cloudWorkouts || typeof cloudWorkouts !== 'object' || Array.isArray(cloudWorkouts)) {
+    return false;
+  }
+
+  const cloudWins = options.cloudWins !== false;
+  const deletedDates = new Set(Array.isArray(state.deletedDates) ? state.deletedDates : []);
+  const mergedWorkouts = JSON.parse(JSON.stringify(state.workouts || {}));
+  let hasChanges = false;
+
+  Object.entries(cloudWorkouts).forEach(([dateStr, exercises]) => {
+    if (!Array.isArray(exercises) || deletedDates.has(dateStr)) return;
+    if (!cloudWins && Array.isArray(mergedWorkouts[dateStr])) return;
+
+    const normalizedExercises = JSON.parse(JSON.stringify(exercises));
+    if (JSON.stringify(mergedWorkouts[dateStr] || null) !== JSON.stringify(normalizedExercises)) {
+      mergedWorkouts[dateStr] = normalizedExercises;
+      hasChanges = true;
+    }
+  });
+
+  if (!hasChanges) return false;
+
+  state.workouts = mergedWorkouts;
+  localStorage.setItem('fit_tracker_workouts_v1', JSON.stringify(state.workouts));
+  if (typeof updateUI === 'function') updateUI();
+  return true;
+};
+
+window.pullWorkoutsFromAdminServer = function pullWorkoutsFromAdminServer(extraData = {}, options = {}) {
+  const savedKakao = getSavedKakaoUser(extraData);
+  const kakaoId = String(savedKakao?.kakaoId || '').trim();
+  if (!kakaoId) return Promise.resolve(false);
+
+  if (adminPullPromises.has(kakaoId)) {
+    return adminPullPromises.get(kakaoId);
+  }
+
+  const query = new URLSearchParams({ kakaoId });
+  const visitorId = getOrInitVisitorId();
+  if (visitorId) query.set('visitorId', visitorId);
+
+  const request = fetch(`https://admin.brightnetworks.kr/api/gym/sync?${query.toString()}`, {
+    method: 'GET',
+    credentials: 'include'
+  }).then(async (response) => {
+    if (!response.ok) {
+      throw new Error(`Admin sync pull failed with status ${response.status}`);
+    }
+
+    const data = await response.json();
+    if (!data.success) {
+      throw new Error(data.error || 'Admin sync pull failed');
+    }
+
+    window.mergeAdminWorkoutsIntoLocalState(data.workouts || {}, {
+      cloudWins: options.cloudWins !== false
+    });
+    adminReadyKakaoIds.add(kakaoId);
+    lastSyncTimestamp = Date.now();
+    updateSyncTimestampDisplay();
+    console.log(`✅ [Admin Sync] Pulled workouts for KakaoID ${kakaoId}`);
+    return true;
+  }).catch((error) => {
+    console.warn('❌ [Admin Sync] Admin server pull failed:', error);
+    return false;
+  }).finally(() => {
+    adminPullPromises.delete(kakaoId);
+  });
+
+  adminPullPromises.set(kakaoId, request);
+  return request;
+};
+
+window.refreshWorkoutsFromAdminServer = function refreshWorkoutsFromAdminServer(extraData = {}) {
+  const savedKakao = getSavedKakaoUser(extraData);
+  if (!savedKakao?.kakaoId) {
+    window.syncWorkoutsToAdminServer(extraData);
+    return Promise.resolve(false);
+  }
+
+  return window.pullWorkoutsFromAdminServer(savedKakao, { cloudWins: true }).then((pulled) => {
+    if (pulled) window.syncWorkoutsToAdminServer(savedKakao);
+    return pulled;
+  });
 };
 
 // Initialize Kakao SDK immediately
@@ -274,6 +392,8 @@ window.signOutUser = function signOutUser() {
     firebase.auth().signOut().catch(() => {});
   }
   localStorage.removeItem('fit_tracker_kakao_user');
+  adminReadyKakaoIds.clear();
+  adminPullPromises.clear();
   currentKakaoUser = null;
   currentUser = null;
   updateAuthUIState(null);
@@ -334,11 +454,14 @@ window.deleteAccountAndData = function deleteAccountAndData() {
   localStorage.removeItem('fit_tracker_workouts_v1');
   localStorage.removeItem('fit_tracker_workouts');
   localStorage.removeItem('fit_tracker_custom_presets_v1');
+  localStorage.removeItem('fit_tracker_deleted_dates_v1');
   localStorage.removeItem('fit_tracker_kakao_user');
 
   currentKakaoUser = null;
   currentUser = null;
   lastSyncTimestamp = null;
+  adminReadyKakaoIds.clear();
+  adminPullPromises.clear();
 
   if (typeof saveState === 'function') saveState();
   if (typeof updateUI === 'function') updateUI();
@@ -402,13 +525,13 @@ function initFirebaseSync() {
 
   // Trigger sync on online/visibility change events
   window.addEventListener('online', () => {
-    console.log('🌐 Network online detected. Triggering Admin sync...');
-    window.syncWorkoutsToAdminServer(currentKakaoUser || {});
+    console.log('🌐 Network online detected. Refreshing Admin sync...');
+    window.refreshWorkoutsFromAdminServer(currentKakaoUser || {});
   });
 
   document.addEventListener('visibilitychange', () => {
     if (!document.hidden) {
-      window.syncWorkoutsToAdminServer(currentKakaoUser || {});
+      window.refreshWorkoutsFromAdminServer(currentKakaoUser || {});
     }
   });
 }
