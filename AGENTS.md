@@ -1,5 +1,12 @@
 # FitTracker Pro 운영 정보
 
+## 커뮤니티 구현 기준
+
+- 커뮤니티의 최신 기획은 [AGENT.md](./AGENT.md)의 오운완·오운왕 설계다.
+- 기존 ‘입장 시 최근 30일 운동 공유 필수’ 기획 대신, 오늘 운동 전체 완료 후 수동 공유 또는 명시적으로 선택한 자동 공유를 기준으로 구현한다.
+- 닉네임 추천 샘플 1,000개는 `planning/ouwan-nicknames.json`에 있다.
+- 기획 문서와 `planning/` 디렉터리 전체를 공개 자산으로 배포하지 않는다.
+
 ## 운영 사이트
 
 - 운영 URL: `https://gym.brightnetworks.kr/`

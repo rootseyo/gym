@@ -1,0 +1,226 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="robots" content="index, follow">
+  <meta name="description" content="FitTracker 오운완 - 오늘 운동 완료 인증과 꾸준한 운동 습관을 서로 응원하는 피트니스 커뮤니티">
+  <meta name="theme-color" content="#0b0f17">
+  <title>오운완 · FitTracker</title>
+  <link rel="canonical" href="https://gym.brightnetworks.kr/community">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="오늘도, 오운완! · FitTracker">
+  <meta property="og:description" content="오늘의 노력을 남기고 서로의 꾸준함을 응원해요. FitTracker 오운완 커뮤니티">
+  <meta property="og:url" content="https://gym.brightnetworks.kr/community">
+  <meta property="og:image" content="https://gym.brightnetworks.kr/og-fittracker.png">
+  <link rel="icon" href="favicon.svg">
+  <link rel="stylesheet" href="community.css">
+  <script defer src="kakao.min.js"></script>
+  <script defer src="ouwan-core.js"></script>
+  <script defer src="routine-code.js"></script>
+  <script defer src="community-auth.js"></script>
+  <script defer src="community.js"></script>
+</head>
+<body>
+<main class="community-shell">
+  <header>
+    <a class="back" href="/">← 내 운동</a>
+    <span class="brand">FitTracker</span>
+    <button id="refreshBtn">새로고침</button>
+  </header>
+
+  <section class="hero">
+    <p class="eyebrow">ONE MORE DAY. ONE MORE WIN.</p>
+    <h1>오늘도, 오운완!</h1>
+    <p>오늘의 노력을 남기고, 서로의 꾸준함을 응원해요.</p>
+  </section>
+
+  <p id="message" role="status" aria-live="polite"></p>
+
+  <section id="loginPanel" class="panel" hidden>
+    <h2>나의 이름으로 함께 시작</h2>
+    <p>카카오 로그인 후 닉네임을 정하면 입장할 수 있어요. 운동은 직접 공유하거나 자동 공유를 선택한 경우에만 공개됩니다.</p>
+    <button id="loginBtn" class="primary">카카오 로그인 확인</button>
+    <p class="muted">앱에서 로그인 확인이 지원되지 않으면 앱을 업데이트해 주세요.</p>
+  </section>
+
+  <section id="profilePanel" class="panel" hidden>
+    <p class="eyebrow">NICE TO MEET YOU</p>
+    <h2>어떤 이름으로 함께할까요?</h2>
+    <p>닉네임을 미리 골라봤어요. 그대로 사용하거나 바꿔도 좋아요.<br>카카오 이름은 공개되지 않습니다.</p>
+    <label for="nickname">오운완 닉네임</label>
+    <div class="nickname-row">
+      <input id="nickname" maxlength="20" minlength="2" autocomplete="off">
+      <button id="rerollBtn">다른 닉네임</button>
+    </div>
+    <small>2~20자 · 한글, 영문, 숫자, 공백, 밑줄, 하이픈</small>
+    <div class="actions">
+      <a class="button" href="/">내 운동으로</a>
+      <button id="profileBtn" class="primary">이 닉네임으로 시작</button>
+    </div>
+  </section>
+
+  <section id="boardPanel" hidden>
+    <div class="sharing-bar">
+      <div class="profile-row">
+        <span id="myAvatar" class="profile-avatar"></span>
+        <strong id="myNickname" class="profile-nickname"></strong>
+        <span id="myLevel" class="profile-level"></span>
+        <span id="autoBadge" class="auto-badge"></span>
+      </div>
+      <button id="settingsBtn" class="settings-btn">내 설정</button>
+    </div>
+
+    <p id="todayStatus" class="today-status"></p>
+
+    <nav class="community-tabs" aria-label="커뮤니티">
+      <button data-tab="feed" aria-pressed="true">오운완 피드</button>
+      <button data-tab="days" aria-pressed="false">🏆 오운왕</button>
+      <button data-tab="likes" aria-pressed="false"><span class="tab-heart">❤️</span> 좋아요왕</button>
+    </nav>
+
+    <div id="feedPanel">
+      <div class="list-heading">
+        <h2>오늘의 노력, 함께 응원해요</h2>
+        <span>최근 운동순 · 공유한 기록만 공개</span>
+      </div>
+      <div id="feed" class="feed"></div>
+      <p id="emptyFeed" class="empty" hidden>아직 오운완이 없어요. 첫 인증을 남겨보세요!</p>
+      <button id="moreBtn" class="more" hidden>더 보기</button>
+    </div>
+
+    <div id="rankingPanel" hidden>
+      <div class="list-heading">
+        <h2 id="rankingTitle">오운왕</h2>
+        <label for="periodSelect" class="sr-only">랭킹 기간</label>
+        <select id="periodSelect">
+          <option value="week">이번 주</option>
+          <option value="month">이번 달</option>
+          <option value="all">전체</option>
+        </select>
+      </div>
+      <p id="rankingDescription" class="muted"></p>
+      <p id="myRank" class="my-rank"></p>
+      <div id="rankingList" class="ranking-list"></div>
+      <button id="rankingMore" class="more" hidden>순위 더 보기</button>
+    </div>
+  </section>
+
+  <footer>오운완은 하루 한 번의 완료 인증이에요. 좋아요로 서로를 응원해요.<br>공유한 운동의 중량은 내 수준에 맞게 조절하세요.</footer>
+</main>
+
+<dialog id="detailDialog">
+  <div class="dialog-head">
+    <h2 id="detailTitle">오운완 상세</h2>
+    <button data-close="detailDialog" aria-label="상세 닫기">✕</button>
+  </div>
+  <p id="detailMeta" class="detail-meta"></p>
+
+  <img id="detailPhoto" class="post-photo detail-photo" alt="첨부한 운동 사진" hidden>
+
+  <div id="photoActions" class="photo-actions" hidden>
+    <label class="button photo-upload" for="photoInput">📷 사진 첨부
+      <input id="photoInput" type="file" accept="image/jpeg,image/png,image/webp" hidden>
+    </label>
+    <button id="removePhotoBtn" class="danger" hidden>삭제</button>
+  </div>
+  <p id="photoHelp" class="muted" hidden>내 게시물에 사진 1장을 첨부할 수 있어요. 위치 등 사진 메타데이터는 제거됩니다.</p>
+
+  <!-- 타이트한 한 줄 액션 버튼 (하트, 코드 복사, 인스타 공유) -->
+  <div class="card-actions detail-actions">
+    <button id="detailLike" class="like-button"></button>
+    <button id="detailCode">코드 복사</button>
+    <button id="detailInstagram">인스타 공유</button>
+  </div>
+
+  <!-- 운동 총 볼륨 성장 그래프 섹션 (날짜 기준 x축) -->
+  <section class="detail-chart-box">
+    <div class="detail-chart-head">
+      <div class="detail-chart-title">
+        <span class="chart-icon">📈</span>
+        <strong>운동 총 볼륨 성장</strong>
+      </div>
+      <span id="detailChartTotal" class="chart-total-badge"></span>
+    </div>
+    <div class="detail-canvas-container">
+      <canvas id="detailVolumeCanvas"></canvas>
+    </div>
+    <p id="detailChartHint" class="detail-chart-hint">날짜 포인트를 터치하면 볼륨을 확인할 수 있어요</p>
+  </section>
+
+  <!-- 운동 종목 리스트 헤더 (줄바꿈 없이 심플하게) -->
+  <div class="exercise-list-head">
+    <h3>운동 종목 (<span id="detailExerciseCount">0</span>)</h3>
+    <span class="muted exercise-list-sub">가져올 종목 선택</span>
+  </div>
+  <div id="detailExercises" class="detail-exercise-list"></div>
+
+  <div class="import-section">
+    <label for="importDate">가져올 날짜</label>
+    <input id="importDate" type="date" required>
+    <p class="muted">내 운동에 추가하며 같은 이름의 종목은 건너뜁니다. 완료 상태는 초기화됩니다.</p>
+  </div>
+
+  <div class="actions detail-footer-actions">
+    <button id="reportBtn">신고</button>
+    <button id="deletePostBtn" class="danger" hidden>공유 삭제</button>
+    <button id="importBtn" class="primary">가져오기</button>
+  </div>
+  <p id="detailMessage" role="status"></p>
+</dialog>
+
+<dialog id="settingsDialog">
+  <div class="dialog-head">
+    <h2>내 오운완 설정</h2>
+    <button data-close="settingsDialog" aria-label="설정 닫기">✕</button>
+  </div>
+  <label for="settingsNickname">닉네임</label>
+  <input id="settingsNickname" maxlength="20">
+  <button id="saveNicknameBtn">닉네임 저장</button>
+  <hr>
+  <h3>헬스 레벨</h3>
+  <p class="muted">현재 운동 경험에 맞는 레벨을 선택하세요. 프로필과 게시물에 표시됩니다.</p>
+  <label for="fitnessLevel" class="sr-only">헬스 레벨</label>
+  <select id="fitnessLevel">
+    <option value="BEGINNER">🌱 헬스 초보</option>
+    <option value="INTERMEDIATE">🔥 헬스 중수</option>
+    <option value="ADVANCED">🏆 헬스 고수</option>
+  </select>
+  <hr>
+  <h3>오운완 자동 공유</h3>
+  <p>오늘 운동의 모든 세트를 완료하면 닉네임, 날짜, 운동 항목, 세트별 중량·횟수/시간과 설정 휴식 시간을 자동으로 공개합니다.</p>
+  <label class="check">
+    <input type="checkbox" id="autoShareSetting"> 다음부터 오운완 자동 공유하기
+  </label>
+  <p class="muted">끄면 앞으로의 자동 공유와 대기 요청만 취소합니다. 기존 게시물은 유지됩니다. 다른 회원이 복사한 운동 코드는 회수되지 않습니다.</p>
+  <button id="saveSettingsBtn" class="primary">설정 저장</button>
+  <p id="settingsMessage" role="status"></p>
+</dialog>
+
+<dialog id="reportDialog">
+  <div class="dialog-head">
+    <h2>신고하고 숨기기</h2>
+    <button data-close="reportDialog" aria-label="신고 닫기">✕</button>
+  </div>
+  <p>이 게시물은 내 피드에서 숨겨지고 관리자가 확인합니다.</p>
+  <label for="reportReason">신고 사유</label>
+  <select id="reportReason">
+    <option>부적절한 이름</option>
+    <option>스팸 또는 허위 기록</option>
+    <option>기타</option>
+  </select>
+  <button id="submitReportBtn" class="danger">신고하고 숨기기</button>
+  <p id="reportMessage" role="status"></p>
+</dialog>
+
+<dialog id="codeDialog">
+  <div class="dialog-head">
+    <h2>운동 코드 복사</h2>
+    <button data-close="codeDialog" aria-label="코드 닫기">✕</button>
+  </div>
+  <p>자동 복사를 사용할 수 없어 코드를 표시했어요. 전체 선택 후 복사해 주세요.</p>
+  <label for="copyCodeText" class="sr-only">운동 코드</label>
+  <textarea id="copyCodeText" rows="8" readonly></textarea>
+</dialog>
+</body>
+</html>

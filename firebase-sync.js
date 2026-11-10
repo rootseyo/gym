@@ -49,99 +49,69 @@ window.searchAndCollectAllLocalWorkouts = function searchAndCollectAllLocalWorko
   return { workouts: mergedWorkouts, customPresets: mergedPresets };
 };
 
-// Global Admin Sync Helper
-window.syncWorkoutsToAdminServer = function syncWorkoutsToAdminServer(extraData = {}, showNotice = false) {
-  if (adminSyncTimeout) clearTimeout(adminSyncTimeout);
-
-  adminSyncTimeout = setTimeout(() => {
-    let savedKakao = currentKakaoUser;
-    if (!savedKakao || !savedKakao.kakaoId) {
-      try {
-        const raw = localStorage.getItem('fit_tracker_kakao_user');
-        if (raw) {
-          savedKakao = JSON.parse(raw);
-          if (savedKakao && savedKakao.kakaoId) {
-            currentKakaoUser = savedKakao;
-          }
-        }
-      } catch (e) {}
+// Dirty dates represent actual workout edits, not collapsed cards or timer preferences.
+function gymWorkoutSignature(exercises) {
+  return JSON.stringify((exercises || []).map(ex => {
+    const { collapsed, ...content } = ex;
+    return content;
+  }));
+}
+function gymDirtyKey() { return 'fit_tracker_dirty_dates_' + (getSavedKakaoUser()?.kakaoId || 'guest'); }
+function getGymDirtyDates() {
+  try { return JSON.parse(localStorage.getItem(gymDirtyKey()) || '{}'); } catch { return {}; }
+}
+window.markGymWorkoutChanges = function(previous, next) {
+  const dirty = getGymDirtyDates();
+  new Set([...Object.keys(previous || {}), ...Object.keys(next || {})]).forEach(date => {
+    if (gymWorkoutSignature(previous?.[date]) !== gymWorkoutSignature(next?.[date])) dirty[date] = true;
+  });
+  localStorage.setItem(gymDirtyKey(), JSON.stringify(dirty));
+};
+let gymSyncQueue = Promise.resolve();
+window.flushGymSync = function(extraData = {}, showNotice = false) {
+  if (adminSyncTimeout) { clearTimeout(adminSyncTimeout); adminSyncTimeout = null; }
+  const expectedId = String(getSavedKakaoUser(extraData)?.kakaoId || '');
+  const run = async () => {
+    const user = getSavedKakaoUser(extraData);
+    if (String(getSavedKakaoUser()?.kakaoId || '') !== expectedId) throw new Error('로그인 계정이 변경되었습니다.');
+    if (expectedId && !adminReadyKakaoIds.has(expectedId)) {
+      if (!await window.pullWorkoutsFromAdminServer(user)) throw new Error('서버 기록을 먼저 불러오지 못했습니다.');
     }
-
-    const vid = getOrInitVisitorId();
-    const kakaoId = String((extraData && extraData.kakaoId) || (savedKakao && savedKakao.kakaoId) || '').trim();
-
-    // A Kakao account must pull first so an older PC snapshot cannot overwrite
-    // newer workouts that were recorded on a phone.
-    if (kakaoId && !adminReadyKakaoIds.has(kakaoId)) {
-      window.pullWorkoutsFromAdminServer({ ...(savedKakao || {}), ...extraData }).then((pulled) => {
-        if (pulled) {
-          window.syncWorkoutsToAdminServer(extraData, showNotice);
-        }
-      });
-      return;
-    }
-
-    const currentWorkouts = (typeof state !== 'undefined' && state.workouts) ? state.workouts : {};
-    const currentPresets = (typeof state !== 'undefined' && state.customPresets) ? state.customPresets : [];
-
-    const adminEndpoint = 'https://admin.brightnetworks.kr/api/gym/sync';
-    const payload = {
-      visitorId: vid,
-      workouts: currentWorkouts,
-      customPresets: currentPresets,
-      deletedDates: (typeof state !== 'undefined' && state.deletedDates) ? state.deletedDates : [],
-      kakaoId: (extraData && extraData.kakaoId) || (savedKakao && savedKakao.kakaoId) || null,
-      nickname: (extraData && extraData.nickname) || (savedKakao && savedKakao.nickname) || null,
-      email: (extraData && extraData.email) || (savedKakao && savedKakao.email) || null,
-      profileImage: (extraData && extraData.profileImage) || (savedKakao && savedKakao.profileImage) || null,
-      ...(savedKakao || {}),
-      ...extraData
-    };
-
-    console.log(`📤 [Admin Sync] Syncing workouts to Admin (KakaoID: ${payload.kakaoId || 'Guest'}, WorkoutDays: ${Object.keys(payload.workouts).length})`);
-
-    fetch(adminEndpoint, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(payload),
-      credentials: 'include'
-    }).then(res => res.json()).then(data => {
-      if (data.success) {
-        if (data.workouts && typeof window.mergeAdminWorkoutsIntoLocalState === 'function') {
-          window.mergeAdminWorkoutsIntoLocalState(data.workouts, { cloudWins: false });
-        }
-        lastSyncTimestamp = Date.now();
-        updateSyncTimestampDisplay();
-        console.log('✅ [Admin Sync] Successfully synchronized with Admin DB:', data.user);
-
-        if (showNotice) {
-          const workoutDays = Object.keys(currentWorkouts).length;
-          alert(`🎉 ${data.user?.nickname || savedKakao?.nickname || '카카오 사용자'}님 환영합니다!\n운동 기록(총 ${workoutDays}일치)이 Admin 서버(식별번호: ${data.user?.kakaoId || savedKakao?.kakaoId || '-'})에 안전하게 동기화되었습니다.`);
-        }
-      } else {
-        console.warn('⚠️ [Admin Sync] Admin server responded with error:', data);
-      }
-    }).catch(err => {
-      console.warn('❌ [Admin Sync] Admin server sync request failed:', err);
+    if (window.GymAuth && expectedId) { try { await GymAuth.ensure(null, expectedId); } catch { /* Legacy accounts remain supported by the server. */ } }
+    if (String(getSavedKakaoUser()?.kakaoId || '') !== expectedId) throw new Error('로그인 계정이 변경되었습니다.');
+    const workouts = typeof state !== 'undefined' ? structuredClone(state.workouts || {}) : {};
+    const dirty = getGymDirtyDates(), dirtyKey = gymDirtyKey();
+    const payload = { ...(user || {}), ...extraData, kakaoId: expectedId || null, visitorId: getOrInitVisitorId(), workouts,
+      customPresets: typeof state !== 'undefined' ? state.customPresets : [],
+      deletedDates: typeof state !== 'undefined' ? state.deletedDates || [] : [] };
+    const response = await (window.GymAuth ? GymAuth.syncFetch : fetch)('https://admin.brightnetworks.kr/api/gym/sync', {
+      method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload), credentials: 'include'
     });
-
-    // Send analytics login/sync ping
-    if (payload.kakaoId) {
-      try {
-        fetch('https://admin.brightnetworks.kr/api/analytics/collect', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            siteId: 'gym-app',
-            path: '/kakao-sync',
-            visitorId: vid,
-            userAgent: navigator.userAgent,
-            screenWidth: window.innerWidth
-          })
-        }).catch(() => {});
-      } catch (e) {}
-    }
-  }, 250);
+    const data = await response.json();
+    if (!response.ok || !data.success) throw new Error(data.error || '운동 동기화에 실패했습니다.');
+    if (String(getSavedKakaoUser()?.kakaoId || '') !== expectedId) throw new Error('로그인 계정이 변경되었습니다.');
+    const remaining = getGymDirtyDates();
+    Object.keys(dirty).forEach(date => {
+      if (gymWorkoutSignature(workouts[date]) === gymWorkoutSignature(state.workouts[date])) delete remaining[date];
+    });
+    localStorage.setItem(dirtyKey, JSON.stringify(remaining));
+    if (data.workouts) window.mergeAdminWorkoutsIntoLocalState(data.workouts, { cloudWins: false });
+    lastSyncTimestamp = Date.now(); updateSyncTimestampDisplay();
+    window.dispatchEvent(new CustomEvent('gym-synced', { detail: { kakaoId: expectedId } }));
+    if (showNotice) alert('운동 기록을 동기화했습니다.');
+    if (expectedId) fetch('https://admin.brightnetworks.kr/api/analytics/collect', {
+      method: 'POST', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ siteId: 'gym-app', path: '/kakao-sync', visitorId: payload.visitorId, userAgent: navigator.userAgent, screenWidth: window.innerWidth })
+    }).catch(() => {});
+    return data;
+  };
+  const result = gymSyncQueue.then(run, run);
+  gymSyncQueue = result.catch(() => {});
+  return result;
+};
+window.syncWorkoutsToAdminServer = function(extraData = {}, showNotice = false) {
+  if (adminSyncTimeout) clearTimeout(adminSyncTimeout);
+  adminSyncTimeout = setTimeout(() => window.flushGymSync(extraData, showNotice).catch(error => console.warn('Gym sync:', error.message)), 250);
 };
 
 function getSavedKakaoUser(fallback = {}) {
@@ -165,11 +135,12 @@ window.mergeAdminWorkoutsIntoLocalState = function mergeAdminWorkoutsIntoLocalSt
   const cloudWins = options.cloudWins !== false;
   const deletedDates = new Set(Array.isArray(state.deletedDates) ? state.deletedDates : []);
   const mergedWorkouts = JSON.parse(JSON.stringify(state.workouts || {}));
+  const dirtyDates = getGymDirtyDates();
   let hasChanges = false;
 
   Object.entries(cloudWorkouts).forEach(([dateStr, exercises]) => {
     if (!Array.isArray(exercises) || deletedDates.has(dateStr)) return;
-    if (!cloudWins && Array.isArray(mergedWorkouts[dateStr])) return;
+    if (dirtyDates[dateStr] || (!cloudWins && Array.isArray(mergedWorkouts[dateStr]))) return;
 
     const normalizedExercises = JSON.parse(JSON.stringify(exercises));
     if (JSON.stringify(mergedWorkouts[dateStr] || null) !== JSON.stringify(normalizedExercises)) {
@@ -199,7 +170,7 @@ window.pullWorkoutsFromAdminServer = function pullWorkoutsFromAdminServer(extraD
   const visitorId = getOrInitVisitorId();
   if (visitorId) query.set('visitorId', visitorId);
 
-  const request = fetch(`https://admin.brightnetworks.kr/api/gym/sync?${query.toString()}`, {
+  const request = (window.GymAuth ? GymAuth.syncFetch : fetch)(`https://admin.brightnetworks.kr/api/gym/sync?${query.toString()}`, {
     method: 'GET',
     credentials: 'include'
   }).then(async (response) => {
@@ -212,6 +183,7 @@ window.pullWorkoutsFromAdminServer = function pullWorkoutsFromAdminServer(extraD
       throw new Error(data.error || 'Admin sync pull failed');
     }
 
+    if (String(getSavedKakaoUser()?.kakaoId || '') !== kakaoId) return false;
     window.mergeAdminWorkoutsIntoLocalState(data.workouts || {}, {
       cloudWins: options.cloudWins !== false
     });
@@ -258,7 +230,7 @@ window.initKakaoSDK = function() {
 };
 
 // Native Android Kakao Login Callbacks
-window.onKakaoNativeLoginSuccess = function(userData) {
+window.onKakaoNativeLoginSuccess = async function(userData) {
   if (!userData) return;
   if (typeof userData === 'string') {
     try {
@@ -275,12 +247,15 @@ window.onKakaoNativeLoginSuccess = function(userData) {
     kakaoId: kakaoId,
     nickname: nickname,
     email: userData.email || null,
-    profileImage: userData.profileImage || null
+    profileImage: userData.profileImage || null,
+    accessToken: userData.accessToken || null
   };
   localStorage.setItem('fit_tracker_kakao_user', JSON.stringify(currentKakaoUser));
 
   updateAuthUIState(currentKakaoUser);
-  
+  if (window.GymAuth && kakaoId) {
+    try { await GymAuth.ensure(userData.accessToken || null, kakaoId); } catch { window.dispatchEvent(new Event('gym-session-required')); }
+  }
   // Collect local storage and sync to Admin DB
   window.searchAndCollectAllLocalWorkouts();
   window.syncWorkoutsToAdminServer(currentKakaoUser, true);
@@ -317,11 +292,11 @@ window.signInWithKakao = function signInWithKakao() {
     }
 
     Kakao.Auth.login({
-      throughTalk: true,
+      throughTalk: false,
       success: function(authObj) {
         Kakao.API.request({
           url: '/v2/user/me',
-          success: function(res) {
+          success: async function(res) {
             const kakaoAccount = res.kakao_account || {};
             const profile = kakaoAccount.profile || {};
             const nickname = profile.nickname || '카카오 사용자';
@@ -331,12 +306,16 @@ window.signInWithKakao = function signInWithKakao() {
               kakaoId: kakaoId,
               nickname: nickname,
               email: kakaoAccount.email || null,
-              profileImage: profile.profile_image_url || null
+              profileImage: profile.profile_image_url || null,
+              accessToken: authObj.access_token || null
             };
             localStorage.setItem('fit_tracker_kakao_user', JSON.stringify(currentKakaoUser));
 
             updateAuthUIState(currentKakaoUser);
             
+            if (window.GymAuth && kakaoId) {
+              try { await GymAuth.ensure(authObj.access_token || null, kakaoId); } catch { window.dispatchEvent(new Event('gym-session-required')); }
+            }
             // Search all LocalStorage records and synchronize with Admin DB
             window.searchAndCollectAllLocalWorkouts();
             window.syncWorkoutsToAdminServer(currentKakaoUser, true);
@@ -381,7 +360,10 @@ window.signInWithKakao = function signInWithKakao() {
 };
 
 // Global Sign-Out Handler
-window.signOutUser = function signOutUser() {
+window.signOutUser = async function signOutUser() {
+  if (window.GymAuth) {
+    try { await GymAuth.logout(); } catch { alert('서버 로그아웃을 완료하지 못했습니다. 연결을 확인한 뒤 다시 시도해 주세요.'); return; }
+  }
   if (window.AndroidBridge && typeof window.AndroidBridge.logoutKakao === 'function') {
     try { window.AndroidBridge.logoutKakao(); } catch(e) {}
   }
@@ -403,7 +385,7 @@ window.signOutUser = function signOutUser() {
 };
 
 // Global Account Deletion Handler
-window.deleteAccountAndData = function deleteAccountAndData() {
+window.deleteAccountAndData = async function deleteAccountAndData() {
   const confirmed = confirm('정말로 계정을 탈퇴하고 저장된 모든 운동 기록 및 클라우드 데이터를 삭제하시겠습니까?\n이 작업은 취소할 수 없으며 모든 데이터가 즉시 영구 삭제됩니다.');
   if (!confirmed) return;
 
@@ -411,12 +393,19 @@ window.deleteAccountAndData = function deleteAccountAndData() {
 
   // 1. Delete data on Admin Server DB
   const adminEndpoint = 'https://admin.brightnetworks.kr/api/gym/sync';
-  fetch(adminEndpoint, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ delete: true, visitorId: vid, ...(currentKakaoUser || {}) }),
-    credentials: 'include'
-  }).catch(e => console.warn('Admin delete sync error:', e));
+  try {
+    const response = await (window.GymAuth ? GymAuth.syncFetch : fetch)(adminEndpoint, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ delete: true, visitorId: vid, ...(currentKakaoUser || {}) }),
+      credentials: 'include'
+    });
+    if (!response.ok || !(await response.json()).deleted) throw new Error('Account deletion failed');
+    if (window.GymAuth) await GymAuth.logout();
+  } catch {
+    alert('서버 기록을 삭제하지 못했습니다. 카카오 로그인과 연결 상태를 확인한 뒤 다시 시도해 주세요.');
+    return;
+  }
 
   // 2. Delete Cloud Firestore User Data & Firebase Auth
   if (typeof firebase !== 'undefined' && firebase.auth && firebase.auth()) {
@@ -483,7 +472,15 @@ function initFirebaseSync() {
       if (parsed && parsed.kakaoId) {
         currentKakaoUser = parsed;
         updateAuthUIState(currentKakaoUser);
-        window.syncWorkoutsToAdminServer(currentKakaoUser);
+        if (window.GymAuth) {
+          // Establish the shared gym session before any sync request starts. The
+          // same session protects the community board and workout sync APIs.
+          GymAuth.ensure(parsed.accessToken || null, parsed.kakaoId)
+            .catch(() => {})
+            .finally(() => window.syncWorkoutsToAdminServer(currentKakaoUser));
+        } else {
+          window.syncWorkoutsToAdminServer(currentKakaoUser);
+        }
       } else {
         currentKakaoUser = null;
         localStorage.removeItem('fit_tracker_kakao_user');
@@ -534,6 +531,15 @@ function initFirebaseSync() {
       window.refreshWorkoutsFromAdminServer(currentKakaoUser || {});
     }
   });
+
+  // A PC tab can remain open while a phone uploads a workout. Visibility and
+  // online events alone do not refresh an already active tab, so periodically
+  // pull the server copy while the app is visible and signed in.
+  window.setInterval(() => {
+    if (!document.hidden && currentKakaoUser?.kakaoId) {
+      window.pullWorkoutsFromAdminServer(currentKakaoUser, { cloudWins: true });
+    }
+  }, 30000);
 }
 
 // Update UI badges & status text based on auth state

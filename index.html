@@ -33,6 +33,7 @@
   <meta name="twitter:image" content="https://gym.brightnetworks.kr/og-fittracker.png">
   <meta name="twitter:image:alt" content="바벨을 든 픽셀 아트 운동선수와 FitTracker 성장 그래프">
 
+  <meta name="robots" content="index, follow">
   <link rel="canonical" href="https://gym.brightnetworks.kr/">
 
   <!-- Favicon Settings -->
@@ -58,7 +59,8 @@
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
   <!-- Custom CSS -->
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css?v=1.0.8-patch2">
+  <link rel="stylesheet" href="ouwan.css?v=1.0.8-patch2">
   <link rel="manifest" href="manifest.webmanifest">
 </head>
 <body>
@@ -69,6 +71,9 @@
       <div class="header-brand">
         <i class="fa-solid fa-dumbbell brand-icon"></i>
         <h1>FitTracker</h1>
+        <button id="openFeedbackBtn" class="header-help-btn" type="button" title="불편 및 개선 사항 접수" aria-label="불편 및 개선 사항 접수">
+          ❓
+        </button>
       </div>
       <div class="header-actions">
         <button id="authModalBtn" class="icon-btn auth-btn" title="클라우드 동기화 및 로그인" aria-label="클라우드 동기화 및 로그인">
@@ -83,13 +88,13 @@
 
     <!-- Date Navigation -->
     <section class="date-bar">
-      <button id="prevDateBtn" class="date-nav-btn"><i class="fa-solid fa-chevron-left"></i></button>
+      <button id="prevDateBtn" class="date-nav-btn" aria-label="이전 날짜"><i class="fa-solid fa-chevron-left"></i></button>
       <div class="current-date-picker">
         <i class="fa-regular fa-calendar"></i>
         <input type="date" id="workoutDateInput">
         <span id="dateDisplay">2026. 07. 28 (화)</span>
       </div>
-      <button id="nextDateBtn" class="date-nav-btn"><i class="fa-solid fa-chevron-right"></i></button>
+      <button id="nextDateBtn" class="date-nav-btn" aria-label="다음 날짜"><i class="fa-solid fa-chevron-right"></i></button>
       <button id="todayBtn" class="btn btn-outline btn-xs">오늘</button>
     </section>
 
@@ -98,21 +103,21 @@
       <div class="metric-card">
         <div class="card-icon cyan"><i class="fa-solid fa-dumbbell"></i></div>
         <div class="card-info">
-          <span class="card-label">유효 볼륨 (웜업 제외)</span>
+          <span class="card-label">완료 중량 · 유산소</span>
           <span class="card-value" id="totalActualWeightDisplay">0 kg</span>
         </div>
       </div>
       <div class="metric-card">
         <div class="card-icon emerald"><i class="fa-solid fa-fire"></i></div>
         <div class="card-info">
-          <span class="card-label">완료 세트 (본세트/전체)</span>
+          <span class="card-label">완료 세트</span>
           <span class="card-value" id="completedSetsRatioDisplay">0 / 0</span>
         </div>
       </div>
       <div class="metric-card">
         <div class="card-icon violet"><i class="fa-solid fa-trophy"></i></div>
         <div class="card-info">
-          <span class="card-label">오늘 최고 1RM / 목표</span>
+          <span class="card-label">최고 추정 1RM</span>
           <span class="card-value" id="totalTargetWeightDisplay">0 kg</span>
         </div>
       </div>
@@ -125,35 +130,28 @@
           <h2>
             <i class="fa-solid fa-list-ul"></i> 오늘의 운동 목록
             <span class="badge" id="exerciseCountBadge">0개 종목</span>
-            <i class="fa-solid fa-chevron-up toggle-chevron" id="exerciseToggleChevron"></i>
+            <span class="exercise-header-actions">
+              <i class="fa-solid fa-chevron-up toggle-chevron" id="exerciseToggleChevron"></i>
+              <button id="deleteAllExercisesBtn" class="header-icon-btn danger" type="button"
+                title="오늘의 운동 전체 삭제" aria-label="오늘의 운동 전체 삭제">
+                <i class="fa-solid fa-trash-can"></i>
+              </button>
+            </span>
           </h2>
         </div>
         <div class="header-right-actions">
-          <div class="header-action-group">
-            <button id="copyWorkoutSummaryBtn" class="btn btn-outline btn-xs" title="ChatGPT 등에서 분석할 수 있도록 운동 내용을 텍스트로 복사">
-              <i class="fa-regular fa-copy"></i> 운동 내용 복사
-            </button>
-            <button id="importYesterdayBtn" class="btn btn-outline btn-xs" title="이전 운동 기록을 날짜별로 선택하여 불러오기">
-              <i class="fa-solid fa-rotate-left"></i> 이전 운동 불러오기
-            </button>
-            <button id="toggleAllExercisesBtn" class="btn btn-secondary btn-xs" title="모든 운동의 세트 내용 펼치기">
-              <i class="fa-solid fa-angles-down"></i> 전체 펼치기
-            </button>
-            <div class="header-more-menu">
-              <button id="workoutMoreMenuBtn" class="btn btn-secondary btn-xs header-more-menu-toggle" type="button"
-                title="운동 목록 더보기" aria-label="운동 목록 더보기" aria-expanded="false" aria-controls="workoutMoreMenu">
-                <i class="fa-solid fa-ellipsis"></i>
-              </button>
-              <div id="workoutMoreMenu" class="header-overflow-menu hidden">
-                <button id="textShareBtn" class="overflow-menu-item" type="button">
-                  <i class="fa-solid fa-code"></i> 운동 코드
-                </button>
-                <button id="deleteAllExercisesBtn" class="overflow-menu-item danger" type="button">
-                  <i class="fa-solid fa-trash-can"></i> 전체 삭제
-                </button>
-              </div>
-            </div>
-          </div>
+          <button id="importYesterdayBtn" class="btn btn-outline btn-xs" type="button" title="이전 운동 기록을 날짜별로 선택하여 불러오기">
+            <i class="fa-solid fa-rotate-left"></i> 이전운동
+          </button>
+          <button id="copyWorkoutSummaryBtn" class="btn btn-outline btn-xs" type="button" title="ChatGPT 운동 분석 프롬프트 열기">
+            GPT분석
+          </button>
+          <button id="copyThreeMonthsBtn" class="btn btn-outline btn-xs" type="button" title="최근 3개월 운동 기록을 압축 복사하여 AI(ChatGPT, Claude 등) 분석에 활용">
+            3개월
+          </button>
+          <button id="textShareBtn" class="btn btn-outline btn-xs" type="button" title="운동 루틴 코드 복사 및 가져오기">
+            운동 코드
+          </button>
         </div>
       </div>
 
@@ -171,6 +169,8 @@
         </div>
       </div>
     </section>
+
+    <a href="community.html" class="community-entry"><span><i class="fa-solid fa-users" aria-hidden="true"></i> 오운완</span><span>오늘 운동 인증 · 오운왕 랭킹 →</span></a>
 
     <!-- BOTTOM SECTION: 심플 운동 총 볼륨 성장 그래프 -->
     <section class="section-card chart-section" id="exerciseChartSection">
@@ -191,6 +191,13 @@
       </div>
 
       <div id="exerciseChartCollapsible" class="chart-collapsible">
+        <div id="chartProjectionNotice" class="chart-projection-notice hidden" role="status" aria-live="polite">
+          <span class="chart-projection-swatch" aria-hidden="true"></span>
+          <div class="chart-projection-copy">
+            <strong>오늘의 예상 볼륨</strong>
+            <span id="chartProjectionMessage"></span>
+          </div>
+        </div>
         <div class="chart-container" style="position: relative; height: 240px; margin-top: 8px;">
           <canvas id="exerciseWeightChart"></canvas>
         </div>
@@ -201,6 +208,13 @@
             <i class="fa-solid fa-hand-pointer text-cyan"></i>
             <span>그래프 지점을 터치하면 해당 날짜의 상세 운동 종목과 볼륨이 표시됩니다.</span>
           </div>
+        </div>
+
+        <div class="chart-ai-action-wrap margin-top-10">
+          <button id="chartCopyThreeMonthsBtn" class="btn btn-outline btn-sm full-width" type="button"
+            title="최근 3개월 운동 기록을 압축하여 AI 분석용으로 클립보드에 복사합니다">
+            <i class="fa-solid fa-wand-magic-sparkles text-cyan"></i> 최근 3개월 운동 기록 압축 복사 (AI 분석용)
+          </button>
         </div>
       </div>
     </section>
@@ -293,6 +307,10 @@
             <span>Latest</span>
           </div>
           <article>
+            <h4><i class="fa-solid fa-compress text-cyan"></i> 최근 3개월 운동 기록 압축 복사 (AI 분석용)</h4>
+            <p>최근 3개월간의 운동 일지를 동일 세트 압축 및 1RM 변화 추이, 볼륨 통계와 함께 AI 맞춤 프롬프트로 한 번에 복사합니다.</p>
+          </article>
+          <article>
             <h4><i class="fa-solid fa-book-atlas text-cyan"></i> 운동 기구 도감 & SVG 일러스트 (78+종)</h4>
             <p>국내외 헬스장 인기 머신(펜듈럼, V-스쿼트, 벨트스쿼트 등) 78종에 대한 네온 라인아트 SVG와 상세 가이드를 제공합니다.</p>
           </article>
@@ -331,31 +349,149 @@
     </div>
   </div>
 
-  <!-- ChatGPT-friendly workout export options -->
+  <!-- AI Workout Analysis & Routine Generator Modal -->
   <div id="workoutExportModal" class="modal hidden">
-    <div class="modal-content">
+    <div class="modal-content ai-analysis-modal-content">
       <div class="modal-header">
-        <h3><i class="fa-solid fa-wand-magic-sparkles"></i> ChatGPT로 내보내기</h3>
+        <h3><i class="fa-solid fa-wand-magic-sparkles text-cyan"></i> AI 맞춤 코치 & 루틴</h3>
         <button id="closeWorkoutExportModalBtn" class="close-btn">&times;</button>
       </div>
 
-      <div class="io-box output-box">
-        <h4>내 운동 분석하기</h4>
-        <p class="export-option-description">현재 날짜의 운동 기록을 읽기 쉬운 텍스트로 복사합니다. ChatGPT에 붙여넣고 분석을 요청해 보세요.</p>
-        <button id="copyWorkoutContentBtn" class="btn btn-export btn-md full-width">
-          <i class="fa-regular fa-copy"></i> 운동 내용 복사
-        </button>
+      <!-- Section 1: Today Workout Context & Action -->
+      <div class="io-box ai-direct-box">
+        <div class="ai-direct-header">
+          <div class="ai-title-row">
+            <h4><i class="fa-solid fa-bolt text-orange"></i> 오늘 운동 맞춤 AI 제안</h4>
+            <span class="beta-badge">BETA</span>
+          </div>
+
+          <!-- When today has NO workouts -->
+          <div id="aiNoWorkoutBanner" class="ai-context-banner">
+            <p class="export-option-description">
+              <i class="fa-solid fa-circle-info text-cyan"></i> 오늘 등록된 운동이 없습니다.
+              <span id="aiPrevWorkoutNotice">직전 운동 기록을 분석하여 점진적 과부하가 적용된 오늘 루틴을 자동 생성합니다.</span>
+            </p>
+            <button id="btnAiRecommendToday" class="btn btn-accent btn-md full-width margin-top-8">
+              <i class="fa-solid fa-bolt"></i> 이전 기록 기반 오늘 운동 생성
+            </button>
+          </div>
+
+          <!-- When today HAS workouts -->
+          <div id="aiHasWorkoutBanner" class="ai-context-banner hidden">
+            <p class="export-option-description">
+              <i class="fa-solid fa-dumbbell text-emerald"></i> 오늘 <strong id="aiTodayExCount">0</strong>개 종목 운동이 등록되어 있습니다.
+            </p>
+            <div class="ai-action-btn-row margin-top-8">
+              <button id="btnAiAnalyzeToday" class="btn btn-primary btn-md flex-1">
+                <i class="fa-solid fa-chart-line"></i> 오늘 운동 분석
+              </button>
+              <button id="btnAiRecreateToday" class="btn btn-accent btn-md flex-1">
+                <i class="fa-solid fa-bolt"></i> 이전 기록 기반 새 운동 생성
+              </button>
+            </div>
+          </div>
+        </div>
       </div>
 
-      <div class="io-box input-box margin-top-12">
-        <h4>새 운동 루틴 만들기</h4>
-        <p class="export-option-description">형식 안내 프롬프트를 ChatGPT에 붙여넣으세요. 완성된 JSON은 상단의 ‘운동 코드’에서 불러올 수 있습니다.</p>
-        <button id="copyWorkoutCodePromptBtn" class="btn btn-import btn-md full-width">
-          <i class="fa-regular fa-copy"></i> 운동 코드 생성 프롬프트 복사
-        </button>
+      <!-- Section 2: Custom Routine Generator (Beginner, Intermediate, Expert + Height/Weight) -->
+      <div class="io-box ai-custom-routine-box margin-top-12">
+        <div class="ai-direct-header">
+          <h4><i class="fa-solid fa-sliders text-cyan"></i> 새 운동 루틴 만들기</h4>
+          <p class="export-option-description">키, 몸무게 및 숙련도에 맞춰 운동 종목, 세트수, 중량을 AI가 자동 설계합니다.</p>
+        </div>
+
+        <div class="ai-profile-form margin-top-8">
+          <div class="form-row inline-mobile-row">
+            <div class="form-group half">
+              <label for="aiUserHeight">키 (cm)</label>
+              <input type="number" id="aiUserHeight" min="100" max="230" step="1" placeholder="예: 175" inputmode="numeric" class="form-control">
+            </div>
+            <div class="form-group half">
+              <label for="aiUserWeight">몸무게 (kg)</label>
+              <input type="number" id="aiUserWeight" min="30" max="250" step="0.5" placeholder="예: 70" inputmode="decimal" class="form-control">
+            </div>
+          </div>
+
+          <div class="form-group margin-top-8">
+            <label>운동 숙련도</label>
+            <div class="ai-level-chips" id="aiLevelChips">
+              <button type="button" class="ai-level-chip active" data-level="beginner">운동 초보</button>
+              <button type="button" class="ai-level-chip" data-level="intermediate">운동 중수</button>
+              <button type="button" class="ai-level-chip" data-level="expert">운동 고수</button>
+            </div>
+          </div>
+
+          <div class="form-group margin-top-8">
+            <label for="aiTargetPartSelect">목표 운동 부위</label>
+            <select id="aiTargetPartSelect" class="form-control">
+              <option value="AI 자동 추천 (균형 분할)">🎯 AI 자동 추천 (가장 적합한 부위)</option>
+              <option value="가슴">가슴 집중</option>
+              <option value="등">등 집중</option>
+              <option value="하체">하체 집중</option>
+              <option value="어깨">어깨 집중</option>
+              <option value="팔">팔 (이두/삼두)</option>
+              <option value="복근/코어">복근 / 코어</option>
+              <option value="유산소">유산소</option>
+              <option value="전신">전신 복합 루틴</option>
+            </select>
+          </div>
+
+          <button id="btnAiCreateNewRoutine" class="btn btn-accent btn-md full-width margin-top-10">
+            <i class="fa-solid fa-wand-magic-sparkles"></i> AI 맞춤 새 루틴 생성
+          </button>
+        </div>
       </div>
 
-      <div class="modal-footer">
+      <!-- Loading Indicator -->
+      <div id="aiAnalysisLoading" class="ai-loading-box hidden margin-top-12">
+        <div class="ai-spinner"></div>
+        <p id="aiLoadingMessage">AI가 운동 데이터와 신체 조건을 분석하고 있습니다...</p>
+      </div>
+
+      <!-- Plan / Error Notice -->
+      <div id="aiPlanNotice" class="ai-plan-notice hidden margin-top-12"></div>
+
+      <!-- Analysis & Routine Result Box -->
+      <div id="aiAnalysisResultContainer" class="ai-result-box hidden margin-top-12">
+        <div class="ai-result-header">
+          <span><i class="fa-solid fa-comment-dots"></i> AI 코칭 & 추천 결과</span>
+          <button id="copyAiResultBtn" class="btn btn-xs btn-outline" type="button">
+            <i class="fa-regular fa-copy"></i> 결과 복사
+          </button>
+        </div>
+
+        <!-- Apply Routine to Today Button (Visible when routine JSON is detected) -->
+        <div id="aiApplyRoutineSection" class="ai-apply-section hidden">
+          <button id="btnAiApplyRoutine" class="btn btn-primary full-width btn-md margin-bottom-10 pulse-glow">
+            <i class="fa-solid fa-cloud-arrow-down"></i> 오늘의 운동 목록으로 바로 적용하기
+          </button>
+        </div>
+
+        <div id="aiAnalysisResultText" class="ai-result-content"></div>
+      </div>
+
+      <!-- Manual ChatGPT Prompt Accordion -->
+      <details class="ai-manual-details margin-top-12">
+        <summary class="ai-manual-summary">
+          <span><i class="fa-solid fa-circle-question"></i> ChatGPT에 직접 붙여넣기 (프롬프트 복사)</span>
+          <i class="fa-solid fa-chevron-down ai-summary-icon"></i>
+        </summary>
+        <div class="ai-manual-body">
+          <div class="margin-top-8">
+            <button id="copyWorkoutContentBtn" class="btn btn-export btn-sm full-width margin-bottom-6">
+              <i class="fa-regular fa-copy"></i> 오늘 운동 내용 + 분석 프롬프트 복사
+            </button>
+            <button id="modalCopyThreeMonthsBtn" class="btn btn-secondary btn-sm full-width margin-bottom-6">
+              <i class="fa-solid fa-compress text-cyan"></i> 최근 3개월 압축 기록 복사 (AI 분석용)
+            </button>
+            <button id="copyWorkoutCodePromptBtn" class="btn btn-import btn-sm full-width">
+              <i class="fa-regular fa-copy"></i> 운동 코드 생성 프롬프트 복사
+            </button>
+          </div>
+        </div>
+      </details>
+
+      <div class="modal-footer margin-top-12">
         <button id="closeWorkoutExportFooterBtn" class="btn btn-secondary">닫기</button>
       </div>
     </div>
@@ -365,32 +501,23 @@
   <div id="codeModal" class="modal hidden">
     <div class="modal-content">
       <div class="modal-header">
-        <h3><i class="fa-solid fa-code"></i> 운동 루틴 코드 공유</h3>
+        <h3><i class="fa-solid fa-code"></i> 운동 코드 불러오기</h3>
         <button id="closeCodeModalBtn" class="close-btn">&times;</button>
       </div>
 
-      <!-- Section 1: Output -->
-      <div class="io-box output-box">
+      <!-- Input Routine Code Only -->
+      <div class="io-box input-box">
         <div class="form-group">
-          <textarea id="generatedRoutineCode" readonly rows="3" class="output-textarea" placeholder="아래 버튼을 터치하여 루틴 코드를 생성하세요"></textarea>
+          <textarea id="inputRoutineCode" placeholder="FITROUTINE_v1_... 코드, 운동 URL 또는 ChatGPT가 만든 JSON을 붙여넣으세요" rows="5" class="input-textarea" aria-label="운동 코드 입력"></textarea>
         </div>
-        <button id="copyGeneratedCodeBtn" class="btn btn-export btn-md full-width">
-          <i class="fa-regular fa-copy"></i> 운동 코드 생성하기
-        </button>
-        <button id="copyGeneratedUrlBtn" class="btn btn-outline btn-md full-width margin-top-8">
-          <i class="fa-solid fa-link"></i> 운동 URL + 코드 생성하기
-        </button>
-      </div>
-
-      <!-- Section 2: Input -->
-      <div class="io-box input-box margin-top-12">
-        <div class="form-group">
-          <textarea id="inputRoutineCode" placeholder="FITROUTINE_v1_... 코드, 운동 URL 또는 ChatGPT가 만든 JSON을 붙여넣으세요" rows="3" class="input-textarea"></textarea>
-          <p class="import-replace-notice"><i class="fa-solid fa-triangle-exclamation"></i> 불러오면 선택한 날짜의 기존 운동을 지우고 새 운동으로 교체합니다.</p>
+        <div class="code-modal-action-row">
+          <button id="importRoutineCodeBtn" class="btn btn-import btn-md flex-1">
+            <i class="fa-solid fa-download"></i> 코드 불러오기
+          </button>
+          <button id="clearRoutineCodeInputBtn" class="btn btn-danger-outline btn-md" type="button" title="입력 내용 전체 삭제">
+            <i class="fa-solid fa-trash-can"></i> 전체 삭제
+          </button>
         </div>
-        <button id="importRoutineCodeBtn" class="btn btn-import btn-md full-width">
-          <i class="fa-solid fa-download"></i> 운동 코드 불러오기
-        </button>
       </div>
 
       <div class="modal-footer">
@@ -437,11 +564,11 @@
   </div>
 
   <!-- Add Exercise Modal with Equipment Encyclopedia -->
-  <div id="addExerciseModal" class="modal hidden">
+  <div id="addExerciseModal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="addExerciseModalTitle">
     <div class="modal-content modal-content-wide">
       <div class="modal-header">
         <h3 id="addExerciseModalTitle"><i class="fa-solid fa-dumbbell text-cyan"></i> 운동 기구 / 종목 선택</h3>
-        <button id="closeAddModalBtn" class="close-btn">&times;</button>
+        <button id="closeAddModalBtn" class="close-btn" type="button" aria-label="닫기">&times;</button>
       </div>
 
       <!-- Mode Selector Tabs: Encyclopedia vs Recommended Routines vs Direct Input -->
@@ -460,9 +587,11 @@
       <form id="addExerciseForm" autocomplete="off">
         <!-- 1. Equipment Encyclopedia Panel (Default Active) -->
         <div id="encyclopediaPanel" class="modal-panel-container">
-          <!-- Category Filter Bar -->
-          <div class="encyclopedia-filter-bar" id="encyclopediaFilterBar">
+          <!-- 1st Tier: Body Part Category Filter Bar -->
+          <div class="encyclopedia-filter-bar" id="encyclopediaFilterBar" role="tablist" aria-label="운동 부위 필터">
             <button type="button" class="enc-filter-chip active" data-cat="all">전체</button>
+            <button type="button" class="enc-filter-chip" data-cat="favorites">⭐ 즐겨찾기</button>
+            <button type="button" class="enc-filter-chip" data-cat="recent">🕒 최근 운동</button>
             <button type="button" class="enc-filter-chip" data-cat="가슴">가슴</button>
             <button type="button" class="enc-filter-chip" data-cat="등">등</button>
             <button type="button" class="enc-filter-chip" data-cat="하체">하체</button>
@@ -473,16 +602,36 @@
             <button type="button" class="enc-filter-chip" data-cat="전신">전신</button>
           </div>
 
+          <!-- 2nd Tier: Equipment Type Filter Bar -->
+          <div class="encyclopedia-equip-filter-bar" id="encyclopediaEquipFilterBar" role="tablist" aria-label="운동 기구 유형 필터">
+            <button type="button" class="enc-equip-chip active" data-equip="all">전체 기구</button>
+            <button type="button" class="enc-equip-chip" data-equip="barbell">바벨·스미스</button>
+            <button type="button" class="enc-equip-chip" data-equip="dumbbell">덤벨</button>
+            <button type="button" class="enc-equip-chip" data-equip="pin_machine">핀 머신</button>
+            <button type="button" class="enc-equip-chip" data-equip="plate_loaded">해머·플레이트</button>
+            <button type="button" class="enc-equip-chip" data-equip="cable">케이블</button>
+            <button type="button" class="enc-equip-chip" data-equip="bodyweight">맨몸·소도구</button>
+            <button type="button" class="enc-equip-chip" data-equip="cardio">유산소 기구</button>
+          </div>
+
           <!-- Live Search Bar within Encyclopedia -->
           <div class="encyclopedia-search-wrap">
             <i class="fa-solid fa-magnifying-glass enc-search-icon"></i>
-            <input type="text" id="encyclopediaSearchInput" class="encyclopedia-search-input" placeholder="기구 이름 또는 초성 검색 (예: ㅂㅊ, 스쿼트, 렛풀)">
+            <input type="text" id="encyclopediaSearchInput" class="encyclopedia-search-input" placeholder="기구명·초성·은어 검색 (예: ㅂㅊ, 사레레, 랫풀, 천계, 해머)">
+            <button type="button" id="encyclopediaSearchClearBtn" class="enc-search-clear-btn hidden" aria-label="검색어 지우기" title="검색어 지우기">&times;</button>
+            <span id="encyclopediaResultCount" class="enc-result-count">163종</span>
           </div>
+
+          <!-- Personal Quick-Access Bar (Favorites & Recent Exercises) -->
+          <div id="encyclopediaPersonalBar" class="enc-personal-bar hidden"></div>
 
           <!-- Illustrated Equipment Cards Grid -->
           <div class="encyclopedia-grid" id="encyclopediaGrid">
             <!-- Dynamic SVG equipment cards rendered here -->
           </div>
+
+          <!-- Multi-Select Shopping Cart Bar -->
+          <div id="encyclopediaCartBar" class="enc-cart-bar hidden"></div>
 
           <!-- Selected Equipment Summary Badge -->
           <div id="encyclopediaSelectedBanner" class="enc-selected-banner hidden">
@@ -544,11 +693,11 @@
           <div class="form-row inline-mobile-row">
             <div class="form-group half">
               <label for="defaultWeightInput" id="labelWeightOrSpeed">기본 무게 (kg)</label>
-              <input type="number" id="defaultWeightInput" min="0" step="0.5" value="40">
+              <input type="number" id="defaultWeightInput" min="0" step="0.5" value="40" inputmode="decimal">
             </div>
             <div class="form-group half">
               <label for="defaultRepsInput" id="labelRepsOrDuration">목표 횟수 (회)</label>
-              <input type="number" id="defaultRepsInput" min="1" max="300" value="12">
+              <input type="number" id="defaultRepsInput" min="1" max="300" value="12" inputmode="numeric" pattern="[0-9]*">
             </div>
           </div>
 
@@ -556,20 +705,62 @@
             <label for="defaultRestInput"><i class="fa-solid fa-stopwatch text-cyan"></i> 세트 간 기본 휴식시간</label>
             <div class="rest-preset-chips" id="restPresetChips">
               <button type="button" class="rest-chip" data-sec="30">30초</button>
-              <button type="button" class="rest-chip" data-sec="60">60초</button>
-              <button type="button" class="rest-chip active" data-sec="90">90초</button>
-              <button type="button" class="rest-chip" data-sec="120">120초</button>
-              <button type="button" class="rest-chip" data-sec="180">180초</button>
+              <button type="button" class="rest-chip" data-sec="60">1분</button>
+              <button type="button" class="rest-chip active" data-sec="90">1분 30초</button>
+              <button type="button" class="rest-chip" data-sec="120">2분</button>
+              <button type="button" class="rest-chip" data-sec="180">3분</button>
+              <button type="button" class="rest-chip" data-sec="300">5분</button>
             </div>
-            <input type="number" id="defaultRestInput" min="5" max="600" step="5" value="90" class="form-control margin-top-6" placeholder="기본 휴식시간 (초)">
+            <input type="number" id="defaultRestInput" min="5" max="600" step="5" value="90" inputmode="numeric" pattern="[0-9]*" class="form-control margin-top-6" placeholder="기본 휴식시간 (초)">
           </div>
         </div>
 
+      </form>
         <div class="modal-footer">
           <button type="button" id="cancelAddBtn" class="btn btn-secondary">취소</button>
-          <button type="submit" id="submitAddExerciseBtn" class="btn btn-primary">
+          <button type="submit" form="addExerciseForm" id="submitAddExerciseBtn" class="btn btn-primary">
             <i class="fa-solid fa-plus"></i> 운동 추가하기
           </button>
+        </div>
+    </div>
+  </div>
+
+  <!-- Exercise Rest Seconds Modal -->
+  <div id="exerciseRestModal" class="modal hidden" role="dialog" aria-labelledby="exerciseRestModalTitle" aria-modal="true">
+    <div class="modal-content" style="max-width: 380px;">
+      <div class="modal-header">
+        <h3 id="exerciseRestModalTitle"><i class="fa-solid fa-stopwatch text-cyan"></i> 세트 간 휴식시간</h3>
+        <button id="closeExerciseRestModalBtn" class="close-btn" type="button" aria-label="닫기">&times;</button>
+      </div>
+      <form id="exerciseRestForm" onsubmit="return false;">
+        <p id="exerciseRestModalDesc" class="text-muted margin-bottom-12" style="font-size: 13.5px;"></p>
+        <div class="rest-display-container margin-bottom-16">
+          <div class="rest-display-label">설정된 휴식시간</div>
+          <div class="rest-display-value">
+            <span id="exerciseRestDisplayFormatted" class="rest-display-time">1분 30초</span>
+            <span id="exerciseRestDisplaySeconds" class="rest-display-sec">(90초)</span>
+          </div>
+          <input type="hidden" id="exerciseRestInput" value="90">
+        </div>
+        <div class="rest-section-label">기준 시간 선택</div>
+        <div class="rest-preset-grid margin-bottom-12" id="exerciseRestPresetChips">
+          <button type="button" class="rest-chip" data-sec="30">30초</button>
+          <button type="button" class="rest-chip" data-sec="60">1분</button>
+          <button type="button" class="rest-chip" data-sec="90">1분 30초</button>
+          <button type="button" class="rest-chip" data-sec="120">2분</button>
+          <button type="button" class="rest-chip" data-sec="180">3분</button>
+          <button type="button" class="rest-chip" data-sec="300">5분</button>
+        </div>
+        <div class="rest-section-label">시간 추가</div>
+        <div class="rest-add-grid margin-bottom-16" id="exerciseRestAddChips">
+          <button type="button" class="rest-add-chip" data-add="10">+10s</button>
+          <button type="button" class="rest-add-chip" data-add="30">+30s</button>
+          <button type="button" class="rest-add-chip" data-add="60">+60s</button>
+          <button type="button" class="rest-add-chip" data-add="120">+120s</button>
+        </div>
+        <div class="modal-footer margin-top-16" style="display: flex; gap: 8px;">
+          <button type="button" id="cancelExerciseRestBtn" class="btn btn-secondary" style="flex: 1;">취소</button>
+          <button type="submit" id="saveExerciseRestBtn" class="btn btn-primary" style="flex: 1;">확인</button>
         </div>
       </form>
     </div>
@@ -654,16 +845,77 @@
     </div>
   </div>
 
+  <!-- Feedback / Issue & Improvement Modal -->
+  <div id="feedbackModal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="feedbackModalTitle">
+    <div class="modal-content feedback-modal-content">
+      <div class="modal-header">
+        <h3 id="feedbackModalTitle"><i class="fa-solid fa-comment-dots text-cyan"></i> 불편 및 개선 사항 접수</h3>
+        <button id="closeFeedbackModalBtn" class="close-btn" type="button" aria-label="닫기">&times;</button>
+      </div>
+
+      <div class="feedback-modal-body">
+        <p class="feedback-intro-desc">
+          FitTracker를 이용하시면서 겪으신 불편한 점이나 추가/개선되었으면 하는 기능이 있다면 자유롭게 남겨주세요.
+        </p>
+
+        <form id="feedbackForm" class="feedback-form margin-top-12">
+          <div class="form-group">
+            <label for="feedbackTypeSelect" class="form-label">
+              <i class="fa-solid fa-tag text-cyan"></i> 구분
+            </label>
+            <select id="feedbackTypeSelect" class="form-control">
+              <option value="개선사항">💡 개선 사항 및 기능 제안</option>
+              <option value="불편사항">⚠️ 불편 사항 및 버그 신고</option>
+              <option value="기타문의">💬 기타 문의 및 피드백</option>
+            </select>
+          </div>
+
+          <div class="form-group margin-top-10">
+            <label for="feedbackMessageInput" class="form-label">
+              <i class="fa-solid fa-pen text-cyan"></i> 내용 <span class="required-star text-orange">*</span>
+            </label>
+            <textarea id="feedbackMessageInput" class="form-control feedback-textarea" rows="5"
+              maxlength="2000" required
+              placeholder="불편하셨던 점이나 개선 아이디어를 적어주세요. (최대 2,000자)"></textarea>
+            <div class="feedback-char-count"><span id="feedbackCharCount">0</span> / 2,000자</div>
+          </div>
+
+          <div class="form-group margin-top-10">
+            <label for="feedbackContactInput" class="form-label">
+              <i class="fa-solid fa-envelope text-cyan"></i> 답변받을 연락처 / 이메일 (선택)
+            </label>
+            <input type="text" id="feedbackContactInput" class="form-control"
+              placeholder="답변을 원하시면 이메일 또는 연락처를 남겨주세요.">
+          </div>
+
+          <div id="feedbackStatusNotice" class="feedback-status-notice hidden margin-top-10" role="status" aria-live="polite"></div>
+
+          <div class="feedback-modal-action-row margin-top-14">
+            <button type="button" id="cancelFeedbackBtn" class="btn btn-secondary flex-1">취소</button>
+            <button type="submit" id="submitFeedbackBtn" class="btn btn-primary flex-2">
+              <i class="fa-solid fa-paper-plane"></i> 접수하기
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
   <!-- Kakao JS SDK v1.43.0 & Firebase JS SDK (v10 Compat) -->
   <script src="https://t1.kakaocdn.net/kakao_js_sdk/1.43.0/kakao.min.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
-  <script src="firebase-config.js"></script>
-  <script src="firebase-sync.js"></script>
-  <script src="equipment-encyclopedia.js"></script>
-  <script src="routine-recommendations.js"></script>
-  <script src="app.js"></script>
+  <script src="firebase-config.js?v=1.0.8-patch2"></script>
+  <script src="ouwan-core.js?v=1.0.8-patch2"></script>
+  <script src="routine-code.js?v=1.0.8-patch2"></script>
+  <script src="community-auth.js?v=1.0.8-patch2"></script>
+  <script src="ouwan.js?v=1.0.8-patch2"></script>
+  <script src="community-import.js?v=1.0.8-patch2"></script>
+  <script src="firebase-sync.js?v=1.0.8-patch2"></script>
+  <script src="equipment-encyclopedia.js?v=1.0.8-patch2"></script>
+  <script src="routine-recommendations.js?v=1.0.8-patch2"></script>
+  <script src="app.js?v=1.0.8-patch2"></script>
   <script>
     (function() {
       var data = {

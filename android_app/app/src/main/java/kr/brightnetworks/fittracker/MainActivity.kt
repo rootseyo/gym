@@ -8,6 +8,7 @@ import android.graphics.Color
 import android.net.Uri
 import android.os.Bundle
 import android.os.Message
+import android.util.Base64
 import android.util.Log
 import android.view.Gravity
 import android.view.View
@@ -26,10 +27,12 @@ import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.FileProvider
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.updatePadding
+import com.kakao.sdk.auth.TokenManagerProvider
 import com.kakao.sdk.auth.model.OAuthToken
 import com.kakao.sdk.common.model.AuthError
 import com.kakao.sdk.common.model.AuthErrorCause
@@ -39,6 +42,8 @@ import com.kakao.sdk.common.util.Utility
 import com.kakao.sdk.user.UserApiClient
 import org.json.JSONObject
 import java.io.ByteArrayInputStream
+import java.io.File
+import java.io.FileOutputStream
 import java.net.URISyntaxException
 import java.nio.charset.StandardCharsets
 
@@ -392,6 +397,19 @@ class MainActivity : AppCompatActivity() {
         fun isAndroidApp(): Boolean = true
 
         @JavascriptInterface
+        fun openExternalChatGPT(url: String) {
+            val uri = Uri.parse(url)
+            if (uri.scheme != "https" || uri.host != "chatgpt.com" || (uri.port != -1 && uri.port != 443)) return
+            runOnUiThread {
+                try {
+                    startActivity(Intent(Intent.ACTION_VIEW, uri))
+                } catch (error: ActivityNotFoundException) {
+                    Log.e(TAG, "No external browser available for ChatGPT", error)
+                }
+            }
+        }
+
+        @JavascriptInterface
         fun onLegacyStorageExported(snapshot: String) {
             val validatedSnapshot = try {
                 JSONObject(snapshot)
@@ -437,10 +455,62 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
+        // Tokens may only be delivered to our HTTPS origin, never an external page.
+        @JavascriptInterface
+        fun requestGymToken() {
+            runOnUiThread {
+                fun isTrustedPage(): Boolean {
+                    val uri = Uri.parse(webView.url ?: "")
+                    return uri.scheme == "https" && uri.host == "gym.brightnetworks.kr" && (uri.port == -1 || uri.port == 443)
+                }
+                if (!isTrustedPage()) return@runOnUiThread
+                UserApiClient.instance.me { _, error ->
+                    if (isTrustedPage()) {
+                        val token = if (error == null) TokenManagerProvider.instance.manager.getToken()?.accessToken else null
+                        val encoded = token?.let { JSONObject.quote(it) } ?: "null"
+                        webView.evaluateJavascript("window.onGymNativeToken && window.onGymNativeToken($encoded);", null)
+                    }
+                }
+            }
+        }
+
         @JavascriptInterface
         fun loginWithKakao() {
             runOnUiThread {
                 performKakaoNativeLogin()
+            }
+        }
+
+        @JavascriptInterface
+        fun shareToInstagram(dataUrl: String, caption: String) {
+            runOnUiThread {
+                val page = Uri.parse(webView.url ?: "")
+                if (page.scheme != "https" || page.host != "gym.brightnetworks.kr" || (page.port != -1 && page.port != 443)) return@runOnUiThread
+                if (!dataUrl.startsWith("data:image/") || dataUrl.length > 4_000_000 || caption.length > 500) return@runOnUiThread
+                try {
+                    val bytes = Base64.decode(dataUrl.substringAfter(',', ""), Base64.DEFAULT)
+                    if (bytes.isEmpty() || bytes.size > 3_000_000) return@runOnUiThread
+                    val directory = File(cacheDir, "shared_images").apply { mkdirs() }
+                    val image = File(directory, "fittracker-instagram.jpg")
+                    FileOutputStream(image).use { it.write(bytes) }
+                    val uri = FileProvider.getUriForFile(this@MainActivity, "$packageName.fileprovider", image)
+                    val share = Intent(Intent.ACTION_SEND).apply {
+                        type = "image/jpeg"
+                        putExtra(Intent.EXTRA_STREAM, uri)
+                        putExtra(Intent.EXTRA_TEXT, caption)
+                        clipData = android.content.ClipData.newRawUri("FitTracker 오운완", uri)
+                        addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
+                        setPackage("com.instagram.android")
+                    }
+                    try {
+                        startActivity(share)
+                    } catch (_: ActivityNotFoundException) {
+                        share.setPackage(null)
+                        startActivity(Intent.createChooser(share, "오운완 공유"))
+                    }
+                } catch (error: Exception) {
+                    Log.e(TAG, "Instagram share failed", error)
+                }
             }
         }
 
@@ -562,6 +632,7 @@ class MainActivity : AppCompatActivity() {
                     put("nickname", nickname)
                     put("email", email)
                     put("profileImage", profileImage)
+                    put("accessToken", TokenManagerProvider.instance.manager.getToken()?.accessToken)
                 }
 
                 sendKakaoLoginResult(true, jsonObj.toString(), null)
@@ -576,11 +647,17 @@ class MainActivity : AppCompatActivity() {
         runOnUiThread {
             isLoggingIn = false
             if (success && jsonData != null) {
+                val callbackUri = Uri.parse(webView.url ?: "")
+                if (callbackUri.scheme != "https" || callbackUri.host != "gym.brightnetworks.kr" || (callbackUri.port != -1 && callbackUri.port != 443)) return@runOnUiThread
                 Log.i(TAG, "Sending Kakao login success to WebView")
                 val script = """
                     (function() {
                         try {
                             var data = $jsonData;
+                            if (/^\/community(?:\.html)?$/.test(window.location.pathname) && typeof window.onKakaoNativeLoginSuccess === 'function') {
+                                window.onKakaoNativeLoginSuccess(data);
+                                return;
+                            }
                             var nickname = data.nickname || '카카오 사용자';
                             var kakaoId = String(data.kakaoId || '');
                             
@@ -588,7 +665,8 @@ class MainActivity : AppCompatActivity() {
                                 kakaoId: kakaoId,
                                 nickname: nickname,
                                 email: data.email || null,
-                                profileImage: data.profileImage || null
+                                profileImage: data.profileImage || null,
+                                accessToken: data.accessToken || null
                             };
                             localStorage.setItem('fit_tracker_kakao_user', JSON.stringify(kakaoUser));
                             

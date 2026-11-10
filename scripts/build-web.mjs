@@ -12,6 +12,16 @@ if (dirname(outputDirectory) !== projectRoot) {
 const publicFiles = [
   'index.html',
   'weekly.html',
+  'community.html',
+  'ouwan-core.js',
+  'ouwan.js',
+  'ouwan.css',
+  'routine-code.js',
+  'nickname-samples.json',
+  'community.css',
+  'community.js',
+  'community-auth.js',
+  'community-import.js',
   'privacy.html',
   'terms.html',
   'app.js',
@@ -29,7 +39,9 @@ const publicFiles = [
   'favicon.svg',
   'icon-192.png',
   'icon-512.png',
-  'og-fittracker.png'
+  'og-fittracker.png',
+  'robots.txt',
+  'sitemap.xml'
 ];
 
 await rm(outputDirectory, { recursive: true, force: true });

@@ -10,8 +10,8 @@ android {
         applicationId = "kr.brightnetworks.fittracker"
         minSdk = 24
         targetSdk = 36
-        versionCode = 9
-        versionName = "1.0.8"
+        versionCode = 12
+        versionName = "1.0.11"
         manifestPlaceholders["KAKAO_NATIVE_APP_KEY"] = "4375f15513f363611ff6adfe86f4a766"
     }
     signingConfigs {

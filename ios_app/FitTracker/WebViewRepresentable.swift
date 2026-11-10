@@ -13,6 +13,7 @@ struct WebViewRepresentable: UIViewRepresentable {
         preferences.allowsContentJavaScript = true
         config.defaultWebpagePreferences = preferences
         config.userContentController.add(context.coordinator, name: "timerVibration")
+        config.userContentController.add(context.coordinator, name: "openExternalChatGPT")
 
         let webView = WKWebView(frame: .zero, configuration: config)
         webView.navigationDelegate = context.coordinator
@@ -44,6 +45,15 @@ struct WebViewRepresentable: UIViewRepresentable {
         }
 
         func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
+            if message.name == "openExternalChatGPT",
+               let urlString = message.body as? String,
+               let url = URL(string: urlString),
+               url.scheme == "https", url.host == "chatgpt.com" {
+                DispatchQueue.main.async {
+                    UIApplication.shared.open(url)
+                }
+                return
+            }
             guard message.name == "timerVibration" else { return }
             let vibrationType = message.body as? Int ?? 1
 
