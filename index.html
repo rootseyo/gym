@@ -633,12 +633,25 @@
           <!-- Multi-Select Shopping Cart Bar -->
           <div id="encyclopediaCartBar" class="enc-cart-bar hidden"></div>
 
-          <!-- Selected Equipment Summary Badge -->
+          <!-- Selected Equipment Summary Badge & Diagram Guide -->
           <div id="encyclopediaSelectedBanner" class="enc-selected-banner hidden">
-            <div class="enc-banner-icon" id="encSelectedIcon"></div>
-            <div class="enc-banner-info">
-              <div class="enc-banner-title" id="encSelectedTitle">벤치프레스</div>
-              <div class="enc-banner-desc" id="encSelectedDesc">대흉근 전체 · 바벨 & 랙</div>
+            <div class="enc-banner-top-row">
+              <div class="enc-banner-icon" id="encSelectedIcon"></div>
+              <div class="enc-banner-info">
+                <div class="enc-banner-title" id="encSelectedTitle">벤치프레스</div>
+                <div class="enc-banner-desc" id="encSelectedDesc">대흉근 전체 · 바벨 & 랙</div>
+              </div>
+            </div>
+            <div id="encSelectedDiagramWrap" class="enc-diagram-preview hidden">
+              <div class="enc-diagram-bar">
+                <span class="enc-diagram-badge"><i class="fa-solid fa-person-running"></i> 2단계 동작 가이드 (신장 ➔ 수축)</span>
+                <button type="button" class="enc-diagram-expand-btn" id="encDiagramZoomBtn" onclick="openExerciseDiagramModal()" title="전체화면 확대">
+                  <i class="fa-solid fa-up-right-and-down-left-from-center"></i> 크게 보기
+                </button>
+              </div>
+              <div class="enc-diagram-img-box" onclick="openExerciseDiagramModal()" title="클릭하여 크게 보기">
+                <img id="encSelectedDiagramImg" class="enc-diagram-img" alt="운동 동작 가이드" src="" loading="lazy">
+              </div>
             </div>
           </div>
         </div>
@@ -897,6 +910,29 @@
             </button>
           </div>
         </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Exercise Diagram Zoom Modal -->
+  <div id="exerciseDiagramModal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="diagramModalTitle" onclick="if(event.target === this) closeExerciseDiagramModal()">
+    <div class="modal-content enc-diagram-modal-content">
+      <div class="modal-header">
+        <h3 id="diagramModalTitle" class="modal-title"><i class="fa-solid fa-person-running text-cyan"></i> 2단계 운동 동작 가이드</h3>
+        <button type="button" class="btn-icon" onclick="closeExerciseDiagramModal()" aria-label="닫기">&times;</button>
+      </div>
+      <div class="enc-diagram-modal-body">
+        <div class="enc-diagram-modal-img-wrap">
+          <img id="diagramModalImg" src="" alt="운동 동작 상세 가이드" class="enc-diagram-modal-img">
+        </div>
+        <div id="diagramModalInfo" class="enc-diagram-modal-info">
+          <div id="diagramModalExerciseName" class="enc-diagram-modal-title"></div>
+          <div id="diagramModalMuscles" class="enc-diagram-modal-muscles"></div>
+          <div id="diagramModalTips" class="enc-diagram-modal-tips"></div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" onclick="closeExerciseDiagramModal()">닫기</button>
       </div>
     </div>
   </div>

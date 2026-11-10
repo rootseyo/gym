@@ -2754,6 +2754,7 @@ function renderEquipmentEncyclopedia(category = activeEncyclopediaCategory, sear
     const equipBadgeText = getEquipCategoryShortLabel(item.equipCategory);
     const aliasBadgeHtml = matchedAlias ? `<div class="enc-alias-match-badge">#${escapeHtml(matchedAlias)}</div>` : '';
     const cartBadgeHtml = isInCart ? `<span class="enc-card-cart-badge" title="담은 순서 ${cartIdx + 1}번">${cartIdx + 1}</span>` : '';
+    const guideBadgeHtml = item.imageUrl ? `<span class="enc-card-guide-badge" title="2단계 동작 가이드 포함"><i class="fa-solid fa-person-running"></i> 2동작</span>` : '';
 
     return `
       <div class="enc-card ${isSelected ? 'selected' : ''} ${isInCart ? 'in-cart' : ''}" data-name="${escapeHtml(item.name)}" role="button" tabindex="0" aria-pressed="${isSelected || isInCart}" onclick="selectEncyclopediaItem('${escapeHtml(item.name)}', false)" onkeydown="if(event.key === 'Enter' || event.key === ' ') { event.preventDefault(); selectEncyclopediaItem('${escapeHtml(item.name)}', false); }">
@@ -2761,6 +2762,7 @@ function renderEquipmentEncyclopedia(category = activeEncyclopediaCategory, sear
           <i class="fa-${isFav ? 'solid' : 'regular'} fa-star"></i>
         </button>
         ${cartBadgeHtml}
+        ${guideBadgeHtml}
         <div class="enc-card-svg-wrap">
           ${svgIcon}
         </div>
@@ -2817,17 +2819,31 @@ function selectEncyclopediaItem(exerciseName, scrollToSettings = false) {
   if (restInput) restInput.value = item.restSeconds;
   updateRestPresetChips(item.restSeconds);
 
-  // Update Selected Summary Banner
+  // Update Selected Summary Banner & 2-Stage Diagram
   const banner = document.getElementById('encyclopediaSelectedBanner');
   const bannerIcon = document.getElementById('encSelectedIcon');
   const bannerTitle = document.getElementById('encSelectedTitle');
   const bannerDesc = document.getElementById('encSelectedDesc');
+  const diagramWrap = document.getElementById('encSelectedDiagramWrap');
+  const diagramImg = document.getElementById('encSelectedDiagramImg');
 
   if (banner && bannerIcon && bannerTitle && bannerDesc) {
     banner.classList.remove('hidden');
     bannerIcon.innerHTML = getExerciseSvgIcon(item.name, item.category);
     bannerTitle.textContent = `${item.name} (${item.equipmentType || item.category})`;
     bannerDesc.textContent = `💡 ${item.tips || item.targetMuscles}`;
+
+    if (diagramWrap && diagramImg) {
+      if (item.imageUrl) {
+        diagramImg.onload = () => { diagramWrap.classList.remove('hidden'); };
+        diagramImg.onerror = () => { diagramWrap.classList.add('hidden'); };
+        diagramImg.src = item.imageUrl;
+        diagramImg.alt = `${item.name} 2단계 동작 가이드`;
+      } else {
+        diagramWrap.classList.add('hidden');
+        diagramImg.src = '';
+      }
+    }
   }
 
   renderEncyclopediaCartBar();
@@ -2835,6 +2851,30 @@ function selectEncyclopediaItem(exerciseName, scrollToSettings = false) {
   renderEquipmentEncyclopedia(activeEncyclopediaCategory, activeEncyclopediaSearch, activeEncyclopediaEquipType);
   if (scrollToSettings) document.querySelector('.enc-tuning-section')?.scrollIntoView({ block: 'start', behavior: 'smooth' });
 }
+
+function openExerciseDiagramModal() {
+  if (!selectedEncyclopediaItem || !selectedEncyclopediaItem.imageUrl) return;
+  const modal = document.getElementById('exerciseDiagramModal');
+  const title = document.getElementById('diagramModalExerciseName');
+  const muscles = document.getElementById('diagramModalMuscles');
+  const tips = document.getElementById('diagramModalTips');
+  const img = document.getElementById('diagramModalImg');
+
+  if (title) title.textContent = `${selectedEncyclopediaItem.name} (${selectedEncyclopediaItem.englishName || selectedEncyclopediaItem.equipmentType || ''})`;
+  if (muscles) muscles.textContent = `🎯 자극 부위: ${selectedEncyclopediaItem.targetMuscles || '-'}`;
+  if (tips) tips.textContent = `💡 핵심 팁: ${selectedEncyclopediaItem.tips || '-'}`;
+  if (img) img.src = selectedEncyclopediaItem.imageUrl;
+
+  if (modal) modal.classList.remove('hidden');
+}
+
+function closeExerciseDiagramModal() {
+  const modal = document.getElementById('exerciseDiagramModal');
+  if (modal) modal.classList.add('hidden');
+}
+
+window.openExerciseDiagramModal = openExerciseDiagramModal;
+window.closeExerciseDiagramModal = closeExerciseDiagramModal;
 
 let addModalReturnFocus;
 function showAddExerciseModal(modal) {

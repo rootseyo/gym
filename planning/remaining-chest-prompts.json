@@ -1,0 +1,77 @@
+[
+  {
+    "id": "hammer-incline-press",
+    "name": "해머 인클라인 프레스",
+    "prompt": "Generate a 2-stage workout exercise illustration diagram:\n- Title: 'HAMMER INCLINE PRESS'\n- Pose 1 (Left - Start/Eccentric): Muscular athletic male seated in a plate-loaded Hammer Strength ISO-Lateral Incline Press machine, independent handles lowered near upper chest level, deep stretch in upper pecs.\n- Pose 2 (Right - Finish/Concentric): Pressing both independent handles upward and converging slightly forward, full contraction of upper chest.\n- Muscle Highlight: Clavicular head of Pectoralis Major (upper chest) glowing bright red-orange.\n- Equipment: Commercial Hammer Strength ISO-Lateral Incline Chest Press plate-loaded machine with Olympic plates.\n- Style: 3D anatomical fitness model, realistic physique, clean light/white minimalist background, scientific fitness guide."
+  },
+  {
+    "id": "hammer-flat-chest-press",
+    "name": "해머 플랫 체스트 프레스",
+    "prompt": "Generate a 2-stage workout exercise illustration diagram:\n- Title: 'HAMMER FLAT CHEST PRESS'\n- Pose 1 (Left - Start/Eccentric): Muscular athletic male seated in a plate-loaded Hammer Strength flat chest press machine, independent handles drawn back, elbows at 90 degrees, deep mid-chest stretch.\n- Pose 2 (Right - Finish/Concentric): Pressing handles forward along converging natural arc, full chest and triceps contraction.\n- Muscle Highlight: Mid-sternal Pectoralis Major glowing bright red-orange.\n- Equipment: Commercial Hammer Strength ISO-Lateral Bench Press machine with Olympic plates.\n- Style: 3D anatomical fitness model, realistic physique, clean light/white minimalist background, scientific fitness guide."
+  },
+  {
+    "id": "hammer-decline-press",
+    "name": "해머 디클라인 프레스",
+    "prompt": "Generate a 2-stage workout exercise illustration diagram:\n- Title: 'HAMMER DECLINE PRESS'\n- Pose 1 (Left - Start/Eccentric): Muscular athletic male seated in a plate-loaded decline chest press machine, handles lowered near lower chest/ribcage level, lower pecs stretched.\n- Pose 2 (Right - Finish/Concentric): Pressing handles downward and forward, strong lower chest line contraction.\n- Muscle Highlight: Lower costal fibers of Pectoralis Major glowing bright red-orange.\n- Equipment: Commercial Hammer Strength ISO-Lateral Decline Press machine with Olympic plates.\n- Style: 3D anatomical fitness model, realistic physique, clean light/white minimalist background, scientific fitness guide."
+  },
+  {
+    "id": "pec-deck-fly",
+    "name": "펙덱 플라이",
+    "prompt": "Generate a 2-stage workout exercise illustration diagram:\n- Title: 'PEC DECK FLY'\n- Pose 1 (Left - Start/Eccentric): Muscular athletic male seated upright on a pec deck butterfly machine, arms out to sides on vertical lever pads, 90-degree elbow bend, chest wide open in deep stretch.\n- Pose 2 (Right - Finish/Concentric): Squeezing lever arms together in front of the chest until pads touch, peak inner chest squeeze.\n- Muscle Highlight: Pectoralis Major inner sternal fibers glowing bright red-orange.\n- Equipment: Commercial selectorized Pec Deck / Butterfly machine with weight stack and vertical pads.\n- Style: 3D anatomical fitness model, realistic physique, clean light/white minimalist background, scientific fitness guide."
+  },
+  {
+    "id": "cable-crossover",
+    "name": "케이블 크로스오버",
+    "prompt": "Generate a 2-stage workout exercise illustration diagram:\n- Title: 'CABLE CROSSOVER'\n- Pose 1 (Left - Start/Eccentric): Muscular athletic male standing centered in a dual cable crossover tower, torso leaning slightly forward, arms wide open holding high cable D-handles, chest stretched under constant tension.\n- Pose 2 (Right - Finish/Concentric): Bringing handles together in a sweeping downward arc in front of lower torso, crossing hands slightly for peak contraction.\n- Muscle Highlight: Pectoralis Major (especially sternal/lower fibers) glowing bright red-orange.\n- Equipment: Commercial dual cable crossover tower with pulleys and weight stacks.\n- Style: 3D anatomical fitness model, realistic physique, clean light/white minimalist background, scientific fitness guide."
+  },
+  {
+    "id": "cable-high-to-low-crossover",
+    "name": "케이블 하이 투 로우 크로스오버",
+    "prompt": "Generate a 2-stage workout exercise illustration diagram:\n- Title: 'HIGH-TO-LOW CABLE FLY'\n- Pose 1 (Left - Start/Eccentric): Muscular athletic male standing with high cable pulleys, arms open high and wide, chest open in stretch.\n- Pose 2 (Right - Finish/Concentric): Squeezing cables downward towards the hips/groin, hands meeting at pelvic level, lower pecs intensely contracted.\n- Muscle Highlight: Lower costal head of Pectoralis Major glowing bright red-orange.\n- Equipment: Dual cable pulley machine with pulleys set at highest top pin.\n- Style: 3D anatomical fitness model, realistic physique, clean light/white minimalist background, scientific fitness guide."
+  },
+  {
+    "id": "cable-low-to-high-fly",
+    "name": "케이블 로우 투 하이 플라이",
+    "prompt": "Generate a 2-stage workout exercise illustration diagram:\n- Title: 'LOW-TO-HIGH CABLE FLY'\n- Pose 1 (Left - Start/Eccentric): Muscular athletic male standing with cable pulleys set at the lowest floor setting, arms extended down and slightly back holding stirrup handles.\n- Pose 2 (Right - Finish/Concentric): Sweeping handles upward and inward in an underhand scoop arc to clavicle level, upper chest squeezed.\n- Muscle Highlight: Upper clavicular head of Pectoralis Major glowing bright red-orange.\n- Equipment: Dual cable pulley machine with pulleys set at lowest floor pin.\n- Style: 3D anatomical fitness model, realistic physique, clean light/white minimalist background, scientific fitness guide."
+  },
+  {
+    "id": "smith-machine-bench-press",
+    "name": "스미스머신 벤치프레스",
+    "prompt": "Generate a 2-stage workout exercise illustration diagram:\n- Title: 'SMITH MACHINE BENCH PRESS'\n- Pose 1 (Left - Start/Eccentric): Muscular athletic male lying on flat bench under Smith machine, lowering guided fixed barbell down to touch mid-chest.\n- Pose 2 (Right - Finish/Concentric): Pressing fixed bar vertically along steel guide rails to full arm extension.\n- Muscle Highlight: Pectoralis Major and triceps glowing bright red-orange.\n- Equipment: Commercial Smith machine with linear guide rods, safety hooks, and flat bench.\n- Style: 3D anatomical fitness model, realistic physique, clean light/white minimalist background, scientific fitness guide."
+  },
+  {
+    "id": "smith-machine-incline-press",
+    "name": "스미스머신 인클라인 프레스",
+    "prompt": "Generate a 2-stage workout exercise illustration diagram:\n- Title: 'SMITH MACHINE INCLINE PRESS'\n- Pose 1 (Left - Start/Eccentric): Muscular athletic male on incline bench under Smith machine, lowering guided barbell to upper chest/clavicle.\n- Pose 2 (Right - Finish/Concentric): Pressing guided barbell upward along fixed vertical rails, full contraction of upper chest.\n- Muscle Highlight: Clavicular head of Pectoralis Major glowing bright red-orange.\n- Equipment: Commercial Smith machine with adjustable incline bench (35 degrees).\n- Style: 3D anatomical fitness model, realistic physique, clean light/white minimalist background, scientific fitness guide."
+  },
+  {
+    "id": "seated-dip-machine",
+    "name": "시티드 딥스 머신",
+    "prompt": "Generate a 2-stage workout exercise illustration diagram:\n- Title: 'SEATED DIP MACHINE'\n- Pose 1 (Left - Start/Eccentric): Muscular athletic male seated on dip machine with thighs secured under lap pads, hands gripping high parallel handles, elbows bent up.\n- Pose 2 (Right - Finish/Concentric): Pressing handles downward until arms lock out, lifting weight stack, squeezing lower pecs and triceps.\n- Muscle Highlight: Lower Pectoralis Major and triceps brachii glowing bright red-orange.\n- Equipment: Commercial selectorized seated dip machine with seat belt/roller pads and weight stack.\n- Style: 3D anatomical fitness model, realistic physique, clean light/white minimalist background, scientific fitness guide."
+  },
+  {
+    "id": "assisted-dip-machine",
+    "name": "어시스트 딥스 머신",
+    "prompt": "Generate a 2-stage workout exercise illustration diagram:\n- Title: 'ASSISTED DIP MACHINE'\n- Pose 1 (Left - Start/Eccentric): Muscular athletic male kneeling on counterbalanced knee platform, torso leaning slightly forward 30 degrees, lowering body until elbows reach 90 degrees.\n- Pose 2 (Right - Finish/Concentric): Pressing down on parallel bars to push torso back up to straight arm lockout.\n- Muscle Highlight: Lower Pectoralis Major and triceps glowing bright red-orange.\n- Equipment: Commercial assisted pull-up/dip combo machine with knee pad and selectorized weight stack.\n- Style: 3D anatomical fitness model, realistic physique, clean light/white minimalist background, scientific fitness guide."
+  },
+  {
+    "id": "dips",
+    "name": "딥스",
+    "prompt": "Generate a 2-stage workout exercise illustration diagram:\n- Title: 'PARALLEL BAR DIPS'\n- Pose 1 (Left - Start/Eccentric): Muscular athletic male supporting bodyweight on parallel dip bars, forward torso lean (30 degrees), descending until elbows bend to 90 degrees, deep lower chest stretch.\n- Pose 2 (Right - Finish/Concentric): Pressing body vertically up to full arm extension while keeping chest forward, squeezing lower pecs.\n- Muscle Highlight: Lower Pectoralis Major and triceps glowing bright red-orange.\n- Equipment: Sturdy freestanding parallel dip bars / power tower station.\n- Style: 3D anatomical fitness model, realistic physique, clean light/white minimalist background, scientific fitness guide."
+  },
+  {
+    "id": "push-up",
+    "name": "푸쉬업",
+    "prompt": "Generate a 2-stage workout exercise illustration diagram:\n- Title: 'STANDARD PUSH-UP'\n- Pose 1 (Left - Start/Eccentric): Muscular athletic male in low push-up plank position, chest hovering 2cm above floor, rigid plank spine, elbows bent back 45 degrees.\n- Pose 2 (Right - Finish/Concentric): Pressing body away from floor to straight-arm high plank position, chest and core firmly flexed.\n- Muscle Highlight: Pectoralis Major, anterior deltoids, and triceps glowing bright red-orange.\n- Equipment: Clean workout floor / exercise mat, bodyweight.\n- Style: 3D anatomical fitness model, realistic physique, clean light/white minimalist background, scientific fitness guide."
+  },
+  {
+    "id": "dumbbell-pullover",
+    "name": "덤벨 풀오버",
+    "prompt": "Generate a 2-stage workout exercise illustration diagram:\n- Title: 'DUMBBELL PULLOVER'\n- Pose 1 (Left - Start/Eccentric): Muscular athletic male lying perpendicular with upper back across a flat bench, hips slightly lowered, holding one heavy dumbbell overhead with arms extended back behind crown of head, deep ribcage and upper chest stretch.\n- Pose 2 (Right - Finish/Concentric): Pulling the dumbbell in a smooth arc up directly over the chest, squeezing upper pecs and serratus anterior.\n- Muscle Highlight: Clavicular head of Pectoralis Major, serratus anterior, and lats glowing bright red-orange.\n- Equipment: Flat workout bench and single heavy hex dumbbell gripped with diamond hand hold.\n- Style: 3D anatomical fitness model, realistic physique, clean light/white minimalist background, scientific fitness guide."
+  },
+  {
+    "id": "dumbbell-squeeze-press",
+    "name": "덤벨 스퀴즈 프레스",
+    "prompt": "Generate a 2-stage workout exercise illustration diagram:\n- Title: 'DUMBBELL SQUEEZE PRESS'\n- Pose 1 (Left - Start/Eccentric): Muscular athletic male lying on flat bench holding two hex dumbbells pressed tightly together touching each other against the mid-chest.\n- Pose 2 (Right - Finish/Concentric): Pressing dumbbells straight up while actively squeezing them together with maximum force, peak inner chest isometric tension.\n- Muscle Highlight: Inner sternal cleavage of Pectoralis Major glowing bright red-orange.\n- Equipment: Flat workout bench and pair of flat-sided hex dumbbells pressed together.\n- Style: 3D anatomical fitness model, realistic physique, clean light/white minimalist background, scientific fitness guide."
+  }
+]

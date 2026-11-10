@@ -1,4 +1,4 @@
-import { copyFile, mkdir, rm } from 'node:fs/promises';
+import { copyFile, mkdir, rm, cp, stat } from 'node:fs/promises';
 import { dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -50,5 +50,15 @@ await mkdir(outputDirectory, { recursive: true });
 await Promise.all(publicFiles.map(file => (
   copyFile(resolve(projectRoot, file), resolve(outputDirectory, file))
 )));
+
+const assetsDir = resolve(projectRoot, 'assets');
+try {
+  const assetsStat = await stat(assetsDir);
+  if (assetsStat.isDirectory()) {
+    await cp(assetsDir, resolve(outputDirectory, 'assets'), { recursive: true });
+  }
+} catch (e) {
+  // assets directory is optional
+}
 
 console.log(`Prepared ${publicFiles.length} public web assets in ${outputDirectory}`);

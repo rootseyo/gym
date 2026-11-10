@@ -1263,6 +1263,7 @@ const EQUIPMENT_CATALOG = [
     "defaultWeight": 60,
     "defaultReps": 12,
     "restSeconds": 150,
+    "imageUrl": "assets/exercises/bench-press.webp",
     "tips": "견갑을 후하방으로 단단히 고정하고 바를 젖꼭지 라인으로 수직 하강하세요.",
     "aliases": [
       "벤치",
@@ -1290,6 +1291,7 @@ const EQUIPMENT_CATALOG = [
     "defaultWeight": 50,
     "defaultReps": 12,
     "restSeconds": 120,
+    "imageUrl": "assets/exercises/incline-bench-press.webp",
     "tips": "벤치 각도는 30~45도가 적당하며, 쇄골 바로 아래로 바벨을 내립니다.",
     "aliases": [
       "인클벤치",
@@ -1315,6 +1317,7 @@ const EQUIPMENT_CATALOG = [
     "defaultWeight": 55,
     "defaultReps": 12,
     "restSeconds": 120,
+    "imageUrl": "assets/exercises/decline-bench-press.webp",
     "tips": "아랫가슴 라인을 선명하게 분리하며 어깨 부담이 비교적 적습니다.",
     "aliases": [
       "디클벤치",
@@ -1339,6 +1342,7 @@ const EQUIPMENT_CATALOG = [
     "defaultWeight": 20,
     "defaultReps": 12,
     "restSeconds": 90,
+    "imageUrl": "assets/exercises/dumbbell-bench-press.webp",
     "tips": "바벨보다 더 깊은 가동범위로 가슴 근육을 강하게 이완/수축할 수 있습니다.",
     "aliases": [
       "덤프",
@@ -1363,6 +1367,7 @@ const EQUIPMENT_CATALOG = [
     "defaultWeight": 18,
     "defaultReps": 12,
     "restSeconds": 90,
+    "imageUrl": "assets/exercises/incline-dumbbell-press.webp",
     "tips": "정점에서 덤벨을 부딪치지 말고 윗가슴의 수축감을 유지하세요.",
     "aliases": [
       "인클덤프",
@@ -1387,6 +1392,7 @@ const EQUIPMENT_CATALOG = [
     "defaultWeight": 12,
     "defaultReps": 12,
     "restSeconds": 60,
+    "imageUrl": "assets/exercises/dumbbell-fly.webp",
     "tips": "팔꿈치를 살짝 구부린 상태를 유지하며 큰 나무를 안듯 가슴을 벌립니다.",
     "aliases": [
       "덤벨플라이",
@@ -1410,6 +1416,7 @@ const EQUIPMENT_CATALOG = [
     "defaultWeight": 10,
     "defaultReps": 12,
     "restSeconds": 60,
+    "imageUrl": "assets/exercises/incline-dumbbell-fly.webp",
     "tips": "윗가슴을 열어주며 어깨가 들리지 않도록 견갑을 밀착합니다.",
     "aliases": [
       "인클플라이",
@@ -1433,6 +1440,7 @@ const EQUIPMENT_CATALOG = [
     "defaultWeight": 40,
     "defaultReps": 12,
     "restSeconds": 90,
+    "imageUrl": "assets/exercises/chest-press-machine.webp",
     "tips": "의자 높이를 조절하여 손잡이가 가슴 중앙 높이에 오도록 맞추세요.",
     "aliases": [
       "체프",
@@ -1458,6 +1466,7 @@ const EQUIPMENT_CATALOG = [
     "defaultWeight": 35,
     "defaultReps": 12,
     "restSeconds": 90,
+    "imageUrl": "assets/exercises/incline-chest-press-machine.webp",
     "tips": "궤적이 고정되어 어깨 부상 위험 없이 윗가슴에 고중량을 실을 수 있습니다.",
     "aliases": [
       "인클체프",
@@ -1481,6 +1490,7 @@ const EQUIPMENT_CATALOG = [
     "defaultWeight": 40,
     "defaultReps": 12,
     "restSeconds": 90,
+    "imageUrl": "assets/exercises/wide-chest-press-machine.webp",
     "tips": "넓은 그립으로 가슴 바깥쪽을 강하게 늘려 프레임을 넓힙니다.",
     "aliases": [
       "와이드체프",
@@ -1504,6 +1514,7 @@ const EQUIPMENT_CATALOG = [
     "defaultWeight": 40,
     "defaultReps": 10,
     "restSeconds": 120,
+    "imageUrl": "assets/exercises/hammer-incline-press.webp",
     "tips": "안장 높이를 조절해 밀어낸 정점에서 손잡이가 쇄골 앞에 모이도록 세팅하세요.",
     "aliases": [
       "해머인클라인",
@@ -1528,6 +1539,7 @@ const EQUIPMENT_CATALOG = [
     "defaultWeight": 50,
     "defaultReps": 10,
     "restSeconds": 120,
+    "imageUrl": "assets/exercises/hammer-flat-chest-press.webp",
     "tips": "좌우 팔이 독립적으로 움직여 짝가슴 교정과 고중량 프레스에 탁월합니다.",
     "aliases": [
       "해머벤치",
@@ -1552,6 +1564,7 @@ const EQUIPMENT_CATALOG = [
     "defaultWeight": 50,
     "defaultReps": 12,
     "restSeconds": 120,
+    "imageUrl": "assets/exercises/hammer-decline-press.webp",
     "tips": "손잡이를 아랫가슴 방향으로 비스듬히 밀어 하부 라인을 깊게 타격합니다.",
     "aliases": [
       "해머디클라인",
@@ -1575,6 +1588,7 @@ const EQUIPMENT_CATALOG = [
     "defaultWeight": 30,
     "defaultReps": 12,
     "restSeconds": 60,
+    "imageUrl": "assets/exercises/pec-deck-fly.webp",
     "tips": "팔꿈치를 살짝 굽힌 상태를 유지하며 가슴 안쪽을 쥐어짜듯 모아줍니다.",
     "aliases": [
       "펙덱",
@@ -1599,6 +1613,7 @@ const EQUIPMENT_CATALOG = [
     "defaultWeight": 15,
     "defaultReps": 15,
     "restSeconds": 60,
+    "imageUrl": "assets/exercises/cable-crossover.webp",
     "tips": "케이블의 지속적인 텐션을 활용해 정점에서 손잡이를 교차하듯 쥐어짭니다.",
     "aliases": [
       "케이블플라이",
@@ -1622,6 +1637,7 @@ const EQUIPMENT_CATALOG = [
     "defaultWeight": 15,
     "defaultReps": 15,
     "restSeconds": 60,
+    "imageUrl": "assets/exercises/cable-high-to-low-crossover.webp",
     "tips": "상단 도르래에서 골반 앞쪽으로 찍어 누르듯 모아 아랫가슴을 조입니다.",
     "aliases": [
       "하이투로우",
@@ -1645,6 +1661,7 @@ const EQUIPMENT_CATALOG = [
     "defaultWeight": 10,
     "defaultReps": 15,
     "restSeconds": 60,
+    "imageUrl": "assets/exercises/cable-low-to-high-fly.webp",
     "tips": "하단 도르래에서 쇄골 앞쪽으로 퍼올리듯 모아 윗가슴 안쪽을 채웁니다.",
     "aliases": [
       "로우투하이",
@@ -1668,6 +1685,7 @@ const EQUIPMENT_CATALOG = [
     "defaultWeight": 50,
     "defaultReps": 12,
     "restSeconds": 120,
+    "imageUrl": "assets/exercises/smith-machine-bench-press.webp",
     "tips": "바의 수직 궤적에 맞춰 벤치 위치를 정밀하게 세팅하세요.",
     "aliases": [
       "스미스벤치",
@@ -1691,6 +1709,7 @@ const EQUIPMENT_CATALOG = [
     "defaultWeight": 45,
     "defaultReps": 12,
     "restSeconds": 120,
+    "imageUrl": "assets/exercises/smith-machine-incline-press.webp",
     "tips": "균형 잡는 에너지를 아껴 오직 윗가슴 수축과 이완에만 집중할 수 있습니다.",
     "aliases": [
       "스미스인클",

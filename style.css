@@ -3934,13 +3934,20 @@ tr.set-row-warmup input[type="number"] {
 /* Selected Equipment Summary Banner */
 .enc-selected-banner {
   display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 8px 12px;
+  flex-direction: column;
+  gap: 8px;
+  padding: 10px 12px;
   background: rgba(0, 242, 254, 0.08);
   border: 1px solid rgba(0, 242, 254, 0.25);
   border-radius: var(--radius-md);
   margin-bottom: 10px;
+}
+
+.enc-banner-top-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
 }
 
 .enc-banner-icon {
@@ -3972,6 +3979,160 @@ tr.set-row-warmup input[type="number"] {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+/* 2-Stage Exercise Diagram Preview */
+.enc-diagram-preview {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-top: 4px;
+  padding-top: 8px;
+  border-top: 1px dashed rgba(0, 242, 254, 0.2);
+}
+
+.enc-diagram-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.enc-diagram-badge {
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: #00f2fe;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.enc-diagram-expand-btn {
+  background: rgba(0, 242, 254, 0.12);
+  border: 1px solid rgba(0, 242, 254, 0.3);
+  color: var(--text-main);
+  padding: 3px 8px;
+  border-radius: 6px;
+  font-size: 0.68rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  transition: all 0.2s ease;
+}
+
+.enc-diagram-expand-btn:hover {
+  background: rgba(0, 242, 254, 0.25);
+  color: #fff;
+}
+
+.enc-diagram-img-box {
+  position: relative;
+  width: 100%;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: #ffffff;
+  cursor: pointer;
+  aspect-ratio: 16 / 9;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.enc-diagram-img-box:hover {
+  transform: scale(1.01);
+  box-shadow: 0 6px 18px rgba(0, 242, 254, 0.25);
+}
+
+.enc-diagram-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
+
+/* Card Guide Badge in Grid */
+.enc-card-guide-badge {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  background: linear-gradient(135deg, rgba(255, 87, 34, 0.9), rgba(255, 152, 0, 0.9));
+  color: #fff;
+  font-size: 0.6rem;
+  font-weight: 700;
+  padding: 2px 6px;
+  border-radius: 10px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  z-index: 2;
+  letter-spacing: -0.3px;
+}
+
+/* Zoom Modal Styles */
+.enc-diagram-modal-content {
+  max-width: 720px;
+  width: 95%;
+  background: var(--bg-card);
+  border: 1px solid rgba(0, 242, 254, 0.3);
+  border-radius: var(--radius-lg);
+}
+
+.enc-diagram-modal-body {
+  padding: 12px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.enc-diagram-modal-img-wrap {
+  width: 100%;
+  border-radius: 10px;
+  overflow: hidden;
+  background: #ffffff;
+  aspect-ratio: 16 / 9;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+}
+
+.enc-diagram-modal-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.enc-diagram-modal-info {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 8px;
+  padding: 10px 12px;
+}
+
+.enc-diagram-modal-title {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text-main);
+}
+
+.enc-diagram-modal-muscles {
+  font-size: 0.8rem;
+  color: var(--accent-orange);
+  font-weight: 600;
+}
+
+.enc-diagram-modal-tips {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  line-height: 1.45;
 }
 
 /* Exercise List Card Thumbnail Icon */
