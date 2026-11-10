@@ -7,8 +7,20 @@ let currentKakaoUser = null;
 let cloudSyncTimeout = null;
 let adminSyncTimeout = null;
 let lastSyncTimestamp = null;
+let kakaoSessionExpired = false;
 const adminReadyKakaoIds = new Set();
 const adminPullPromises = new Map();
+
+if (typeof window !== 'undefined' && typeof window.addEventListener === 'function') {
+  window.addEventListener('gym-session-required', () => {
+    kakaoSessionExpired = true;
+    updateAuthUIState(currentKakaoUser);
+  });
+  window.addEventListener('gym-authenticated', () => {
+    kakaoSessionExpired = false;
+    updateAuthUIState(currentKakaoUser);
+  });
+}
 
 // Get or initialize unique visitor ID in LocalStorage
 function getOrInitVisitorId() {
@@ -88,7 +100,14 @@ window.flushGymSync = function(extraData = {}, showNotice = false) {
       method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload), credentials: 'include'
     });
     const data = await response.json();
-    if (!response.ok || !data.success) throw new Error(data.error || '운동 동기화에 실패했습니다.');
+    if (!response.ok || !data.success) {
+      if (response.status === 401) {
+        kakaoSessionExpired = true;
+        updateAuthUIState(currentKakaoUser);
+      }
+      throw new Error(data.error || '운동 동기화에 실패했습니다.');
+    }
+    kakaoSessionExpired = false;
     if (String(getSavedKakaoUser()?.kakaoId || '') !== expectedId) throw new Error('로그인 계정이 변경되었습니다.');
     const remaining = getGymDirtyDates();
     Object.keys(dirty).forEach(date => {
@@ -175,6 +194,10 @@ window.pullWorkoutsFromAdminServer = function pullWorkoutsFromAdminServer(extraD
     credentials: 'include'
   }).then(async (response) => {
     if (!response.ok) {
+      if (response.status === 401) {
+        kakaoSessionExpired = true;
+        updateAuthUIState(currentKakaoUser);
+      }
       throw new Error(`Admin sync pull failed with status ${response.status}`);
     }
 
@@ -182,6 +205,8 @@ window.pullWorkoutsFromAdminServer = function pullWorkoutsFromAdminServer(extraD
     if (!data.success) {
       throw new Error(data.error || 'Admin sync pull failed');
     }
+
+    kakaoSessionExpired = false;
 
     if (String(getSavedKakaoUser()?.kakaoId || '') !== kakaoId) return false;
     window.mergeAdminWorkoutsIntoLocalState(data.workouts || {}, {
@@ -251,6 +276,7 @@ window.onKakaoNativeLoginSuccess = async function(userData) {
     accessToken: userData.accessToken || null
   };
   localStorage.setItem('fit_tracker_kakao_user', JSON.stringify(currentKakaoUser));
+  kakaoSessionExpired = false;
 
   updateAuthUIState(currentKakaoUser);
   if (window.GymAuth && kakaoId) {
@@ -310,6 +336,7 @@ window.signInWithKakao = function signInWithKakao() {
               accessToken: authObj.access_token || null
             };
             localStorage.setItem('fit_tracker_kakao_user', JSON.stringify(currentKakaoUser));
+            kakaoSessionExpired = false;
 
             updateAuthUIState(currentKakaoUser);
             
@@ -376,6 +403,7 @@ window.signOutUser = async function signOutUser() {
   localStorage.removeItem('fit_tracker_kakao_user');
   adminReadyKakaoIds.clear();
   adminPullPromises.clear();
+  kakaoSessionExpired = false;
   currentKakaoUser = null;
   currentUser = null;
   updateAuthUIState(null);
@@ -588,6 +616,40 @@ function updateAuthUIState(user) {
         authUserEmailRow.style.display = 'none';
       }
     }
+
+    const reconnectBtn = document.getElementById('reconnectKakaoBtn');
+    const syncCardTitle = document.getElementById('syncStatusCardTitle');
+    const syncCardDesc = document.getElementById('syncStatusCardDesc');
+    const syncPulseDot = document.getElementById('syncStatusPulseDot');
+
+    if (reconnectBtn) {
+      if (kakaoSessionExpired) {
+        reconnectBtn.classList.remove('hidden');
+        reconnectBtn.style.display = 'block';
+      } else {
+        reconnectBtn.classList.add('hidden');
+        reconnectBtn.style.display = 'none';
+      }
+      reconnectBtn.onclick = () => {
+        if (typeof window.signInWithKakao === 'function') {
+          window.signInWithKakao();
+        }
+      };
+    }
+
+    if (syncCardTitle && syncCardDesc && syncPulseDot) {
+      if (kakaoSessionExpired) {
+        syncCardTitle.textContent = '카카오 서버 재인증 필요';
+        syncCardDesc.textContent = '서버와의 연결이 만료되었습니다. 아래 \'카카오 계정 다시 연결\'을 누르면 즉시 동기화가 재개됩니다.';
+        syncPulseDot.style.background = '#f59e0b';
+        syncPulseDot.style.boxShadow = '0 0 0 0 rgba(245, 158, 11, 0.7)';
+      } else {
+        syncCardTitle.textContent = '실시간 클라우드 자동 동기화 활성';
+        syncCardDesc.textContent = '운동 일지, 세트 기록, 커스텀 프리셋이 클라우드 서버에 실시간 안전하게 자동 보관 중입니다.';
+        syncPulseDot.style.background = '';
+        syncPulseDot.style.boxShadow = '';
+      }
+    }
   } else {
     // Logged Out State: strictly show login view and hide logout/delete buttons
     if (authModalBtn) authModalBtn.classList.remove('logged-in');
@@ -619,7 +681,10 @@ function updateSyncTimestampDisplay() {
 
   const isKakaoLoggedIn = Boolean(currentKakaoUser && currentKakaoUser.kakaoId);
 
-  if (lastSyncTimestamp && isKakaoLoggedIn) {
+  if (kakaoSessionExpired && isKakaoLoggedIn) {
+    syncTimeEl.textContent = '동기화 상태: 카카오 재인증 필요';
+    syncTimeEl.style.color = '#f59e0b';
+  } else if (lastSyncTimestamp && isKakaoLoggedIn) {
     const timeStr = new Date(lastSyncTimestamp).toLocaleTimeString('ko-KR', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
     syncTimeEl.textContent = `마지막 동기화: ${timeStr}`;
     syncTimeEl.style.color = 'var(--accent-emerald)';

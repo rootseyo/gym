@@ -173,3 +173,44 @@ test('GymAuth.ensure seamlessly connects with saved cloud sync accessToken', asy
   assert.equal(session.kakaoId, '1234567');
   assert.equal(postPayload?.accessToken, 'mock_kakao_access_token_123');
 });
+
+test('GymAuth.syncFetch does not throw or dispatch gym-session-required when backend returns 200 even if ensure() fails', async () => {
+  const { context, window } = createBrowserEnv();
+  window.localStorage.setItem('fit_tracker_kakao_user', JSON.stringify({
+    kakaoId: '1234567',
+    nickname: '운동하는사자'
+  }));
+
+  let sessionRequiredFired = false;
+  window.addEventListener('gym-session-required', () => { sessionRequiredFired = true; });
+
+  context.fetch = async (url, options) => {
+    if (url.endsWith('/session')) {
+      return { ok: true, json: async () => ({ authenticated: false, kakaoId: null }) };
+    }
+    return { ok: true, status: 200, json: async () => ({ success: true, workouts: {} }) };
+  };
+
+  const authCode = fs.readFileSync('community-auth.js', 'utf8');
+  vm.runInContext(authCode, context);
+
+  const res = await context.window.GymAuth.syncFetch('https://admin.brightnetworks.kr/api/gym/sync');
+  assert.equal(res.status, 200);
+  assert.equal(sessionRequiredFired, false, 'gym-session-required must not be fired on 200 OK');
+});
+
+test('GymAuth removes gymSessionNotice when gym-authenticated event fires', () => {
+  const { context, window, elements } = createBrowserEnv();
+  const notice = {
+    id: 'gymSessionNotice',
+    removeCalled: false,
+    remove() { this.removeCalled = true; elements.delete('gymSessionNotice'); }
+  };
+  elements.set('gymSessionNotice', notice);
+
+  const authCode = fs.readFileSync('community-auth.js', 'utf8');
+  vm.runInContext(authCode, context);
+
+  window.dispatchEvent(new context.CustomEvent('gym-authenticated', { detail: { kakaoId: '123' } }));
+  assert.equal(notice.removeCalled, true, 'gymSessionNotice must be removed upon gym-authenticated');
+});

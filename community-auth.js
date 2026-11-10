@@ -73,11 +73,7 @@
   async function syncFetch(url, options) {
     const user = savedUser();
     if (user?.kakaoId) {
-      try { await ensure(null, user.kakaoId); }
-      catch (error) {
-        window.dispatchEvent(new Event('gym-session-required'));
-        throw error;
-      }
+      try { await ensure(null, user.kakaoId); } catch (_) {}
     }
     let response = await fetch(url, options);
     if (response.status === 401 && user?.kakaoId) {
@@ -89,7 +85,11 @@
         response = await fetch(url, options);
       } catch (_) {}
     }
-    if (response.status === 401) { cachedSession = null; validUntil = 0; window.dispatchEvent(new Event('gym-session-required')); }
+    if (response.status === 401) {
+      cachedSession = null;
+      validUntil = 0;
+      window.dispatchEvent(new Event('gym-session-required'));
+    }
     return response;
   }
   async function logout() {
@@ -97,17 +97,30 @@
     return request('/session', { method: 'POST', body: JSON.stringify({ action: 'logout' }) });
   }
   window.addEventListener('storage', event => { if (event.key === 'fit_tracker_kakao_user') { cachedSession = null; validUntil = 0; } });
+  window.addEventListener('gym-authenticated', () => {
+    document.getElementById('gymSessionNotice')?.remove();
+  });
   window.addEventListener('gym-session-required', () => {
     if (!document.getElementById('authModalBtn') || document.getElementById('gymSessionNotice')) return;
     const notice = document.createElement('p'); notice.id = 'gymSessionNotice'; notice.setAttribute('role', 'status');
-    notice.style.cssText = 'padding:12px;border:1px solid #a88b34;border-radius:10px;color:#ffe49a';
-    notice.append('카카오 계정의 서버 연결을 확인하지 못했어요. 운동과 오운완은 같은 카카오 로그인으로 연결됩니다. ');
-    const link = document.createElement('a'); link.href = '#'; link.textContent = '카카오 계정 연결 확인';
-    link.addEventListener('click', event => {
+    notice.style.cssText = 'padding:12px;border:1px solid #a88b34;border-radius:10px;color:#ffe49a;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;margin:8px 0;';
+    const textSpan = document.createElement('span');
+    textSpan.textContent = '카카오 계정의 서버 연결을 확인하지 못했어요. 운동과 오운완은 같은 카카오 로그인으로 연결됩니다.';
+    notice.append(textSpan);
+    const btn = document.createElement('button');
+    btn.type = 'button';
+    btn.textContent = '카카오 계정 다시 연결';
+    btn.style.cssText = 'padding:6px 12px;background:#fee500;color:#181600;font-weight:700;border:none;border-radius:6px;cursor:pointer;font-size:13px;white-space:nowrap;';
+    btn.addEventListener('click', event => {
       event.preventDefault();
-      document.getElementById('authModalBtn')?.click();
+      if (typeof window.signInWithKakao === 'function') {
+        window.signInWithKakao();
+      } else {
+        document.getElementById('authModalBtn')?.click();
+      }
     });
-    notice.append(link); document.querySelector('.app-header')?.after(notice);
+    notice.append(btn);
+    document.querySelector('.app-header')?.after(notice);
   });
   function hasActiveSession(expectedId = savedUser()?.kakaoId) {
     return Boolean(cachedSession && Date.now() < validUntil && (!expectedId || cachedSession.kakaoId === String(expectedId)));
