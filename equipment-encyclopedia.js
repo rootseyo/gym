@@ -1,6 +1,6 @@
 /**
  * FitTracker Pro - Illustrated Equipment & Exercise Encyclopedia Module (Phase 1 Enhanced)
- * Complete Master Catalog of 163 Gym Equipment, Free Weights, Plate-Loaded/Pin Machines & Cardio.
+ * Complete Master Catalog of 168 Gym Equipment, Free Weights, Plate-Loaded/Pin Machines & Cardio.
  * Features 105 custom SVG vector illustrations, 6+1 equipment taxonomy, synonyms & alternatives.
  */
 
@@ -1246,10 +1246,15 @@ const EXERCISE_SYNONYMS = {
   "라트익": "스컬 크러셔 (라잉 익스텐션)",
   "행레": "행잉 레그레이즈",
   "데드": "데드리프트",
-  "루마데드": "루마니안 데드리프트"
+  "루마데드": "루마니안 데드리프트",
+  "케오익": "케이블 오버헤드 익스텐션",
+  "케이블오버헤드": "케이블 오버헤드 익스텐션",
+  "베이지안": "케이블 원 암 바이셉스 컬",
+  "베이지안컬": "케이블 원 암 바이셉스 컬",
+  "원암케이블컬": "케이블 원 암 바이셉스 컬"
 };
 
-// Master Encyclopedia of 163 Gym Exercises & Equipment
+// Master Encyclopedia of 168 Gym Exercises & Equipment
 const EQUIPMENT_CATALOG = [
   {
     "id": "bench-press",
@@ -3040,6 +3045,31 @@ const EQUIPMENT_CATALOG = [
     ]
   },
   {
+    "id": "cable-hip-abduction",
+    "name": "케이블 힙 어브덕션",
+    "category": "하체",
+    "englishName": "Cable Hip Abduction",
+    "iconType": "outer-thigh",
+    "equipmentType": "하단 케이블 & 발목 스트랩",
+    "equipCategory": "cable",
+    "targetMuscles": "중둔근, 소둔근 (골반 힙딥 채움)",
+    "defaultWeight": 5,
+    "defaultReps": 15,
+    "restSeconds": 60,
+    "tips": "상체를 가볍게 지지하고 발목 스트랩을 바깥쪽으로 밀어내며 중둔근 상단을 강하게 수축합니다.",
+    "aliases": [
+      "케이블어브덕션",
+      "케이블중둔근",
+      "케이블외전",
+      "중둔근케이블"
+    ],
+    "alternatives": [
+      "아웃싸이 (어브덕션)",
+      "머신 힙 어브덕션",
+      "케이블 글루트 킥백"
+    ]
+  },
+  {
     "id": "lunge",
     "name": "런지",
     "category": "하체",
@@ -4009,6 +4039,85 @@ const EQUIPMENT_CATALOG = [
     ]
   },
   {
+    "id": "cable-one-arm-biceps-curl",
+    "name": "케이블 원 암 바이셉스 컬",
+    "category": "팔",
+    "englishName": "Cable One-Arm Biceps Curl (Bayesian Curl)",
+    "iconType": "triceps-pushdown",
+    "equipmentType": "케이블 머신 & 싱글 핸들",
+    "equipCategory": "cable",
+    "targetMuscles": "상완이두근 장두/단두 (최대 신장 및 지속 장력)",
+    "defaultWeight": 10,
+    "defaultReps": 12,
+    "restSeconds": 60,
+    "imageUrl": "assets/exercises/cable-one-arm-biceps-curl.webp",
+    "tips": "도르래를 등지고 서서 팔을 뒤로 보낸 신장 포지션(베이지안 컬)에서 컬을 진행하면 이두근에 강력한 긴장감이 지속됩니다.",
+    "aliases": [
+      "원암케이블컬",
+      "원암바이셉스컬",
+      "베이지안컬",
+      "케이블원암컬",
+      "원암이두컬",
+      "bayesian",
+      "베이지안"
+    ],
+    "alternatives": [
+      "케이블 컬",
+      "인클라인 덤벨 컬",
+      "덤벨 컬",
+      "컨센트레이션 컬"
+    ]
+  },
+  {
+    "id": "cable-rope-hammer-curl",
+    "name": "케이블 로프 해머 컬",
+    "category": "팔",
+    "englishName": "Cable Rope Hammer Curl",
+    "iconType": "triceps-pushdown",
+    "equipmentType": "하단 케이블 & 로프",
+    "equipCategory": "cable",
+    "targetMuscles": "상완근, 상완요골근, 이두근 외측",
+    "defaultWeight": 15,
+    "defaultReps": 12,
+    "restSeconds": 60,
+    "tips": "손바닥이 서로 마주보는 뉴트럴 그립으로 컬을 수행하며 정점에서 로프를 양옆으로 살짝 벌려줍니다.",
+    "aliases": [
+      "케이블해머컬",
+      "로프해머컬",
+      "케이블로프컬",
+      "로프컬"
+    ],
+    "alternatives": [
+      "해머 컬",
+      "케이블 컬",
+      "덤벨 컬"
+    ]
+  },
+  {
+    "id": "high-cable-biceps-curl",
+    "name": "하이 케이블 바이셉스 컬",
+    "category": "팔",
+    "englishName": "High Cable Dual Biceps Curl",
+    "iconType": "triceps-pushdown",
+    "equipmentType": "듀얼 케이블 타워 (상단 도르래)",
+    "equipCategory": "cable",
+    "targetMuscles": "상완이두근 단두 및 피크",
+    "defaultWeight": 10,
+    "defaultReps": 12,
+    "restSeconds": 60,
+    "tips": "케이블 타워 중앙에 서서 양팔을 어깨 높이로 든 채 머리 쪽으로 컬하여 이두근 피크를 극대화합니다.",
+    "aliases": [
+      "하이케이블컬",
+      "프론트더블바이셉스",
+      "더블케이블컬"
+    ],
+    "alternatives": [
+      "케이블 컬",
+      "프리처 컬",
+      "바벨 컬"
+    ]
+  },
+  {
     "id": "triceps-pushdown",
     "name": "트라이셉스 푸쉬다운",
     "category": "팔",
@@ -4104,25 +4213,56 @@ const EQUIPMENT_CATALOG = [
   },
   {
     "id": "overhead-triceps-extension",
-    "name": "오버헤드 트라이셉스 익스텐션",
+    "name": "케이블 오버헤드 익스텐션",
     "category": "팔",
     "englishName": "Overhead Cable Rope Triceps Extension",
     "iconType": "overhead-triceps-ext",
     "equipmentType": "케이블 로프 / EZ바",
     "equipCategory": "cable",
-    "targetMuscles": "상완삼두근 장두 최대 신장",
+    "targetMuscles": "상완삼두근 장두 최대 신장 및 수축",
     "defaultWeight": 20,
     "defaultReps": 15,
     "restSeconds": 60,
-    "tips": "머리 위로 팔을 뻗어 삼두근 장두를 최대로 이완한 뒤 팔꿈치를 고정한 채 펴줍니다.",
+    "tips": "케이블을 등지고 서서 팔꿈치를 머리 위로 고정한 채 앞쪽 대각선으로 힘껏 밀어 장두를 쥐어짭니다.",
     "aliases": [
+      "오버헤드 트라이셉스 익스텐션",
       "오버헤드익스텐션",
-      "케이블오버헤드"
+      "케이블오버헤드",
+      "케오익",
+      "케이블오버헤드익스텐션",
+      "케이블삼두",
+      "오버헤드트라이셉스"
     ],
     "alternatives": [
       "덤벨 오버헤드 트라이셉스 익스텐션",
       "스컬 크러셔 (라잉 익스텐션)",
-      "케이블 로프 푸쉬다운"
+      "케이블 로프 푸쉬다운",
+      "케이블 원 암 오버헤드 익스텐션"
+    ]
+  },
+  {
+    "id": "cable-single-arm-overhead-extension",
+    "name": "케이블 원 암 오버헤드 익스텐션",
+    "category": "팔",
+    "englishName": "Cable Single-Arm Overhead Triceps Extension",
+    "iconType": "overhead-triceps-ext",
+    "equipmentType": "케이블 머신 & 싱글 핸들",
+    "equipCategory": "cable",
+    "targetMuscles": "상완삼두근 장두 (한 팔 집중 고립)",
+    "defaultWeight": 7.5,
+    "defaultReps": 12,
+    "restSeconds": 60,
+    "tips": "한 팔씩 진행하여 팔꿈치 흔들림 없이 삼두근 장두를 정밀하게 스트레칭하고 수축합니다.",
+    "aliases": [
+      "원암오버헤드",
+      "케이블원암오버헤드",
+      "원암케이블익스텐션",
+      "원암삼두익스텐션"
+    ],
+    "alternatives": [
+      "케이블 오버헤드 익스텐션",
+      "원암 케이블 푸쉬다운",
+      "덤벨 오버헤드 트라이셉스 익스텐션"
     ]
   },
   {

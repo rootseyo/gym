@@ -171,7 +171,7 @@ const EXERCISE_DATABASE = [
   { name: '로잉머신', category: '유산소', type: 'cardio', weight: 2.0, reps: 15, restSeconds: 30 }
 ];
 
-// Merge expanded 163-item EQUIPMENT_CATALOG into EXERCISE_DATABASE for unified lookup
+// Merge expanded 168-item EQUIPMENT_CATALOG into EXERCISE_DATABASE for unified lookup
 if (typeof EQUIPMENT_CATALOG !== 'undefined' && Array.isArray(EQUIPMENT_CATALOG)) {
   EQUIPMENT_CATALOG.forEach(item => {
     const existing = EXERCISE_DATABASE.find(db => db.name.toLowerCase() === item.name.toLowerCase());
