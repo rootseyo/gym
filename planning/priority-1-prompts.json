@@ -1,0 +1,74 @@
+[
+  {
+    "id": "seated-dip-machine",
+    "name": "시티드 딥스 머신",
+    "category": "가슴",
+    "prompt": "Generate a 2-stage workout exercise illustration diagram:\n- Title: 'SEATED DIP MACHINE'\n- Pose 1 (Left - Starting Position): Muscular athletic male seated in a selectorized dip machine with thigh pads secured, gripping high parallel handles at waist level, elbows bent at 90 degrees with lower pecs stretched.\n- Pose 2 (Right - Finish Position / Lockout): Pressing both handles downwards towards the seat base until arms are fully extended and locked out downwards, squeezing lower pecs and triceps.\n- Muscle Highlight: Lower Pectoralis Major and Triceps Brachii glowing bright red-orange.\n- Equipment: Commercial selectorized seated dip machine with weight stack and downward pressing levers.\n- Style: 3D anatomical fitness model, realistic physique, clean white minimalist background, scientific fitness guide, side-by-side comparison diagram."
+  },
+  {
+    "id": "assisted-dip-machine",
+    "name": "어시스트 딥스 머신",
+    "category": "가슴",
+    "prompt": "Generate a 2-stage workout exercise illustration diagram:\n- Title: 'ASSISTED DIP MACHINE'\n- Pose 1 (Left - Starting Position): Muscular athletic male kneeling on counterbalanced knee platform, torso leaning forward 30 degrees, lowering body until elbows reach 90 degrees.\n- Pose 2 (Right - Finish Position / Lockout): Pressing downward on parallel bars to push torso back up to straight arm lockout, chest tilted forward.\n- Muscle Highlight: Lower Pectoralis Major and triceps glowing bright red-orange.\n- Equipment: Commercial assisted pull-up/dip combo machine with knee pad and selectorized weight stack.\n- Style: 3D anatomical fitness model, realistic physique, clean white minimalist background, scientific fitness guide, side-by-side comparison diagram."
+  },
+  {
+    "id": "dips",
+    "name": "딥스",
+    "category": "가슴",
+    "prompt": "Generate a 2-stage workout exercise illustration diagram:\n- Title: 'PARALLEL BAR DIPS'\n- Pose 1 (Left - Starting Position): Muscular athletic male supporting bodyweight on freestanding parallel dip bars, forward torso lean (30 degrees), descending until elbows bend to 90 degrees, deep lower chest stretch.\n- Pose 2 (Right - Finish Position / Lockout): Pressing body vertically up to full arm extension while keeping chest tilted forward, peak contraction of lower chest.\n- Muscle Highlight: Lower Pectoralis Major and triceps glowing bright red-orange.\n- Equipment: Freestanding parallel dip bars / power tower station.\n- Style: 3D anatomical fitness model, realistic physique, clean white minimalist background, scientific fitness guide, side-by-side comparison diagram."
+  },
+  {
+    "id": "push-up",
+    "name": "푸쉬업",
+    "category": "가슴",
+    "prompt": "Generate a 2-stage workout exercise illustration diagram:\n- Title: 'PUSH-UP'\n- Pose 1 (Left - Starting Position): Muscular athletic male in low push-up plank position, chest hovering 2cm above floor, rigid plank spine, elbows bent back 45 degrees.\n- Pose 2 (Right - Finish Position / Lockout): Pressing body away from floor to straight-arm high plank position, chest and triceps fully contracted.\n- Muscle Highlight: Pectoralis Major, anterior deltoids, and triceps glowing bright red-orange.\n- Equipment: Exercise mat / clean gym floor, bodyweight.\n- Style: 3D anatomical fitness model, realistic physique, clean white minimalist background, scientific fitness guide, side-by-side comparison diagram."
+  },
+  {
+    "id": "dumbbell-pullover",
+    "name": "덤벨 풀오버",
+    "category": "가슴",
+    "prompt": "Generate a 2-stage workout exercise illustration diagram:\n- Title: 'DUMBBELL PULLOVER'\n- Pose 1 (Left - Starting Position): Muscular athletic male lying perpendicular with upper back across a flat bench, hips slightly lowered, holding one heavy dumbbell overhead with arms extended back behind head, deep ribcage and upper chest stretch.\n- Pose 2 (Right - Finish Position): Pulling the dumbbell in a smooth arc up directly over the chest, squeezing upper pecs, serratus anterior, and lats.\n- Muscle Highlight: Clavicular head of Pectoralis Major, serratus anterior, and lats glowing bright red-orange.\n- Equipment: Flat workout bench and single heavy hex dumbbell gripped with diamond hand hold.\n- Style: 3D anatomical fitness model, realistic physique, clean white minimalist background, scientific fitness guide, side-by-side comparison diagram."
+  },
+  {
+    "id": "dumbbell-squeeze-press",
+    "name": "덤벨 스퀴즈 프레스",
+    "category": "가슴",
+    "prompt": "Generate a 2-stage workout exercise illustration diagram:\n- Title: 'DUMBBELL SQUEEZE PRESS'\n- Pose 1 (Left - Starting Position): Muscular athletic male lying on flat bench holding two hex dumbbells pressed tightly together touching each other against the mid-chest.\n- Pose 2 (Right - Finish Position / Lockout): Pressing dumbbells straight up while actively squeezing them together with maximum force, peak inner chest isometric tension.\n- Muscle Highlight: Inner sternal cleavage of Pectoralis Major glowing bright red-orange.\n- Equipment: Flat workout bench and pair of flat-sided hex dumbbells pressed together.\n- Style: 3D anatomical fitness model, realistic physique, clean white minimalist background, scientific fitness guide, side-by-side comparison diagram."
+  },
+  {
+    "id": "overhead-triceps-extension",
+    "name": "케이블 오버헤드 익스텐션",
+    "category": "팔",
+    "prompt": "Generate a 2-stage workout exercise illustration diagram:\n- Title: 'CABLE OVERHEAD TRICEPS EXTENSION'\n- Pose 1 (Left - Starting Position): Muscular athletic male facing away from low/mid cable pulley, torso leaning forward 45 degrees in split stance, holding rope attachment behind head with elbows bent fully, triceps long head deeply stretched.\n- Pose 2 (Right - Finish Position / Lockout): Extending arms forward and upward overhead until elbows lock out, spreading the rope ends apart at full extension, peak triceps long head contraction.\n- Muscle Highlight: Long head and lateral head of Triceps Brachii glowing bright red-orange.\n- Equipment: Cable pulley column with rope attachment and weight stack.\n- Style: 3D anatomical fitness model, realistic physique, clean white minimalist background, scientific fitness guide, side-by-side comparison diagram."
+  },
+  {
+    "id": "triceps-pushdown",
+    "name": "트라이셉스 푸쉬다운",
+    "category": "팔",
+    "prompt": "Generate a 2-stage workout exercise illustration diagram:\n- Title: 'TRICEPS PUSHDOWN'\n- Pose 1 (Left - Starting Position): Muscular athletic male standing upright facing high cable pulley with slight forward lean, gripping straight bar or V-bar at upper chest level, elbows tucked tight against ribs at 90-degree bend.\n- Pose 2 (Right - Finish Position / Lockout): Pushing the bar straight down towards thighs until arms are fully locked out, pinning elbows at sides, squeezing triceps hard.\n- Muscle Highlight: Lateral and medial heads of Triceps Brachii glowing bright red-orange.\n- Equipment: Cable pulley station with high pulley and straight bar attachment.\n- Style: 3D anatomical fitness model, realistic physique, clean white minimalist background, scientific fitness guide, side-by-side comparison diagram."
+  },
+  {
+    "id": "cable-rope-pushdown",
+    "name": "케이블 로프 푸쉬다운",
+    "category": "팔",
+    "prompt": "Generate a 2-stage workout exercise illustration diagram:\n- Title: 'CABLE ROPE PUSHDOWN'\n- Pose 1 (Left - Starting Position): Muscular athletic male standing facing high cable pulley, gripping rope attachment handles near chest level, elbows pinned to sides.\n- Pose 2 (Right - Finish Position / Lockout): Pressing rope downward and flaring/spreading the rope ends outward past the hips at full extension, peak lateral triceps contraction.\n- Muscle Highlight: Lateral head of Triceps Brachii glowing bright red-orange.\n- Equipment: High cable pulley with double-rope attachment.\n- Style: 3D anatomical fitness model, realistic physique, clean white minimalist background, scientific fitness guide, side-by-side comparison diagram."
+  },
+  {
+    "id": "barbell-curl",
+    "name": "바벨 컬",
+    "category": "팔",
+    "prompt": "Generate a 2-stage workout exercise illustration diagram:\n- Title: 'BARBELL BICEPS CURL'\n- Pose 1 (Left - Starting Position): Muscular athletic male standing tall with shoulder-width stance, holding Olympic barbell with underhand supinated grip, arms fully extended down in front of thighs, biceps stretched.\n- Pose 2 (Right - Finish Position): Curling the barbell upward in a smooth circular arc towards shoulders while keeping elbows pinned to ribs, full biceps peak contraction.\n- Muscle Highlight: Biceps Brachii (both short and long heads) glowing bright red-orange.\n- Equipment: Olympic barbell with weight plates.\n- Style: 3D anatomical fitness model, realistic physique, clean white minimalist background, scientific fitness guide, side-by-side comparison diagram."
+  },
+  {
+    "id": "dumbbell-curl",
+    "name": "덤벨 컬",
+    "category": "팔",
+    "prompt": "Generate a 2-stage workout exercise illustration diagram:\n- Title: 'DUMBBELL BICEPS CURL'\n- Pose 1 (Left - Starting Position): Muscular athletic male standing tall, holding a pair of dumbbells at sides with palms facing inward (neutral grip), arms fully extended down.\n- Pose 2 (Right - Finish Position): Curling dumbbells upward while supinating wrists (palms facing up) towards anterior shoulders, peak biceps contraction.\n- Muscle Highlight: Biceps Brachii (peak) glowing bright red-orange.\n- Equipment: Pair of commercial dumbbells.\n- Style: 3D anatomical fitness model, realistic physique, clean white minimalist background, scientific fitness guide, side-by-side comparison diagram."
+  },
+  {
+    "id": "hammer-curl",
+    "name": "해머 컬",
+    "category": "팔",
+    "prompt": "Generate a 2-stage workout exercise illustration diagram:\n- Title: 'DUMBBELL HAMMER CURL'\n- Pose 1 (Left - Starting Position): Muscular athletic male standing tall, holding a pair of heavy dumbbells down at sides with palms facing inward (neutral grip like holding a hammer).\n- Pose 2 (Right - Finish Position): Curling dumbbells upward along chest while strictly maintaining neutral vertical palms throughout, squeezing brachialis and brachioradialis forearm muscles.\n- Muscle Highlight: Brachialis, Brachioradialis (forearm), and outer Biceps Brachii glowing bright red-orange.\n- Equipment: Pair of commercial dumbbells.\n- Style: 3D anatomical fitness model, realistic physique, clean white minimalist background, scientific fitness guide, side-by-side comparison diagram."
+  }
+]
