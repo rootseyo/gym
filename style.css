@@ -3523,6 +3523,25 @@ tr.set-row-warmup input[type="number"] {
   animation: pulse-glow 2s infinite;
 }
 
+.ex-stat-badge.guide-badge {
+  background: linear-gradient(135deg, rgba(255, 87, 34, 0.15), rgba(255, 152, 0, 0.15));
+  border-color: rgba(255, 152, 0, 0.4);
+  color: #ff9800;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.ex-stat-badge.guide-badge:hover {
+  background: linear-gradient(135deg, rgba(255, 87, 34, 0.3), rgba(255, 152, 0, 0.3));
+  border-color: #ff9800;
+  color: #fff;
+  transform: translateY(-1px);
+}
+
+.ex-stat-badge.guide-badge:active {
+  transform: translateY(0);
+}
+
 /* Progressive Overload Recommendation Banner */
 .overload-guide-banner {
   display: flex;
@@ -4059,21 +4078,37 @@ tr.set-row-warmup input[type="number"] {
   position: absolute;
   top: 6px;
   right: 6px;
-  background: linear-gradient(135deg, rgba(255, 87, 34, 0.9), rgba(255, 152, 0, 0.9));
+  background: linear-gradient(135deg, rgba(255, 87, 34, 0.95), rgba(255, 152, 0, 0.95));
   color: #fff;
-  font-size: 0.6rem;
+  font-size: 0.62rem;
   font-weight: 700;
-  padding: 2px 6px;
+  padding: 3px 7px;
   border-radius: 10px;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
   display: flex;
   align-items: center;
   gap: 3px;
-  z-index: 2;
+  z-index: 3;
   letter-spacing: -0.3px;
+  border: none;
+  cursor: pointer;
+  transition: transform 0.15s ease, filter 0.15s ease;
+}
+
+.enc-card-guide-badge:hover {
+  transform: scale(1.08);
+  filter: brightness(1.15);
+}
+
+.enc-card-guide-badge:active {
+  transform: scale(0.96);
 }
 
 /* Zoom Modal Styles */
+#exerciseDiagramModal {
+  z-index: 1200;
+}
+
 .enc-diagram-modal-content {
   max-width: 720px;
   width: 95%;
@@ -4137,6 +4172,7 @@ tr.set-row-warmup input[type="number"] {
 
 /* Exercise List Card Thumbnail Icon */
 .ex-equip-thumb {
+  position: relative;
   width: 32px;
   height: 32px;
   flex-shrink: 0;
@@ -4148,6 +4184,31 @@ tr.set-row-warmup input[type="number"] {
   align-items: center;
   justify-content: center;
   color: var(--accent-cyan);
+  transition: all 0.2s ease;
+}
+
+.ex-equip-thumb.has-guide {
+  border-color: rgba(255, 152, 0, 0.5);
+  box-shadow: 0 0 8px rgba(255, 152, 0, 0.2);
+  cursor: pointer;
+}
+
+.ex-equip-thumb.has-guide:hover {
+  border-color: #ff9800;
+  box-shadow: 0 0 12px rgba(255, 152, 0, 0.4);
+  transform: scale(1.05);
+}
+
+.thumb-guide-dot {
+  position: absolute;
+  top: -2px;
+  right: -2px;
+  width: 8px;
+  height: 8px;
+  background: #ff5722;
+  border: 1.5px solid var(--bg-card);
+  border-radius: 50%;
+  box-shadow: 0 0 4px #ff5722;
 }
 
 .ex-equip-thumb .equip-svg {
@@ -4444,6 +4505,22 @@ tr.set-row-warmup input[type="number"] {
   font-size: 0.76rem;
   font-weight: 700;
   color: var(--text-main);
+  display: flex;
+  align-items: center;
+}
+
+.quick-swap-guide-indicator {
+  font-size: 0.58rem;
+  font-weight: 700;
+  color: #ff9800;
+  background: rgba(255, 152, 0, 0.15);
+  border: 1px solid rgba(255, 152, 0, 0.35);
+  border-radius: 4px;
+  padding: 1px 4px;
+  margin-left: 4px;
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
 }
 
 .quick-swap-chip-sub {

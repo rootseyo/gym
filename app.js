@@ -1779,7 +1779,18 @@ function openExerciseIconViewer(exId, event) {
   if (event) { event.preventDefault(); event.stopPropagation(); }
   if (Date.now() < exerciseGestureClickSuppressedUntil) return;
   const ex = (state.workouts[state.currentDate] || []).find(e => e.id === exId);
-  if (!ex || typeof getExerciseSvgIcon !== 'function') return;
+  if (!ex) return;
+
+  const catalogItem = typeof EQUIPMENT_CATALOG !== 'undefined'
+    ? (EQUIPMENT_CATALOG.find(e => e.name === ex.name) || EQUIPMENT_CATALOG.find(e => e.aliases?.includes(ex.name)))
+    : null;
+
+  if (catalogItem && catalogItem.imageUrl) {
+    openExerciseDiagramModal(catalogItem);
+    return;
+  }
+
+  if (typeof getExerciseSvgIcon !== 'function') return;
 
   let dialog = document.getElementById('exerciseIconViewer');
   if (!dialog) {
@@ -2085,6 +2096,10 @@ function renderExerciseList(exercises) {
     });
 
     const svgThumb = typeof getExerciseSvgIcon === 'function' ? getExerciseSvgIcon(ex.name, ex.category) : '';
+    const catalogItem = (typeof EQUIPMENT_CATALOG !== 'undefined')
+      ? (EQUIPMENT_CATALOG.find(e => e.name === ex.name) || EQUIPMENT_CATALOG.find(e => e.aliases?.includes(ex.name)))
+      : null;
+    const hasGuideImage = Boolean(catalogItem?.imageUrl);
 
     card.innerHTML = `
       <div class="exercise-card-header" onclick="handleExerciseCardHeaderClick('${ex.id}', event)"
@@ -2092,10 +2107,13 @@ function renderExerciseList(exercises) {
         onkeydown="if(event.key === 'Enter' || event.key === ' ') { event.preventDefault(); handleExerciseCardHeaderClick('${ex.id}', event); }"
         title="탭하여 세트 펼치기 · 길게 눌러 순서 변경 · 왼쪽으로 밀어 삭제">
         <div class="exercise-meta">
-          <div class="ex-equip-thumb" role="button" tabindex="0" title="${escapeHtml(ex.name)} 크게 보기" aria-label="${escapeHtml(ex.name)} 아이콘 크게 보기"
+          <div class="ex-equip-thumb ${hasGuideImage ? 'has-guide' : ''}" role="button" tabindex="0"
+            title="${escapeHtml(ex.name)} ${hasGuideImage ? '운동 도감 가이드 보기' : '크게 보기'}"
+            aria-label="${escapeHtml(ex.name)} ${hasGuideImage ? '운동 도감 가이드 보기' : '아이콘 크게 보기'}"
             onclick="openExerciseIconViewer('${ex.id}', event)"
             onkeydown="if(event.key === 'Enter' || event.key === ' ') { openExerciseIconViewer('${ex.id}', event); }">
             ${svgThumb}
+            ${hasGuideImage ? '<span class="thumb-guide-dot" title="운동 도감 2단계 가이드 포함"></span>' : ''}
           </div>
           <span class="category-tag" style="${isCardio ? 'background: rgba(0, 230, 118, 0.15); color: var(--accent-emerald);' : ''}">${escapeHtml(ex.category || '기타')}</span>
           <span class="exercise-title">
@@ -2120,6 +2138,11 @@ function renderExerciseList(exercises) {
         <span class="ex-stat-badge swap-badge" onclick="toggleQuickSwapDrawer('${ex.id}', event)" title="자리가 없을 때 동일 타겟 대체 기구로 1-클릭 교체">
           <i class="fa-solid fa-shuffle"></i> 대체 기구
         </span>
+        ${hasGuideImage ? `
+          <span class="ex-stat-badge guide-badge" onclick="openExerciseDiagramByName('${escapeHtml(ex.name)}', event)" title="2단계 동작 가이드 도감 크게 보기">
+            <i class="fa-solid fa-person-running"></i> 운동 도감
+          </span>
+        ` : ''}
         ${!isCardio && peakOrm > 0 ? `
           <span class="ex-stat-badge orm-badge" title="Epley 공식 기반 오늘 최고 추정 1RM">
             <i class="fa-solid fa-trophy"></i> 최고 1RM ${peakOrm}kg
@@ -2159,6 +2182,7 @@ function renderExerciseList(exercises) {
           <details class="exercise-manage-menu">
             <summary>운동 관리</summary>
             <div class="exercise-manage-actions">
+              ${hasGuideImage ? `<button type="button" onclick="openExerciseDiagramByName('${escapeHtml(ex.name)}', event)"><i class="fa-solid fa-person-running"></i> 운동 도감 보기</button>` : ''}
               <button type="button" onclick="openEditExerciseModal('${ex.id}')">종목 교체</button>
               ${ex.sets.map((set, index) => `<button type="button" class="danger" onclick="deleteSpecificSet('${ex.id}', ${index})">${index + 1}세트 삭제</button>`).join('')}
               <button type="button" class="danger" onclick="deleteExercise('${ex.id}')">운동 삭제</button>
@@ -2215,11 +2239,12 @@ function toggleQuickSwapDrawer(exId, event) {
   const chipsHtml = alternatives.map(alt => {
     const svg = (typeof getExerciseSvgIcon === 'function') ? getExerciseSvgIcon(alt.name, alt.category) : '';
     const equipLabel = getEquipCategoryShortLabel(alt.equipCategory) || alt.equipmentType || alt.category;
+    const guideTag = alt.imageUrl ? ` <span class="quick-swap-guide-indicator" title="2단계 동작 가이드 포함"><i class="fa-solid fa-person-running"></i> 도감</span>` : '';
     return `
       <button type="button" class="quick-swap-chip" onclick="quickSwapExercise('${ex.id}', '${escapeHtml(alt.name)}')">
         <div class="quick-swap-chip-icon">${svg}</div>
         <div class="quick-swap-chip-info">
-          <span class="quick-swap-chip-name">${escapeHtml(alt.name)}</span>
+          <span class="quick-swap-chip-name">${escapeHtml(alt.name)}${guideTag}</span>
           <span class="quick-swap-chip-sub">${escapeHtml(equipLabel)} · ${alt.category === '유산소' ? `${alt.defaultWeight}km/h` : `${alt.defaultWeight}kg`}</span>
         </div>
       </button>
@@ -2754,7 +2779,7 @@ function renderEquipmentEncyclopedia(category = activeEncyclopediaCategory, sear
     const equipBadgeText = getEquipCategoryShortLabel(item.equipCategory);
     const aliasBadgeHtml = matchedAlias ? `<div class="enc-alias-match-badge">#${escapeHtml(matchedAlias)}</div>` : '';
     const cartBadgeHtml = isInCart ? `<span class="enc-card-cart-badge" title="담은 순서 ${cartIdx + 1}번">${cartIdx + 1}</span>` : '';
-    const guideBadgeHtml = item.imageUrl ? `<span class="enc-card-guide-badge" title="2단계 동작 가이드 포함"><i class="fa-solid fa-person-running"></i> 2동작</span>` : '';
+    const guideBadgeHtml = item.imageUrl ? `<button type="button" class="enc-card-guide-badge" onclick="openExerciseDiagramByName('${escapeHtml(item.name)}', event)" title="2단계 동작 가이드 도감 크게 보기" aria-label="${escapeHtml(item.name)} 2단계 동작 가이드 보기"><i class="fa-solid fa-person-running"></i> 도감 가이드</button>` : '';
 
     return `
       <div class="enc-card ${isSelected ? 'selected' : ''} ${isInCart ? 'in-cart' : ''}" data-name="${escapeHtml(item.name)}" role="button" tabindex="0" aria-pressed="${isSelected || isInCart}" onclick="selectEncyclopediaItem('${escapeHtml(item.name)}', false)" onkeydown="if(event.key === 'Enter' || event.key === ' ') { event.preventDefault(); selectEncyclopediaItem('${escapeHtml(item.name)}', false); }">
@@ -2852,20 +2877,44 @@ function selectEncyclopediaItem(exerciseName, scrollToSettings = false) {
   if (scrollToSettings) document.querySelector('.enc-tuning-section')?.scrollIntoView({ block: 'start', behavior: 'smooth' });
 }
 
-function openExerciseDiagramModal() {
-  if (!selectedEncyclopediaItem || !selectedEncyclopediaItem.imageUrl) return;
+function openExerciseDiagramModal(item = selectedEncyclopediaItem) {
+  if (!item) return;
+  if (!item.imageUrl && typeof EQUIPMENT_CATALOG !== 'undefined') {
+    const found = EQUIPMENT_CATALOG.find(e => e.name === item.name)
+      || EQUIPMENT_CATALOG.find(e => e.aliases?.includes(item.name));
+    if (found) item = found;
+  }
+  if (!item || !item.imageUrl) return;
+
+  selectedEncyclopediaItem = item;
   const modal = document.getElementById('exerciseDiagramModal');
   const title = document.getElementById('diagramModalExerciseName');
   const muscles = document.getElementById('diagramModalMuscles');
   const tips = document.getElementById('diagramModalTips');
   const img = document.getElementById('diagramModalImg');
 
-  if (title) title.textContent = `${selectedEncyclopediaItem.name} (${selectedEncyclopediaItem.englishName || selectedEncyclopediaItem.equipmentType || ''})`;
-  if (muscles) muscles.textContent = `🎯 자극 부위: ${selectedEncyclopediaItem.targetMuscles || '-'}`;
-  if (tips) tips.textContent = `💡 핵심 팁: ${selectedEncyclopediaItem.tips || '-'}`;
-  if (img) img.src = selectedEncyclopediaItem.imageUrl;
+  if (title) title.textContent = `${item.name} (${item.englishName || item.equipmentType || ''})`;
+  if (muscles) muscles.textContent = `🎯 자극 부위: ${item.targetMuscles || '-'}`;
+  if (tips) tips.textContent = `💡 핵심 팁: ${item.tips || '-'}`;
+  if (img) {
+    img.src = item.imageUrl;
+    img.alt = `${item.name} 2단계 동작 가이드`;
+  }
 
   if (modal) modal.classList.remove('hidden');
+}
+
+function openExerciseDiagramByName(exerciseName, event) {
+  if (event) {
+    event.preventDefault();
+    event.stopPropagation();
+  }
+  if (!exerciseName || typeof EQUIPMENT_CATALOG === 'undefined') return;
+  const item = EQUIPMENT_CATALOG.find(e => e.name === exerciseName)
+    || EQUIPMENT_CATALOG.find(e => e.aliases?.includes(exerciseName));
+  if (!item || !item.imageUrl) return;
+
+  openExerciseDiagramModal(item);
 }
 
 function closeExerciseDiagramModal() {
@@ -5228,4 +5277,7 @@ document.addEventListener('DOMContentLoaded', () => {
   window.compressConsecutiveSetTokens = compressConsecutiveSetTokens;
   window.generateThreeMonthsWorkoutAnalysisPrompt = generateThreeMonthsWorkoutAnalysisPrompt;
   window.copyThreeMonthsWorkoutSummary = copyThreeMonthsWorkoutSummary;
+  window.openExerciseDiagramByName = openExerciseDiagramByName;
+  window.openExerciseDiagramModal = openExerciseDiagramModal;
+  window.closeExerciseDiagramModal = closeExerciseDiagramModal;
 });
