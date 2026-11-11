@@ -30,3 +30,15 @@ test('app.js defines openExerciseDiagramByName and integrates guide badges in wo
   assert.ok(appJs.includes('enc-card-guide-badge'), 'renderEquipmentEncyclopedia must include enc-card-guide-badge');
   assert.ok(appJs.includes('window.openExerciseDiagramByName = openExerciseDiagramByName'), 'Must expose function to window');
 });
+
+test('equipment-encyclopedia.js includes bayesian-curl with high quality animated GIF guide', () => {
+  const encJs = fs.readFileSync(path.join(__dirname, '..', 'equipment-encyclopedia.js'), 'utf8');
+  assert.ok(encJs.includes('"id": "bayesian-curl"'), 'Must have bayesian-curl id');
+  assert.ok(encJs.includes('"name": "베이지안 컬"'), 'Must have 베이지안 컬 as official name');
+  assert.ok(encJs.includes('"imageUrl": "assets/exercises/bayesian-curl.gif"'), 'Must point to bayesian-curl.gif');
+
+  const gifPath = path.join(__dirname, '..', 'assets', 'exercises', 'bayesian-curl.gif');
+  assert.ok(fs.existsSync(gifPath), 'bayesian-curl.gif must exist on disk');
+  const stat = fs.statSync(gifPath);
+  assert.ok(stat.size > 100000, 'bayesian-curl.gif must be a valid animated GIF asset');
+});

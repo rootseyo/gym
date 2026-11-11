@@ -131,11 +131,12 @@ const EXERCISE_DATABASE = [
   { name: '리어 델토이드 머신', category: '어깨', weight: 25, reps: 15, restSeconds: 60 },
   { name: '슈러그', category: '어깨', weight: 60, reps: 15, restSeconds: 60 },
 
-  // 팔 (Arms - 10종)
+  // 팔 (Arms - 11종)
   { name: '바벨 컬', category: '팔', weight: 25, reps: 12, restSeconds: 60 },
   { name: '덤벨 컬', category: '팔', weight: 12, reps: 12, restSeconds: 60 },
   { name: '해머 컬', category: '팔', weight: 12, reps: 12, restSeconds: 60 },
   { name: '인클라인 덤벨 컬', category: '팔', weight: 10, reps: 12, restSeconds: 60 },
+  { name: '베이지안 컬', category: '팔', weight: 10, reps: 12, restSeconds: 60 },
   { name: '리버스 컬', category: '팔', weight: 15, reps: 12, restSeconds: 60 },
   { name: '바이셉스 컬 머신', category: '팔', weight: 25, reps: 12, restSeconds: 60 },
   { name: '프리처 컬', category: '팔', weight: 20, reps: 12, restSeconds: 60 },

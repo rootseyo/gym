@@ -1249,9 +1249,11 @@ const EXERCISE_SYNONYMS = {
   "루마데드": "루마니안 데드리프트",
   "케오익": "케이블 오버헤드 익스텐션",
   "케이블오버헤드": "케이블 오버헤드 익스텐션",
-  "베이지안": "케이블 원 암 바이셉스 컬",
-  "베이지안컬": "케이블 원 암 바이셉스 컬",
-  "원암케이블컬": "케이블 원 암 바이셉스 컬"
+  "베이지안": "베이지안 컬",
+  "베이지안컬": "베이지안 컬",
+  "원암케이블컬": "베이지안 컬",
+  "케이블원암컬": "베이지안 컬",
+  "케이블 원 암 바이셉스 컬": "베이지안 컬"
 };
 
 // Master Encyclopedia of 168 Gym Exercises & Equipment
@@ -4056,10 +4058,10 @@ const EQUIPMENT_CATALOG = [
     ]
   },
   {
-    "id": "cable-one-arm-biceps-curl",
-    "name": "케이블 원 암 바이셉스 컬",
+    "id": "bayesian-curl",
+    "name": "베이지안 컬",
     "category": "팔",
-    "englishName": "Cable One-Arm Biceps Curl (Bayesian Curl)",
+    "englishName": "Bayesian Cable Curl (Behind-the-Back Cable Curl)",
     "iconType": "triceps-pushdown",
     "equipmentType": "케이블 머신 & 싱글 핸들",
     "equipCategory": "cable",
@@ -4067,16 +4069,18 @@ const EQUIPMENT_CATALOG = [
     "defaultWeight": 10,
     "defaultReps": 12,
     "restSeconds": 60,
-    "imageUrl": "assets/exercises/cable-one-arm-biceps-curl.webp",
-    "tips": "도르래를 등지고 서서 팔을 뒤로 보낸 신장 포지션(베이지안 컬)에서 컬을 진행하면 이두근에 강력한 긴장감이 지속됩니다.",
+    "imageUrl": "assets/exercises/bayesian-curl.gif",
+    "tips": "도르래를 등지고 앞으로 한 걸음 나와 팔을 몸 뒤로 보낸 최대 신장 포지션에서 컬을 진행하면 이두근에 강력한 지속 장력이 유지됩니다.",
     "aliases": [
+      "베이지안컬",
+      "베이지안",
+      "케이블 원 암 바이셉스 컬",
+      "케이블원암바이셉스컬",
       "원암케이블컬",
       "원암바이셉스컬",
-      "베이지안컬",
       "케이블원암컬",
       "원암이두컬",
-      "bayesian",
-      "베이지안"
+      "bayesian"
     ],
     "alternatives": [
       "케이블 컬",
