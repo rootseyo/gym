@@ -1,0 +1,122 @@
+[
+  {
+    "id": "dumbbell-curl",
+    "name": "덤벨 컬",
+    "category": "팔",
+    "prompt": "Generate a 2-stage workout exercise illustration diagram:\n- Title: 'DUMBBELL BICEPS CURL'\n- Pose 1 (Left - Starting Position): Muscular athletic male standing tall, holding a pair of dumbbells down at sides with palms facing inward (neutral grip), arms fully extended down.\n- Pose 2 (Right - Finish Position): Curling dumbbells upward while supinating wrists (palms facing up) towards anterior shoulders, peak biceps contraction.\n- Muscle Highlight: Biceps Brachii (peak) glowing bright red-orange.\n- Equipment: Pair of commercial dumbbells.\n- Style: 3D anatomical fitness model, realistic physique, clean white minimalist background, scientific fitness guide, side-by-side comparison diagram."
+  },
+  {
+    "id": "hammer-curl",
+    "name": "해머 컬",
+    "category": "팔",
+    "prompt": "Generate a 2-stage workout exercise illustration diagram:\n- Title: 'DUMBBELL HAMMER CURL'\n- Pose 1 (Left - Starting Position): Muscular athletic male standing tall, holding a pair of heavy dumbbells down at sides with palms facing inward (neutral grip like holding a hammer).\n- Pose 2 (Right - Finish Position): Curling dumbbells upward along chest while strictly maintaining neutral vertical palms throughout, squeezing brachialis and brachioradialis forearm muscles.\n- Muscle Highlight: Brachialis, Brachioradialis (forearm), and outer Biceps Brachii glowing bright red-orange.\n- Equipment: Pair of commercial dumbbells.\n- Style: 3D anatomical fitness model, realistic physique, clean white minimalist background, scientific fitness guide, side-by-side comparison diagram."
+  },
+  {
+    "id": "ez-bar-curl",
+    "name": "이지바 컬",
+    "category": "팔",
+    "prompt": "Generate a 2-stage workout exercise illustration diagram:\n- Title: 'EZ-BAR BICEPS CURL'\n- Pose 1 (Left - Starting Position): Muscular athletic male standing gripping an undulating EZ-curl bar on angled inner grips, arms extended down in front of thighs.\n- Pose 2 (Right - Finish Position): Curling EZ-bar upward to collarbone level with elbows pinned to sides, reducing wrist strain while heavily loading biceps.\n- Muscle Highlight: Biceps Brachii and Brachialis glowing bright red-orange.\n- Equipment: Cambered EZ-curl barbell with weight plates.\n- Style: 3D anatomical fitness model, realistic physique, clean white minimalist background, scientific fitness guide, side-by-side comparison diagram."
+  },
+  {
+    "id": "concentration-curl",
+    "name": "컨센트레이션 컬",
+    "category": "팔",
+    "prompt": "Generate a 2-stage workout exercise illustration diagram:\n- Title: 'CONCENTRATION CURL'\n- Pose 1 (Left - Starting Position): Muscular athletic male seated on bench leaning forward, back of working elbow braced against inner thigh, arm hanging straight down holding dumbbell.\n- Pose 2 (Right - Finish Position): Curling dumbbell up towards face while keeping elbow firmly anchored on inner thigh, isolated biceps peak squeeze.\n- Muscle Highlight: Biceps Brachii (short head peak) glowing bright red-orange.\n- Equipment: Flat bench and single dumbbell.\n- Style: 3D anatomical fitness model, realistic physique, clean white minimalist background, scientific fitness guide, side-by-side comparison diagram."
+  },
+  {
+    "id": "incline-dumbbell-curl",
+    "name": "인클라인 덤벨 컬",
+    "category": "팔",
+    "prompt": "Generate a 2-stage workout exercise illustration diagram:\n- Title: 'INCLINE DUMBBELL CURL'\n- Pose 1 (Left - Starting Position): Muscular athletic male seated back on 45-degree incline bench, arms hanging straight down behind torso line, deep long-head bicep stretch.\n- Pose 2 (Right - Finish Position): Curling dumbbells upward while supinating, keeping upper arms tilted back behind torso, peak long-head contraction.\n- Muscle Highlight: Long head of Biceps Brachii glowing bright red-orange.\n- Equipment: Incline bench (45 degrees) and pair of dumbbells.\n- Style: 3D anatomical fitness model, realistic physique, clean white minimalist background, scientific fitness guide, side-by-side comparison diagram."
+  },
+  {
+    "id": "spider-curl",
+    "name": "스파이더 컬",
+    "category": "팔",
+    "prompt": "Generate a 2-stage workout exercise illustration diagram:\n- Title: 'SPIDER CURL'\n- Pose 1 (Left - Starting Position): Muscular athletic male lying chest-down on steep 45-degree incline bench, arms hanging vertically perpendicular to floor holding EZ-curl bar.\n- Pose 2 (Right - Finish Position): Curling bar upward towards forehead with elbows stationary, eliminating all shoulder/back momentum.\n- Muscle Highlight: Short head of Biceps Brachii glowing bright red-orange.\n- Equipment: Incline bench (45 degrees) and EZ-curl bar.\n- Style: 3D anatomical fitness model, realistic physique, clean white minimalist background, scientific fitness guide, side-by-side comparison diagram."
+  },
+  {
+    "id": "reverse-curl",
+    "name": "리버스 컬",
+    "category": "팔",
+    "prompt": "Generate a 2-stage workout exercise illustration diagram:\n- Title: 'REVERSE BARBELL CURL'\n- Pose 1 (Left - Starting Position): Muscular athletic male standing holding barbell with overhand pronated (knuckles facing forward) grip, arms straight down.\n- Pose 2 (Right - Finish Position): Curling bar up to chest maintaining overhand grip, heavily stressing top forearm and brachialis.\n- Muscle Highlight: Brachioradialis (forearm) and Brachialis glowing bright red-orange.\n- Equipment: Straight barbell or EZ-bar with weights.\n- Style: 3D anatomical fitness model, realistic physique, clean white minimalist background, scientific fitness guide, side-by-side comparison diagram."
+  },
+  {
+    "id": "biceps-curl-machine",
+    "name": "바이셉스 컬 머신",
+    "category": "팔",
+    "prompt": "Generate a 2-stage workout exercise illustration diagram:\n- Title: 'BICEPS CURL MACHINE'\n- Pose 1 (Left - Starting Position): Muscular athletic male seated with upper arms supported on slanted arm pad, arms extended gripping rotating handles.\n- Pose 2 (Right - Finish Position): Curling handles upward along guided pivot axis, squeezing biceps at full flexion.\n- Muscle Highlight: Biceps Brachii glowing bright red-orange.\n- Equipment: Commercial selectorized seated biceps curl machine.\n- Style: 3D anatomical fitness model, realistic physique, clean white minimalist background, scientific fitness guide, side-by-side comparison diagram."
+  },
+  {
+    "id": "preacher-curl",
+    "name": "프리처 컬",
+    "category": "팔",
+    "prompt": "Generate a 2-stage workout exercise illustration diagram:\n- Title: 'PREACHER CURL'\n- Pose 1 (Left - Starting Position): Muscular athletic male standing/seated behind angled preacher bench, triceps flat against 45-degree pad, arms extended down holding EZ-bar.\n- Pose 2 (Right - Finish Position): Curling EZ-bar upward to vertical forearm angle, strict isolation of lower biceps with zero body swing.\n- Muscle Highlight: Lower Biceps Brachii and Brachialis glowing bright red-orange.\n- Equipment: Preacher curl bench and loaded EZ-curl barbell.\n- Style: 3D anatomical fitness model, realistic physique, clean white minimalist background, scientific fitness guide, side-by-side comparison diagram."
+  },
+  {
+    "id": "preacher-curl-machine",
+    "name": "프리처 컬 머신",
+    "category": "팔",
+    "prompt": "Generate a 2-stage workout exercise illustration diagram:\n- Title: 'PREACHER CURL MACHINE'\n- Pose 1 (Left - Starting Position): Muscular athletic male seated at preacher machine with armpits resting on top of pad, arms extended gripping pivoting handles.\n- Pose 2 (Right - Finish Position): Curling lever handles upward along constant tension cam, peak bicep contraction.\n- Muscle Highlight: Biceps Brachii glowing bright red-orange.\n- Equipment: Selectorized preacher curl machine with weight stack.\n- Style: 3D anatomical fitness model, realistic physique, clean white minimalist background, scientific fitness guide, side-by-side comparison diagram."
+  },
+  {
+    "id": "cable-curl",
+    "name": "케이블 컬",
+    "category": "팔",
+    "prompt": "Generate a 2-stage workout exercise illustration diagram:\n- Title: 'STANDING CABLE BICEPS CURL'\n- Pose 1 (Left - Starting Position): Muscular athletic male standing facing low cable pulley, arms extended down holding straight bar or rope with constant cable tension.\n- Pose 2 (Right - Finish Position): Curling bar up to chest level with elbows pinned to ribs, maintaining continuous peak resistance at top.\n- Muscle Highlight: Biceps Brachii glowing bright red-orange.\n- Equipment: Low cable pulley tower with short straight bar attachment.\n- Style: 3D anatomical fitness model, realistic physique, clean white minimalist background, scientific fitness guide, side-by-side comparison diagram."
+  },
+  {
+    "id": "cable-rope-hammer-curl",
+    "name": "케이블 로프 해머 컬",
+    "category": "팔",
+    "prompt": "Generate a 2-stage workout exercise illustration diagram:\n- Title: 'CABLE ROPE HAMMER CURL'\n- Pose 1 (Left - Starting Position): Muscular athletic male standing facing low cable pulley, gripping rope attachment with neutral palms (thumbs up), arms extended down.\n- Pose 2 (Right - Finish Position): Curling rope upward while maintaining vertical neutral grip, squeezing brachialis and outer forearms.\n- Muscle Highlight: Brachialis, Brachioradialis, and Biceps Brachii glowing bright red-orange.\n- Equipment: Low cable pulley station with double-rope attachment.\n- Style: 3D anatomical fitness model, realistic physique, clean white minimalist background, scientific fitness guide, side-by-side comparison diagram."
+  },
+  {
+    "id": "high-cable-biceps-curl",
+    "name": "하이 케이블 바이셉스 컬",
+    "category": "팔",
+    "prompt": "Generate a 2-stage workout exercise illustration diagram:\n- Title: 'HIGH CABLE DUAL BICEPS CURL'\n- Pose 1 (Left - Starting Position): Muscular athletic male standing centered between dual high cable pulleys, arms extended horizontally in 'T' formation holding stirrup handles.\n- Pose 2 (Right - Finish Position): Curling both handles inward towards temples/ears in double bicep pose, elbows held high and stationary.\n- Muscle Highlight: Biceps Brachii (peak short head) glowing bright red-orange.\n- Equipment: Dual cable crossover tower with high pulleys.\n- Style: 3D anatomical fitness model, realistic physique, clean white minimalist background, scientific fitness guide, side-by-side comparison diagram."
+  },
+  {
+    "id": "one-arm-cable-pushdown",
+    "name": "원암 케이블 푸쉬다운",
+    "category": "팔",
+    "prompt": "Generate a 2-stage workout exercise illustration diagram:\n- Title: 'SINGLE-ARM CABLE TRICEPS PUSHDOWN'\n- Pose 1 (Left - Starting Position): Muscular athletic male standing beside high cable pulley, one hand gripping single handle at chest level with elbow pinned to side.\n- Pose 2 (Right - Finish Position): Pushing handle straight down until working arm is fully locked out, isolated unilateral triceps contraction.\n- Muscle Highlight: Triceps Brachii (lateral and medial heads) glowing bright red-orange.\n- Equipment: High cable pulley with single D-handle.\n- Style: 3D anatomical fitness model, realistic physique, clean white minimalist background, scientific fitness guide, side-by-side comparison diagram."
+  },
+  {
+    "id": "skull-crusher",
+    "name": "스컬 크러셔 (라잉 익스텐션)",
+    "category": "팔",
+    "prompt": "Generate a 2-stage workout exercise illustration diagram:\n- Title: 'SKULL CRUSHER / LYING TRICEPS EXTENSION'\n- Pose 1 (Left - Starting Position): Muscular athletic male lying on flat bench holding EZ-bar with arms vertical over shoulders, bending elbows to lower bar to forehead/crown.\n- Pose 2 (Right - Finish Position): Extending elbows to press bar back up to vertical arm lockout overhead, isolated triceps extension.\n- Muscle Highlight: Triceps Brachii (long head and medial head) glowing bright red-orange.\n- Equipment: Flat workout bench and loaded EZ-curl barbell.\n- Style: 3D anatomical fitness model, realistic physique, clean white minimalist background, scientific fitness guide, side-by-side comparison diagram."
+  },
+  {
+    "id": "cable-single-arm-overhead-extension",
+    "name": "케이블 원 암 오버헤드 익스텐션",
+    "category": "팔",
+    "prompt": "Generate a 2-stage workout exercise illustration diagram:\n- Title: 'SINGLE-ARM CABLE OVERHEAD TRICEPS EXTENSION'\n- Pose 1 (Left - Starting Position): Muscular athletic male standing facing away from cable tower, holding single cable handle behind neck with elbow pointing up, deep long-head triceps stretch.\n- Pose 2 (Right - Finish Position): Extending arm straight overhead into full triceps lockout, keeping elbow stationary beside ear.\n- Muscle Highlight: Long head of Triceps Brachii glowing bright red-orange.\n- Equipment: Cable pulley column set at hip/chest height with single handle.\n- Style: 3D anatomical fitness model, realistic physique, clean white minimalist background, scientific fitness guide, side-by-side comparison diagram."
+  },
+  {
+    "id": "dumbbell-overhead-triceps-extension",
+    "name": "덤벨 오버헤드 트라이셉스 익스텐션",
+    "category": "팔",
+    "prompt": "Generate a 2-stage workout exercise illustration diagram:\n- Title: 'SEATED DUMBBELL OVERHEAD TRICEPS EXTENSION'\n- Pose 1 (Left - Starting Position): Muscular athletic male seated on low-back bench holding heavy hex dumbbell overhead with both hands, lowering dumbbell behind head until elbows bend past 90 degrees.\n- Pose 2 (Right - Finish Position): Pressing dumbbell upward to full vertical arm lockout overhead, squeezing triceps long heads.\n- Muscle Highlight: Triceps Brachii (long head) glowing bright red-orange.\n- Equipment: Utility bench with low back support and single heavy dumbbell.\n- Style: 3D anatomical fitness model, realistic physique, clean white minimalist background, scientific fitness guide, side-by-side comparison diagram."
+  },
+  {
+    "id": "dumbbell-kickback",
+    "name": "덤벨 킥백",
+    "category": "팔",
+    "prompt": "Generate a 2-stage workout exercise illustration diagram:\n- Title: 'DUMBBELL TRICEPS KICKBACK'\n- Pose 1 (Left - Starting Position): Muscular athletic male supporting one knee on bench with flat back, upper arm pinned parallel to torso, elbow bent at 90 degrees holding dumbbell.\n- Pose 2 (Right - Finish Position): Extending forearm straight back until entire arm is parallel to torso, peak contraction of lateral triceps.\n- Muscle Highlight: Lateral head of Triceps Brachii glowing bright red-orange.\n- Equipment: Flat workout bench and single dumbbell.\n- Style: 3D anatomical fitness model, realistic physique, clean white minimalist background, scientific fitness guide, side-by-side comparison diagram."
+  },
+  {
+    "id": "close-grip-bench-press",
+    "name": "클로즈그립 벤치프레스",
+    "category": "팔",
+    "prompt": "Generate a 2-stage workout exercise illustration diagram:\n- Title: 'CLOSE-GRIP BENCH PRESS'\n- Pose 1 (Left - Starting Position): Muscular athletic male lying on flat bench gripping Olympic barbell with shoulder-width (close) grip, lowering bar to lower sternum with elbows tucked close to ribs.\n- Pose 2 (Right - Finish Position): Pressing barbell vertically to straight arm lockout, driving through triceps.\n- Muscle Highlight: Triceps Brachii (all three heads) and Inner Pectoralis Major glowing bright red-orange.\n- Equipment: Olympic flat bench press station with barbell.\n- Style: 3D anatomical fitness model, realistic physique, clean white minimalist background, scientific fitness guide, side-by-side comparison diagram."
+  },
+  {
+    "id": "wrist-curl",
+    "name": "리스트 컬",
+    "category": "팔",
+    "prompt": "Generate a 2-stage workout exercise illustration diagram:\n- Title: 'SEATED BARBELL WRIST CURL'\n- Pose 1 (Left - Starting Position): Muscular athletic male seated with forearms resting across thighs or flat bench, palms facing up, wrists extended down letting barbell roll down into fingers.\n- Pose 2 (Right - Finish Position): Curling wrists upward as high as possible, squeezing forearm flexor muscles.\n- Muscle Highlight: Forearm Flexors (anterior forearm) glowing bright red-orange.\n- Equipment: Flat workout bench and barbell with light weight plates.\n- Style: 3D anatomical fitness model, realistic physique, clean white minimalist background, scientific fitness guide, side-by-side comparison diagram."
+  }
+]

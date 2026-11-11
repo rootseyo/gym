@@ -1,0 +1,158 @@
+[
+  {
+    "id": "lat-pulldown",
+    "name": "렛풀다운",
+    "category": "등",
+    "prompt": "Generate a 2-stage workout exercise illustration diagram:\n- Title: 'LAT PULLDOWN'\n- Pose 1 (Left - Starting Position): Muscular athletic male seated on lat pulldown machine with thighs locked under roller pads, arms extended overhead holding wide lat pulldown bar, deep lat stretch.\n- Pose 2 (Right - Finish Position): Pulling the bar down smoothly to upper clavicle/chest with torso tilted slightly back 15 degrees, elbows driving down and back, peak lat contraction.\n- Muscle Highlight: Latissimus Dorsi and Teres Major glowing bright red-orange.\n- Equipment: Commercial selectorized lat pulldown cable station with wide-grip bar and thigh pads.\n- Style: 3D anatomical fitness model, realistic physique, clean white minimalist background, scientific fitness guide, side-by-side comparison diagram."
+  },
+  {
+    "id": "mag-grip-lat-pulldown",
+    "name": "맥그립 렛풀다운",
+    "category": "등",
+    "prompt": "Generate a 2-stage workout exercise illustration diagram:\n- Title: 'MAG GRIP LAT PULLDOWN'\n- Pose 1 (Left - Starting Position): Muscular athletic male seated holding wide MAG (Maximum Advantage Grip) neutral handle overhead, lats fully elongated.\n- Pose 2 (Right - Finish Position): Pulling MAG bar down to upper sternum, neutral wrist alignment, elbows tucked in natural ergonomic plane, deep lower/outer lat squeeze.\n- Muscle Highlight: Latissimus Dorsi (lower and outer fibers) glowing bright red-orange.\n- Equipment: Lat pulldown machine equipped with black ergonomic MAG grip attachment.\n- Style: 3D anatomical fitness model, realistic physique, clean white minimalist background, scientific fitness guide, side-by-side comparison diagram."
+  },
+  {
+    "id": "underhand-lat-pulldown",
+    "name": "언더그립 렛풀다운",
+    "category": "등",
+    "prompt": "Generate a 2-stage workout exercise illustration diagram:\n- Title: 'UNDERHAND LAT PULLDOWN'\n- Pose 1 (Left - Starting Position): Muscular athletic male seated with arms reaching overhead, gripping straight bar with shoulder-width supinated (underhand) palms facing him.\n- Pose 2 (Right - Finish Position): Pulling bar down to upper chest level, elbows driving close alongside ribs, intense lower lat and lower bicep contraction.\n- Muscle Highlight: Lower Latissimus Dorsi and Biceps Brachii glowing bright red-orange.\n- Equipment: Cable lat pulldown station with supinated straight bar.\n- Style: 3D anatomical fitness model, realistic physique, clean white minimalist background, scientific fitness guide, side-by-side comparison diagram."
+  },
+  {
+    "id": "seated-cable-row",
+    "name": "시티드 케이블 로우",
+    "category": "등",
+    "prompt": "Generate a 2-stage workout exercise illustration diagram:\n- Title: 'SEATED CABLE ROW'\n- Pose 1 (Left - Starting Position): Muscular athletic male seated upright on low row bench with feet on footplates, knees slightly bent, arms extended forward holding close-grip V-handle, mid-back stretched.\n- Pose 2 (Right - Finish Position): Pulling V-handle back to lower abdomen/navel, retracting shoulder blades, chest proud and spine neutral, peak mid-back squeeze.\n- Muscle Highlight: Rhomboids, Middle Trapezius, and Latissimus Dorsi glowing bright red-orange.\n- Equipment: Commercial low pulley seated cable row station with footplates and close-grip V-handle.\n- Style: 3D anatomical fitness model, realistic physique, clean white minimalist background, scientific fitness guide, side-by-side comparison diagram."
+  },
+  {
+    "id": "one-arm-seated-cable-row",
+    "name": "케이블 시티드 원암 로우",
+    "category": "등",
+    "prompt": "Generate a 2-stage workout exercise illustration diagram:\n- Title: 'SINGLE-ARM SEATED CABLE ROW'\n- Pose 1 (Left - Starting Position): Muscular athletic male seated on row bench, one arm extended forward holding single stirrup handle with neutral grip, deep unilateral lat stretch.\n- Pose 2 (Right - Finish Position): Pulling single handle into waist/hip, driving elbow tight past ribcage with slight torso rotation, deep unilateral lat contraction.\n- Muscle Highlight: Unilateral Latissimus Dorsi and lower rhomboids glowing bright red-orange.\n- Equipment: Low pulley cable machine with single D-handle.\n- Style: 3D anatomical fitness model, realistic physique, clean white minimalist background, scientific fitness guide, side-by-side comparison diagram."
+  },
+  {
+    "id": "pull-up",
+    "name": "풀업 (턱걸이)",
+    "category": "등",
+    "prompt": "Generate a 2-stage workout exercise illustration diagram:\n- Title: 'PULL-UP'\n- Pose 1 (Left - Starting Position): Muscular athletic male hanging at full dead-hang extension from horizontal bar with overhand pronated grip wider than shoulders.\n- Pose 2 (Right - Finish Position): Pulling body vertically upward until chin clears the bar, chest lifted, scapulae fully depressed and retracted.\n- Muscle Highlight: Latissimus Dorsi, Teres Major, and Upper Back glowing bright red-orange.\n- Equipment: Overhead pull-up bar / power rack.\n- Style: 3D anatomical fitness model, realistic physique, clean white minimalist background, scientific fitness guide, side-by-side comparison diagram."
+  },
+  {
+    "id": "chin-up",
+    "name": "친업",
+    "category": "등",
+    "prompt": "Generate a 2-stage workout exercise illustration diagram:\n- Title: 'CHIN-UP'\n- Pose 1 (Left - Starting Position): Muscular athletic male hanging from bar with shoulder-width underhand (supinated) grip, arms straight.\n- Pose 2 (Right - Finish Position): Pulling body upward until chin is over the bar, elbows pulling down and in, maximum biceps and lat contraction.\n- Muscle Highlight: Biceps Brachii and Latissimus Dorsi glowing bright red-orange.\n- Equipment: Overhead pull-up bar.\n- Style: 3D anatomical fitness model, realistic physique, clean white minimalist background, scientific fitness guide, side-by-side comparison diagram."
+  },
+  {
+    "id": "assisted-pull-up",
+    "name": "어시스트 풀업",
+    "category": "등",
+    "prompt": "Generate a 2-stage workout exercise illustration diagram:\n- Title: 'ASSISTED PULL-UP'\n- Pose 1 (Left - Starting Position): Muscular athletic male kneeling on counterbalanced assist knee platform, arms fully extended overhead gripping wide pull-up handles.\n- Pose 2 (Right - Finish Position): Pulling upward smoothly with counterweight support until chin reaches handle height, lats engaged.\n- Muscle Highlight: Latissimus Dorsi and Rhomboids glowing bright red-orange.\n- Equipment: Commercial selectorized assisted chin/dip machine with knee pad.\n- Style: 3D anatomical fitness model, realistic physique, clean white minimalist background, scientific fitness guide, side-by-side comparison diagram."
+  },
+  {
+    "id": "barbell-row",
+    "name": "바벨 로우",
+    "category": "등",
+    "prompt": "Generate a 2-stage workout exercise illustration diagram:\n- Title: 'BENT-OVER BARBELL ROW'\n- Pose 1 (Left - Starting Position): Muscular athletic male bent forward at hips at 45 degrees, neutral spine, knees slightly bent, holding barbell with overhand grip just below knees.\n- Pose 2 (Right - Finish Position): Rowing barbell up along thighs towards lower ribcage/navel, elbows driving behind torso, full scapular retraction.\n- Muscle Highlight: Middle Trapezius, Rhomboids, Latissimus Dorsi, and Posterior Deltoids glowing bright red-orange.\n- Equipment: Olympic barbell with bumper plates.\n- Style: 3D anatomical fitness model, realistic physique, clean white minimalist background, scientific fitness guide, side-by-side comparison diagram."
+  },
+  {
+    "id": "pendlay-row",
+    "name": "펜들레이 로우",
+    "category": "등",
+    "prompt": "Generate a 2-stage workout exercise illustration diagram:\n- Title: 'PENDLAY ROW'\n- Pose 1 (Left - Starting Position): Muscular athletic male bent over with torso strictly parallel to floor (horizontal), barbell resting dead on floor, overhand grip.\n- Pose 2 (Right - Finish Position): Explosively pulling barbell off floor to touch lower chest without lifting hips or torso angle, elbows flared wide.\n- Muscle Highlight: Upper Back, Rhomboids, Trapezius, and Lats glowing bright red-orange.\n- Equipment: Olympic barbell resting on rubber lifting platform.\n- Style: 3D anatomical fitness model, realistic physique, clean white minimalist background, scientific fitness guide, side-by-side comparison diagram."
+  },
+  {
+    "id": "one-arm-dumbbell-row",
+    "name": "원암 덤벨 로우",
+    "category": "등",
+    "prompt": "Generate a 2-stage workout exercise illustration diagram:\n- Title: 'ONE-ARM DUMBBELL ROW'\n- Pose 1 (Left - Starting Position): Muscular athletic male supporting one knee and hand on flat bench, flat horizontal back, working arm hanging straight down holding heavy dumbbell.\n- Pose 2 (Right - Finish Position): Rowing dumbbell in smooth J-curve arc towards hip pocket, elbow driving high past back plane, peak unilateral lat squeeze.\n- Muscle Highlight: Latissimus Dorsi, Rhomboids, and Teres Major glowing bright red-orange.\n- Equipment: Flat bench and single heavy hex dumbbell.\n- Style: 3D anatomical fitness model, realistic physique, clean white minimalist background, scientific fitness guide, side-by-side comparison diagram."
+  },
+  {
+    "id": "incline-dumbbell-row",
+    "name": "인클라인 덤벨 로우",
+    "category": "등",
+    "prompt": "Generate a 2-stage workout exercise illustration diagram:\n- Title: 'CHEST-SUPPORTED INCLINE DUMBBELL ROW'\n- Pose 1 (Left - Starting Position): Muscular athletic male lying prone with chest supported against 30-degree incline bench, arms hanging straight down holding dumbbells.\n- Pose 2 (Right - Finish Position): Rowing both dumbbells upward towards hips, driving elbows back, pinching shoulder blades together with zero lower back strain.\n- Muscle Highlight: Rhomboids, Middle and Lower Trapezius, and Lats glowing bright red-orange.\n- Equipment: Adjustable incline workout bench (30 degrees) and pair of dumbbells.\n- Style: 3D anatomical fitness model, realistic physique, clean white minimalist background, scientific fitness guide, side-by-side comparison diagram."
+  },
+  {
+    "id": "t-bar-row",
+    "name": "티바 로우",
+    "category": "등",
+    "prompt": "Generate a 2-stage workout exercise illustration diagram:\n- Title: 'T-BAR ROW'\n- Pose 1 (Left - Starting Position): Muscular athletic male straddling a T-bar landmine bar, bent over at 45 degrees, arms extended holding close-grip handle beneath loaded bar.\n- Pose 2 (Right - Finish Position): Pulling T-bar handle up towards mid-torso, elbows tucked, contracting mid and upper back thickness.\n- Muscle Highlight: Middle Trapezius, Rhomboids, and Latissimus Dorsi glowing bright red-orange.\n- Equipment: T-bar row platform with Olympic plates and parallel close-grip handle.\n- Style: 3D anatomical fitness model, realistic physique, clean white minimalist background, scientific fitness guide, side-by-side comparison diagram."
+  },
+  {
+    "id": "chest-supported-t-bar-row",
+    "name": "체스트 서포티드 티바 로우",
+    "category": "등",
+    "prompt": "Generate a 2-stage workout exercise illustration diagram:\n- Title: 'CHEST-SUPPORTED T-BAR ROW'\n- Pose 1 (Left - Starting Position): Muscular athletic male with chest firmly braced against padded inclined support, arms hanging forward gripping wide handles.\n- Pose 2 (Right - Finish Position): Pulling lever handles back, squeezing shoulder blades together, isolating upper back with zero spinal load.\n- Muscle Highlight: Rhomboids, Rear Deltoids, and Middle Trapezius glowing bright red-orange.\n- Equipment: Dedicated plate-loaded chest-supported T-bar row machine.\n- Style: 3D anatomical fitness model, realistic physique, clean white minimalist background, scientific fitness guide, side-by-side comparison diagram."
+  },
+  {
+    "id": "chest-supported-row",
+    "name": "체스트 서포티드 로우",
+    "category": "등",
+    "prompt": "Generate a 2-stage workout exercise illustration diagram:\n- Title: 'CHEST-SUPPORTED MACHINE ROW'\n- Pose 1 (Left - Starting Position): Muscular athletic male seated upright with chest pressed against vertical chest pad, arms extended gripping machine handles.\n- Pose 2 (Right - Finish Position): Pulling handles horizontally back towards ribs, retracting scapulae, peak back thickness contraction.\n- Muscle Highlight: Middle Trapezius and Rhomboids glowing bright red-orange.\n- Equipment: Commercial selectorized seated chest-supported row machine.\n- Style: 3D anatomical fitness model, realistic physique, clean white minimalist background, scientific fitness guide, side-by-side comparison diagram."
+  },
+  {
+    "id": "low-row-machine",
+    "name": "로우 로우 머신",
+    "category": "등",
+    "prompt": "Generate a 2-stage workout exercise illustration diagram:\n- Title: 'ISO-LATERAL LOW ROW'\n- Pose 1 (Left - Starting Position): Muscular athletic male seated at Hammer Strength Low Row, arms extended down and forward along low diverging lever arms.\n- Pose 2 (Right - Finish Position): Pulling handles backward and slightly upward towards lower ribs/hips, elbows tucked tight, lower lat peak contraction.\n- Muscle Highlight: Lower Latissimus Dorsi and Teres Major glowing bright red-orange.\n- Equipment: Hammer Strength plate-loaded ISO-Lateral Low Row machine.\n- Style: 3D anatomical fitness model, realistic physique, clean white minimalist background, scientific fitness guide, side-by-side comparison diagram."
+  },
+  {
+    "id": "hammer-dy-row",
+    "name": "해머 DY 로우",
+    "category": "등",
+    "prompt": "Generate a 2-stage workout exercise illustration diagram:\n- Title: 'HAMMER DY ROW'\n- Pose 1 (Left - Starting Position): Muscular athletic male seated with chest against pad on Dorian Yates ISO-Lateral Row, arms reaching forward with underhand/neutral grip.\n- Pose 2 (Right - Finish Position): Pulling handles low towards waist, driving elbows deeply backward, intense lower lat squeeze.\n- Muscle Highlight: Lower Latissimus Dorsi glowing bright red-orange.\n- Equipment: Hammer Strength ISO-Lateral DY Row plate-loaded machine.\n- Style: 3D anatomical fitness model, realistic physique, clean white minimalist background, scientific fitness guide, side-by-side comparison diagram."
+  },
+  {
+    "id": "high-row-machine",
+    "name": "하이 로우 머신",
+    "category": "등",
+    "prompt": "Generate a 2-stage workout exercise illustration diagram:\n- Title: 'ISO-LATERAL HIGH ROW'\n- Pose 1 (Left - Starting Position): Muscular athletic male seated at High Row machine with arms reaching high and forward holding overhead handles, upper back stretched.\n- Pose 2 (Right - Finish Position): Pulling handles downward and backward in natural converging arc, elbows driving down to mid-torso level, upper back and lat contraction.\n- Muscle Highlight: Upper Latissimus Dorsi, Teres Major, and Rhomboids glowing bright red-orange.\n- Equipment: Hammer Strength plate-loaded ISO-Lateral High Row machine.\n- Style: 3D anatomical fitness model, realistic physique, clean white minimalist background, scientific fitness guide, side-by-side comparison diagram."
+  },
+  {
+    "id": "hammer-front-lat-pulldown",
+    "name": "해머 프론트 렛풀다운",
+    "category": "등",
+    "prompt": "Generate a 2-stage workout exercise illustration diagram:\n- Title: 'HAMMER FRONT LAT PULLDOWN'\n- Pose 1 (Left - Starting Position): Muscular athletic male seated at plate-loaded front pulldown machine, arms extended upward holding independent converging handles.\n- Pose 2 (Right - Finish Position): Pulling handles smoothly downward in front of shoulders, chest lifted, lats flared and contracted.\n- Muscle Highlight: Latissimus Dorsi (outer sweep) glowing bright red-orange.\n- Equipment: Hammer Strength plate-loaded ISO-Lateral Front Lat Pulldown machine.\n- Style: 3D anatomical fitness model, realistic physique, clean white minimalist background, scientific fitness guide, side-by-side comparison diagram."
+  },
+  {
+    "id": "one-arm-lat-pulldown",
+    "name": "원암 렛풀다운",
+    "category": "등",
+    "prompt": "Generate a 2-stage workout exercise illustration diagram:\n- Title: 'SINGLE-ARM CABLE LAT PULLDOWN'\n- Pose 1 (Left - Starting Position): Muscular athletic male kneeling or seated with one arm extended straight up holding high cable single handle, unilateral lat stretched.\n- Pose 2 (Right - Finish Position): Pulling handle vertically down towards collarbone, elbow driving into hip pocket with subtle side crunch, deep unilateral lat peak contraction.\n- Muscle Highlight: Unilateral Latissimus Dorsi glowing bright red-orange.\n- Equipment: High cable pulley tower with single stirrup D-handle.\n- Style: 3D anatomical fitness model, realistic physique, clean white minimalist background, scientific fitness guide, side-by-side comparison diagram."
+  },
+  {
+    "id": "straight-arm-pulldown",
+    "name": "암 풀다운",
+    "category": "등",
+    "prompt": "Generate a 2-stage workout exercise illustration diagram:\n- Title: 'STRAIGHT-ARM CABLE PULLDOWN'\n- Pose 1 (Left - Starting Position): Muscular athletic male standing with slight forward lean (30 degrees), arms extended forward and up holding straight bar at eye level with slight elbow bend.\n- Pose 2 (Right - Finish Position): Sweeping bar down in circular arc to touch front of thighs while keeping arms nearly straight, peak lat isolation.\n- Muscle Highlight: Latissimus Dorsi and Teres Major glowing bright red-orange.\n- Equipment: High cable pulley column with wide straight bar attachment.\n- Style: 3D anatomical fitness model, realistic physique, clean white minimalist background, scientific fitness guide, side-by-side comparison diagram."
+  },
+  {
+    "id": "machine-pullover",
+    "name": "머신 풀오버",
+    "category": "등",
+    "prompt": "Generate a 2-stage workout exercise illustration diagram:\n- Title: 'LAT PULLOVER MACHINE'\n- Pose 1 (Left - Starting Position): Muscular athletic male seated in pullover machine with elbows resting on padded lever arms overhead, ribcage expanded in deep lat stretch.\n- Pose 2 (Right - Finish Position): Driving elbow pads downward and forward through full rotational arc to abdomen level, maximum lat isolation without bicep involvement.\n- Muscle Highlight: Latissimus Dorsi, Teres Major, and Serratus Anterior glowing bright red-orange.\n- Equipment: Commercial Nautilus or plate-loaded pullover machine with seat belt.\n- Style: 3D anatomical fitness model, realistic physique, clean white minimalist background, scientific fitness guide, side-by-side comparison diagram."
+  },
+  {
+    "id": "meadows-row",
+    "name": "메도우스 로우",
+    "category": "등",
+    "prompt": "Generate a 2-stage workout exercise illustration diagram:\n- Title: 'LANDMINE MEADOWS ROW'\n- Pose 1 (Left - Starting Position): Muscular athletic male standing in staggered split stance perpendicular to landmine bar, bent over, holding thick barbell collar with overhand grip.\n- Pose 2 (Right - Finish Position): Rowing barbell end up toward hip, elbow flared outward past back plane, squeezing upper back and rear lats.\n- Muscle Highlight: Upper Latissimus Dorsi, Teres Major, and Rear Deltoid glowing bright red-orange.\n- Equipment: Landmine pivot base with Olympic barbell.\n- Style: 3D anatomical fitness model, realistic physique, clean white minimalist background, scientific fitness guide, side-by-side comparison diagram."
+  },
+  {
+    "id": "inverted-row",
+    "name": "인버티드 로우",
+    "category": "등",
+    "prompt": "Generate a 2-stage workout exercise illustration diagram:\n- Title: 'INVERTED BODYWEIGHT ROW'\n- Pose 1 (Left - Starting Position): Muscular athletic male hanging beneath horizontal bar set at waist height, heels on floor, body in rigid straight plank, arms extended.\n- Pose 2 (Right - Finish Position): Pulling chest up to touch the bar, keeping body in straight line, pinching shoulder blades together.\n- Muscle Highlight: Rhomboids, Middle Trapezius, and Posterior Deltoids glowing bright red-orange.\n- Equipment: Smith machine bar or barbell locked in power rack at waist height.\n- Style: 3D anatomical fitness model, realistic physique, clean white minimalist background, scientific fitness guide, side-by-side comparison diagram."
+  },
+  {
+    "id": "rack-pull",
+    "name": "랙 풀",
+    "category": "등",
+    "prompt": "Generate a 2-stage workout exercise illustration diagram:\n- Title: 'BARBELL RACK PULL'\n- Pose 1 (Left - Starting Position): Muscular athletic male in power rack with barbell resting on safety pins just below knee caps, gripping bar with overhand grip, hips hinged back.\n- Pose 2 (Right - Finish Position): Standing tall into lockout, hips driven forward, pulling shoulders back, contracting upper back and spinal erectors.\n- Muscle Highlight: Trapezius (Upper/Middle), Erector Spinae, and Rhomboids glowing bright red-orange.\n- Equipment: Power rack with heavy Olympic barbell resting on steel safety pins.\n- Style: 3D anatomical fitness model, realistic physique, clean white minimalist background, scientific fitness guide, side-by-side comparison diagram."
+  },
+  {
+    "id": "back-extension",
+    "name": "백 익스텐션",
+    "category": "등",
+    "prompt": "Generate a 2-stage workout exercise illustration diagram:\n- Title: 'HYPEREXTENSION / BACK EXTENSION'\n- Pose 1 (Left - Starting Position): Muscular athletic male on 45-degree hyperextension bench with hips resting on pad, lowering torso down towards floor, hinging at hips.\n- Pose 2 (Right - Finish Position): Raising torso up until body forms a straight line with legs (no hyperextension), squeezing lower back, glutes, and hamstrings.\n- Muscle Highlight: Erector Spinae (lower back) and Gluteus Maximus glowing bright red-orange.\n- Equipment: 45-degree hyperextension / Roman chair bench with ankle rollers.\n- Style: 3D anatomical fitness model, realistic physique, clean white minimalist background, scientific fitness guide, side-by-side comparison diagram."
+  }
+]
