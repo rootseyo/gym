@@ -1879,6 +1879,7 @@ const EQUIPMENT_CATALOG = [
     "id": "lat-pulldown",
     "name": "렛풀다운",
     "category": "등",
+    "imageUrl": "assets/exercises/lat-pulldown.webp",
     "englishName": "Lat Pulldown Machine",
     "iconType": "lat-pulldown",
     "equipmentType": "케이블 풀다운 핀 머신",
