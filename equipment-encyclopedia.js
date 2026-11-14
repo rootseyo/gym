@@ -2898,6 +2898,7 @@ const EQUIPMENT_CATALOG = [
     "id": "lying-leg-curl",
     "name": "라잉 레그컬",
     "category": "하체",
+    "imageUrl": "assets/exercises/lying-leg-curl.webp",
     "englishName": "Prone Lying Leg Curl",
     "iconType": "lying-leg-curl",
     "equipmentType": "라잉 레그컬 핀 머신 (엎드림)",
