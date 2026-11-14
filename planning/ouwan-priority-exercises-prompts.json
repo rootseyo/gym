@@ -1,0 +1,121 @@
+[
+  {
+    "id": "overhead-triceps-extension",
+    "name": "케이블 오버헤드 익스텐션",
+    "category": "팔",
+    "reason": "케이블 위치 골반/허리 높이 보정판 (기존 상단 케이블 오류 수정)",
+    "prompt": "Generate a 2-stage workout exercise illustration diagram:\n- Title: 'CABLE OVERHEAD TRICEPS EXTENSION'\n- Pose 1 (Left - Starting Position): Muscular athletic male facing AWAY from cable pulley column in forward split-stance with torso angled forward 45 degrees. Cable pulley is set at WAIST / PELVIS HEIGHT behind him (low-to-mid pulley). Cable rope runs diagonally upward from the hip-height pulley behind his pelvis, along his back to his hands gripping the rope behind his head with elbows fully bent, deep long-head triceps stretch.\n- Pose 2 (Right - Finish Position / Lockout): Torso remains leaned forward at 45 degrees, extending arms forward and diagonally upward overhead until elbows lock out, spreading rope handles apart at peak contraction while cable remains anchored to the hip-height pulley behind him.\n- Muscle Highlight: Triceps Brachii (Long Head) glowing bright red-orange.\n- Equipment: Cable pulley column with pulley set at PELVIS / HIP LEVEL behind user (NOT overhead), rope attachment.\n- Style: 3D anatomical fitness model, realistic physique, clean white minimalist background, scientific fitness guide, side-by-side comparison diagram."
+  },
+  {
+    "id": "leg-press",
+    "name": "레그프레스",
+    "category": "하체",
+    "reason": "오운완 게시판 최다 등록 1위 (22회)",
+    "prompt": "Generate a 2-stage workout exercise illustration diagram:\n- Title: '45-DEGREE LEG PRESS'\n- Pose 1 (Left - Starting Position): Muscular athletic male seated reclined in 45-degree leg press sled, feet shoulder-width flat on platform, knees bent to 90 degrees bringing sled down toward chest, deep quadriceps and glute stretch.\n- Pose 2 (Right - Finish Position): Pressing the footplate upward until legs are almost straight with knees soft (never locked out), peak contraction in thighs and glutes.\n- Muscle Highlight: Quadriceps (Rectus Femoris, Vastus Lateralis/Medialis) and Gluteus Maximus glowing bright red-orange.\n- Equipment: 45-degree commercial plate-loaded incline leg press machine with heavy weight plates.\n- Style: 3D anatomical fitness model, realistic physique, clean white minimalist background, scientific fitness guide, side-by-side comparison diagram."
+  },
+  {
+    "id": "treadmill",
+    "name": "런닝머신",
+    "category": "유산소",
+    "reason": "오운완 게시판 등록 2위 (20회)",
+    "prompt": "Generate a 2-stage workout exercise illustration diagram:\n- Title: 'TREADMILL RUNNING / INCLINE WALK'\n- Pose 1 (Left - Starting Position / Incline Walking): Muscular athletic male walking briskly with powerful upright stride on a 5% inclined running deck, driving through midfoot and heels, arms swinging rhythmically.\n- Pose 2 (Right - Finish Position / Sprint & Run): Athletic male in full energetic running gait with high knee drive, chest lifted, forward momentum on rotating treadmill belt.\n- Muscle Highlight: Full-body cardiovascular system with glowing bright red-orange highlights on Quadriceps, Hamstrings, Calves (Gastrocnemius), and Glutes.\n- Equipment: Modern commercial treadmill with digital console, running belt, and safety handrails.\n- Style: 3D anatomical fitness model, realistic physique, clean white minimalist background, scientific fitness guide, side-by-side comparison diagram."
+  },
+  {
+    "id": "abdominal-machine",
+    "name": "앱도미널 머신",
+    "category": "복근/코어",
+    "reason": "오운완 게시판 등록 3위 (18회, 업도미널)",
+    "prompt": "Generate a 2-stage workout exercise illustration diagram:\n- Title: 'SEATED ABDOMINAL CRUNCH MACHINE'\n- Pose 1 (Left - Starting Position): Muscular athletic male seated upright on abdominal machine, chest against roller pad or gripping overhead handles, spine lengthened in neutral stretch.\n- Pose 2 (Right - Finish Position): Flexing spine to curl chest down toward pelvis in a tight crunch, drawing ribs toward navel, peak six-pack abdominal contraction.\n- Muscle Highlight: Rectus Abdominis (Six-Pack) and Obliques glowing bright red-orange.\n- Equipment: Commercial selectorized seated abdominal crunch machine with padded chest lever and weight stack.\n- Style: 3D anatomical fitness model, realistic physique, clean white minimalist background, scientific fitness guide, side-by-side comparison diagram."
+  },
+  {
+    "id": "hack-squat",
+    "name": "핵스쿼트",
+    "category": "하체",
+    "reason": "오운완 게시판 등록 4위 (17회)",
+    "prompt": "Generate a 2-stage workout exercise illustration diagram:\n- Title: 'HACK SQUAT MACHINE'\n- Pose 1 (Left - Starting Position): Muscular athletic male at the bottom of 45-degree hack squat sled, back flat against backrest with shoulders under padded pads, knees bent past 90 degrees with shins vertical, deep quad stretch.\n- Pose 2 (Right - Finish Position): Driving up through heels along linear rails to near full knee extension (knees soft, not locked), peak quadriceps lockout.\n- Muscle Highlight: Quadriceps (Vastus Lateralis, Rectus Femoris, Vastus Medialis) glowing bright red-orange.\n- Equipment: 45-degree angled plate-loaded hack squat machine with shoulder pads and angled footplate.\n- Style: 3D anatomical fitness model, realistic physique, clean white minimalist background, scientific fitness guide, side-by-side comparison diagram."
+  },
+  {
+    "id": "stationary-bike",
+    "name": "사이클",
+    "category": "유산소",
+    "reason": "오운완 게시판 등록 5위 (16회, 실내자전거)",
+    "prompt": "Generate a 2-stage workout exercise illustration diagram:\n- Title: 'STATIONARY SPIN BIKE'\n- Pose 1 (Left - Starting Position / Seated Endurance): Muscular athletic male seated on spin bike with hands on bullhorn handlebars, driving right pedal down through ball of foot with 30-degree knee bend at bottom stroke.\n- Pose 2 (Right - Finish Position / Standing Climb Sprint): Athlete standing out of saddle in aggressive sprint climb, shifting weight smoothly over pedals with powerful alternating quad and glute drive.\n- Muscle Highlight: Quadriceps, Gluteus Maximus, Hamstrings, and Calves glowing bright red-orange.\n- Equipment: Commercial heavy flywheel indoor cycling / spin bike with drop handlebars.\n- Style: 3D anatomical fitness model, realistic physique, clean white minimalist background, scientific fitness guide, side-by-side comparison diagram."
+  },
+  {
+    "id": "overhead-press",
+    "name": "오버헤드 프레스 (OHP)",
+    "category": "어깨",
+    "reason": "오운완 게시판 등록 6위 (12회)",
+    "prompt": "Generate a 2-stage workout exercise illustration diagram:\n- Title: 'STANDING OVERHEAD BARBELL PRESS (OHP)'\n- Pose 1 (Left - Starting Position): Muscular athletic male standing tall with neutral spine and braced glutes, holding Olympic barbell at upper clavicle/front deltoid rack position, forearms vertical beneath the bar.\n- Pose 2 (Right - Finish Position / Lockout): Pressing barbell vertically overhead in a straight line, head pushing slightly forward through window of arms, shoulders shrugged at full lockout.\n- Muscle Highlight: Anterior Deltoids, Lateral Deltoids, Upper Trapezius, and Triceps glowing bright red-orange.\n- Equipment: Olympic barbell with bumper plates standing in power rack.\n- Style: 3D anatomical fitness model, realistic physique, clean white minimalist background, scientific fitness guide, side-by-side comparison diagram."
+  },
+  {
+    "id": "seated-leg-curl",
+    "name": "레그컬",
+    "category": "하체",
+    "reason": "오운완 게시판 등록 7위 (12회, 시티드 레그컬)",
+    "prompt": "Generate a 2-stage workout exercise illustration diagram:\n- Title: 'SEATED LEG CURL'\n- Pose 1 (Left - Starting Position): Muscular athletic male seated in leg curl machine, thighs locked under thigh pad, legs extended straight out with ankle roller resting on back of lower calves/Achilles, hamstrings fully stretched.\n- Pose 2 (Right - Finish Position): Flexing knees smoothly to curl roller pad deep beneath the seat toward buttocks, peak hamstring contraction.\n- Muscle Highlight: Hamstrings (Biceps Femoris, Semitendinosus, Semimembranosus) glowing bright red-orange.\n- Equipment: Commercial selectorized seated leg curl machine with lap pad and ankle lever arm.\n- Style: 3D anatomical fitness model, realistic physique, clean white minimalist background, scientific fitness guide, side-by-side comparison diagram."
+  },
+  {
+    "id": "leg-extension",
+    "name": "레그 익스텐션",
+    "category": "하체",
+    "reason": "오운완 게시판 등록 8위 (9회)",
+    "prompt": "Generate a 2-stage workout exercise illustration diagram:\n- Title: 'SEATED LEG EXTENSION'\n- Pose 1 (Left - Starting Position): Muscular athletic male seated with back against pad, knees bent 90 degrees with padded lever arm resting against lower shins/ankles, quadriceps stretched.\n- Pose 2 (Right - Finish Position / Peak Lockout): Extending legs straight forward and up until fully horizontal, squeezing quadriceps forcefully for 1 second.\n- Muscle Highlight: Quadriceps (Vastus Medialis Teardrop, Rectus Femoris, Vastus Lateralis) glowing bright red-orange.\n- Equipment: Commercial selectorized seated leg extension machine with weight stack.\n- Style: 3D anatomical fitness model, realistic physique, clean white minimalist background, scientific fitness guide, side-by-side comparison diagram."
+  },
+  {
+    "id": "rear-deltoid-machine",
+    "name": "리어 델토이드 머신",
+    "category": "어깨",
+    "reason": "오운완 게시판 등록 9위 (9회, 리버스 펙덱플라이)",
+    "prompt": "Generate a 2-stage workout exercise illustration diagram:\n- Title: 'REVERSE PEC-DECK REAR DELTOID FLY'\n- Pose 1 (Left - Starting Position): Muscular athletic male seated facing inward toward chest pad, arms extended forward holding vertical machine handles at chest height with slight elbow bend.\n- Pose 2 (Right - Finish Position): Sweeping arms horizontally backward in a wide lateral arc past the torso plane while keeping scapulae stable, peak rear deltoid contraction.\n- Muscle Highlight: Posterior Deltoids (Rear Delts) and Infraspinatus glowing bright red-orange.\n- Equipment: Dual-function Pec-Deck / Rear Deltoid fly machine with selectorized weight stack.\n- Style: 3D anatomical fitness model, realistic physique, clean white minimalist background, scientific fitness guide, side-by-side comparison diagram."
+  },
+  {
+    "id": "lying-leg-curl",
+    "name": "라잉 레그컬",
+    "category": "하체",
+    "reason": "오운완 게시판 등록 10위 (8회)",
+    "prompt": "Generate a 2-stage workout exercise illustration diagram:\n- Title: 'LYING PRONE LEG CURL'\n- Pose 1 (Left - Starting Position): Muscular athletic male lying prone (face down) on contoured bench, hips pressed into pad, legs extended with ankle roller resting against lower calves/Achilles, hamstrings stretched.\n- Pose 2 (Right - Finish Position): Curling the roller pad upward and forward toward the glutes without lifting hips off bench, peak hamstring squeeze.\n- Muscle Highlight: Hamstrings (Biceps Femoris long and short heads) glowing bright red-orange.\n- Equipment: Commercial angled lying leg curl machine with handles and padded roller arm.\n- Style: 3D anatomical fitness model, realistic physique, clean white minimalist background, scientific fitness guide, side-by-side comparison diagram."
+  },
+  {
+    "id": "hip-abduction",
+    "name": "아웃싸이 (어브덕션)",
+    "category": "하체",
+    "reason": "오운완 게시판 등록 11위 (6회, 아웃타이)",
+    "prompt": "Generate a 2-stage workout exercise illustration diagram:\n- Title: 'SEATED HIP ABDUCTION (OUTER THIGH)'\n- Pose 1 (Left - Starting Position): Muscular athletic male seated upright with slight forward torso lean, knees together with padded lever pads resting against outer knees/thighs.\n- Pose 2 (Right - Finish Position): Pressing thighs forcefully outward against pads into a wide spread, peak contraction in upper glutes and hips.\n- Muscle Highlight: Gluteus Medius, Gluteus Minimus, and Tensor Fasciae Latae glowing bright red-orange.\n- Equipment: Commercial selectorized seated hip abduction machine.\n- Style: 3D anatomical fitness model, realistic physique, clean white minimalist background, scientific fitness guide, side-by-side comparison diagram."
+  },
+  {
+    "id": "hip-adduction",
+    "name": "이너싸이 (어덕션)",
+    "category": "하체",
+    "reason": "오운완 게시판 등록 12위 (6회, 이너타이)",
+    "prompt": "Generate a 2-stage workout exercise illustration diagram:\n- Title: 'SEATED HIP ADDUCTION (INNER THIGH)'\n- Pose 1 (Left - Starting Position): Muscular athletic male seated with legs spread wide in comfortable stretch, padded lever pads resting against inside of knees/thighs.\n- Pose 2 (Right - Finish Position): Squeezing thighs together forcefully until pads touch in the center, peak inner groin/adductor contraction.\n- Muscle Highlight: Adductor Longus, Adductor Magnus, and Gracilis glowing bright red-orange.\n- Equipment: Commercial selectorized seated hip adduction machine.\n- Style: 3D anatomical fitness model, realistic physique, clean white minimalist background, scientific fitness guide, side-by-side comparison diagram."
+  },
+  {
+    "id": "stairmaster",
+    "name": "천국의 계단 (스텝밀)",
+    "category": "유산소",
+    "reason": "오운완 게시판 등록 13위 (6회)",
+    "prompt": "Generate a 2-stage workout exercise illustration diagram:\n- Title: 'STAIRMASTER / REVOLVING STAIRMILL'\n- Pose 1 (Left - Starting Position / Step Rise): Muscular athletic male stepping up onto revolving staircase, driving through whole foot and heel with tall upright posture, light fingertip touch on rails.\n- Pose 2 (Right - Finish Position / Continuous Climbing Gait): Dynamic climbing stride driving through glutes and calves with rhythmic hip extension, chest lifted, steady cardio power.\n- Muscle Highlight: Gluteus Maximus, Quadriceps, Hamstrings, and Calves glowing bright red-orange.\n- Equipment: Commercial motorized revolving stairmill machine (StairMaster) with digital console.\n- Style: 3D anatomical fitness model, realistic physique, clean white minimalist background, scientific fitness guide, side-by-side comparison diagram."
+  },
+  {
+    "id": "v-squat",
+    "name": "V-스쿼트",
+    "category": "하체",
+    "reason": "오운완 게시판 등록 14위 (5회, 브이스쿼트)",
+    "prompt": "Generate a 2-stage workout exercise illustration diagram:\n- Title: 'V-SQUAT MACHINE'\n- Pose 1 (Left - Starting Position): Muscular athletic male at bottom of curved V-squat movement, shoulders braced under padded bars, hips hinged deep into full squat with thighs parallel to platform.\n- Pose 2 (Right - Finish Position): Pressing upward along curved natural arc through heels into tall standing lockout, glutes and quads fully engaged.\n- Muscle Highlight: Quadriceps, Gluteus Maximus, and Hamstrings glowing bright red-orange.\n- Equipment: Plate-loaded V-squat machine with curved pivot arm and heavy Olympic plates.\n- Style: 3D anatomical fitness model, realistic physique, clean white minimalist background, scientific fitness guide, side-by-side comparison diagram."
+  },
+  {
+    "id": "dumbbell-shoulder-press",
+    "name": "덤벨 숄더프레스",
+    "category": "어깨",
+    "reason": "오운완 게시판 등록 15위 (2회)",
+    "prompt": "Generate a 2-stage workout exercise illustration diagram:\n- Title: 'SEATED DUMBBELL SHOULDER PRESS'\n- Pose 1 (Left - Starting Position): Muscular athletic male seated on 85-degree vertical bench, holding heavy hex dumbbells at ear/shoulder level with palms facing forward, elbows angled slightly forward at 75 degrees.\n- Pose 2 (Right - Finish Position / Lockout): Pressing dumbbells upward in converging arc overhead until arms are extended straight overhead with dumbbells nearly touching, peak deltoid squeeze.\n- Muscle Highlight: Anterior Deltoid and Lateral Deltoid glowing bright red-orange.\n- Equipment: Adjustable utility bench set upright and pair of hex dumbbells.\n- Style: 3D anatomical fitness model, realistic physique, clean white minimalist background, scientific fitness guide, side-by-side comparison diagram."
+  },
+  {
+    "id": "shoulder-press-machine",
+    "name": "숄더프레스 머신",
+    "category": "어깨",
+    "reason": "오운완 게시판 등록 16위 (1회)",
+    "prompt": "Generate a 2-stage workout exercise illustration diagram:\n- Title: 'SEATED SHOULDER PRESS MACHINE'\n- Pose 1 (Left - Starting Position): Muscular athletic male seated with back against vertical pad, gripping neutral/pronated machine handles at chin height, shoulders ready to press.\n- Pose 2 (Right - Finish Position): Pushing handles smoothly upward along fixed converging guide path to full overhead extension, deltoids fully contracted.\n- Muscle Highlight: Anterior and Lateral Deltoids glowing bright red-orange.\n- Equipment: Commercial selectorized seated overhead shoulder press machine with weight stack.\n- Style: 3D anatomical fitness model, realistic physique, clean white minimalist background, scientific fitness guide, side-by-side comparison diagram."
+  }
+]
