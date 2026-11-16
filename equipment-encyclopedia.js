@@ -2992,6 +2992,7 @@ const EQUIPMENT_CATALOG = [
     "name": "아웃싸이 (어브덕션)",
     "category": "하체",
     "englishName": "Seated Hip Abduction",
+    "imageUrl": "assets/exercises/hip-abduction.webp",
     "iconType": "hip-abduction",
     "equipmentType": "아웃싸이 (어브덕션) 핀 머신",
     "equipCategory": "pin_machine",
