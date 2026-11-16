@@ -2969,6 +2969,7 @@ const EQUIPMENT_CATALOG = [
     "name": "이너싸이 (어덕션)",
     "category": "하체",
     "englishName": "Seated Hip Adduction",
+    "imageUrl": "assets/exercises/hip-adduction.webp",
     "iconType": "hip-adduction",
     "equipmentType": "이너싸이 (어덕션) 핀 머신",
     "equipCategory": "pin_machine",
