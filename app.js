@@ -777,6 +777,13 @@ function matchExerciseSearch(item, rawQuery) {
     }
   }
 
+  // 5. Ouwan popularity search
+  if (cleanSearch === '오운완' || cleanSearch === '오운완인기' || cleanSearch === '인기') {
+    if (item.ouwanRank) {
+      return { matched: true, matchedAlias: `오운완 ${item.ouwanRank}위` };
+    }
+  }
+
   return { matched: false, matchedAlias: null };
 }
 
@@ -2727,6 +2734,8 @@ function renderEquipmentEncyclopedia(category = activeEncyclopediaCategory, sear
       if (!favSet.has(item.name)) return;
     } else if (category === 'recent') {
       if (!recentSet.has(item.name)) return;
+    } else if (category === 'ouwan') {
+      if (!item.ouwanRank) return;
     } else if (category !== 'all' && item.category !== category) {
       return;
     }
@@ -2743,6 +2752,8 @@ function renderEquipmentEncyclopedia(category = activeEncyclopediaCategory, sear
 
   if (category === 'recent') {
     matchedItems.sort((a, b) => recentList.indexOf(a.item.name) - recentList.indexOf(b.item.name));
+  } else if (category === 'ouwan') {
+    matchedItems.sort((a, b) => (a.item.ouwanRank || 999) - (b.item.ouwanRank || 999));
   }
 
   const countBadge = document.getElementById('encyclopediaResultCount');
@@ -2755,6 +2766,8 @@ function renderEquipmentEncyclopedia(category = activeEncyclopediaCategory, sear
       ? '⭐ 즐겨찾기한 운동 기구가 없습니다.<br><span style="font-size:0.75rem; color:var(--text-dim);">운동 카드 좌측 상단의 ☆ 버튼을 눌러 자주 쓰는 기구를 등록해 보세요!</span>'
       : category === 'recent'
       ? '🕒 최근 수행한 운동 기록이 없습니다.'
+      : category === 'ouwan'
+      ? '🔥 오운완 인기 운동이 없습니다.'
       : '일치하는 운동 기구가 없습니다.';
 
     grid.innerHTML = `
@@ -2796,6 +2809,7 @@ function renderEquipmentEncyclopedia(category = activeEncyclopediaCategory, sear
         <div class="enc-card-name">${highlightSearchText(item.name, trimmedSearch)}</div>
         <div class="enc-card-eng">${highlightSearchText(item.englishName || '', trimmedSearch)}</div>
         <div class="enc-card-badge-row">
+          ${item.ouwanRank ? `<span class="enc-badge ouwan-badge" title="오운완 게시판 ${item.ouwanCount}회 등록"><i class="fa-solid fa-fire"></i> 오운완 ${item.ouwanRank}위</span>` : ''}
           <span class="enc-badge cat">${escapeHtml(item.category)}</span>
           ${equipBadgeText ? `<span class="enc-badge equip-type">${escapeHtml(equipBadgeText)}</span>` : ''}
           <span class="enc-badge">${item.category === '유산소' ? `${item.defaultWeight}km/h` : `${item.defaultWeight}kg`}</span>

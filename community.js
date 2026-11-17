@@ -574,13 +574,27 @@
     $('detailExercises').innerHTML = detail.exercises.map((ex, index) => {
       const vol = exerciseVolume(ex);
       const volText = vol > 0 ? volume(vol) : (ex.type === 'cardio' ? '유산소' : '맨몸/스트레칭');
+      const canonicalName = (typeof window.resolveExerciseCanonical === 'function')
+        ? window.resolveExerciseCanonical(ex.name)
+        : ex.name;
+      const catalogItem = (typeof window.EQUIPMENT_CATALOG !== 'undefined')
+        ? (window.EQUIPMENT_CATALOG.find(e => e.name === canonicalName || e.name === ex.name)
+          || window.EQUIPMENT_CATALOG.find(e => (e.aliases || []).includes(ex.name)))
+        : null;
+      const hasImage = Boolean(catalogItem?.imageUrl);
+      const svgIcon = (typeof window.getExerciseSvgIcon === 'function')
+        ? window.getExerciseSvgIcon(canonicalName, ex.category)
+        : '';
+
       return `
         <article class="exercise-row-card">
           <label class="exercise-check-label">
             <input type="checkbox" data-select="${index}" checked>
+            ${svgIcon ? `<span class="exercise-thumb-icon">${svgIcon}</span>` : ''}
             <span class="exercise-name-text">${escape(ex.name)}</span>
           </label>
           <div class="exercise-info-badges">
+            ${catalogItem ? `<button type="button" class="ouwan-enc-guide-btn ${hasImage ? 'has-image' : ''}" data-ex-name="${escape(ex.name)}" title="운동 도감 2단계 동작 가이드 보기">📖 도감${hasImage ? ' 가이드' : ''}</button>` : ''}
             <span class="category-pill">${escape(ex.category)}</span>
             <span class="sets-pill">${ex.sets.length}세트</span>
             <strong class="volume-pill">${volText}</strong>
@@ -588,6 +602,14 @@
         </article>
       `;
     }).join('');
+
+    $('detailExercises').querySelectorAll('.ouwan-enc-guide-btn').forEach(btn => {
+      btn.onclick = e => {
+        e.preventDefault();
+        e.stopPropagation();
+        openExerciseDiagram(btn.dataset.exName);
+      };
+    });
 
     likeButton($('detailLike'), detail.id, detail.liked, detail.likeCount, detail.isOwn);
     $('reportBtn').hidden = detail.isOwn;
@@ -601,6 +623,36 @@
     if (!$('detailDialog').open) $('detailDialog').showModal();
 
     requestAnimationFrame(() => renderDetailVolumeChart(detail));
+  }
+
+  function openExerciseDiagram(name) {
+    if (!name || typeof window.EQUIPMENT_CATALOG === 'undefined') return;
+    const canonicalName = (typeof window.resolveExerciseCanonical === 'function')
+      ? window.resolveExerciseCanonical(name)
+      : name;
+    const item = window.EQUIPMENT_CATALOG.find(e => e.name === canonicalName || e.name === name)
+      || window.EQUIPMENT_CATALOG.find(e => (e.aliases || []).includes(name));
+    if (!item) return;
+
+    $('diagramExerciseTitle').textContent = item.name + (item.equipmentType ? ` (${item.equipmentType})` : '');
+    $('diagramName').textContent = `${item.name} · ${item.englishName || item.category}`;
+    $('diagramMuscles').textContent = `🎯 자극 부위: ${item.targetMuscles || '-'}`;
+    $('diagramTips').textContent = `💡 핵심 팁: ${item.tips || '-'}`;
+
+    const imgWrap = $('diagramImgWrap');
+    const img = $('diagramImage');
+    if (item.imageUrl) {
+      img.src = item.imageUrl;
+      img.alt = `${item.name} 2단계 동작 가이드`;
+      imgWrap.hidden = false;
+    } else {
+      img.removeAttribute('src');
+      imgWrap.hidden = true;
+    }
+
+    if (!$('exerciseDiagramDialog').open) {
+      $('exerciseDiagramDialog').showModal();
+    }
   }
 
   async function copyCode(id) {

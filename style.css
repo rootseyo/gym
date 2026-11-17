@@ -3950,6 +3950,13 @@ tr.set-row-warmup input[type="number"] {
   color: var(--accent-cyan);
 }
 
+.enc-badge.ouwan-badge {
+  background: rgba(255, 68, 68, 0.15);
+  color: #ff5252;
+  border: 1px solid rgba(255, 68, 68, 0.35);
+  font-weight: 700;
+}
+
 /* Selected Equipment Summary Banner */
 .enc-selected-banner {
   display: flex;

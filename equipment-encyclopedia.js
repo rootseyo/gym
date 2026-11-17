@@ -1277,7 +1277,15 @@ const EXERCISE_SYNONYMS = {
   "덤벨 숄더 프레스": "덤벨 숄더프레스",
   "체스트 웨이트": "체스트 프레스 머신",
   "시티드 로우": "시티드 케이블 로우",
-  "친딥": "어시스트 풀업"
+  "시티드로우": "시티드 케이블 로우",
+  "친딥": "어시스트 풀업",
+  "프론트 로우": "해머 프론트 렛풀다운",
+  "프론트로우": "해머 프론트 렛풀다운",
+  "해머프론트로우": "해머 프론트 렛풀다운",
+  "해머 프론트 로우": "해머 프론트 렛풀다운",
+  "라잉 레그 컬": "라잉 레그컬",
+  "케이블 로프 푸시다운": "케이블 로프 푸쉬다운",
+  "오버헤드 트라이셉스 익스텐션": "케이블 오버헤드 익스텐션"
 };
 
 // Master Encyclopedia of 168 Gym Exercises & Equipment
@@ -2360,7 +2368,11 @@ const EQUIPMENT_CATALOG = [
     "aliases": [
       "프론트랫풀",
       "해머랫풀",
-      "플레이트랫풀"
+      "플레이트랫풀",
+      "프론트 로우",
+      "프론트로우",
+      "해머 프론트 로우",
+      "해머프론트로우"
     ],
     "alternatives": [
       "렛풀다운",
@@ -5476,10 +5488,81 @@ function getExerciseAlternatives(exerciseName, category = '') {
     .slice(0, 4);
 }
 
+// Community Ouwan Popular Exercises ranking
+const OUWAN_POPULAR_EXERCISES = [
+  { name: "레그프레스", count: 22, rank: 1 },
+  { name: "런닝머신", count: 20, rank: 2 },
+  { name: "앱도미널 머신", count: 18, rank: 3 },
+  { name: "핵스쿼트", count: 17, rank: 4 },
+  { name: "사이클", count: 16, rank: 5 },
+  { name: "오버헤드 프레스 (OHP)", count: 12, rank: 6 },
+  { name: "레그컬", count: 12, rank: 7 },
+  { name: "렛풀다운", count: 10, rank: 8 },
+  { name: "레그 익스텐션", count: 9, rank: 9 },
+  { name: "리어 델토이드 머신", count: 9, rank: 10 },
+  { name: "라잉 레그컬", count: 8, rank: 11 },
+  { name: "아웃싸이 (어브덕션)", count: 6, rank: 12 },
+  { name: "이너싸이 (어덕션)", count: 6, rank: 13 },
+  { name: "천국의 계단 (스텝밀)", count: 6, rank: 14 },
+  { name: "V-스쿼트", count: 5, rank: 15 },
+  { name: "시티드 케이블 로우", count: 5, rank: 16 },
+  { name: "체스트 프레스 머신", count: 5, rank: 17 },
+  { name: "어시스트 풀업", count: 4, rank: 18 },
+  { name: "인클라인 벤치프레스", count: 3, rank: 19 },
+  { name: "해머 프론트 렛풀다운", count: 3, rank: 20 },
+  { name: "티바 로우", count: 3, rank: 21 },
+  { name: "케이블 오버헤드 익스텐션", count: 3, rank: 22 },
+  { name: "케이블 로프 푸쉬다운", count: 3, rank: 23 },
+  { name: "베이지안 컬", count: 3, rank: 24 },
+  { name: "로우 로우 머신", count: 2, rank: 25 },
+  { name: "덤벨 숄더프레스", count: 2, rank: 26 },
+  { name: "케이블 컬", count: 2, rank: 27 },
+  { name: "덤벨 컬", count: 2, rank: 28 },
+  { name: "케이블 크로스오버", count: 2, rank: 29 },
+  { name: "숄더프레스 머신", count: 1, rank: 30 }
+];
+
+// Attach Ouwan metrics to EQUIPMENT_CATALOG
+OUWAN_POPULAR_EXERCISES.forEach(ou => {
+  const item = EQUIPMENT_CATALOG.find(e => e.name === ou.name);
+  if (item) {
+    item.ouwanRank = ou.rank;
+    item.ouwanCount = ou.count;
+  }
+});
+
+// Helper to resolve any slang, alias, or raw user name into canonical catalog name
+function resolveExerciseCanonical(name) {
+  if (!name || typeof name !== 'string') return null;
+  const raw = name.trim();
+  const lower = raw.toLowerCase();
+  const clean = lower.replace(/\s+/g, '');
+
+  if (EXERCISE_SYNONYMS[raw]) return EXERCISE_SYNONYMS[raw];
+  if (EXERCISE_SYNONYMS[lower]) return EXERCISE_SYNONYMS[lower];
+  if (EXERCISE_SYNONYMS[clean]) return EXERCISE_SYNONYMS[clean];
+
+  const exact = EQUIPMENT_CATALOG.find(e => e.name.toLowerCase() === lower);
+  if (exact) return exact.name;
+
+  const cleanExact = EQUIPMENT_CATALOG.find(e => e.name.toLowerCase().replace(/\s+/g, '') === clean);
+  if (cleanExact) return cleanExact.name;
+
+  const aliasMatch = EQUIPMENT_CATALOG.find(e => (e.aliases || []).some(a => {
+    const aLower = a.toLowerCase();
+    return aLower === lower || aLower.replace(/\s+/g, '') === clean;
+  }));
+  if (aliasMatch) return aliasMatch.name;
+
+  return raw;
+}
+
 // Global expose
 window.EQUIPMENT_SVGS = EQUIPMENT_SVGS;
 window.EQUIPMENT_CATEGORIES = EQUIPMENT_CATEGORIES;
 window.EXERCISE_SYNONYMS = EXERCISE_SYNONYMS;
 window.EQUIPMENT_CATALOG = EQUIPMENT_CATALOG;
+window.OUWAN_POPULAR_EXERCISES = OUWAN_POPULAR_EXERCISES;
+window.resolveExerciseCanonical = resolveExerciseCanonical;
 window.getExerciseSvgIcon = getExerciseSvgIcon;
 window.getExerciseAlternatives = getExerciseAlternatives;

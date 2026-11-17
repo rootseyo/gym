@@ -42,3 +42,25 @@ test('equipment-encyclopedia.js includes bayesian-curl with high quality animate
   const stat = fs.statSync(gifPath);
   assert.ok(stat.size > 100000, 'bayesian-curl.gif must be a valid animated GIF asset');
 });
+
+test('equipment-encyclopedia.js and app.js support Ouwan popular exercises and canonical resolution', () => {
+  const encJs = fs.readFileSync(path.join(__dirname, '..', 'equipment-encyclopedia.js'), 'utf8');
+  assert.ok(encJs.includes('OUWAN_POPULAR_EXERCISES'), 'Must define OUWAN_POPULAR_EXERCISES');
+  assert.ok(encJs.includes('resolveExerciseCanonical'), 'Must define resolveExerciseCanonical');
+  assert.ok(encJs.includes('"프론트 로우": "해머 프론트 렛풀다운"'), 'Must map 프론트 로우 synonym');
+  assert.ok(encJs.includes('"라잉 레그 컬": "라잉 레그컬"'), 'Must map 라잉 레그 컬 synonym');
+
+  assert.ok(indexHtml.includes('data-cat="ouwan"'), 'index.html must have ouwan category chip');
+  assert.ok(appJs.includes("category === 'ouwan'"), 'app.js must handle ouwan category filtering');
+  assert.ok(appJs.includes('enc-badge ouwan-badge'), 'app.js must render ouwan ranking badges');
+});
+
+test('community.html and community.js integrate exercise diagram modal and encyclopedia', () => {
+  const commHtml = fs.readFileSync(path.join(__dirname, '..', 'community.html'), 'utf8');
+  const commJs = fs.readFileSync(path.join(__dirname, '..', 'community.js'), 'utf8');
+
+  assert.ok(commHtml.includes('src="equipment-encyclopedia.js"'), 'community.html must load equipment-encyclopedia.js');
+  assert.ok(commHtml.includes('id="exerciseDiagramDialog"'), 'community.html must have exerciseDiagramDialog');
+  assert.ok(commJs.includes('ouwan-enc-guide-btn'), 'community.js must render guide button in exercise rows');
+  assert.ok(commJs.includes('openExerciseDiagram'), 'community.js must define openExerciseDiagram');
+});

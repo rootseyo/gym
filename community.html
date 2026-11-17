@@ -18,6 +18,7 @@
   <script defer src="kakao.min.js"></script>
   <script defer src="ouwan-core.js"></script>
   <script defer src="routine-code.js"></script>
+  <script defer src="equipment-encyclopedia.js"></script>
   <script defer src="community-auth.js"></script>
   <script defer src="community.js"></script>
 </head>
@@ -221,6 +222,24 @@
   <p>자동 복사를 사용할 수 없어 코드를 표시했어요. 전체 선택 후 복사해 주세요.</p>
   <label for="copyCodeText" class="sr-only">운동 코드</label>
   <textarea id="copyCodeText" rows="8" readonly></textarea>
+</dialog>
+
+<!-- 운동 도감 2단계 가이드 팝업 다이얼로그 -->
+<dialog id="exerciseDiagramDialog" class="exercise-diagram-dialog">
+  <div class="dialog-head">
+    <h2><span class="icon">📖</span> <span id="diagramExerciseTitle">운동 도감 가이드</span></h2>
+    <button data-close="exerciseDiagramDialog" aria-label="도감 닫기">✕</button>
+  </div>
+  <div class="diagram-dialog-body">
+    <div id="diagramImgWrap" class="diagram-img-wrap">
+      <img id="diagramImage" src="" alt="운동 동작 2단계 가이드" class="diagram-image">
+    </div>
+    <div class="diagram-info-card">
+      <h3 id="diagramName"></h3>
+      <p id="diagramMuscles" class="diagram-muscles"></p>
+      <p id="diagramTips" class="diagram-tips"></p>
+    </div>
+  </div>
 </dialog>
 </body>
 </html>
