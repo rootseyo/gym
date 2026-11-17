@@ -1,0 +1,1602 @@
+[
+  {
+    "id": "squat",
+    "name": "스쿼트",
+    "category": "하체",
+    "englishName": "Barbell Back Squat",
+    "equipCategory": "barbell",
+    "equipmentType": "파워 랙 & 바벨",
+    "targetMuscles": "대퇴사두근, 대둔근, 햄스트링, 코어",
+    "tips": "발끝과 무릎 방향을 일치시키고 고관절을 먼저 접으며 깊게 앉습니다.",
+    "ouwanRank": null,
+    "ouwanCount": null,
+    "spec": {
+      "title": "BARBELL BACK SQUAT",
+      "pose1": "Muscular athletic male standing tall in rack with Olympic barbell secured across upper trapezius, feet shoulder-width apart, chest proud, core braced.",
+      "pose2": "Deep parallel back squat with hips sank below knee crease, knees tracking outward over toes, flat neutral spine, eyes forward.",
+      "muscles": "Quadriceps, Gluteus Maximus, and Hamstrings glowing bright red-orange.",
+      "equipment": "Commercial power rack with barbell and Olympic bumper plates."
+    },
+    "prompt": "Generate a 2-stage workout exercise illustration diagram:\n- Title: 'BARBELL BACK SQUAT'\n- Pose 1 (Left - Starting Position): Muscular athletic male standing tall in rack with Olympic barbell secured across upper trapezius, feet shoulder-width apart, chest proud, core braced.\n- Pose 2 (Right - Finish Position): Deep parallel back squat with hips sank below knee crease, knees tracking outward over toes, flat neutral spine, eyes forward.\n- Muscle Highlight: Quadriceps, Gluteus Maximus, and Hamstrings glowing bright red-orange.\n- Equipment: Commercial power rack with barbell and Olympic bumper plates.\n- Style: 3D anatomical fitness model, realistic physique, clean white minimalist background, scientific fitness guide, side-by-side comparison diagram."
+  },
+  {
+    "id": "front-squat",
+    "name": "프론트 스쿼트",
+    "category": "하체",
+    "englishName": "Barbell Front Squat",
+    "equipCategory": "barbell",
+    "equipmentType": "파워 랙 & 바벨",
+    "targetMuscles": "대퇴사두근 집중, 상체 직립 코어",
+    "tips": "팔꿈치를 높이 들어 바벨을 쇄골에 안정적으로 얹고 상체를 세워 앉습니다.",
+    "ouwanRank": null,
+    "ouwanCount": null,
+    "spec": {
+      "title": "BARBELL FRONT SQUAT",
+      "pose1": "Muscular male standing with Olympic barbell resting across anterior deltoids and clavicles in clean front-rack grip, elbows pointing high and forward.",
+      "pose2": "Deep squat with completely upright vertical torso, hips deep between thighs, knees forward over toes, elbows kept elevated high.",
+      "muscles": "Quadriceps (Vastus Medialis/Lateralis) and Rectus Abdominis core glowing bright red-orange.",
+      "equipment": "Power rack with barbell in front rack position."
+    },
+    "prompt": "Generate a 2-stage workout exercise illustration diagram:\n- Title: 'BARBELL FRONT SQUAT'\n- Pose 1 (Left - Starting Position): Muscular male standing with Olympic barbell resting across anterior deltoids and clavicles in clean front-rack grip, elbows pointing high and forward.\n- Pose 2 (Right - Finish Position): Deep squat with completely upright vertical torso, hips deep between thighs, knees forward over toes, elbows kept elevated high.\n- Muscle Highlight: Quadriceps (Vastus Medialis/Lateralis) and Rectus Abdominis core glowing bright red-orange.\n- Equipment: Power rack with barbell in front rack position.\n- Style: 3D anatomical fitness model, realistic physique, clean white minimalist background, scientific fitness guide, side-by-side comparison diagram."
+  },
+  {
+    "id": "wide-squat",
+    "name": "와이드 스쿼트 (스모 스쿼트)",
+    "category": "하체",
+    "englishName": "Wide-Stance Sumo Squat",
+    "equipCategory": "dumbbell",
+    "equipmentType": "바벨 / 덤벨 / 케틀벨",
+    "targetMuscles": "내전근(허벅지 안쪽), 대둔근, 대퇴사두근",
+    "tips": "다리를 어깨너비 1.5배 이상 벌리고 발끝을 45도 바깥으로 향해 내전근과 둔근을 늘립니다.",
+    "ouwanRank": null,
+    "ouwanCount": null,
+    "spec": {
+      "title": "WIDE-STANCE SUMO SQUAT",
+      "pose1": "Muscular male standing in wide sumo stance (1.5x shoulder width) with toes flared outward at 45 degrees, holding heavy dumbbell or barbell vertically.",
+      "pose2": "Deep wide squat sinking hips straight down, knees pushed forcefully wide outward over toes, deep groin and inner thigh adductor stretch.",
+      "muscles": "Adductor Magnus/Longus (Inner Thighs) and Gluteus Maximus glowing bright red-orange.",
+      "equipment": "Heavy dumbbell or Olympic barbell in wide sumo setup."
+    },
+    "prompt": "Generate a 2-stage workout exercise illustration diagram:\n- Title: 'WIDE-STANCE SUMO SQUAT'\n- Pose 1 (Left - Starting Position): Muscular male standing in wide sumo stance (1.5x shoulder width) with toes flared outward at 45 degrees, holding heavy dumbbell or barbell vertically.\n- Pose 2 (Right - Finish Position): Deep wide squat sinking hips straight down, knees pushed forcefully wide outward over toes, deep groin and inner thigh adductor stretch.\n- Muscle Highlight: Adductor Magnus/Longus (Inner Thighs) and Gluteus Maximus glowing bright red-orange.\n- Equipment: Heavy dumbbell or Olympic barbell in wide sumo setup.\n- Style: 3D anatomical fitness model, realistic physique, clean white minimalist background, scientific fitness guide, side-by-side comparison diagram."
+  },
+  {
+    "id": "goblet-squat",
+    "name": "고블릿 스쿼트",
+    "category": "하체",
+    "englishName": "Dumbbell / Kettlebell Goblet Squat",
+    "equipCategory": "dumbbell",
+    "equipmentType": "덤벨 / 케틀벨",
+    "targetMuscles": "대퇴사두근, 대둔근, 코어 안정성",
+    "tips": "덤벨이나 케틀벨을 가슴 앞에 바짝 안고 상체를 세워 깊숙이 앉습니다.",
+    "ouwanRank": null,
+    "ouwanCount": null,
+    "spec": {
+      "title": "GOBLET SQUAT",
+      "pose1": "Muscular male standing tall holding a heavy dumbbell or kettlebell cupped in both hands vertically against upper chest under chin.",
+      "pose2": "Deep bottom squat sitting down between hips, elbows tracking cleanly inside knees, upright vertical spine, flat feet.",
+      "muscles": "Quadriceps and Gluteus Maximus glowing bright red-orange.",
+      "equipment": "Heavy dumbbell held vertically by top bell against sternum."
+    },
+    "prompt": "Generate a 2-stage workout exercise illustration diagram:\n- Title: 'GOBLET SQUAT'\n- Pose 1 (Left - Starting Position): Muscular male standing tall holding a heavy dumbbell or kettlebell cupped in both hands vertically against upper chest under chin.\n- Pose 2 (Right - Finish Position): Deep bottom squat sitting down between hips, elbows tracking cleanly inside knees, upright vertical spine, flat feet.\n- Muscle Highlight: Quadriceps and Gluteus Maximus glowing bright red-orange.\n- Equipment: Heavy dumbbell held vertically by top bell against sternum.\n- Style: 3D anatomical fitness model, realistic physique, clean white minimalist background, scientific fitness guide, side-by-side comparison diagram."
+  },
+  {
+    "id": "sissy-squat",
+    "name": "씨씨 스쿼트",
+    "category": "하체",
+    "englishName": "Sissy Squat Bench",
+    "equipCategory": "bodyweight",
+    "equipmentType": "씨씨 스쿼트 머신 (발목 고정 벤치)",
+    "targetMuscles": "대퇴사두근 하부 및 전체 극한 고립",
+    "tips": "발목과 종아리를 패드에 고정하고 무릎을 구부리며 허벅지 앞쪽 힘으로 올라옵니다.",
+    "ouwanRank": null,
+    "ouwanCount": null,
+    "spec": {
+      "title": "SISSY SQUAT",
+      "pose1": "Muscular male standing upright on sissy squat bench with calves firmly locked against padded back rollers and feet secured under toe bar.",
+      "pose2": "Leaning rigid torso and hips backward at 45 degrees while flexing knees forward to 90 degrees, extreme isolated stretch across front thighs.",
+      "muscles": "Rectus Femoris and Quadriceps glowing intense bright red-orange.",
+      "equipment": "Commercial sissy squat bench station with calf pads and footplate."
+    },
+    "prompt": "Generate a 2-stage workout exercise illustration diagram:\n- Title: 'SISSY SQUAT'\n- Pose 1 (Left - Starting Position): Muscular male standing upright on sissy squat bench with calves firmly locked against padded back rollers and feet secured under toe bar.\n- Pose 2 (Right - Finish Position): Leaning rigid torso and hips backward at 45 degrees while flexing knees forward to 90 degrees, extreme isolated stretch across front thighs.\n- Muscle Highlight: Rectus Femoris and Quadriceps glowing intense bright red-orange.\n- Equipment: Commercial sissy squat bench station with calf pads and footplate.\n- Style: 3D anatomical fitness model, realistic physique, clean white minimalist background, scientific fitness guide, side-by-side comparison diagram."
+  },
+  {
+    "id": "smith-machine-squat",
+    "name": "스미스머신 스쿼트",
+    "category": "하체",
+    "englishName": "Smith Machine Squat",
+    "equipCategory": "barbell",
+    "equipmentType": "스미스 머신",
+    "targetMuscles": "대퇴사두근 및 둔근 타겟팅",
+    "tips": "발을 바벨보다 약간 앞에 두면 허리 부담을 줄이고 허벅지와 엉덩이에 집중 가능.",
+    "ouwanRank": null,
+    "ouwanCount": null,
+    "spec": {
+      "title": "SMITH MACHINE SQUAT",
+      "pose1": "Muscular male standing with barbell of Smith machine across upper traps, feet placed slightly forward of bar plane for quad emphasis.",
+      "pose2": "Deep squat descending along fixed vertical guide rails, torso supported upright by track, hips sinking parallel to floor.",
+      "muscles": "Quadriceps and Gluteus Maximus glowing bright red-orange.",
+      "equipment": "Commercial Smith machine with vertical guide rails and safety catches."
+    },
+    "prompt": "Generate a 2-stage workout exercise illustration diagram:\n- Title: 'SMITH MACHINE SQUAT'\n- Pose 1 (Left - Starting Position): Muscular male standing with barbell of Smith machine across upper traps, feet placed slightly forward of bar plane for quad emphasis.\n- Pose 2 (Right - Finish Position): Deep squat descending along fixed vertical guide rails, torso supported upright by track, hips sinking parallel to floor.\n- Muscle Highlight: Quadriceps and Gluteus Maximus glowing bright red-orange.\n- Equipment: Commercial Smith machine with vertical guide rails and safety catches.\n- Style: 3D anatomical fitness model, realistic physique, clean white minimalist background, scientific fitness guide, side-by-side comparison diagram."
+  },
+  {
+    "id": "v-squat",
+    "name": "V-스쿼트",
+    "category": "하체",
+    "englishName": "V-Squat Machine",
+    "equipCategory": "plate_loaded",
+    "equipmentType": "V스쿼트 플레이트 머신",
+    "targetMuscles": "정방향: 대퇴사두 / 리버스: 둔근, 햄스트링",
+    "tips": "역방향(리버스)으로 서서 힙힌지를 걸면 엉덩이와 햄스트링에 강력한 자극.",
+    "ouwanRank": 15,
+    "ouwanCount": 5,
+    "spec": {
+      "title": "V-SQUAT MACHINE",
+      "pose1": "Muscular male at bottom of curved V-squat movement, shoulders braced under padded bars, hips hinged deep into full squat with thighs parallel to platform.",
+      "pose2": "Pressing upward along curved natural arc through heels into tall standing lockout, glutes and quads fully engaged.",
+      "muscles": "Quadriceps, Gluteus Maximus, and Hamstrings glowing bright red-orange.",
+      "equipment": "Plate-loaded V-squat machine with curved pivot arm and heavy Olympic plates."
+    },
+    "prompt": "Generate a 2-stage workout exercise illustration diagram:\n- Title: 'V-SQUAT MACHINE'\n- Pose 1 (Left - Starting Position): Muscular male at bottom of curved V-squat movement, shoulders braced under padded bars, hips hinged deep into full squat with thighs parallel to platform.\n- Pose 2 (Right - Finish Position): Pressing upward along curved natural arc through heels into tall standing lockout, glutes and quads fully engaged.\n- Muscle Highlight: Quadriceps, Gluteus Maximus, and Hamstrings glowing bright red-orange.\n- Equipment: Plate-loaded V-squat machine with curved pivot arm and heavy Olympic plates.\n- Style: 3D anatomical fitness model, realistic physique, clean white minimalist background, scientific fitness guide, side-by-side comparison diagram."
+  },
+  {
+    "id": "pendulum-squat",
+    "name": "펜듈럼 스쿼트",
+    "category": "하체",
+    "englishName": "Pendulum Squat Machine",
+    "equipCategory": "plate_loaded",
+    "equipmentType": "펜듈럼 진자 스쿼트 머신",
+    "targetMuscles": "대퇴사두근 최대 고립 & 깊은 풀가동범위",
+    "tips": "진자 궤적으로 허리와 무릎 부담 없이 하체 앞쪽을 극한으로 태웁니다.",
+    "ouwanRank": null,
+    "ouwanCount": null,
+    "spec": {
+      "title": "PENDULUM SQUAT",
+      "pose1": "Muscular male standing locked on counterbalanced pendulum squat machine, shoulders braced under curved pads, feet on angled footplate.",
+      "pose2": "Sinking into deep full squat along pendulum swinging pivot arc, extreme knee flexion delivering maximum isolated tension directly into quadriceps.",
+      "muscles": "Vastus Lateralis, Vastus Medialis (Teardrop), and Rectus Femoris glowing bright red-orange.",
+      "equipment": "Commercial pendulum squat machine with counterweighted swing arm and Olympic plates."
+    },
+    "prompt": "Generate a 2-stage workout exercise illustration diagram:\n- Title: 'PENDULUM SQUAT'\n- Pose 1 (Left - Starting Position): Muscular male standing locked on counterbalanced pendulum squat machine, shoulders braced under curved pads, feet on angled footplate.\n- Pose 2 (Right - Finish Position): Sinking into deep full squat along pendulum swinging pivot arc, extreme knee flexion delivering maximum isolated tension directly into quadriceps.\n- Muscle Highlight: Vastus Lateralis, Vastus Medialis (Teardrop), and Rectus Femoris glowing bright red-orange.\n- Equipment: Commercial pendulum squat machine with counterweighted swing arm and Olympic plates.\n- Style: 3D anatomical fitness model, realistic physique, clean white minimalist background, scientific fitness guide, side-by-side comparison diagram."
+  },
+  {
+    "id": "belt-squat",
+    "name": "벨트 스쿼트",
+    "category": "하체",
+    "englishName": "Belt Squat Machine",
+    "equipCategory": "plate_loaded",
+    "equipmentType": "벨트 스쿼트 플레이트 머신",
+    "targetMuscles": "척추 무부하 하체 전반 & 둔근",
+    "tips": "골반에 벨트를 차고 수행하여 척추 압박 없이 순수 다리 힘으로만 중량을 듭니다.",
+    "ouwanRank": null,
+    "ouwanCount": null,
+    "spec": {
+      "title": "BELT SQUAT MACHINE",
+      "pose1": "Muscular male standing upright on split foot platforms with heavy duty dip belt slung around hips connected to lower pivot cable, zero spinal compression.",
+      "pose2": "Deep squat with vertical torso, hands holding front support rail, hips sinking low between platforms against pure lower-body resistance.",
+      "muscles": "Quadriceps and Gluteus Maximus glowing bright red-orange.",
+      "equipment": "Commercial belt squat platform machine with waist harness belt."
+    },
+    "prompt": "Generate a 2-stage workout exercise illustration diagram:\n- Title: 'BELT SQUAT MACHINE'\n- Pose 1 (Left - Starting Position): Muscular male standing upright on split foot platforms with heavy duty dip belt slung around hips connected to lower pivot cable, zero spinal compression.\n- Pose 2 (Right - Finish Position): Deep squat with vertical torso, hands holding front support rail, hips sinking low between platforms against pure lower-body resistance.\n- Muscle Highlight: Quadriceps and Gluteus Maximus glowing bright red-orange.\n- Equipment: Commercial belt squat platform machine with waist harness belt.\n- Style: 3D anatomical fitness model, realistic physique, clean white minimalist background, scientific fitness guide, side-by-side comparison diagram."
+  },
+  {
+    "id": "horizontal-leg-press",
+    "name": "수평 레그프레스 머신",
+    "category": "하체",
+    "englishName": "Seated Horizontal Pin Leg Press",
+    "equipCategory": "pin_machine",
+    "equipmentType": "시티드 레그프레스 핀 머신",
+    "targetMuscles": "대퇴사두근, 대둔근 (허리 안전)",
+    "tips": "원판을 끼울 필요 없이 핀으로 빠르게 무게를 조절하며 초보자에게도 안전합니다.",
+    "ouwanRank": null,
+    "ouwanCount": null,
+    "spec": {
+      "title": "SEATED HORIZONTAL PIN LEG PRESS",
+      "pose1": "Muscular male seated in horizontal carriage, knees bent at 90 degrees with feet flat against vertical footplate, selectorized pin weight stack.",
+      "pose2": "Forcefully pressing seat carriage horizontally backward away from footplate into full leg extension without hyperextending knees.",
+      "muscles": "Quadriceps and Gluteus Maximus glowing bright red-orange.",
+      "equipment": "Selectorized horizontal seated pin leg press machine with backrest."
+    },
+    "prompt": "Generate a 2-stage workout exercise illustration diagram:\n- Title: 'SEATED HORIZONTAL PIN LEG PRESS'\n- Pose 1 (Left - Starting Position): Muscular male seated in horizontal carriage, knees bent at 90 degrees with feet flat against vertical footplate, selectorized pin weight stack.\n- Pose 2 (Right - Finish Position): Forcefully pressing seat carriage horizontally backward away from footplate into full leg extension without hyperextending knees.\n- Muscle Highlight: Quadriceps and Gluteus Maximus glowing bright red-orange.\n- Equipment: Selectorized horizontal seated pin leg press machine with backrest.\n- Style: 3D anatomical fitness model, realistic physique, clean white minimalist background, scientific fitness guide, side-by-side comparison diagram."
+  },
+  {
+    "id": "single-leg-press",
+    "name": "원레그 레그프레스",
+    "category": "하체",
+    "englishName": "Single-Leg Press",
+    "equipCategory": "plate_loaded",
+    "equipmentType": "레그프레스 머신 (한 발)",
+    "targetMuscles": "대퇴사두근 및 대둔근 좌우 비대칭 교정",
+    "tips": "한쪽 다리씩 깊게 밀어내며 골반이 틀어지지 않도록 코어를 고정하세요.",
+    "ouwanRank": null,
+    "ouwanCount": null,
+    "spec": {
+      "title": "SINGLE-LEG PRESS (UNILATERAL)",
+      "pose1": "Muscular male seated on 45-degree leg press with one foot centered on plate, knee bent deep towards shoulder at 90 degrees, opposite foot resting off sled.",
+      "pose2": "Pressing heavy sled upward unilaterally through heel into full single-leg extension, peak quad and glute stability.",
+      "muscles": "Quadriceps and Gluteus Medius/Maximus of working leg glowing bright red-orange.",
+      "equipment": "45-degree plate-loaded sled leg press."
+    },
+    "prompt": "Generate a 2-stage workout exercise illustration diagram:\n- Title: 'SINGLE-LEG PRESS (UNILATERAL)'\n- Pose 1 (Left - Starting Position): Muscular male seated on 45-degree leg press with one foot centered on plate, knee bent deep towards shoulder at 90 degrees, opposite foot resting off sled.\n- Pose 2 (Right - Finish Position): Pressing heavy sled upward unilaterally through heel into full single-leg extension, peak quad and glute stability.\n- Muscle Highlight: Quadriceps and Gluteus Medius/Maximus of working leg glowing bright red-orange.\n- Equipment: 45-degree plate-loaded sled leg press.\n- Style: 3D anatomical fitness model, realistic physique, clean white minimalist background, scientific fitness guide, side-by-side comparison diagram."
+  },
+  {
+    "id": "standing-leg-curl",
+    "name": "스탠딩 레그컬",
+    "category": "하체",
+    "englishName": "Standing Single-Leg Curl Machine",
+    "equipCategory": "pin_machine",
+    "equipmentType": "스탠딩 원레그 컬 머신",
+    "targetMuscles": "햄스트링 편측 집중 고립",
+    "tips": "한 다리씩 번갈아 수행하여 양쪽 햄스트링의 근력 불균형을 완벽히 잡아줍니다.",
+    "ouwanRank": null,
+    "ouwanCount": null,
+    "spec": {
+      "title": "STANDING SINGLE-LEG CURL",
+      "pose1": "Muscular male standing facing machine, chest against angled pad, working leg extended down with roller pad resting behind Achilles tendon.",
+      "pose2": "Curling working heel upward and backward toward glutes into peak hamstring contraction against lever resistance, hips pinned forward.",
+      "muscles": "Biceps Femoris and Semitendinosus (Hamstrings) glowing bright red-orange.",
+      "equipment": "Commercial selectorized standing single leg curl machine."
+    },
+    "prompt": "Generate a 2-stage workout exercise illustration diagram:\n- Title: 'STANDING SINGLE-LEG CURL'\n- Pose 1 (Left - Starting Position): Muscular male standing facing machine, chest against angled pad, working leg extended down with roller pad resting behind Achilles tendon.\n- Pose 2 (Right - Finish Position): Curling working heel upward and backward toward glutes into peak hamstring contraction against lever resistance, hips pinned forward.\n- Muscle Highlight: Biceps Femoris and Semitendinosus (Hamstrings) glowing bright red-orange.\n- Equipment: Commercial selectorized standing single leg curl machine.\n- Style: 3D anatomical fitness model, realistic physique, clean white minimalist background, scientific fitness guide, side-by-side comparison diagram."
+  },
+  {
+    "id": "glute-ham-raise",
+    "name": "글루트 햄 레이즈 (GHR)",
+    "category": "하체",
+    "englishName": "Glute Ham Raise (GHD)",
+    "equipCategory": "bodyweight",
+    "equipmentType": "GHR 벤치 (글루트 햄 디벨로퍼)",
+    "targetMuscles": "햄스트링, 대둔근, 종아리, 척추기립근",
+    "tips": "무릎과 발목을 고정하고 햄스트링의 힘으로 몸을 지탱하며 올라옵니다.",
+    "ouwanRank": null,
+    "ouwanCount": null,
+    "spec": {
+      "title": "GLUTE HAM RAISE (GHR / GHD)",
+      "pose1": "Muscular male with thighs on rounded pad and feet locked between ankle rollers, torso hinged vertically down 90 degrees at hips.",
+      "pose2": "Pulling torso up horizontally in line with thighs and bending knees to pull whole body upright using pure hamstring and glute contraction.",
+      "muscles": "Hamstrings (full length), Gluteus Maximus, and Gastrocnemius glowing bright red-orange.",
+      "equipment": "Commercial GHD / Glute Ham Developer bench."
+    },
+    "prompt": "Generate a 2-stage workout exercise illustration diagram:\n- Title: 'GLUTE HAM RAISE (GHR / GHD)'\n- Pose 1 (Left - Starting Position): Muscular male with thighs on rounded pad and feet locked between ankle rollers, torso hinged vertically down 90 degrees at hips.\n- Pose 2 (Right - Finish Position): Pulling torso up horizontally in line with thighs and bending knees to pull whole body upright using pure hamstring and glute contraction.\n- Muscle Highlight: Hamstrings (full length), Gluteus Maximus, and Gastrocnemius glowing bright red-orange.\n- Equipment: Commercial GHD / Glute Ham Developer bench.\n- Style: 3D anatomical fitness model, realistic physique, clean white minimalist background, scientific fitness guide, side-by-side comparison diagram."
+  },
+  {
+    "id": "hip-thrust",
+    "name": "힙 쓰러스터",
+    "category": "하체",
+    "englishName": "Barbell Hip Thrust",
+    "equipCategory": "barbell",
+    "equipmentType": "힙 쓰러스트 벤치 & 바벨",
+    "targetMuscles": "대둔근 (엉덩이 볼륨 집중 고립)",
+    "tips": "정점에서 골반을 말아올려 엉덩이를 최대로 수축하고 턱은 당기세요.",
+    "ouwanRank": null,
+    "ouwanCount": null,
+    "spec": {
+      "title": "BARBELL HIP THRUST",
+      "pose1": "Muscular male with upper back rested against cross bench, hips dipped low toward floor with padded barbell resting across hip crease.",
+      "pose2": "Driving hips explosively upward into full horizontal tabletop extension, knees at 90 degrees, vertical shins, crushing glutes at lockout.",
+      "muscles": "Gluteus Maximus glowing intense bright red-orange.",
+      "equipment": "Hip thrust bench with barbell, thick foam barbell pad, and bumper plates."
+    },
+    "prompt": "Generate a 2-stage workout exercise illustration diagram:\n- Title: 'BARBELL HIP THRUST'\n- Pose 1 (Left - Starting Position): Muscular male with upper back rested against cross bench, hips dipped low toward floor with padded barbell resting across hip crease.\n- Pose 2 (Right - Finish Position): Driving hips explosively upward into full horizontal tabletop extension, knees at 90 degrees, vertical shins, crushing glutes at lockout.\n- Muscle Highlight: Gluteus Maximus glowing intense bright red-orange.\n- Equipment: Hip thrust bench with barbell, thick foam barbell pad, and bumper plates.\n- Style: 3D anatomical fitness model, realistic physique, clean white minimalist background, scientific fitness guide, side-by-side comparison diagram."
+  },
+  {
+    "id": "booty-builder-hip-thrust",
+    "name": "부티빌더 힙 쓰러스트 머신",
+    "category": "하체",
+    "englishName": "Booty Builder /Hip Thrust Machine",
+    "equipCategory": "plate_loaded",
+    "equipmentType": "전용 힙 쓰러스트 머신 (벨트형)",
+    "targetMuscles": "대둔근 전체 및 상부 힙업",
+    "tips": "바벨 세팅의 번거로움과 골반 통증 없이 패드 벨트를 채워 안전하게 고중량 힙업을 수행합니다.",
+    "ouwanRank": null,
+    "ouwanCount": null,
+    "spec": {
+      "title": "BOOTY BUILDER / HIP THRUST MACHINE",
+      "pose1": "Muscular male seated in dedicated hip thrust machine with wide padded seatbelt strapped across pelvis, hips lowered in starting dip.",
+      "pose2": "Driving hips upward against padded seatbelt harness into full locked-out hip extension, upper torso stabilized on backrest.",
+      "muscles": "Gluteus Maximus and Upper Glutes glowing bright red-orange.",
+      "equipment": "Selectorized Booty Builder hip thrust machine with padded waist belt."
+    },
+    "prompt": "Generate a 2-stage workout exercise illustration diagram:\n- Title: 'BOOTY BUILDER / HIP THRUST MACHINE'\n- Pose 1 (Left - Starting Position): Muscular male seated in dedicated hip thrust machine with wide padded seatbelt strapped across pelvis, hips lowered in starting dip.\n- Pose 2 (Right - Finish Position): Driving hips upward against padded seatbelt harness into full locked-out hip extension, upper torso stabilized on backrest.\n- Muscle Highlight: Gluteus Maximus and Upper Glutes glowing bright red-orange.\n- Equipment: Selectorized Booty Builder hip thrust machine with padded waist belt.\n- Style: 3D anatomical fitness model, realistic physique, clean white minimalist background, scientific fitness guide, side-by-side comparison diagram."
+  },
+  {
+    "id": "glute-kickback-machine",
+    "name": "글루트 킥백 머신",
+    "category": "하체",
+    "englishName": "Glute Kickback Machine",
+    "equipCategory": "pin_machine",
+    "equipmentType": "글루트 킥백 핀/플레이트 머신",
+    "targetMuscles": "대둔근 상부, 힙업",
+    "tips": "허리를 꺾지 않고 다리를 뒤쪽 대각선 위로 힘차게 밀어 엉덩이를 쥡니다.",
+    "ouwanRank": null,
+    "ouwanCount": null,
+    "spec": {
+      "title": "GLUTE KICKBACK MACHINE",
+      "pose1": "Muscular male leaning forward with chest and forearms on padded supports, working knee flexed forward ready to push.",
+      "pose2": "Kicking working leg forcefully backward and upward against circular footpad until leg and hip reach full extension in peak glute squeeze.",
+      "muscles": "Gluteus Maximus glowing bright red-orange.",
+      "equipment": "Commercial selectorized rear glute kickback machine."
+    },
+    "prompt": "Generate a 2-stage workout exercise illustration diagram:\n- Title: 'GLUTE KICKBACK MACHINE'\n- Pose 1 (Left - Starting Position): Muscular male leaning forward with chest and forearms on padded supports, working knee flexed forward ready to push.\n- Pose 2 (Right - Finish Position): Kicking working leg forcefully backward and upward against circular footpad until leg and hip reach full extension in peak glute squeeze.\n- Muscle Highlight: Gluteus Maximus glowing bright red-orange.\n- Equipment: Commercial selectorized rear glute kickback machine.\n- Style: 3D anatomical fitness model, realistic physique, clean white minimalist background, scientific fitness guide, side-by-side comparison diagram."
+  },
+  {
+    "id": "cable-glute-kickback",
+    "name": "케이블 글루트 킥백",
+    "category": "하체",
+    "englishName": "Cable Ankle-Strap Glute Kickback",
+    "equipCategory": "cable",
+    "equipmentType": "하단 케이블 & 발목 스트랩",
+    "targetMuscles": "대둔근 및 중둔근 상부 라인",
+    "tips": "발목 스트랩을 걸고 골반을 고정한 채 다리를 뒤쪽 대각선 30도로 차올립니다.",
+    "ouwanRank": null,
+    "ouwanCount": null,
+    "spec": {
+      "title": "CABLE GLUTE KICKBACK",
+      "pose1": "Muscular male facing low cable pulley with ankle strap attached, leaning slightly forward holding machine frame, working leg brought forward.",
+      "pose2": "Kicking working leg straight backward and slightly diagonally outward into full hip extension, squeezing glute hard at peak.",
+      "muscles": "Gluteus Maximus and Gluteus Medius glowing bright red-orange.",
+      "equipment": "Cable column station with ankle cuff attachment at lowest pulley."
+    },
+    "prompt": "Generate a 2-stage workout exercise illustration diagram:\n- Title: 'CABLE GLUTE KICKBACK'\n- Pose 1 (Left - Starting Position): Muscular male facing low cable pulley with ankle strap attached, leaning slightly forward holding machine frame, working leg brought forward.\n- Pose 2 (Right - Finish Position): Kicking working leg straight backward and slightly diagonally outward into full hip extension, squeezing glute hard at peak.\n- Muscle Highlight: Gluteus Maximus and Gluteus Medius glowing bright red-orange.\n- Equipment: Cable column station with ankle cuff attachment at lowest pulley.\n- Style: 3D anatomical fitness model, realistic physique, clean white minimalist background, scientific fitness guide, side-by-side comparison diagram."
+  },
+  {
+    "id": "cable-hip-abduction",
+    "name": "케이블 힙 어브덕션",
+    "category": "하체",
+    "englishName": "Cable Hip Abduction",
+    "equipCategory": "cable",
+    "equipmentType": "하단 케이블 & 발목 스트랩",
+    "targetMuscles": "중둔근, 소둔근 (골반 힙딥 채움)",
+    "tips": "상체를 가볍게 지지하고 발목 스트랩을 바깥쪽으로 밀어내며 중둔근 상단을 강하게 수축합니다.",
+    "ouwanRank": null,
+    "ouwanCount": null,
+    "spec": {
+      "title": "CABLE STANDING HIP ABDUCTION",
+      "pose1": "Muscular male standing sideways to low cable column, ankle cuff on outer leg with cable running in front of supporting leg, holding machine upright.",
+      "pose2": "Sweeping working leg laterally outward and upward away from body against cable resistance into wide abduction.",
+      "muscles": "Gluteus Medius and Tensor Fasciae Latae (TFL) glowing bright red-orange.",
+      "equipment": "Cable machine with low pulley and padded ankle strap."
+    },
+    "prompt": "Generate a 2-stage workout exercise illustration diagram:\n- Title: 'CABLE STANDING HIP ABDUCTION'\n- Pose 1 (Left - Starting Position): Muscular male standing sideways to low cable column, ankle cuff on outer leg with cable running in front of supporting leg, holding machine upright.\n- Pose 2 (Right - Finish Position): Sweeping working leg laterally outward and upward away from body against cable resistance into wide abduction.\n- Muscle Highlight: Gluteus Medius and Tensor Fasciae Latae (TFL) glowing bright red-orange.\n- Equipment: Cable machine with low pulley and padded ankle strap.\n- Style: 3D anatomical fitness model, realistic physique, clean white minimalist background, scientific fitness guide, side-by-side comparison diagram."
+  },
+  {
+    "id": "lunge",
+    "name": "런지",
+    "category": "하체",
+    "englishName": "Dumbbell Walking / Static Lunge",
+    "equipCategory": "dumbbell",
+    "equipmentType": "덤벨 / 바벨",
+    "targetMuscles": "대둔근, 대퇴사두근, 햄스트링",
+    "tips": "앞 무릎이 발끝을 과하게 넘지 않게 90도로 직각 하강합니다.",
+    "ouwanRank": null,
+    "ouwanCount": null,
+    "spec": {
+      "title": "DUMBBELL WALKING / STATIC LUNGE",
+      "pose1": "Muscular male standing tall holding heavy pair of dumbbells at sides, initiating forward split stride.",
+      "pose2": "Deep lunging bottom position with front thigh parallel to floor (90° knee bend) and trailing knee hovering 2cm above floor, torso tall and upright.",
+      "muscles": "Quadriceps and Gluteus Maximus glowing bright red-orange.",
+      "equipment": "Pair of heavy hexagonal or round dumbbells."
+    },
+    "prompt": "Generate a 2-stage workout exercise illustration diagram:\n- Title: 'DUMBBELL WALKING / STATIC LUNGE'\n- Pose 1 (Left - Starting Position): Muscular male standing tall holding heavy pair of dumbbells at sides, initiating forward split stride.\n- Pose 2 (Right - Finish Position): Deep lunging bottom position with front thigh parallel to floor (90° knee bend) and trailing knee hovering 2cm above floor, torso tall and upright.\n- Muscle Highlight: Quadriceps and Gluteus Maximus glowing bright red-orange.\n- Equipment: Pair of heavy hexagonal or round dumbbells.\n- Style: 3D anatomical fitness model, realistic physique, clean white minimalist background, scientific fitness guide, side-by-side comparison diagram."
+  },
+  {
+    "id": "reverse-lunge",
+    "name": "리버스 런지",
+    "category": "하체",
+    "englishName": "Reverse / Back Lunge",
+    "equipCategory": "dumbbell",
+    "equipmentType": "덤벨 / 바벨 / 스미스머신",
+    "targetMuscles": "대둔근 집중, 무릎 관절 보호",
+    "tips": "발을 뒤로 빼며 앉아 무릎 부담은 줄이고 앞다리 엉덩이 자극을 극대화합니다.",
+    "ouwanRank": null,
+    "ouwanCount": null,
+    "spec": {
+      "title": "DUMBBELL REVERSE LUNGE",
+      "pose1": "Muscular male standing tall holding dumbbells at sides, feet hip-width apart.",
+      "pose2": "Stepping one leg backward into deep lunge, front knee bent at 90 degrees absorbing load through front heel, back knee hovering near floor, upright spine.",
+      "muscles": "Gluteus Maximus and Front Quadriceps glowing bright red-orange.",
+      "equipment": "Pair of dumbbells held at sides."
+    },
+    "prompt": "Generate a 2-stage workout exercise illustration diagram:\n- Title: 'DUMBBELL REVERSE LUNGE'\n- Pose 1 (Left - Starting Position): Muscular male standing tall holding dumbbells at sides, feet hip-width apart.\n- Pose 2 (Right - Finish Position): Stepping one leg backward into deep lunge, front knee bent at 90 degrees absorbing load through front heel, back knee hovering near floor, upright spine.\n- Muscle Highlight: Gluteus Maximus and Front Quadriceps glowing bright red-orange.\n- Equipment: Pair of dumbbells held at sides.\n- Style: 3D anatomical fitness model, realistic physique, clean white minimalist background, scientific fitness guide, side-by-side comparison diagram."
+  },
+  {
+    "id": "bulgarian-split-squat",
+    "name": "불가리안 스플릿 스쿼트",
+    "category": "하체",
+    "englishName": "Bulgarian Split Squat",
+    "equipCategory": "dumbbell",
+    "equipmentType": "스플릿 스쿼트 스탠드 & 덤벨",
+    "targetMuscles": "대둔근, 대퇴사두근 편측 균형",
+    "tips": "뒷발을 롤러에 얹고 상체를 살짝 숙여 앞다리 엉덩이로 지면을 밀어 올립니다.",
+    "ouwanRank": null,
+    "ouwanCount": null,
+    "spec": {
+      "title": "BULGARIAN SPLIT SQUAT (REAR-FOOT ELEVATED)",
+      "pose1": "Muscular male with rear foot laces resting on flat bench behind him, standing upright on forward working leg holding dumbbells.",
+      "pose2": "Sinking deeply down until front thigh is parallel to floor, front knee tracked over midfoot, back knee dipping toward ground in extreme single-leg load.",
+      "muscles": "Gluteus Maximus, Quadriceps, and Adductor Magnus glowing bright red-orange.",
+      "equipment": "Flat gym bench and pair of dumbbells."
+    },
+    "prompt": "Generate a 2-stage workout exercise illustration diagram:\n- Title: 'BULGARIAN SPLIT SQUAT (REAR-FOOT ELEVATED)'\n- Pose 1 (Left - Starting Position): Muscular male with rear foot laces resting on flat bench behind him, standing upright on forward working leg holding dumbbells.\n- Pose 2 (Right - Finish Position): Sinking deeply down until front thigh is parallel to floor, front knee tracked over midfoot, back knee dipping toward ground in extreme single-leg load.\n- Muscle Highlight: Gluteus Maximus, Quadriceps, and Adductor Magnus glowing bright red-orange.\n- Equipment: Flat gym bench and pair of dumbbells.\n- Style: 3D anatomical fitness model, realistic physique, clean white minimalist background, scientific fitness guide, side-by-side comparison diagram."
+  },
+  {
+    "id": "step-up",
+    "name": "스텝업",
+    "category": "하체",
+    "englishName": "Dumbbell Box Step-Up",
+    "equipCategory": "dumbbell",
+    "equipmentType": "플라이오 박스 / 벤치 & 덤벨",
+    "targetMuscles": "대둔근, 대퇴사두근, 고관절 안정성",
+    "tips": "뒷다리 반동을 쓰지 말고 박스 위에 올린 앞다리 뒤꿈치 힘으로만 몸을 끌어올립니다.",
+    "ouwanRank": null,
+    "ouwanCount": null,
+    "spec": {
+      "title": "DUMBBELL BOX STEP-UP",
+      "pose1": "Muscular male standing before high wooden plyo box or flat bench, one foot planted firmly on top, holding dumbbells at sides.",
+      "pose2": "Driving forcefully through top foot and heel to stand atop box with full hip and knee lockout, trailing knee driven forward in athletic finish.",
+      "muscles": "Gluteus Maximus and Quadriceps glowing bright red-orange.",
+      "equipment": "Sturdy wooden plyo box (20-24 inch) and pair of dumbbells."
+    },
+    "prompt": "Generate a 2-stage workout exercise illustration diagram:\n- Title: 'DUMBBELL BOX STEP-UP'\n- Pose 1 (Left - Starting Position): Muscular male standing before high wooden plyo box or flat bench, one foot planted firmly on top, holding dumbbells at sides.\n- Pose 2 (Right - Finish Position): Driving forcefully through top foot and heel to stand atop box with full hip and knee lockout, trailing knee driven forward in athletic finish.\n- Muscle Highlight: Gluteus Maximus and Quadriceps glowing bright red-orange.\n- Equipment: Sturdy wooden plyo box (20-24 inch) and pair of dumbbells.\n- Style: 3D anatomical fitness model, realistic physique, clean white minimalist background, scientific fitness guide, side-by-side comparison diagram."
+  },
+  {
+    "id": "calf-raise",
+    "name": "카프 레이즈",
+    "category": "하체",
+    "englishName": "Standing / Leg-Press Calf Raise",
+    "equipCategory": "pin_machine",
+    "equipmentType": "카프 레이즈 머신 / 스텝 블록",
+    "targetMuscles": "비복근, 가자미근 (종아리 전체)",
+    "tips": "뒤꿈치를 최대한 깊게 내렸다가 엄지발가락으로 지면을 강하게 누릅니다.",
+    "ouwanRank": null,
+    "ouwanCount": null,
+    "spec": {
+      "title": "STANDING CALF RAISE (BLOCK / LEG PRESS)",
+      "pose1": "Muscular male standing with balls of feet on edge of raised block, heels dropped low below platform level into deep Achilles and calf stretch.",
+      "pose2": "Exploding high onto tiptoes and balls of feet into full plantarflexion, peak contraction squeezing calves tight.",
+      "muscles": "Gastrocnemius (Medial & Lateral Heads) glowing bright red-orange.",
+      "equipment": "Raised calf block platform."
+    },
+    "prompt": "Generate a 2-stage workout exercise illustration diagram:\n- Title: 'STANDING CALF RAISE (BLOCK / LEG PRESS)'\n- Pose 1 (Left - Starting Position): Muscular male standing with balls of feet on edge of raised block, heels dropped low below platform level into deep Achilles and calf stretch.\n- Pose 2 (Right - Finish Position): Exploding high onto tiptoes and balls of feet into full plantarflexion, peak contraction squeezing calves tight.\n- Muscle Highlight: Gastrocnemius (Medial & Lateral Heads) glowing bright red-orange.\n- Equipment: Raised calf block platform.\n- Style: 3D anatomical fitness model, realistic physique, clean white minimalist background, scientific fitness guide, side-by-side comparison diagram."
+  },
+  {
+    "id": "standing-calf-raise",
+    "name": "스탠딩 카프 레이즈",
+    "category": "하체",
+    "englishName": "Standing Calf Raise Machine",
+    "equipCategory": "pin_machine",
+    "equipmentType": "스탠딩 카프 레이즈 핀 머신",
+    "targetMuscles": "비복근 (종아리 알통 볼륨)",
+    "tips": "무릎을 편 상태에서 발목을 최대로 꺾어 이완한 뒤 정점에서 1초간 수축합니다.",
+    "ouwanRank": null,
+    "ouwanCount": null,
+    "spec": {
+      "title": "STANDING CALF RAISE MACHINE",
+      "pose1": "Muscular male standing on machine platform, shoulder pads resting on traps with full weight stack engaged, heels dropped deep below footplate.",
+      "pose2": "Pushing upward onto balls of feet into maximum calf lockout, knees kept straight with slight micro-bend.",
+      "muscles": "Gastrocnemius and Soleus glowing bright red-orange.",
+      "equipment": "Selectorized standing calf raise machine with shoulder pads."
+    },
+    "prompt": "Generate a 2-stage workout exercise illustration diagram:\n- Title: 'STANDING CALF RAISE MACHINE'\n- Pose 1 (Left - Starting Position): Muscular male standing on machine platform, shoulder pads resting on traps with full weight stack engaged, heels dropped deep below footplate.\n- Pose 2 (Right - Finish Position): Pushing upward onto balls of feet into maximum calf lockout, knees kept straight with slight micro-bend.\n- Muscle Highlight: Gastrocnemius and Soleus glowing bright red-orange.\n- Equipment: Selectorized standing calf raise machine with shoulder pads.\n- Style: 3D anatomical fitness model, realistic physique, clean white minimalist background, scientific fitness guide, side-by-side comparison diagram."
+  },
+  {
+    "id": "seated-calf-raise",
+    "name": "시티드 카프 레이즈",
+    "category": "하체",
+    "englishName": "Seated Calf Raise Machine",
+    "equipCategory": "plate_loaded",
+    "equipmentType": "시티드 카프 레이즈 플레이트 머신",
+    "targetMuscles": "가자미근 (종아리 바깥/하단 라인)",
+    "tips": "무릎이 90도로 굽혀진 상태에서는 가자미근이 집중적으로 타격되어 발목 라인을 다듬어줍니다.",
+    "ouwanRank": null,
+    "ouwanCount": null,
+    "spec": {
+      "title": "SEATED CALF RAISE MACHINE",
+      "pose1": "Muscular male seated upright with knees bent at 90 degrees under padded thigh lever, balls of feet on block, heels dropped down in full stretch.",
+      "pose2": "Pressing balls of feet down to raise heels high against padded lever resistance in deep soleus contraction.",
+      "muscles": "Soleus (Deep Calf Muscle) glowing bright red-orange.",
+      "equipment": "Plate-loaded seated calf raise machine with knee pads."
+    },
+    "prompt": "Generate a 2-stage workout exercise illustration diagram:\n- Title: 'SEATED CALF RAISE MACHINE'\n- Pose 1 (Left - Starting Position): Muscular male seated upright with knees bent at 90 degrees under padded thigh lever, balls of feet on block, heels dropped down in full stretch.\n- Pose 2 (Right - Finish Position): Pressing balls of feet down to raise heels high against padded lever resistance in deep soleus contraction.\n- Muscle Highlight: Soleus (Deep Calf Muscle) glowing bright red-orange.\n- Equipment: Plate-loaded seated calf raise machine with knee pads.\n- Style: 3D anatomical fitness model, realistic physique, clean white minimalist background, scientific fitness guide, side-by-side comparison diagram."
+  },
+  {
+    "id": "barbell-good-morning",
+    "name": "바벨 굿모닝",
+    "category": "하체",
+    "englishName": "Barbell Good Morning",
+    "equipCategory": "barbell",
+    "equipmentType": "파워 랙 & 바벨",
+    "targetMuscles": "햄스트링, 대둔근, 척추기립근 (후면 사슬)",
+    "tips": "승모근에 바벨을 얹고 무릎을 살짝 굽힌 채 인사하듯 엉덩이를 뒤로 쭉 밀어냅니다.",
+    "ouwanRank": null,
+    "ouwanCount": null,
+    "spec": {
+      "title": "BARBELL GOOD MORNING",
+      "pose1": "Muscular male standing tall with Olympic barbell resting across upper traps, feet hip-width, knees soft.",
+      "pose2": "Hinging hips deeply backward with flat neutral spine until torso reaches near-parallel to floor, deep hamstring and posterior chain stretch.",
+      "muscles": "Hamstrings, Gluteus Maximus, and Erector Spinae glowing bright red-orange.",
+      "equipment": "Olympic barbell across upper back."
+    },
+    "prompt": "Generate a 2-stage workout exercise illustration diagram:\n- Title: 'BARBELL GOOD MORNING'\n- Pose 1 (Left - Starting Position): Muscular male standing tall with Olympic barbell resting across upper traps, feet hip-width, knees soft.\n- Pose 2 (Right - Finish Position): Hinging hips deeply backward with flat neutral spine until torso reaches near-parallel to floor, deep hamstring and posterior chain stretch.\n- Muscle Highlight: Hamstrings, Gluteus Maximus, and Erector Spinae glowing bright red-orange.\n- Equipment: Olympic barbell across upper back.\n- Style: 3D anatomical fitness model, realistic physique, clean white minimalist background, scientific fitness guide, side-by-side comparison diagram."
+  },
+  {
+    "id": "smith-machine-shoulder-press",
+    "name": "스미스머신 숄더프레스",
+    "category": "어깨",
+    "englishName": "Seated Smith Machine Shoulder Press",
+    "equipCategory": "barbell",
+    "equipmentType": "스미스 머신 & 80도 벤치",
+    "targetMuscles": "전면/측면 삼각근 고중량 고립",
+    "tips": "벤치 등받이를 75~85도로 세우고 코끝이나 턱선 높이까지 안전하게 내려 밀어 올립니다.",
+    "ouwanRank": null,
+    "ouwanCount": null,
+    "spec": {
+      "title": "SMITH MACHINE SEATED SHOULDER PRESS",
+      "pose1": "Muscular male seated on 85-degree upright bench inside Smith machine, gripping bar at chin/collarbone level with forearms vertical.",
+      "pose2": "Pressing bar smoothly upward along fixed vertical track into full overhead lockout above head, shoulders fully engaged.",
+      "muscles": "Anterior Deltoid, Lateral Deltoid, and Triceps glowing bright red-orange.",
+      "equipment": "Smith machine with adjustable incline bench set to 85 degrees."
+    },
+    "prompt": "Generate a 2-stage workout exercise illustration diagram:\n- Title: 'SMITH MACHINE SEATED SHOULDER PRESS'\n- Pose 1 (Left - Starting Position): Muscular male seated on 85-degree upright bench inside Smith machine, gripping bar at chin/collarbone level with forearms vertical.\n- Pose 2 (Right - Finish Position): Pressing bar smoothly upward along fixed vertical track into full overhead lockout above head, shoulders fully engaged.\n- Muscle Highlight: Anterior Deltoid, Lateral Deltoid, and Triceps glowing bright red-orange.\n- Equipment: Smith machine with adjustable incline bench set to 85 degrees.\n- Style: 3D anatomical fitness model, realistic physique, clean white minimalist background, scientific fitness guide, side-by-side comparison diagram."
+  },
+  {
+    "id": "behind-the-neck-press",
+    "name": "비하인드 넥 프레스",
+    "category": "어깨",
+    "englishName": "Behind-the-Neck Barbell/Smith Press",
+    "equipCategory": "barbell",
+    "equipmentType": "스미스 머신 / 바벨 & 벤치",
+    "targetMuscles": "측면 삼각근 및 전면 삼각근",
+    "tips": "무리하게 목 뒤 깊숙이 내리지 말고 귀 높이까지만 내려 어깨 충돌을 예방하세요.",
+    "ouwanRank": null,
+    "ouwanCount": null,
+    "spec": {
+      "title": "BEHIND-THE-NECK BARBELL PRESS",
+      "pose1": "Muscular male seated upright with barbell lowered carefully behind head across upper neck/trapezius level, wide overhand grip.",
+      "pose2": "Pressing barbell vertically overhead until arms reach full extension directly over crown of head.",
+      "muscles": "Lateral Deltoid and Posterior Deltoid glowing bright red-orange.",
+      "equipment": "Barbell with Olympic plates and seated upright bench."
+    },
+    "prompt": "Generate a 2-stage workout exercise illustration diagram:\n- Title: 'BEHIND-THE-NECK BARBELL PRESS'\n- Pose 1 (Left - Starting Position): Muscular male seated upright with barbell lowered carefully behind head across upper neck/trapezius level, wide overhand grip.\n- Pose 2 (Right - Finish Position): Pressing barbell vertically overhead until arms reach full extension directly over crown of head.\n- Muscle Highlight: Lateral Deltoid and Posterior Deltoid glowing bright red-orange.\n- Equipment: Barbell with Olympic plates and seated upright bench.\n- Style: 3D anatomical fitness model, realistic physique, clean white minimalist background, scientific fitness guide, side-by-side comparison diagram."
+  },
+  {
+    "id": "dumbbell-shoulder-press",
+    "name": "덤벨 숄더프레스",
+    "category": "어깨",
+    "englishName": "Seated Dumbbell Shoulder Press",
+    "equipCategory": "dumbbell",
+    "equipmentType": "덤벨 & 90도 벤치",
+    "targetMuscles": "전면/측면 삼각근, 삼두근",
+    "tips": "팔꿈치가 어깨선보다 약간 앞으로 오게 각도를 두고 귀 옆에서 머리 위로 밉니다.",
+    "ouwanRank": 26,
+    "ouwanCount": 2,
+    "spec": {
+      "title": "SEATED DUMBBELL SHOULDER PRESS",
+      "pose1": "Muscular male seated upright with back supported, dumbbells held at ear level with palms facing forward, elbows at 90 degrees.",
+      "pose2": "Pressing dumbbells overhead in gentle converging arc until weights nearly touch overhead at lockout, core braced.",
+      "muscles": "Anterior Deltoid and Lateral Deltoid glowing bright red-orange.",
+      "equipment": "Adjustable gym bench set to 85 degrees and heavy dumbbells."
+    },
+    "prompt": "Generate a 2-stage workout exercise illustration diagram:\n- Title: 'SEATED DUMBBELL SHOULDER PRESS'\n- Pose 1 (Left - Starting Position): Muscular male seated upright with back supported, dumbbells held at ear level with palms facing forward, elbows at 90 degrees.\n- Pose 2 (Right - Finish Position): Pressing dumbbells overhead in gentle converging arc until weights nearly touch overhead at lockout, core braced.\n- Muscle Highlight: Anterior Deltoid and Lateral Deltoid glowing bright red-orange.\n- Equipment: Adjustable gym bench set to 85 degrees and heavy dumbbells.\n- Style: 3D anatomical fitness model, realistic physique, clean white minimalist background, scientific fitness guide, side-by-side comparison diagram."
+  },
+  {
+    "id": "shoulder-press-machine",
+    "name": "숄더프레스 머신",
+    "category": "어깨",
+    "englishName": "Seated Shoulder Press Machine",
+    "equipCategory": "pin_machine",
+    "equipmentType": "숄더프레스 핀 머신",
+    "targetMuscles": "전면/측면 삼각근 고립",
+    "tips": "손잡이를 잡고 팔꿈치가 뒤로 빠지지 않도록 유의하며 밀어 올립니다.",
+    "ouwanRank": 30,
+    "ouwanCount": 1,
+    "spec": {
+      "title": "SEATED SHOULDER PRESS MACHINE",
+      "pose1": "Muscular male seated in selectorized shoulder press machine, hands gripping handles at shoulder level, chest proud against backrest.",
+      "pose2": "Pressing machine handles upward to full overhead extension in controlled arc, locking out shoulders at top.",
+      "muscles": "Anterior Deltoid and Lateral Deltoid glowing bright red-orange.",
+      "equipment": "Commercial selectorized seated shoulder press machine."
+    },
+    "prompt": "Generate a 2-stage workout exercise illustration diagram:\n- Title: 'SEATED SHOULDER PRESS MACHINE'\n- Pose 1 (Left - Starting Position): Muscular male seated in selectorized shoulder press machine, hands gripping handles at shoulder level, chest proud against backrest.\n- Pose 2 (Right - Finish Position): Pressing machine handles upward to full overhead extension in controlled arc, locking out shoulders at top.\n- Muscle Highlight: Anterior Deltoid and Lateral Deltoid glowing bright red-orange.\n- Equipment: Commercial selectorized seated shoulder press machine.\n- Style: 3D anatomical fitness model, realistic physique, clean white minimalist background, scientific fitness guide, side-by-side comparison diagram."
+  },
+  {
+    "id": "hammer-shoulder-press",
+    "name": "해머 숄더프레스 머신",
+    "category": "어깨",
+    "englishName": "Hammer Strength ISO-Lateral Shoulder Press",
+    "equipCategory": "plate_loaded",
+    "equipmentType": "해머스트렝스 플레이트 숄더 머신",
+    "targetMuscles": "전면 및 측면 삼각근 고중량 프레스",
+    "tips": "자연스러운 아치 궤적으로 어깨 관절에 부담 없이 고중량 훈련이 가능합니다.",
+    "ouwanRank": null,
+    "ouwanCount": null,
+    "spec": {
+      "title": "HAMMER STRENGTH ISO-LATERAL SHOULDER PRESS",
+      "pose1": "Muscular male seated on plate-loaded hammer machine, gripping independent converging handles at collarbone height.",
+      "pose2": "Pressing handles upward along natural converging arc overhead, peak shoulder contraction at lockout.",
+      "muscles": "Anterior Deltoid and Lateral Deltoid glowing bright red-orange.",
+      "equipment": "Hammer Strength plate-loaded ISO-lateral shoulder press machine."
+    },
+    "prompt": "Generate a 2-stage workout exercise illustration diagram:\n- Title: 'HAMMER STRENGTH ISO-LATERAL SHOULDER PRESS'\n- Pose 1 (Left - Starting Position): Muscular male seated on plate-loaded hammer machine, gripping independent converging handles at collarbone height.\n- Pose 2 (Right - Finish Position): Pressing handles upward along natural converging arc overhead, peak shoulder contraction at lockout.\n- Muscle Highlight: Anterior Deltoid and Lateral Deltoid glowing bright red-orange.\n- Equipment: Hammer Strength plate-loaded ISO-lateral shoulder press machine.\n- Style: 3D anatomical fitness model, realistic physique, clean white minimalist background, scientific fitness guide, side-by-side comparison diagram."
+  },
+  {
+    "id": "arnold-press",
+    "name": "아놀드 프레스",
+    "category": "어깨",
+    "englishName": "Arnold Dumbbell Press",
+    "equipCategory": "dumbbell",
+    "equipmentType": "덤벨 & 벤치",
+    "targetMuscles": "전면, 측면, 후면 삼각근 복합",
+    "tips": "손바닥이 몸을 보게 시작하여 밀어 올리면서 바깥쪽으로 회전시킵니다.",
+    "ouwanRank": null,
+    "ouwanCount": null,
+    "spec": {
+      "title": "ARNOLD DUMBBELL PRESS",
+      "pose1": "Muscular male seated holding dumbbells in front of upper chest with palms facing body (supinated) and elbows tucked close.",
+      "pose2": "Rotating wrists outward 180 degrees while pressing dumbbells overhead in continuous motion, finishing with palms facing forward at lockout.",
+      "muscles": "Anterior, Lateral, and Posterior Deltoids glowing bright red-orange.",
+      "equipment": "Seated upright bench and pair of dumbbells."
+    },
+    "prompt": "Generate a 2-stage workout exercise illustration diagram:\n- Title: 'ARNOLD DUMBBELL PRESS'\n- Pose 1 (Left - Starting Position): Muscular male seated holding dumbbells in front of upper chest with palms facing body (supinated) and elbows tucked close.\n- Pose 2 (Right - Finish Position): Rotating wrists outward 180 degrees while pressing dumbbells overhead in continuous motion, finishing with palms facing forward at lockout.\n- Muscle Highlight: Anterior, Lateral, and Posterior Deltoids glowing bright red-orange.\n- Equipment: Seated upright bench and pair of dumbbells.\n- Style: 3D anatomical fitness model, realistic physique, clean white minimalist background, scientific fitness guide, side-by-side comparison diagram."
+  },
+  {
+    "id": "side-lateral-raise",
+    "name": "사이드 레터럴 레이즈",
+    "category": "어깨",
+    "englishName": "Dumbbell Side Lateral Raise",
+    "equipCategory": "dumbbell",
+    "equipmentType": "덤벨",
+    "targetMuscles": "측면 삼각근 (어깨 뽕 볼륨)",
+    "tips": "승모근 개입을 줄이고 팔꿈치를 옆으로 멀리 던져 올린다는 느낌으로 수행하세요.",
+    "ouwanRank": null,
+    "ouwanCount": null,
+    "spec": {
+      "title": "DUMBBELL SIDE LATERAL RAISE",
+      "pose1": "Muscular male standing tall with dumbbells held at sides of thighs, palms facing inward, slight forward torso lean, elbows slightly bent.",
+      "pose2": "Raising dumbbells laterally outward and upward like wings until elbows and weights are level with shoulders parallel to floor.",
+      "muscles": "Lateral Deltoid (Middle Shoulder) glowing intense bright red-orange.",
+      "equipment": "Pair of dumbbells."
+    },
+    "prompt": "Generate a 2-stage workout exercise illustration diagram:\n- Title: 'DUMBBELL SIDE LATERAL RAISE'\n- Pose 1 (Left - Starting Position): Muscular male standing tall with dumbbells held at sides of thighs, palms facing inward, slight forward torso lean, elbows slightly bent.\n- Pose 2 (Right - Finish Position): Raising dumbbells laterally outward and upward like wings until elbows and weights are level with shoulders parallel to floor.\n- Muscle Highlight: Lateral Deltoid (Middle Shoulder) glowing intense bright red-orange.\n- Equipment: Pair of dumbbells.\n- Style: 3D anatomical fitness model, realistic physique, clean white minimalist background, scientific fitness guide, side-by-side comparison diagram."
+  },
+  {
+    "id": "lateral-raise-machine",
+    "name": "사이드 레터럴 레이즈 머신",
+    "category": "어깨",
+    "englishName": "Seated Lateral Raise Machine",
+    "equipCategory": "pin_machine",
+    "equipmentType": "델토이드 레이즈 핀 머신",
+    "targetMuscles": "측면 삼각근 순수 고립",
+    "tips": "팔꿈치 패드를 어깨 높이까지 밀어 올려 승모근 개입 없이 측면 삼각근을 고립합니다.",
+    "ouwanRank": null,
+    "ouwanCount": null,
+    "spec": {
+      "title": "SEATED LATERAL RAISE MACHINE",
+      "pose1": "Muscular male seated in machine with chest against chest pad, outer elbows resting against padded lever arms at sides.",
+      "pose2": "Raising padded lever arms laterally upward until upper arms reach horizontal parallel to floor, isolated side delt squeeze.",
+      "muscles": "Lateral Deltoid glowing bright red-orange.",
+      "equipment": "Commercial selectorized lateral raise machine with elbow pads."
+    },
+    "prompt": "Generate a 2-stage workout exercise illustration diagram:\n- Title: 'SEATED LATERAL RAISE MACHINE'\n- Pose 1 (Left - Starting Position): Muscular male seated in machine with chest against chest pad, outer elbows resting against padded lever arms at sides.\n- Pose 2 (Right - Finish Position): Raising padded lever arms laterally upward until upper arms reach horizontal parallel to floor, isolated side delt squeeze.\n- Muscle Highlight: Lateral Deltoid glowing bright red-orange.\n- Equipment: Commercial selectorized lateral raise machine with elbow pads.\n- Style: 3D anatomical fitness model, realistic physique, clean white minimalist background, scientific fitness guide, side-by-side comparison diagram."
+  },
+  {
+    "id": "cable-side-lateral-raise",
+    "name": "케이블 사이드 레터럴 레이즈",
+    "category": "어깨",
+    "englishName": "Cable Side Lateral Raise",
+    "equipCategory": "cable",
+    "equipmentType": "케이블 싱글 핸들",
+    "targetMuscles": "측면 삼각근 (전 구간 일정한 장력)",
+    "tips": "케이블을 다리 뒤나 앞으로 빼서 잡고 측면으로 부드럽게 끌어올립니다.",
+    "ouwanRank": null,
+    "ouwanCount": null,
+    "spec": {
+      "title": "CABLE SIDE LATERAL RAISE",
+      "pose1": "Muscular male standing sideways to low cable column, gripping D-handle with outside hand, cable running behind or in front of hips.",
+      "pose2": "Raising cable handle laterally outward and upward to shoulder height, maintaining constant cable tension throughout arc.",
+      "muscles": "Lateral Deltoid glowing bright red-orange.",
+      "equipment": "Cable column with low pulley and single stirrup handle."
+    },
+    "prompt": "Generate a 2-stage workout exercise illustration diagram:\n- Title: 'CABLE SIDE LATERAL RAISE'\n- Pose 1 (Left - Starting Position): Muscular male standing sideways to low cable column, gripping D-handle with outside hand, cable running behind or in front of hips.\n- Pose 2 (Right - Finish Position): Raising cable handle laterally outward and upward to shoulder height, maintaining constant cable tension throughout arc.\n- Muscle Highlight: Lateral Deltoid glowing bright red-orange.\n- Equipment: Cable column with low pulley and single stirrup handle.\n- Style: 3D anatomical fitness model, realistic physique, clean white minimalist background, scientific fitness guide, side-by-side comparison diagram."
+  },
+  {
+    "id": "cable-y-raise",
+    "name": "케이블 Y-레이즈",
+    "category": "어깨",
+    "englishName": "Cable Dual Y-Raise",
+    "equipCategory": "cable",
+    "equipmentType": "듀얼 케이블 타워",
+    "targetMuscles": "측면 삼각근, 하부 승모근",
+    "tips": "양손에 케이블을 교차해 잡고 대각선 위 Y자 모양으로 뻗어 측면 어깨를 쥐어짭니다.",
+    "ouwanRank": null,
+    "ouwanCount": null,
+    "spec": {
+      "title": "CABLE DUAL Y-RAISE",
+      "pose1": "Muscular male standing in center of dual cable crossover with pulleys set at hip/knee height, cables crossed with hands holding opposite cables.",
+      "pose2": "Raising arms diagonally upward and outward into a wide overhead 'Y' shape, peak contraction across side and rear delts.",
+      "muscles": "Lateral Deltoid, Lower Trapezius, and Posterior Deltoid glowing bright red-orange.",
+      "equipment": "Dual cable crossover column with pulleys at mid-low height."
+    },
+    "prompt": "Generate a 2-stage workout exercise illustration diagram:\n- Title: 'CABLE DUAL Y-RAISE'\n- Pose 1 (Left - Starting Position): Muscular male standing in center of dual cable crossover with pulleys set at hip/knee height, cables crossed with hands holding opposite cables.\n- Pose 2 (Right - Finish Position): Raising arms diagonally upward and outward into a wide overhead 'Y' shape, peak contraction across side and rear delts.\n- Muscle Highlight: Lateral Deltoid, Lower Trapezius, and Posterior Deltoid glowing bright red-orange.\n- Equipment: Dual cable crossover column with pulleys at mid-low height.\n- Style: 3D anatomical fitness model, realistic physique, clean white minimalist background, scientific fitness guide, side-by-side comparison diagram."
+  },
+  {
+    "id": "front-raise",
+    "name": "프론트 레이즈",
+    "category": "어깨",
+    "englishName": "Dumbbell / Barbell Front Raise",
+    "equipCategory": "dumbbell",
+    "equipmentType": "덤벨 / 바벨",
+    "targetMuscles": "전면 삼각근, 윗가슴 연결부",
+    "tips": "반동 없이 눈높이까지 천천히 들어 올리고 버티면서 내립니다.",
+    "ouwanRank": null,
+    "ouwanCount": null,
+    "spec": {
+      "title": "DUMBBELL / BARBELL FRONT RAISE",
+      "pose1": "Muscular male standing tall with dumbbells or barbell resting in front of thighs with overhand pronated grip, core braced.",
+      "pose2": "Lifting weight straight forward and upward with slight elbow micro-bend until arms are parallel to floor at eye level.",
+      "muscles": "Anterior Deltoid (Front Shoulder) glowing bright red-orange.",
+      "equipment": "Pair of dumbbells or straight barbell."
+    },
+    "prompt": "Generate a 2-stage workout exercise illustration diagram:\n- Title: 'DUMBBELL / BARBELL FRONT RAISE'\n- Pose 1 (Left - Starting Position): Muscular male standing tall with dumbbells or barbell resting in front of thighs with overhand pronated grip, core braced.\n- Pose 2 (Right - Finish Position): Lifting weight straight forward and upward with slight elbow micro-bend until arms are parallel to floor at eye level.\n- Muscle Highlight: Anterior Deltoid (Front Shoulder) glowing bright red-orange.\n- Equipment: Pair of dumbbells or straight barbell.\n- Style: 3D anatomical fitness model, realistic physique, clean white minimalist background, scientific fitness guide, side-by-side comparison diagram."
+  },
+  {
+    "id": "plate-front-raise",
+    "name": "원판 프론트 레이즈",
+    "category": "어깨",
+    "englishName": "Weight Plate Front Raise",
+    "equipCategory": "barbell",
+    "equipmentType": "원판 (플레이트)",
+    "targetMuscles": "전면 삼각근",
+    "tips": "원판의 3시·9시 방향을 잡고 눈높이까지 들어 올려 정점에서 1초간 버팁니다.",
+    "ouwanRank": null,
+    "ouwanCount": null,
+    "spec": {
+      "title": "WEIGHT PLATE FRONT RAISE",
+      "pose1": "Muscular male standing tall gripping Olympic 20kg weight plate at 9 o'clock and 3 o'clock positions in front of thighs.",
+      "pose2": "Raising weight plate straight forward and upward with locked arms until center hole of plate reaches eye level.",
+      "muscles": "Anterior Deltoid and Upper Chest glowing bright red-orange.",
+      "equipment": "Olympic 20kg cast iron or bumper plate."
+    },
+    "prompt": "Generate a 2-stage workout exercise illustration diagram:\n- Title: 'WEIGHT PLATE FRONT RAISE'\n- Pose 1 (Left - Starting Position): Muscular male standing tall gripping Olympic 20kg weight plate at 9 o'clock and 3 o'clock positions in front of thighs.\n- Pose 2 (Right - Finish Position): Raising weight plate straight forward and upward with locked arms until center hole of plate reaches eye level.\n- Muscle Highlight: Anterior Deltoid and Upper Chest glowing bright red-orange.\n- Equipment: Olympic 20kg cast iron or bumper plate.\n- Style: 3D anatomical fitness model, realistic physique, clean white minimalist background, scientific fitness guide, side-by-side comparison diagram."
+  },
+  {
+    "id": "cable-front-raise",
+    "name": "케이블 프론트 레이즈",
+    "category": "어깨",
+    "englishName": "Cable Rope / Bar Front Raise",
+    "equipCategory": "cable",
+    "equipmentType": "하단 케이블 & 로프/일자바",
+    "targetMuscles": "전면 삼각근 지속 긴장",
+    "tips": "다리 사이로 케이블을 통과시켜 잡고 어깨 높이까지 앞으로 들어 올립니다.",
+    "ouwanRank": null,
+    "ouwanCount": null,
+    "spec": {
+      "title": "CABLE FRONT RAISE",
+      "pose1": "Muscular male straddling low cable pulley facing away from column, holding straight bar or rope attachment between legs with arms extended down.",
+      "pose2": "Raising cable attachment straight forward and upward to shoulder height against constant continuous cable resistance.",
+      "muscles": "Anterior Deltoid glowing bright red-orange.",
+      "equipment": "Low cable pulley with straight bar or rope attachment."
+    },
+    "prompt": "Generate a 2-stage workout exercise illustration diagram:\n- Title: 'CABLE FRONT RAISE'\n- Pose 1 (Left - Starting Position): Muscular male straddling low cable pulley facing away from column, holding straight bar or rope attachment between legs with arms extended down.\n- Pose 2 (Right - Finish Position): Raising cable attachment straight forward and upward to shoulder height against constant continuous cable resistance.\n- Muscle Highlight: Anterior Deltoid glowing bright red-orange.\n- Equipment: Low cable pulley with straight bar or rope attachment.\n- Style: 3D anatomical fitness model, realistic physique, clean white minimalist background, scientific fitness guide, side-by-side comparison diagram."
+  },
+  {
+    "id": "face-pull",
+    "name": "페이스 풀",
+    "category": "어깨",
+    "englishName": "Cable Rope Face Pull",
+    "equipCategory": "cable",
+    "equipmentType": "케이블 로프",
+    "targetMuscles": "후면 삼각근, 회전근개, 승모근 중하부",
+    "tips": "로프를 이마 방향으로 당기며 양손을 귀 옆으로 벌려 어깨 외회전을 함께 걸어줍니다.",
+    "ouwanRank": null,
+    "ouwanCount": null,
+    "spec": {
+      "title": "CABLE ROPE FACE PULL",
+      "pose1": "Muscular male standing facing high cable pulley holding rope attachment with thumbs pointing backward, arms fully extended forward.",
+      "pose2": "Pulling rope directly toward bridge of nose and forehead, flaring elbows wide and rotating shoulders back into double biceps external rotation.",
+      "muscles": "Posterior Deltoid, Infraspinatus, Rhomboids, and Upper Trapezius glowing bright red-orange.",
+      "equipment": "High cable pulley with long triceps rope attachment."
+    },
+    "prompt": "Generate a 2-stage workout exercise illustration diagram:\n- Title: 'CABLE ROPE FACE PULL'\n- Pose 1 (Left - Starting Position): Muscular male standing facing high cable pulley holding rope attachment with thumbs pointing backward, arms fully extended forward.\n- Pose 2 (Right - Finish Position): Pulling rope directly toward bridge of nose and forehead, flaring elbows wide and rotating shoulders back into double biceps external rotation.\n- Muscle Highlight: Posterior Deltoid, Infraspinatus, Rhomboids, and Upper Trapezius glowing bright red-orange.\n- Equipment: High cable pulley with long triceps rope attachment.\n- Style: 3D anatomical fitness model, realistic physique, clean white minimalist background, scientific fitness guide, side-by-side comparison diagram."
+  },
+  {
+    "id": "bent-over-lateral-raise",
+    "name": "벤트오버 덤벨 레터럴 레이즈",
+    "category": "어깨",
+    "englishName": "Bent-Over Dumbbell Rear Delt Raise",
+    "equipCategory": "dumbbell",
+    "equipmentType": "덤벨 & 벤치",
+    "targetMuscles": "후면 삼각근",
+    "tips": "상체를 숙이거나 인클라인 벤치에 이마를 대고 팔꿈치를 옆으로 벌려 후면 삼각근만 타격합니다.",
+    "ouwanRank": null,
+    "ouwanCount": null,
+    "spec": {
+      "title": "BENT-OVER DUMBBELL REAR DELT RAISE",
+      "pose1": "Muscular male standing with hips hinged forward 60-70 degrees, flat neutral spine, dumbbells hanging straight down beneath chest.",
+      "pose2": "Raising dumbbells laterally outward and backward leading with elbows until weights reach shoulder level in rear delt squeeze.",
+      "muscles": "Posterior Deltoid (Rear Shoulder) and Rhomboids glowing bright red-orange.",
+      "equipment": "Pair of dumbbells."
+    },
+    "prompt": "Generate a 2-stage workout exercise illustration diagram:\n- Title: 'BENT-OVER DUMBBELL REAR DELT RAISE'\n- Pose 1 (Left - Starting Position): Muscular male standing with hips hinged forward 60-70 degrees, flat neutral spine, dumbbells hanging straight down beneath chest.\n- Pose 2 (Right - Finish Position): Raising dumbbells laterally outward and backward leading with elbows until weights reach shoulder level in rear delt squeeze.\n- Muscle Highlight: Posterior Deltoid (Rear Shoulder) and Rhomboids glowing bright red-orange.\n- Equipment: Pair of dumbbells.\n- Style: 3D anatomical fitness model, realistic physique, clean white minimalist background, scientific fitness guide, side-by-side comparison diagram."
+  },
+  {
+    "id": "cable-rear-delt-fly",
+    "name": "케이블 리어 델트 플라이",
+    "category": "어깨",
+    "englishName": "High Cable Reverse Crossover Fly",
+    "equipCategory": "cable",
+    "equipmentType": "듀얼 케이블 타워",
+    "targetMuscles": "후면 삼각근, 능형근",
+    "tips": "눈높이 케이블을 양손 교차로 잡고 대각선 뒤로 팔을 활짝 펼쳐 후면 어깨를 조입니다.",
+    "ouwanRank": null,
+    "ouwanCount": null,
+    "spec": {
+      "title": "HIGH CABLE REVERSE CROSSOVER FLY",
+      "pose1": "Muscular male standing in center of dual cable crossover, pulleys at eye level without handles, holding opposite cable carabiners crossed in front of face.",
+      "pose2": "Pulling cables horizontally apart and backward in wide reverse fly arc until hands are back in line with torso.",
+      "muscles": "Posterior Deltoid and Middle Trapezius glowing bright red-orange.",
+      "equipment": "Dual cable column station at eye height."
+    },
+    "prompt": "Generate a 2-stage workout exercise illustration diagram:\n- Title: 'HIGH CABLE REVERSE CROSSOVER FLY'\n- Pose 1 (Left - Starting Position): Muscular male standing in center of dual cable crossover, pulleys at eye level without handles, holding opposite cable carabiners crossed in front of face.\n- Pose 2 (Right - Finish Position): Pulling cables horizontally apart and backward in wide reverse fly arc until hands are back in line with torso.\n- Muscle Highlight: Posterior Deltoid and Middle Trapezius glowing bright red-orange.\n- Equipment: Dual cable column station at eye height.\n- Style: 3D anatomical fitness model, realistic physique, clean white minimalist background, scientific fitness guide, side-by-side comparison diagram."
+  },
+  {
+    "id": "barbell-upright-row",
+    "name": "바벨 업라이트 로우",
+    "category": "어깨",
+    "englishName": "Barbell / EZ-Bar Upright Row",
+    "equipCategory": "barbell",
+    "equipmentType": "EZ 바 / 바벨",
+    "targetMuscles": "측면 삼각근, 상부 승모근",
+    "tips": "어깨너비로 바를 잡고 팔꿈치가 손목보다 높게 올라오도록 가슴 상단까지 끌어올립니다.",
+    "ouwanRank": null,
+    "ouwanCount": null,
+    "spec": {
+      "title": "BARBELL UPRIGHT ROW",
+      "pose1": "Muscular male standing tall holding Olympic barbell with shoulder-width overhand grip in front of thighs.",
+      "pose2": "Pulling barbell vertically straight up along torso, leading with high flared elbows until bar reaches mid-chest level.",
+      "muscles": "Lateral Deltoid and Upper Trapezius glowing bright red-orange.",
+      "equipment": "Olympic barbell with plates."
+    },
+    "prompt": "Generate a 2-stage workout exercise illustration diagram:\n- Title: 'BARBELL UPRIGHT ROW'\n- Pose 1 (Left - Starting Position): Muscular male standing tall holding Olympic barbell with shoulder-width overhand grip in front of thighs.\n- Pose 2 (Right - Finish Position): Pulling barbell vertically straight up along torso, leading with high flared elbows until bar reaches mid-chest level.\n- Muscle Highlight: Lateral Deltoid and Upper Trapezius glowing bright red-orange.\n- Equipment: Olympic barbell with plates.\n- Style: 3D anatomical fitness model, realistic physique, clean white minimalist background, scientific fitness guide, side-by-side comparison diagram."
+  },
+  {
+    "id": "dumbbell-upright-row",
+    "name": "덤벨 업라이트 로우",
+    "category": "어깨",
+    "englishName": "Dumbbell Upright Row",
+    "equipCategory": "dumbbell",
+    "equipmentType": "덤벨",
+    "targetMuscles": "측면 삼각근, 승모근 (손목/어깨 관절 보호)",
+    "tips": "바벨보다 손목과 어깨 회전이 자유로워 통증 없이 측면 삼각근을 강하게 끌어올립니다.",
+    "ouwanRank": null,
+    "ouwanCount": null,
+    "spec": {
+      "title": "DUMBBELL UPRIGHT ROW",
+      "pose1": "Muscular male standing tall holding pair of dumbbells across front of thighs, palms facing backward.",
+      "pose2": "Pulling dumbbells vertically upward along torso line, elbows leading high and wide above hands at upper chest height.",
+      "muscles": "Lateral Deltoid and Upper Trapezius glowing bright red-orange.",
+      "equipment": "Pair of dumbbells."
+    },
+    "prompt": "Generate a 2-stage workout exercise illustration diagram:\n- Title: 'DUMBBELL UPRIGHT ROW'\n- Pose 1 (Left - Starting Position): Muscular male standing tall holding pair of dumbbells across front of thighs, palms facing backward.\n- Pose 2 (Right - Finish Position): Pulling dumbbells vertically upward along torso line, elbows leading high and wide above hands at upper chest height.\n- Muscle Highlight: Lateral Deltoid and Upper Trapezius glowing bright red-orange.\n- Equipment: Pair of dumbbells.\n- Style: 3D anatomical fitness model, realistic physique, clean white minimalist background, scientific fitness guide, side-by-side comparison diagram."
+  },
+  {
+    "id": "shrug",
+    "name": "슈러그",
+    "category": "어깨",
+    "englishName": "Barbell / Smith Machine Shrug",
+    "equipCategory": "barbell",
+    "equipmentType": "바벨 / 스미스머신 / 트랩바",
+    "targetMuscles": "상부 승모근",
+    "tips": "어깨를 귀에 닿게 한다는 느낌으로 수직으로 으쓱 올리고 정점에서 1초간 멈춥니다.",
+    "ouwanRank": null,
+    "ouwanCount": null,
+    "spec": {
+      "title": "BARBELL / SMITH MACHINE SHRUG",
+      "pose1": "Muscular male standing upright holding heavy barbell in front of thighs with arms completely straight, shoulders relaxed and depressed.",
+      "pose2": "Elevating shoulders straight up toward ears in maximum vertical shrug contraction without rolling shoulders, pausing at top.",
+      "muscles": "Upper Trapezius glowing intense bright red-orange.",
+      "equipment": "Olympic barbell or Smith machine loaded with heavy plates."
+    },
+    "prompt": "Generate a 2-stage workout exercise illustration diagram:\n- Title: 'BARBELL / SMITH MACHINE SHRUG'\n- Pose 1 (Left - Starting Position): Muscular male standing upright holding heavy barbell in front of thighs with arms completely straight, shoulders relaxed and depressed.\n- Pose 2 (Right - Finish Position): Elevating shoulders straight up toward ears in maximum vertical shrug contraction without rolling shoulders, pausing at top.\n- Muscle Highlight: Upper Trapezius glowing intense bright red-orange.\n- Equipment: Olympic barbell or Smith machine loaded with heavy plates.\n- Style: 3D anatomical fitness model, realistic physique, clean white minimalist background, scientific fitness guide, side-by-side comparison diagram."
+  },
+  {
+    "id": "dumbbell-shrug",
+    "name": "덤벨 슈러그",
+    "category": "어깨",
+    "englishName": "Standing Dumbbell Shrug",
+    "equipCategory": "dumbbell",
+    "equipmentType": "덤벨",
+    "targetMuscles": "상부 승모근 좌우 대칭 발달",
+    "tips": "몸통 옆에 덤벨을 들고 날개뼈를 살짝 모으며 귀 뒤쪽 방향으로 으쓱 들어 올립니다.",
+    "ouwanRank": null,
+    "ouwanCount": null,
+    "spec": {
+      "title": "STANDING DUMBBELL SHRUG",
+      "pose1": "Muscular male standing tall holding heavy pair of dumbbells at sides of thighs, arms straight, shoulders hanging down.",
+      "pose2": "Shrugging shoulders straight upward toward ears in powerful vertical contraction, crushing upper traps at peak.",
+      "muscles": "Upper Trapezius glowing bright red-orange.",
+      "equipment": "Pair of heavy dumbbells."
+    },
+    "prompt": "Generate a 2-stage workout exercise illustration diagram:\n- Title: 'STANDING DUMBBELL SHRUG'\n- Pose 1 (Left - Starting Position): Muscular male standing tall holding heavy pair of dumbbells at sides of thighs, arms straight, shoulders hanging down.\n- Pose 2 (Right - Finish Position): Shrugging shoulders straight upward toward ears in powerful vertical contraction, crushing upper traps at peak.\n- Muscle Highlight: Upper Trapezius glowing bright red-orange.\n- Equipment: Pair of heavy dumbbells.\n- Style: 3D anatomical fitness model, realistic physique, clean white minimalist background, scientific fitness guide, side-by-side comparison diagram."
+  },
+  {
+    "id": "plank",
+    "name": "플랭크",
+    "category": "복근/코어",
+    "englishName": "Standard Core Plank",
+    "equipCategory": "bodyweight",
+    "equipmentType": "피트니스 매트",
+    "targetMuscles": "복직근, 복횡근, 코어 안정성",
+    "tips": "복근과 둔근에 힘을 주어 허리가 아래로 꺾이지 않는 일직선을 유지합니다.",
+    "ouwanRank": null,
+    "ouwanCount": null,
+    "spec": {
+      "title": "STANDARD FOREARM PLANK",
+      "pose1": "Muscular male setting up in prone position on exercise mat, forearms on floor with elbows directly under shoulders, toes planted.",
+      "pose2": "Lifting body into rigid straight-line plank from head to heels, neutral neck, glutes squeezed, intense abdominal hollow bracing.",
+      "muscles": "Rectus Abdominis and Transverse Abdominis glowing bright red-orange.",
+      "equipment": "High-density exercise floor mat."
+    },
+    "prompt": "Generate a 2-stage workout exercise illustration diagram:\n- Title: 'STANDARD FOREARM PLANK'\n- Pose 1 (Left - Starting Position): Muscular male setting up in prone position on exercise mat, forearms on floor with elbows directly under shoulders, toes planted.\n- Pose 2 (Right - Finish Position): Lifting body into rigid straight-line plank from head to heels, neutral neck, glutes squeezed, intense abdominal hollow bracing.\n- Muscle Highlight: Rectus Abdominis and Transverse Abdominis glowing bright red-orange.\n- Equipment: High-density exercise floor mat.\n- Style: 3D anatomical fitness model, realistic physique, clean white minimalist background, scientific fitness guide, side-by-side comparison diagram."
+  },
+  {
+    "id": "side-plank",
+    "name": "사이드 플랭크",
+    "category": "복근/코어",
+    "englishName": "Side Oblique Plank",
+    "equipCategory": "bodyweight",
+    "equipmentType": "피트니스 매트",
+    "targetMuscles": "외복사근, 내복사근, 중둔근 코어",
+    "tips": "한쪽 팔꿈치로 지탱하며 골반이 바닥으로 처지지 않게 옆구리 힘으로 버팁니다.",
+    "ouwanRank": null,
+    "ouwanCount": null,
+    "spec": {
+      "title": "SIDE PLANK (OBLIQUE BRACE)",
+      "pose1": "Muscular male lying on side supported on single forearm with feet stacked, hips resting on mat.",
+      "pose2": "Lifting hips off floor until body forms rigid diagonal line from head to feet, top arm extended vertically upward.",
+      "muscles": "Internal and External Obliques and Quadratus Lumborum glowing bright red-orange.",
+      "equipment": "Exercise floor mat."
+    },
+    "prompt": "Generate a 2-stage workout exercise illustration diagram:\n- Title: 'SIDE PLANK (OBLIQUE BRACE)'\n- Pose 1 (Left - Starting Position): Muscular male lying on side supported on single forearm with feet stacked, hips resting on mat.\n- Pose 2 (Right - Finish Position): Lifting hips off floor until body forms rigid diagonal line from head to feet, top arm extended vertically upward.\n- Muscle Highlight: Internal and External Obliques and Quadratus Lumborum glowing bright red-orange.\n- Equipment: Exercise floor mat.\n- Style: 3D anatomical fitness model, realistic physique, clean white minimalist background, scientific fitness guide, side-by-side comparison diagram."
+  },
+  {
+    "id": "crunch",
+    "name": "크런치",
+    "category": "복근/코어",
+    "englishName": "Abdominal Crunch",
+    "equipCategory": "bodyweight",
+    "equipmentType": "매트 / 애브매트",
+    "targetMuscles": "상복부 (복직근 상단)",
+    "tips": "허리를 바닥에 붙인 채로 갈비뼈를 골반 쪽으로 말아 올립니다.",
+    "ouwanRank": null,
+    "ouwanCount": null,
+    "spec": {
+      "title": "ABDOMINAL FLOOR CRUNCH",
+      "pose1": "Muscular male lying supine on floor mat with knees bent at 90 degrees, feet flat, fingertips touching temples, lower back pressed down.",
+      "pose2": "Curling ribcage toward pelvis, lifting shoulder blades 3-4 inches off floor in tight abdominal contraction, lower back remaining flat on mat.",
+      "muscles": "Upper Rectus Abdominis glowing bright red-orange.",
+      "equipment": "Exercise floor mat."
+    },
+    "prompt": "Generate a 2-stage workout exercise illustration diagram:\n- Title: 'ABDOMINAL FLOOR CRUNCH'\n- Pose 1 (Left - Starting Position): Muscular male lying supine on floor mat with knees bent at 90 degrees, feet flat, fingertips touching temples, lower back pressed down.\n- Pose 2 (Right - Finish Position): Curling ribcage toward pelvis, lifting shoulder blades 3-4 inches off floor in tight abdominal contraction, lower back remaining flat on mat.\n- Muscle Highlight: Upper Rectus Abdominis glowing bright red-orange.\n- Equipment: Exercise floor mat.\n- Style: 3D anatomical fitness model, realistic physique, clean white minimalist background, scientific fitness guide, side-by-side comparison diagram."
+  },
+  {
+    "id": "decline-sit-up",
+    "name": "디클라인 싯업",
+    "category": "복근/코어",
+    "englishName": "Decline Bench Sit-Up",
+    "equipCategory": "bodyweight",
+    "equipmentType": "디클라인 복근 벤치",
+    "targetMuscles": "복직근 전체, 장요근",
+    "tips": "발목을 패드에 걸고 등을 둥글게 말아 복근의 긴장이 풀리지 않는 각도까지 내려갑니다.",
+    "ouwanRank": null,
+    "ouwanCount": null,
+    "spec": {
+      "title": "DECLINE BENCH SIT-UP",
+      "pose1": "Muscular male on 30-degree decline bench with shins locked under padded rollers, torso reclined along bench with hands at head.",
+      "pose2": "Flexing abs powerfully to sit all the way up until torso is perpendicular to floor in full abdominal squeeze.",
+      "muscles": "Rectus Abdominis and Iliopsoas glowing bright red-orange.",
+      "equipment": "Commercial decline sit-up bench with foot rollers."
+    },
+    "prompt": "Generate a 2-stage workout exercise illustration diagram:\n- Title: 'DECLINE BENCH SIT-UP'\n- Pose 1 (Left - Starting Position): Muscular male on 30-degree decline bench with shins locked under padded rollers, torso reclined along bench with hands at head.\n- Pose 2 (Right - Finish Position): Flexing abs powerfully to sit all the way up until torso is perpendicular to floor in full abdominal squeeze.\n- Muscle Highlight: Rectus Abdominis and Iliopsoas glowing bright red-orange.\n- Equipment: Commercial decline sit-up bench with foot rollers.\n- Style: 3D anatomical fitness model, realistic physique, clean white minimalist background, scientific fitness guide, side-by-side comparison diagram."
+  },
+  {
+    "id": "bench-leg-raise",
+    "name": "레그레이즈 (플랫 벤치)",
+    "category": "복근/코어",
+    "englishName": "Lying Flat Bench Leg Raise",
+    "equipCategory": "bodyweight",
+    "equipmentType": "플랫 벤치 / 매트",
+    "targetMuscles": "하복부 (복직근 하단)",
+    "tips": "다리를 내릴 때 허리가 뜨지 않도록 복부를 바닥 쪽으로 강하게 누르며 버팁니다.",
+    "ouwanRank": null,
+    "ouwanCount": null,
+    "spec": {
+      "title": "FLAT BENCH LYING LEG RAISE",
+      "pose1": "Muscular male lying flat on gym bench gripping edge beside head, legs extended straight hovering horizontally off bench.",
+      "pose2": "Raising straight legs upward to 90-degree vertical angle and slightly tilting pelvis off bench in peak lower ab contraction.",
+      "muscles": "Lower Rectus Abdominis and Hip Flexors glowing bright red-orange.",
+      "equipment": "Flat gym bench."
+    },
+    "prompt": "Generate a 2-stage workout exercise illustration diagram:\n- Title: 'FLAT BENCH LYING LEG RAISE'\n- Pose 1 (Left - Starting Position): Muscular male lying flat on gym bench gripping edge beside head, legs extended straight hovering horizontally off bench.\n- Pose 2 (Right - Finish Position): Raising straight legs upward to 90-degree vertical angle and slightly tilting pelvis off bench in peak lower ab contraction.\n- Muscle Highlight: Lower Rectus Abdominis and Hip Flexors glowing bright red-orange.\n- Equipment: Flat gym bench.\n- Style: 3D anatomical fitness model, realistic physique, clean white minimalist background, scientific fitness guide, side-by-side comparison diagram."
+  },
+  {
+    "id": "hanging-leg-raise",
+    "name": "행잉 레그레이즈",
+    "category": "복근/코어",
+    "englishName": "Hanging / Captains Chair Leg Raise",
+    "equipCategory": "bodyweight",
+    "equipmentType": "풀업 바 / 캡틴스 체어",
+    "targetMuscles": "하복부, 복직근 전체, 장요근",
+    "tips": "다리만 들지 말고 골반 자체를 명치 쪽으로 말아 올린다는 느낌으로 진행하세요.",
+    "ouwanRank": null,
+    "ouwanCount": null,
+    "spec": {
+      "title": "HANGING STRAIGHT LEG RAISE",
+      "pose1": "Muscular male hanging from pull-up bar with straight arms and overhead grip, body hanging still without swinging.",
+      "pose2": "Flexing core and hips to raise straight legs horizontally to 90 degrees (or toes to bar) with posterior pelvic tilt.",
+      "muscles": "Lower Rectus Abdominis and Hip Flexors glowing bright red-orange.",
+      "equipment": "Overhead pull-up bar."
+    },
+    "prompt": "Generate a 2-stage workout exercise illustration diagram:\n- Title: 'HANGING STRAIGHT LEG RAISE'\n- Pose 1 (Left - Starting Position): Muscular male hanging from pull-up bar with straight arms and overhead grip, body hanging still without swinging.\n- Pose 2 (Right - Finish Position): Flexing core and hips to raise straight legs horizontally to 90 degrees (or toes to bar) with posterior pelvic tilt.\n- Muscle Highlight: Lower Rectus Abdominis and Hip Flexors glowing bright red-orange.\n- Equipment: Overhead pull-up bar.\n- Style: 3D anatomical fitness model, realistic physique, clean white minimalist background, scientific fitness guide, side-by-side comparison diagram."
+  },
+  {
+    "id": "hanging-knee-raise",
+    "name": "행잉 니레이즈",
+    "category": "복근/코어",
+    "englishName": "Captains Chair / Hanging Knee Raise",
+    "equipCategory": "bodyweight",
+    "equipmentType": "캡틴스 체어 / 치닝디핑",
+    "targetMuscles": "하복부 집중 (허리 부담 최소화)",
+    "tips": "무릎을 굽혀 가슴 쪽으로 당기면서 골반을 말아 올려 초보자도 쉽게 하복부를 자극합니다.",
+    "ouwanRank": null,
+    "ouwanCount": null,
+    "spec": {
+      "title": "CAPTAIN'S CHAIR / HANGING KNEE RAISE",
+      "pose1": "Muscular male supported on forearms in captain's chair tower with back against pad, legs hanging down relaxed.",
+      "pose2": "Curling knees up toward chest, curling pelvis forward and rounding lower spine to intensely contract abdominal wall.",
+      "muscles": "Rectus Abdominis glowing bright red-orange.",
+      "equipment": "Captain's chair / Roman chair vertical knee raise station."
+    },
+    "prompt": "Generate a 2-stage workout exercise illustration diagram:\n- Title: 'CAPTAIN'S CHAIR / HANGING KNEE RAISE'\n- Pose 1 (Left - Starting Position): Muscular male supported on forearms in captain's chair tower with back against pad, legs hanging down relaxed.\n- Pose 2 (Right - Finish Position): Curling knees up toward chest, curling pelvis forward and rounding lower spine to intensely contract abdominal wall.\n- Muscle Highlight: Rectus Abdominis glowing bright red-orange.\n- Equipment: Captain's chair / Roman chair vertical knee raise station.\n- Style: 3D anatomical fitness model, realistic physique, clean white minimalist background, scientific fitness guide, side-by-side comparison diagram."
+  },
+  {
+    "id": "cable-crunch",
+    "name": "케이블 크런치",
+    "category": "복근/코어",
+    "englishName": "Kneeling Cable Rope Crunch",
+    "equipCategory": "cable",
+    "equipmentType": "상단 케이블 & 로프",
+    "targetMuscles": "상중 복직근 고중량 강화",
+    "tips": "무릎을 꿇고 엉덩이를 고정한 채 등을 새우처럼 둥글게 말아 복근으로만 당깁니다.",
+    "ouwanRank": null,
+    "ouwanCount": null,
+    "spec": {
+      "title": "KNEELING CABLE ROPE CRUNCH",
+      "pose1": "Muscular male kneeling facing high cable pulley holding rope attachment handles at sides of ears, hips high and stationary.",
+      "pose2": "Curling thoracic spine downward bringing elbows down toward knees, rounding back into maximum abdominal crunch without moving hips.",
+      "muscles": "Rectus Abdominis glowing intense bright red-orange.",
+      "equipment": "High cable pulley with triceps rope attachment."
+    },
+    "prompt": "Generate a 2-stage workout exercise illustration diagram:\n- Title: 'KNEELING CABLE ROPE CRUNCH'\n- Pose 1 (Left - Starting Position): Muscular male kneeling facing high cable pulley holding rope attachment handles at sides of ears, hips high and stationary.\n- Pose 2 (Right - Finish Position): Curling thoracic spine downward bringing elbows down toward knees, rounding back into maximum abdominal crunch without moving hips.\n- Muscle Highlight: Rectus Abdominis glowing intense bright red-orange.\n- Equipment: High cable pulley with triceps rope attachment.\n- Style: 3D anatomical fitness model, realistic physique, clean white minimalist background, scientific fitness guide, side-by-side comparison diagram."
+  },
+  {
+    "id": "cable-woodchopper",
+    "name": "케이블 우드촙",
+    "category": "복근/코어",
+    "englishName": "Cable Rotational Woodchopper",
+    "equipCategory": "cable",
+    "equipmentType": "케이블 싱글 핸들",
+    "targetMuscles": "외복사근, 내복사근, 회전 코어 파워",
+    "tips": "도끼질하듯 상단에서 대각선 아래로 코어 회전을 이용해 케이블을 당깁니다.",
+    "ouwanRank": null,
+    "ouwanCount": null,
+    "spec": {
+      "title": "CABLE ROTATIONAL WOODCHOPPER",
+      "pose1": "Muscular male standing perpendicular to cable column, arms extended gripping single handle at high pulley position, hips pivoted.",
+      "pose2": "Rotating torso dynamically downward and across body past opposite knee in powerful diagonal woodchop sweep.",
+      "muscles": "External Obliques, Internal Obliques, and Transverse Abdominis glowing bright red-orange.",
+      "equipment": "Cable column with high-to-low pulley setup."
+    },
+    "prompt": "Generate a 2-stage workout exercise illustration diagram:\n- Title: 'CABLE ROTATIONAL WOODCHOPPER'\n- Pose 1 (Left - Starting Position): Muscular male standing perpendicular to cable column, arms extended gripping single handle at high pulley position, hips pivoted.\n- Pose 2 (Right - Finish Position): Rotating torso dynamically downward and across body past opposite knee in powerful diagonal woodchop sweep.\n- Muscle Highlight: External Obliques, Internal Obliques, and Transverse Abdominis glowing bright red-orange.\n- Equipment: Cable column with high-to-low pulley setup.\n- Style: 3D anatomical fitness model, realistic physique, clean white minimalist background, scientific fitness guide, side-by-side comparison diagram."
+  },
+  {
+    "id": "torso-rotation-machine",
+    "name": "토르소 로테이션 머신",
+    "category": "복근/코어",
+    "englishName": "Torso Rotation Machine",
+    "equipCategory": "pin_machine",
+    "equipmentType": "로테이션 핀 머신",
+    "targetMuscles": "외복사근, 내복사근 (옆구리/허리 라인)",
+    "tips": "상체를 고정하고 하체와 골반을 복사근 힘으로 회전시켜 옆구리 라인을 다듬습니다.",
+    "ouwanRank": null,
+    "ouwanCount": null,
+    "spec": {
+      "title": "TORSO ROTATION MACHINE",
+      "pose1": "Muscular male seated in rotary torso machine, thighs locked between pads, chest pressed against upper rotating lever pad rotated 45 degrees.",
+      "pose2": "Twisting torso forcefully across to opposite side against selectorized resistance, rotating purely through abdominal core.",
+      "muscles": "Internal and External Obliques glowing bright red-orange.",
+      "equipment": "Commercial selectorized rotary torso pin machine."
+    },
+    "prompt": "Generate a 2-stage workout exercise illustration diagram:\n- Title: 'TORSO ROTATION MACHINE'\n- Pose 1 (Left - Starting Position): Muscular male seated in rotary torso machine, thighs locked between pads, chest pressed against upper rotating lever pad rotated 45 degrees.\n- Pose 2 (Right - Finish Position): Twisting torso forcefully across to opposite side against selectorized resistance, rotating purely through abdominal core.\n- Muscle Highlight: Internal and External Obliques glowing bright red-orange.\n- Equipment: Commercial selectorized rotary torso pin machine.\n- Style: 3D anatomical fitness model, realistic physique, clean white minimalist background, scientific fitness guide, side-by-side comparison diagram."
+  },
+  {
+    "id": "roman-chair-side-bend",
+    "name": "로만체어 사이드 벤드",
+    "category": "복근/코어",
+    "englishName": "Roman Chair Oblique Side Bend",
+    "equipCategory": "bodyweight",
+    "equipmentType": "45도 로만체어 (백익스텐션 벤치)",
+    "targetMuscles": "외복사근, 요방형근 (옆구리 코어)",
+    "tips": "옆으로 기대어 상체를 아래로 늘렸다가 옆구리 근육의 힘으로 일직선까지 올라옵니다.",
+    "ouwanRank": null,
+    "ouwanCount": null,
+    "spec": {
+      "title": "ROMAN CHAIR OBLIQUE SIDE BEND",
+      "pose1": "Muscular male with hips locked sideways on 45-degree hyperextension bench, upper body lowered laterally toward floor in deep side stretch.",
+      "pose2": "Flexing lateral waist to pull torso upward past neutral into tight oblique side crunch, hands behind head.",
+      "muscles": "External Obliques and Quadratus Lumborum glowing bright red-orange.",
+      "equipment": "45-degree hyperextension / Roman chair bench."
+    },
+    "prompt": "Generate a 2-stage workout exercise illustration diagram:\n- Title: 'ROMAN CHAIR OBLIQUE SIDE BEND'\n- Pose 1 (Left - Starting Position): Muscular male with hips locked sideways on 45-degree hyperextension bench, upper body lowered laterally toward floor in deep side stretch.\n- Pose 2 (Right - Finish Position): Flexing lateral waist to pull torso upward past neutral into tight oblique side crunch, hands behind head.\n- Muscle Highlight: External Obliques and Quadratus Lumborum glowing bright red-orange.\n- Equipment: 45-degree hyperextension / Roman chair bench.\n- Style: 3D anatomical fitness model, realistic physique, clean white minimalist background, scientific fitness guide, side-by-side comparison diagram."
+  },
+  {
+    "id": "ab-rollout",
+    "name": "복근 롤아웃 (애브 슬라이더)",
+    "category": "복근/코어",
+    "englishName": "Ab Wheel Rollout",
+    "equipCategory": "bodyweight",
+    "equipmentType": "애브 휠 (복근 롤러)",
+    "targetMuscles": "복직근 전체, 코어 신전 저항, 전거근",
+    "tips": "허리가 꺾이지 않게 배를 둥글게 말아 힘을 준 상태로 굴려 나갔다 복근으로 당겨옵니다.",
+    "ouwanRank": null,
+    "ouwanCount": null,
+    "spec": {
+      "title": "AB WHEEL ROLLOUT",
+      "pose1": "Muscular male kneeling on floor mat gripping dual handles of ab wheel directly beneath chest, core pre-braced.",
+      "pose2": "Rolling wheel straight forward extending body into long horizontal hollow plank hovering 5cm above floor, then pulling back through abs.",
+      "muscles": "Rectus Abdominis, Transverse Abdominis, and Latissimus Dorsi glowing bright red-orange.",
+      "equipment": "Dual-wheel ab roller and knee pad."
+    },
+    "prompt": "Generate a 2-stage workout exercise illustration diagram:\n- Title: 'AB WHEEL ROLLOUT'\n- Pose 1 (Left - Starting Position): Muscular male kneeling on floor mat gripping dual handles of ab wheel directly beneath chest, core pre-braced.\n- Pose 2 (Right - Finish Position): Rolling wheel straight forward extending body into long horizontal hollow plank hovering 5cm above floor, then pulling back through abs.\n- Muscle Highlight: Rectus Abdominis, Transverse Abdominis, and Latissimus Dorsi glowing bright red-orange.\n- Equipment: Dual-wheel ab roller and knee pad.\n- Style: 3D anatomical fitness model, realistic physique, clean white minimalist background, scientific fitness guide, side-by-side comparison diagram."
+  },
+  {
+    "id": "deadlift",
+    "name": "데드리프트",
+    "category": "전신",
+    "englishName": "Conventional Barbell Deadlift",
+    "equipCategory": "barbell",
+    "equipmentType": "바벨 & 데드리프트 플랫폼",
+    "targetMuscles": "둔근, 햄스트링, 척추기립근, 등 전체",
+    "tips": "바벨을 정강이에 밀착시키고 복압을 가득 채운 뒤 지면을 발바닥으로 밀어내며 일어섭니다.",
+    "ouwanRank": null,
+    "ouwanCount": null,
+    "spec": {
+      "title": "CONVENTIONAL BARBELL DEADLIFT",
+      "pose1": "Muscular male in starting deadlift stance: feet hip-width under bar, shins touching barbell, hips hinged back, flat spine, chest proud, double overhand grip.",
+      "pose2": "Standing tall at full lockout: driving through floor, hips fully extended, knees locked, shoulders pinned back, barbell resting against thighs.",
+      "muscles": "Gluteus Maximus, Hamstrings, Erector Spinae, and Trapezius glowing bright red-orange.",
+      "equipment": "Olympic barbell with heavy bumper plates on deadlift platform."
+    },
+    "prompt": "Generate a 2-stage workout exercise illustration diagram:\n- Title: 'CONVENTIONAL BARBELL DEADLIFT'\n- Pose 1 (Left - Starting Position): Muscular male in starting deadlift stance: feet hip-width under bar, shins touching barbell, hips hinged back, flat spine, chest proud, double overhand grip.\n- Pose 2 (Right - Finish Position): Standing tall at full lockout: driving through floor, hips fully extended, knees locked, shoulders pinned back, barbell resting against thighs.\n- Muscle Highlight: Gluteus Maximus, Hamstrings, Erector Spinae, and Trapezius glowing bright red-orange.\n- Equipment: Olympic barbell with heavy bumper plates on deadlift platform.\n- Style: 3D anatomical fitness model, realistic physique, clean white minimalist background, scientific fitness guide, side-by-side comparison diagram."
+  },
+  {
+    "id": "romanian-deadlift",
+    "name": "루마니안 데드리프트",
+    "category": "전신",
+    "englishName": "Barbell Romanian Deadlift (RDL)",
+    "equipCategory": "barbell",
+    "equipmentType": "바벨 & 파워 랙",
+    "targetMuscles": "햄스트링, 대둔근, 척추기립근",
+    "tips": "무릎을 살짝만 굽히고 엉덩이를 뒤로 쭉 밀어 정강이 중간까지 내려가며 햄스트링을 늘립니다.",
+    "ouwanRank": null,
+    "ouwanCount": null,
+    "spec": {
+      "title": "BARBELL ROMANIAN DEADLIFT (RDL)",
+      "pose1": "Muscular male standing tall holding barbell at hip crease with overhand grip, shoulders retracted, knees soft.",
+      "pose2": "Hinging hips deeply backward with flat neutral spine, sliding barbell down thighs to mid-shin level, intense hamstring and glute stretch.",
+      "muscles": "Hamstrings (full length) and Gluteus Maximus glowing bright red-orange.",
+      "equipment": "Olympic barbell with bumper plates."
+    },
+    "prompt": "Generate a 2-stage workout exercise illustration diagram:\n- Title: 'BARBELL ROMANIAN DEADLIFT (RDL)'\n- Pose 1 (Left - Starting Position): Muscular male standing tall holding barbell at hip crease with overhand grip, shoulders retracted, knees soft.\n- Pose 2 (Right - Finish Position): Hinging hips deeply backward with flat neutral spine, sliding barbell down thighs to mid-shin level, intense hamstring and glute stretch.\n- Muscle Highlight: Hamstrings (full length) and Gluteus Maximus glowing bright red-orange.\n- Equipment: Olympic barbell with bumper plates.\n- Style: 3D anatomical fitness model, realistic physique, clean white minimalist background, scientific fitness guide, side-by-side comparison diagram."
+  },
+  {
+    "id": "dumbbell-romanian-deadlift",
+    "name": "덤벨 루마니안 데드리프트",
+    "category": "전신",
+    "englishName": "Dumbbell Romanian Deadlift",
+    "equipCategory": "dumbbell",
+    "equipmentType": "덤벨",
+    "targetMuscles": "대둔근, 햄스트링 (고관절 힌지 집중)",
+    "tips": "덤벨을 허벅지 앞면을 스치듯 내리며 엉덩이 아래쪽이 팽팽하게 늘어나는 자극에 집중하세요.",
+    "ouwanRank": null,
+    "ouwanCount": null,
+    "spec": {
+      "title": "DUMBBELL ROMANIAN DEADLIFT (DB RDL)",
+      "pose1": "Muscular male standing tall holding pair of heavy dumbbells in front of thighs, shoulders back, core braced.",
+      "pose2": "Pushing hips backward with slight knee bend, sliding dumbbells along shins to below knee level, maintaining flat back and loaded posterior chain.",
+      "muscles": "Hamstrings and Gluteus Maximus glowing bright red-orange.",
+      "equipment": "Pair of heavy dumbbells."
+    },
+    "prompt": "Generate a 2-stage workout exercise illustration diagram:\n- Title: 'DUMBBELL ROMANIAN DEADLIFT (DB RDL)'\n- Pose 1 (Left - Starting Position): Muscular male standing tall holding pair of heavy dumbbells in front of thighs, shoulders back, core braced.\n- Pose 2 (Right - Finish Position): Pushing hips backward with slight knee bend, sliding dumbbells along shins to below knee level, maintaining flat back and loaded posterior chain.\n- Muscle Highlight: Hamstrings and Gluteus Maximus glowing bright red-orange.\n- Equipment: Pair of heavy dumbbells.\n- Style: 3D anatomical fitness model, realistic physique, clean white minimalist background, scientific fitness guide, side-by-side comparison diagram."
+  },
+  {
+    "id": "sumo-deadlift",
+    "name": "스모 데드리프트",
+    "category": "전신",
+    "englishName": "Sumo Barbell Deadlift",
+    "equipCategory": "barbell",
+    "equipmentType": "바벨 & 플랫폼",
+    "targetMuscles": "내전근, 대둔근, 대퇴사두근, 척추기립근",
+    "tips": "넓은 보폭과 고관절 외회전으로 상체를 세우고 바벨을 수직으로 뽑아 올립니다.",
+    "ouwanRank": null,
+    "ouwanCount": null,
+    "spec": {
+      "title": "SUMO BARBELL DEADLIFT",
+      "pose1": "Muscular male in wide sumo stance near barbell plates with toes flared 45 degrees, upright torso, hands gripping bar inside knees.",
+      "pose2": "Driving floor away through heels, pushing knees out to lock out tall with hips driven fully forward against barbell.",
+      "muscles": "Adductors, Gluteus Maximus, and Quadriceps glowing bright red-orange.",
+      "equipment": "Olympic barbell with bumper plates in wide stance setup."
+    },
+    "prompt": "Generate a 2-stage workout exercise illustration diagram:\n- Title: 'SUMO BARBELL DEADLIFT'\n- Pose 1 (Left - Starting Position): Muscular male in wide sumo stance near barbell plates with toes flared 45 degrees, upright torso, hands gripping bar inside knees.\n- Pose 2 (Right - Finish Position): Driving floor away through heels, pushing knees out to lock out tall with hips driven fully forward against barbell.\n- Muscle Highlight: Adductors, Gluteus Maximus, and Quadriceps glowing bright red-orange.\n- Equipment: Olympic barbell with bumper plates in wide stance setup.\n- Style: 3D anatomical fitness model, realistic physique, clean white minimalist background, scientific fitness guide, side-by-side comparison diagram."
+  },
+  {
+    "id": "trap-bar-deadlift",
+    "name": "트랩바 데드리프트",
+    "category": "전신",
+    "englishName": "Trap Bar / Hex Bar Deadlift",
+    "equipCategory": "barbell",
+    "equipmentType": "헥스 바 (트랩바) & 원판",
+    "targetMuscles": "하체 전반, 둔근, 등 전체 (허리 부담 감소)",
+    "tips": "무게중심이 몸 한가운데 위치해 허리 부상 위험 없이 안전하게 고중량을 뽑을 수 있습니다.",
+    "ouwanRank": null,
+    "ouwanCount": null,
+    "spec": {
+      "title": "TRAP BAR (HEX BAR) DEADLIFT",
+      "pose1": "Muscular male standing inside hexagonal trap bar, gripping neutral handles, hips hinged down in balanced squat-deadlift posture with upright chest.",
+      "pose2": "Driving floor away to full standing lockout, shoulders back, neutral spine, weight centered over midfoot.",
+      "muscles": "Quadriceps, Gluteus Maximus, and Trapezius glowing bright red-orange.",
+      "equipment": "Olympic trap bar (hex bar) loaded with bumper plates."
+    },
+    "prompt": "Generate a 2-stage workout exercise illustration diagram:\n- Title: 'TRAP BAR (HEX BAR) DEADLIFT'\n- Pose 1 (Left - Starting Position): Muscular male standing inside hexagonal trap bar, gripping neutral handles, hips hinged down in balanced squat-deadlift posture with upright chest.\n- Pose 2 (Right - Finish Position): Driving floor away to full standing lockout, shoulders back, neutral spine, weight centered over midfoot.\n- Muscle Highlight: Quadriceps, Gluteus Maximus, and Trapezius glowing bright red-orange.\n- Equipment: Olympic trap bar (hex bar) loaded with bumper plates.\n- Style: 3D anatomical fitness model, realistic physique, clean white minimalist background, scientific fitness guide, side-by-side comparison diagram."
+  },
+  {
+    "id": "landmine-press",
+    "name": "랜드마인 프레스",
+    "category": "전신",
+    "englishName": "Standing Landmine Press",
+    "equipCategory": "barbell",
+    "equipmentType": "바벨 랜드마인 스테이션",
+    "targetMuscles": "전면 삼각근, 윗가슴, 전거근, 코어",
+    "tips": "사선 궤적으로 밀어 올려 어깨 충돌 없이 코어와 상체 협응력을 함께 기릅니다.",
+    "ouwanRank": null,
+    "ouwanCount": null,
+    "spec": {
+      "title": "STANDING LANDMINE PRESS (UNILATERAL)",
+      "pose1": "Muscular male standing in athletic split stance holding end of landmine barbell at shoulder height with one hand, elbow tucked.",
+      "pose2": "Pressing barbell diagonally upward and forward along pivot arc to full overhead arm extension, core braced against rotation.",
+      "muscles": "Anterior Deltoid, Upper Pectoralis, and Core Obliques glowing bright red-orange.",
+      "equipment": "Barbell anchored in landmine floor swivel base."
+    },
+    "prompt": "Generate a 2-stage workout exercise illustration diagram:\n- Title: 'STANDING LANDMINE PRESS (UNILATERAL)'\n- Pose 1 (Left - Starting Position): Muscular male standing in athletic split stance holding end of landmine barbell at shoulder height with one hand, elbow tucked.\n- Pose 2 (Right - Finish Position): Pressing barbell diagonally upward and forward along pivot arc to full overhead arm extension, core braced against rotation.\n- Muscle Highlight: Anterior Deltoid, Upper Pectoralis, and Core Obliques glowing bright red-orange.\n- Equipment: Barbell anchored in landmine floor swivel base.\n- Style: 3D anatomical fitness model, realistic physique, clean white minimalist background, scientific fitness guide, side-by-side comparison diagram."
+  },
+  {
+    "id": "kettlebell-swing",
+    "name": "케틀벨 스윙",
+    "category": "전신",
+    "englishName": "Kettlebell Russian Swing",
+    "equipCategory": "bodyweight",
+    "equipmentType": "케틀벨",
+    "targetMuscles": "둔근 힌지 파워, 햄스트링, 코어, 심폐 지구력",
+    "tips": "팔로 들지 말고 고관절을 접었다가 폭발적으로 펴는 엉덩이 탄력으로 케틀벨을 띄웁니다.",
+    "ouwanRank": null,
+    "ouwanCount": null,
+    "spec": {
+      "title": "RUSSIAN KETTLEBELL SWING",
+      "pose1": "Muscular male at bottom of hip hinge, hiking heavy cast-iron kettlebell back between thighs with flat spine and bent knees.",
+      "pose2": "Snapping hips explosively forward into full standing lockout, kettlebell floating weightlessly to chest/shoulder height.",
+      "muscles": "Gluteus Maximus, Hamstrings, and Core glowing bright red-orange.",
+      "equipment": "Heavy competition or cast-iron kettlebell."
+    },
+    "prompt": "Generate a 2-stage workout exercise illustration diagram:\n- Title: 'RUSSIAN KETTLEBELL SWING'\n- Pose 1 (Left - Starting Position): Muscular male at bottom of hip hinge, hiking heavy cast-iron kettlebell back between thighs with flat spine and bent knees.\n- Pose 2 (Right - Finish Position): Snapping hips explosively forward into full standing lockout, kettlebell floating weightlessly to chest/shoulder height.\n- Muscle Highlight: Gluteus Maximus, Hamstrings, and Core glowing bright red-orange.\n- Equipment: Heavy competition or cast-iron kettlebell.\n- Style: 3D anatomical fitness model, realistic physique, clean white minimalist background, scientific fitness guide, side-by-side comparison diagram."
+  },
+  {
+    "id": "kettlebell-clean-and-press",
+    "name": "케틀벨 고블릿 클린 앤 프레스",
+    "category": "전신",
+    "englishName": "Kettlebell Clean & Overhead Press",
+    "equipCategory": "bodyweight",
+    "equipmentType": "케틀벨",
+    "targetMuscles": "둔근, 어깨, 코어, 전신 협응력",
+    "tips": "고관절 힘으로 케틀벨을 가슴 앞으로 감아올린(Clean) 뒤 머리 위로 힘차게 뻗습니다(Press).",
+    "ouwanRank": null,
+    "ouwanCount": null,
+    "spec": {
+      "title": "KETTLEBELL CLEAN AND OVERHEAD PRESS",
+      "pose1": "Muscular male holding kettlebell in tight front rack position against chest and shoulder, elbow resting on ribcage.",
+      "pose2": "Pressing kettlebell overhead into full vertical lockout with straight wrist and bicep beside ear, core braced.",
+      "muscles": "Deltoids, Triceps, and Core Stabilizers glowing bright red-orange.",
+      "equipment": "Competition kettlebell."
+    },
+    "prompt": "Generate a 2-stage workout exercise illustration diagram:\n- Title: 'KETTLEBELL CLEAN AND OVERHEAD PRESS'\n- Pose 1 (Left - Starting Position): Muscular male holding kettlebell in tight front rack position against chest and shoulder, elbow resting on ribcage.\n- Pose 2 (Right - Finish Position): Pressing kettlebell overhead into full vertical lockout with straight wrist and bicep beside ear, core braced.\n- Muscle Highlight: Deltoids, Triceps, and Core Stabilizers glowing bright red-orange.\n- Equipment: Competition kettlebell.\n- Style: 3D anatomical fitness model, realistic physique, clean white minimalist background, scientific fitness guide, side-by-side comparison diagram."
+  },
+  {
+    "id": "power-clean",
+    "name": "파워 클린",
+    "category": "전신",
+    "englishName": "Barbell Power Clean",
+    "equipCategory": "barbell",
+    "equipmentType": "바벨 & 범퍼 플레이트",
+    "targetMuscles": "순발력(파워), 둔근, 승모근, 전신 협응력",
+    "tips": "발목·무릎·고관절의 삼중 신전(Triple Extension)으로 바벨을 띄워 쇄골 위에 빠르게 받아냅니다.",
+    "ouwanRank": null,
+    "ouwanCount": null,
+    "spec": {
+      "title": "BARBELL POWER CLEAN",
+      "pose1": "Muscular male in explosive second pull position extending hips, knees, and ankles with barbell accelerating past mid-thigh.",
+      "pose2": "Snapping elbows fast under bar to catch barbell across front deltoids in solid quarter-squat receiving position.",
+      "muscles": "Trapezius, Hamstrings, Gluteus Maximus, and Quadriceps glowing bright red-orange.",
+      "equipment": "Olympic barbell with bumper plates on lifting platform."
+    },
+    "prompt": "Generate a 2-stage workout exercise illustration diagram:\n- Title: 'BARBELL POWER CLEAN'\n- Pose 1 (Left - Starting Position): Muscular male in explosive second pull position extending hips, knees, and ankles with barbell accelerating past mid-thigh.\n- Pose 2 (Right - Finish Position): Snapping elbows fast under bar to catch barbell across front deltoids in solid quarter-squat receiving position.\n- Muscle Highlight: Trapezius, Hamstrings, Gluteus Maximus, and Quadriceps glowing bright red-orange.\n- Equipment: Olympic barbell with bumper plates on lifting platform.\n- Style: 3D anatomical fitness model, realistic physique, clean white minimalist background, scientific fitness guide, side-by-side comparison diagram."
+  },
+  {
+    "id": "thruster",
+    "name": "쓰러스터 (바벨/덤벨)",
+    "category": "전신",
+    "englishName": "Barbell / Dumbbell Squat Thruster",
+    "equipCategory": "barbell",
+    "equipmentType": "바벨 / 덤벨",
+    "targetMuscles": "대퇴사두근, 둔근, 삼각근, 극한의 심폐 지구력",
+    "tips": "프론트 스쿼트로 앉았다가 일어나는 탄력을 그대로 이어 머리 위로 바벨/덤벨을 밀어 올립니다.",
+    "ouwanRank": null,
+    "ouwanCount": null,
+    "spec": {
+      "title": "SQUAT THRUSTER (BARBELL / DUMBBELL)",
+      "pose1": "Muscular male at bottom of deep front squat holding barbell across clavicles in front rack position, chest proud.",
+      "pose2": "Exploding upward out of squat in one continuous motion, launching barbell directly into locked-out overhead press.",
+      "muscles": "Quadriceps, Gluteus Maximus, Anterior Deltoids, and Triceps glowing bright red-orange.",
+      "equipment": "Olympic barbell with bumper plates."
+    },
+    "prompt": "Generate a 2-stage workout exercise illustration diagram:\n- Title: 'SQUAT THRUSTER (BARBELL / DUMBBELL)'\n- Pose 1 (Left - Starting Position): Muscular male at bottom of deep front squat holding barbell across clavicles in front rack position, chest proud.\n- Pose 2 (Right - Finish Position): Exploding upward out of squat in one continuous motion, launching barbell directly into locked-out overhead press.\n- Muscle Highlight: Quadriceps, Gluteus Maximus, Anterior Deltoids, and Triceps glowing bright red-orange.\n- Equipment: Olympic barbell with bumper plates.\n- Style: 3D anatomical fitness model, realistic physique, clean white minimalist background, scientific fitness guide, side-by-side comparison diagram."
+  },
+  {
+    "id": "farmers-walk",
+    "name": "파머스 워크",
+    "category": "전신",
+    "englishName": "Farmers Walk / Heavy Carry",
+    "equipCategory": "dumbbell",
+    "equipmentType": "고중량 덤벨 / 케틀벨 / 트랩바",
+    "targetMuscles": "전완근(악력), 승모근, 코어 전체 안정성",
+    "tips": "가슴을 펴고 어깨가 처지지 않게 고정한 채 무거운 덤벨을 들고 흔들림 없이 걸어갑니다.",
+    "ouwanRank": null,
+    "ouwanCount": null,
+    "spec": {
+      "title": "FARMER'S WALK (HEAVY CARRY)",
+      "pose1": "Muscular male standing tall holding heavy dumbbells or farmer's carry handles at sides, chest proud, shoulders packed back.",
+      "pose2": "Taking controlled, powerful forward strides with heavy load, maintaining rock-solid upright posture and unyielding grip.",
+      "muscles": "Forearms (Grip), Trapezius, Core/Obliques, and Calves glowing bright red-orange.",
+      "equipment": "Pair of heavy farmer's walk handles or heavy dumbbells."
+    },
+    "prompt": "Generate a 2-stage workout exercise illustration diagram:\n- Title: 'FARMER'S WALK (HEAVY CARRY)'\n- Pose 1 (Left - Starting Position): Muscular male standing tall holding heavy dumbbells or farmer's carry handles at sides, chest proud, shoulders packed back.\n- Pose 2 (Right - Finish Position): Taking controlled, powerful forward strides with heavy load, maintaining rock-solid upright posture and unyielding grip.\n- Muscle Highlight: Forearms (Grip), Trapezius, Core/Obliques, and Calves glowing bright red-orange.\n- Equipment: Pair of heavy farmer's walk handles or heavy dumbbells.\n- Style: 3D anatomical fitness model, realistic physique, clean white minimalist background, scientific fitness guide, side-by-side comparison diagram."
+  },
+  {
+    "id": "battle-rope",
+    "name": "배틀 로프",
+    "category": "전신",
+    "englishName": "Battle Rope Waves",
+    "equipCategory": "bodyweight",
+    "equipmentType": "배틀 로프 (헤비 로프)",
+    "targetMuscles": "어깨, 코어, 전신 고강도 인터벌(HIIT)",
+    "tips": "무릎을 살짝 굽힌 기마 자세에서 코어를 단단히 잡고 양팔로 로프 파동을 끝까지 보냅니다.",
+    "ouwanRank": null,
+    "ouwanCount": null,
+    "spec": {
+      "title": "BATTLE ROPE WAVES",
+      "pose1": "Muscular male in athletic half-squat stance holding thick battle ropes in each hand, arms lowered preparing to whip.",
+      "pose2": "Vigorously whipping ropes up and down creating powerful rhythmic undulating waves traveling to anchor point, core braced.",
+      "muscles": "Shoulders (Deltoids), Biceps, Core, and Cardiovascular System glowing bright red-orange.",
+      "equipment": "Heavy thick poly-dacron battle ropes anchored to floor bracket."
+    },
+    "prompt": "Generate a 2-stage workout exercise illustration diagram:\n- Title: 'BATTLE ROPE WAVES'\n- Pose 1 (Left - Starting Position): Muscular male in athletic half-squat stance holding thick battle ropes in each hand, arms lowered preparing to whip.\n- Pose 2 (Right - Finish Position): Vigorously whipping ropes up and down creating powerful rhythmic undulating waves traveling to anchor point, core braced.\n- Muscle Highlight: Shoulders (Deltoids), Biceps, Core, and Cardiovascular System glowing bright red-orange.\n- Equipment: Heavy thick poly-dacron battle ropes anchored to floor bracket.\n- Style: 3D anatomical fitness model, realistic physique, clean white minimalist background, scientific fitness guide, side-by-side comparison diagram."
+  },
+  {
+    "id": "curved-treadmill",
+    "name": "무동력 트레드밀 (커브드 러닝)",
+    "category": "유산소",
+    "englishName": "Non-Motorized Curved Treadmill",
+    "equipCategory": "cardio",
+    "equipmentType": "무동력 곡선형 트레드밀",
+    "targetMuscles": "햄스트링, 둔근 추진력, 고강도 스프린트",
+    "tips": "일반 런닝머신 대비 칼로리 소모가 30% 높으며 앞꿈치로 트랙을 긁어내듯 달립니다.",
+    "ouwanRank": null,
+    "ouwanCount": null,
+    "spec": {
+      "title": "CURVED MANUAL TREADMILL (NON-MOTORIZED)",
+      "pose1": "Muscular male runner striking front curved incline of manual slat treadmill with ball of foot, accelerating cadence.",
+      "pose2": "High-speed sprinting gait driving curved belt backward with hamstrings and glutes under pure self-powered human propulsion.",
+      "muscles": "Hamstrings, Gluteus Maximus, Quadriceps, and Calves glowing bright red-orange.",
+      "equipment": "Non-motorized curved manual treadmill (Woodway / AssaultRunner style)."
+    },
+    "prompt": "Generate a 2-stage workout exercise illustration diagram:\n- Title: 'CURVED MANUAL TREADMILL (NON-MOTORIZED)'\n- Pose 1 (Left - Starting Position): Muscular male runner striking front curved incline of manual slat treadmill with ball of foot, accelerating cadence.\n- Pose 2 (Right - Finish Position): High-speed sprinting gait driving curved belt backward with hamstrings and glutes under pure self-powered human propulsion.\n- Muscle Highlight: Hamstrings, Gluteus Maximus, Quadriceps, and Calves glowing bright red-orange.\n- Equipment: Non-motorized curved manual treadmill (Woodway / AssaultRunner style).\n- Style: 3D anatomical fitness model, realistic physique, clean white minimalist background, scientific fitness guide, side-by-side comparison diagram."
+  },
+  {
+    "id": "recumbent-bike",
+    "name": "리컴번트 바이크 (좌식 사이클)",
+    "category": "유산소",
+    "englishName": "Recumbent Seated Bike",
+    "equipCategory": "cardio",
+    "equipmentType": "등받이 좌식 사이클 머신",
+    "targetMuscles": "허리/무릎 관절 무부하 하체 유산소",
+    "tips": "넓은 등받이에 허리를 편안히 기대고 무릎과 척추 부담 없이 장시간 유산소를 수행합니다.",
+    "ouwanRank": null,
+    "ouwanCount": null,
+    "spec": {
+      "title": "SEATED RECUMBENT BIKE",
+      "pose1": "Muscular male seated in bucket seat with backrest, gripping side handlebars, one leg flexed at pedal ready to push.",
+      "pose2": "Driving alternate leg forward into full pedal stroke against magnetic flywheel resistance with steady cardio cadence.",
+      "muscles": "Quadriceps, Hamstrings, and Gluteus Maximus glowing bright red-orange.",
+      "equipment": "Commercial recumbent exercise bike with digital console."
+    },
+    "prompt": "Generate a 2-stage workout exercise illustration diagram:\n- Title: 'SEATED RECUMBENT BIKE'\n- Pose 1 (Left - Starting Position): Muscular male seated in bucket seat with backrest, gripping side handlebars, one leg flexed at pedal ready to push.\n- Pose 2 (Right - Finish Position): Driving alternate leg forward into full pedal stroke against magnetic flywheel resistance with steady cardio cadence.\n- Muscle Highlight: Quadriceps, Hamstrings, and Gluteus Maximus glowing bright red-orange.\n- Equipment: Commercial recumbent exercise bike with digital console.\n- Style: 3D anatomical fitness model, realistic physique, clean white minimalist background, scientific fitness guide, side-by-side comparison diagram."
+  },
+  {
+    "id": "stairmaster",
+    "name": "천국의 계단 (스텝밀)",
+    "category": "유산소",
+    "englishName": "StairMaster / StepMill",
+    "equipCategory": "cardio",
+    "equipmentType": "스텝밀 계단 머신",
+    "targetMuscles": "둔근, 햄스트링, 종아리, 심폐 강화",
+    "tips": "손잡이에 상체 체중을 기대지 말고 발바닥 전체와 뒤꿈치로 계단을 밀어 올리며 힙을 자극하세요.",
+    "ouwanRank": 14,
+    "ouwanCount": 6,
+    "spec": {
+      "title": "STAIRMASTER / REVOLVING STAIRMILL",
+      "pose1": "Muscular athletic male stepping up onto revolving staircase, driving through whole foot and heel with tall upright posture, light fingertip touch on rails.",
+      "pose2": "Dynamic continuous climbing stride driving through glutes and calves with rhythmic hip extension, chest lifted, steady cardio power.",
+      "muscles": "Gluteus Maximus, Quadriceps, Hamstrings, and Calves glowing bright red-orange.",
+      "equipment": "Commercial motorized revolving stairmill machine (StairMaster) with digital console."
+    },
+    "prompt": "Generate a 2-stage workout exercise illustration diagram:\n- Title: 'STAIRMASTER / REVOLVING STAIRMILL'\n- Pose 1 (Left - Starting Position): Muscular athletic male stepping up onto revolving staircase, driving through whole foot and heel with tall upright posture, light fingertip touch on rails.\n- Pose 2 (Right - Finish Position): Dynamic continuous climbing stride driving through glutes and calves with rhythmic hip extension, chest lifted, steady cardio power.\n- Muscle Highlight: Gluteus Maximus, Quadriceps, Hamstrings, and Calves glowing bright red-orange.\n- Equipment: Commercial motorized revolving stairmill machine (StairMaster) with digital console.\n- Style: 3D anatomical fitness model, realistic physique, clean white minimalist background, scientific fitness guide, side-by-side comparison diagram."
+  },
+  {
+    "id": "vertical-climber",
+    "name": "버티컬 클라이머",
+    "category": "유산소",
+    "englishName": "Vertical Climber / VersaClimber",
+    "equipCategory": "cardio",
+    "equipmentType": "수직 클라이밍 머신",
+    "targetMuscles": "전신 고강도 칼로리 연소, 코어, 하체",
+    "tips": "암벽 등반하듯 팔과 다리를 교차로 뻗으며 짧은 시간 안에 최대 심박수에 도달합니다.",
+    "ouwanRank": null,
+    "ouwanCount": null,
+    "spec": {
+      "title": "VERTICAL CLIMBER (VERSACLIMBER)",
+      "pose1": "Muscular male standing on vertical climber pedals holding moving handles in cross-crawl start (right hand high, left foot low).",
+      "pose2": "Driving right arm down while driving left knee high in powerful vertical total-body climbing stroke with upright core.",
+      "muscles": "Latissimus Dorsi, Deltoids, Core, Quadriceps, and Calves glowing bright red-orange.",
+      "equipment": "Commercial 75-degree angled vertical climbing machine (VersaClimber)."
+    },
+    "prompt": "Generate a 2-stage workout exercise illustration diagram:\n- Title: 'VERTICAL CLIMBER (VERSACLIMBER)'\n- Pose 1 (Left - Starting Position): Muscular male standing on vertical climber pedals holding moving handles in cross-crawl start (right hand high, left foot low).\n- Pose 2 (Right - Finish Position): Driving right arm down while driving left knee high in powerful vertical total-body climbing stroke with upright core.\n- Muscle Highlight: Latissimus Dorsi, Deltoids, Core, Quadriceps, and Calves glowing bright red-orange.\n- Equipment: Commercial 75-degree angled vertical climbing machine (VersaClimber).\n- Style: 3D anatomical fitness model, realistic physique, clean white minimalist background, scientific fitness guide, side-by-side comparison diagram."
+  },
+  {
+    "id": "arc-trainer",
+    "name": "아크 트레이너",
+    "category": "유산소",
+    "englishName": "Cybex Arc Trainer",
+    "equipCategory": "cardio",
+    "equipmentType": "아크 트레이너 머신",
+    "targetMuscles": "관절 무부하 힙업 & 폭발적 칼로리 연소",
+    "tips": "발을 아치 형태로 굴려 무릎 통증 없이 엉덩이와 허벅지를 집중적으로 태웁니다.",
+    "ouwanRank": null,
+    "ouwanCount": null,
+    "spec": {
+      "title": "CYBEX ARC TRAINER",
+      "pose1": "Muscular male standing on curved arc footplates holding dual action handles, footplate gliding at top of gentle arc.",
+      "pose2": "Driving opposite footplate backward along reverse arc glide path while pushing alternate handle forward, zero knee impact.",
+      "muscles": "Quadriceps, Gluteus Maximus, and Hamstrings glowing bright red-orange.",
+      "equipment": "Commercial Cybex Arc Trainer with digital console."
+    },
+    "prompt": "Generate a 2-stage workout exercise illustration diagram:\n- Title: 'CYBEX ARC TRAINER'\n- Pose 1 (Left - Starting Position): Muscular male standing on curved arc footplates holding dual action handles, footplate gliding at top of gentle arc.\n- Pose 2 (Right - Finish Position): Driving opposite footplate backward along reverse arc glide path while pushing alternate handle forward, zero knee impact.\n- Muscle Highlight: Quadriceps, Gluteus Maximus, and Hamstrings glowing bright red-orange.\n- Equipment: Commercial Cybex Arc Trainer with digital console.\n- Style: 3D anatomical fitness model, realistic physique, clean white minimalist background, scientific fitness guide, side-by-side comparison diagram."
+  },
+  {
+    "id": "skierg",
+    "name": "스키에르그",
+    "category": "유산소",
+    "englishName": "Concept2 SkiErg",
+    "equipCategory": "cardio",
+    "equipmentType": "스키에르그 에어 머신",
+    "targetMuscles": "광배근, 삼두근, 복근 코어, 전신 인터벌",
+    "tips": "크로스컨트리 스키를 타듯 복근과 광배근을 접으며 핸들을 아래로 강하게 찍어 누릅니다.",
+    "ouwanRank": null,
+    "ouwanCount": null,
+    "spec": {
+      "title": "CONCEPT2 SKIERG (SKI ERGOMETER)",
+      "pose1": "Muscular male standing tall facing SkiErg with arms reaching high overhead gripping drive handles, heels slightly elevated.",
+      "pose2": "Driving handles powerfully downward and past hips while hinging hips and flexing core into deep ski-pole finish posture.",
+      "muscles": "Latissimus Dorsi, Triceps, Rectus Abdominis, and Hip Flexors glowing bright red-orange.",
+      "equipment": "Concept2 SkiErg wall-mounted machine with flywheel."
+    },
+    "prompt": "Generate a 2-stage workout exercise illustration diagram:\n- Title: 'CONCEPT2 SKIERG (SKI ERGOMETER)'\n- Pose 1 (Left - Starting Position): Muscular male standing tall facing SkiErg with arms reaching high overhead gripping drive handles, heels slightly elevated.\n- Pose 2 (Right - Finish Position): Driving handles powerfully downward and past hips while hinging hips and flexing core into deep ski-pole finish posture.\n- Muscle Highlight: Latissimus Dorsi, Triceps, Rectus Abdominis, and Hip Flexors glowing bright red-orange.\n- Equipment: Concept2 SkiErg wall-mounted machine with flywheel.\n- Style: 3D anatomical fitness model, realistic physique, clean white minimalist background, scientific fitness guide, side-by-side comparison diagram."
+  },
+  {
+    "id": "airbike",
+    "name": "에어바이크",
+    "category": "유산소",
+    "englishName": "Assault / Rogue AirBike",
+    "equipCategory": "cardio",
+    "equipmentType": "에어바이크 팬 머신",
+    "targetMuscles": "상하체 복합 극한의 타바타/인터벌 유산소",
+    "tips": "페달을 강하게 밟을수록 팬 공기 저항이 기하급수적으로 커지는 하이록스/크로스핏 필수 머신입니다.",
+    "ouwanRank": null,
+    "ouwanCount": null,
+    "spec": {
+      "title": "ASSAULT AIRBIKE / FAN BIKE",
+      "pose1": "Muscular male seated on AirBike pushing right handlebar forward and driving right pedal down against air fan resistance.",
+      "pose2": "Explosive reciprocal push-pull of dual handles while furiously pedaling large front steel fan wheel in high-intensity sprint.",
+      "muscles": "Full Body (Chest, Upper Back, Shoulders, Quadriceps, Hamstrings) glowing bright red-orange.",
+      "equipment": "Assault AirBike / Rogue Echo Bike with large front fan wheel."
+    },
+    "prompt": "Generate a 2-stage workout exercise illustration diagram:\n- Title: 'ASSAULT AIRBIKE / FAN BIKE'\n- Pose 1 (Left - Starting Position): Muscular male seated on AirBike pushing right handlebar forward and driving right pedal down against air fan resistance.\n- Pose 2 (Right - Finish Position): Explosive reciprocal push-pull of dual handles while furiously pedaling large front steel fan wheel in high-intensity sprint.\n- Muscle Highlight: Full Body (Chest, Upper Back, Shoulders, Quadriceps, Hamstrings) glowing bright red-orange.\n- Equipment: Assault AirBike / Rogue Echo Bike with large front fan wheel.\n- Style: 3D anatomical fitness model, realistic physique, clean white minimalist background, scientific fitness guide, side-by-side comparison diagram."
+  },
+  {
+    "id": "elliptical",
+    "name": "일립티컬",
+    "category": "유산소",
+    "englishName": "Elliptical Cross Trainer",
+    "equipCategory": "cardio",
+    "equipmentType": "일립티컬 크로스 트레이너",
+    "targetMuscles": "무릎 관절 무부하 전신 유산소",
+    "tips": "뒤꿈치를 페달에 붙이고 상하체 핸들을 함께 밀고 당기며 리드미컬하게 수행합니다.",
+    "ouwanRank": null,
+    "ouwanCount": null,
+    "spec": {
+      "title": "ELLIPTICAL CROSS TRAINER",
+      "pose1": "Muscular male standing on elliptical footplates holding moving hand levers, gliding into forward stride.",
+      "pose2": "Smooth continuous elliptical pedal stroke with alternate arm pushing handle forward, fluid low-impact cardio gait.",
+      "muscles": "Gluteus Maximus, Quadriceps, Hamstrings, and Upper Body glowing bright red-orange.",
+      "equipment": "Commercial elliptical cross trainer with console."
+    },
+    "prompt": "Generate a 2-stage workout exercise illustration diagram:\n- Title: 'ELLIPTICAL CROSS TRAINER'\n- Pose 1 (Left - Starting Position): Muscular male standing on elliptical footplates holding moving hand levers, gliding into forward stride.\n- Pose 2 (Right - Finish Position): Smooth continuous elliptical pedal stroke with alternate arm pushing handle forward, fluid low-impact cardio gait.\n- Muscle Highlight: Gluteus Maximus, Quadriceps, Hamstrings, and Upper Body glowing bright red-orange.\n- Equipment: Commercial elliptical cross trainer with console.\n- Style: 3D anatomical fitness model, realistic physique, clean white minimalist background, scientific fitness guide, side-by-side comparison diagram."
+  },
+  {
+    "id": "rowing-machine",
+    "name": "로잉머신",
+    "category": "유산소",
+    "englishName": "Concept2 Rowing Machine",
+    "equipCategory": "cardio",
+    "equipmentType": "로잉 머신 (조정 에르고미터)",
+    "targetMuscles": "전신 유산소 (하체 60%, 등/코어 40%)",
+    "tips": "다리로 먼저 밀고, 상체를 살짝 뒤로 젖힌 후, 마지막에 명치로 핸들을 당기는 순서를 지키세요.",
+    "ouwanRank": null,
+    "ouwanCount": null,
+    "spec": {
+      "title": "CONCEPT2 ROWING ERGOMETER",
+      "pose1": "Muscular male at 'Catch' position: shins vertical, knees flexed, arms extended forward holding handle, torso leaned forward 10 degrees.",
+      "pose2": "Muscular male at 'Finish' position: legs fully extended, hips hinged back 100 degrees, handle pulled smoothly into lower ribs.",
+      "muscles": "Latissimus Dorsi, Rhomboids, Quadriceps, Gluteus Maximus, and Biceps glowing bright red-orange.",
+      "equipment": "Concept2 indoor rower ergometer with PM5 monitor."
+    },
+    "prompt": "Generate a 2-stage workout exercise illustration diagram:\n- Title: 'CONCEPT2 ROWING ERGOMETER'\n- Pose 1 (Left - Starting Position): Muscular male at 'Catch' position: shins vertical, knees flexed, arms extended forward holding handle, torso leaned forward 10 degrees.\n- Pose 2 (Right - Finish Position): Muscular male at 'Finish' position: legs fully extended, hips hinged back 100 degrees, handle pulled smoothly into lower ribs.\n- Muscle Highlight: Latissimus Dorsi, Rhomboids, Quadriceps, Gluteus Maximus, and Biceps glowing bright red-orange.\n- Equipment: Concept2 indoor rower ergometer with PM5 monitor.\n- Style: 3D anatomical fitness model, realistic physique, clean white minimalist background, scientific fitness guide, side-by-side comparison diagram."
+  },
+  {
+    "id": "box-jump",
+    "name": "박스 점프 (플라이오 박스)",
+    "category": "유산소",
+    "englishName": "Plyometric Box Jump",
+    "equipCategory": "bodyweight",
+    "equipmentType": "플라이오메트릭 점프 박스",
+    "targetMuscles": "하체 순발력, 둔근, 심폐 민첩성",
+    "tips": "팔 스윙과 고관절 반동을 이용해 박스 중앙에 사뿐히 착지한 뒤 무릎을 펴고 일어섭니다.",
+    "ouwanRank": null,
+    "ouwanCount": null,
+    "spec": {
+      "title": "PLYOMETRIC BOX JUMP",
+      "pose1": "Muscular male standing before sturdy wooden plyo box in athletic quarter-squat loading posture, arms swung back ready to explode.",
+      "pose2": "Landing softly on top of plyometric box with both feet flat in athletic quarter-squat, chest proud, standing tall to full extension.",
+      "muscles": "Quadriceps, Gluteus Maximus, and Gastrocnemius (Calves) glowing bright red-orange.",
+      "equipment": "Heavy-duty 24-inch wooden plyometric jump box."
+    },
+    "prompt": "Generate a 2-stage workout exercise illustration diagram:\n- Title: 'PLYOMETRIC BOX JUMP'\n- Pose 1 (Left - Starting Position): Muscular male standing before sturdy wooden plyo box in athletic quarter-squat loading posture, arms swung back ready to explode.\n- Pose 2 (Right - Finish Position): Landing softly on top of plyometric box with both feet flat in athletic quarter-squat, chest proud, standing tall to full extension.\n- Muscle Highlight: Quadriceps, Gluteus Maximus, and Gastrocnemius (Calves) glowing bright red-orange.\n- Equipment: Heavy-duty 24-inch wooden plyometric jump box.\n- Style: 3D anatomical fitness model, realistic physique, clean white minimalist background, scientific fitness guide, side-by-side comparison diagram."
+  }
+]
