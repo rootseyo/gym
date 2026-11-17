@@ -5144,6 +5144,7 @@ const EQUIPMENT_CATALOG = [
     "name": "천국의 계단 (스텝밀)",
     "category": "유산소",
     "englishName": "StairMaster / StepMill",
+    "imageUrl": "assets/exercises/stairmaster.webp",
     "iconType": "stairmaster",
     "equipmentType": "스텝밀 계단 머신",
     "equipCategory": "cardio",
