@@ -2721,6 +2721,7 @@ const EQUIPMENT_CATALOG = [
     "name": "V-스쿼트",
     "category": "하체",
     "englishName": "V-Squat Machine",
+    "imageUrl": "assets/exercises/v-squat.webp",
     "iconType": "v-squat",
     "equipmentType": "V스쿼트 플레이트 머신",
     "equipCategory": "plate_loaded",
