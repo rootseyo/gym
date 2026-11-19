@@ -3582,6 +3582,7 @@ const EQUIPMENT_CATALOG = [
     "name": "케이블 사이드 레터럴 레이즈",
     "category": "어깨",
     "englishName": "Cable Side Lateral Raise",
+    "imageUrl": "assets/exercises/cable-side-lateral-raise.webp",
     "iconType": "cable-lateral-raise",
     "equipmentType": "케이블 싱글 핸들",
     "equipCategory": "cable",
