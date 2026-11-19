@@ -4619,6 +4619,7 @@ const EQUIPMENT_CATALOG = [
     "name": "행잉 레그레이즈",
     "category": "복근/코어",
     "englishName": "Hanging / Captains Chair Leg Raise",
+    "imageUrl": "assets/exercises/hanging-leg-raise.webp",
     "iconType": "captains-chair",
     "equipmentType": "풀업 바 / 캡틴스 체어",
     "equipCategory": "bodyweight",
