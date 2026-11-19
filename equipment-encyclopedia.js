@@ -4765,6 +4765,7 @@ const EQUIPMENT_CATALOG = [
     "name": "복근 롤아웃 (애브 슬라이더)",
     "category": "복근/코어",
     "englishName": "Ab Wheel Rollout",
+    "imageUrl": "assets/exercises/ab-rollout.webp",
     "iconType": "ab-roller",
     "equipmentType": "애브 휠 (복근 롤러)",
     "equipCategory": "bodyweight",
