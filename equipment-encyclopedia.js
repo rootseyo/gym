@@ -4584,6 +4584,7 @@ const EQUIPMENT_CATALOG = [
     "name": "디클라인 싯업",
     "category": "복근/코어",
     "englishName": "Decline Bench Sit-Up",
+    "imageUrl": "assets/exercises/decline-sit-up.webp",
     "iconType": "decline-bench",
     "equipmentType": "디클라인 복근 벤치",
     "equipCategory": "bodyweight",
