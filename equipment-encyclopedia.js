@@ -3869,6 +3869,7 @@ const EQUIPMENT_CATALOG = [
     "name": "덤벨 슈러그",
     "category": "어깨",
     "englishName": "Standing Dumbbell Shrug",
+    "imageUrl": "assets/exercises/dumbbell-shrug.webp",
     "iconType": "shrug-barbell",
     "equipmentType": "덤벨",
     "equipCategory": "dumbbell",
