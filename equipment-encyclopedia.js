@@ -4537,6 +4537,7 @@ const EQUIPMENT_CATALOG = [
     "name": "사이드 플랭크",
     "category": "복근/코어",
     "englishName": "Side Oblique Plank",
+    "imageUrl": "assets/exercises/side-plank.webp",
     "iconType": "mat-core",
     "equipmentType": "피트니스 매트",
     "equipCategory": "bodyweight",
