@@ -41,6 +41,13 @@
     $('feed').replaceChildren();
     $('rankingList').replaceChildren();
     $('detailExercises').replaceChildren();
+    $('topExercisesList')?.replaceChildren();
+    if ($('topExercisesSection')) $('topExercisesSection').hidden = true;
+    if ($('settingsBtn')) $('settingsBtn').hidden = true;
+    if ($('toggleAllFeedBtn')) {
+      $('toggleAllFeedBtn').hidden = true;
+      $('toggleAllFeedBtn').setAttribute('aria-expanded', 'false');
+    }
     $('moreBtn').hidden = true;
     $('boardPanel').hidden = true;
     document.querySelectorAll('dialog[open]').forEach(d => d.close());
@@ -94,18 +101,8 @@
         return;
       }
       panel('boardPanel');
-      $('myAvatar').textContent = avatar(status.profile.nickname);
-      $('myNickname').textContent = status.profile.nickname;
-      $('myLevel').textContent = levelLabel(status.profile.fitnessLevel);
-      $('autoBadge').textContent = status.profile.autoShareEnabled ? '자동 공유 ON' : '자동 공유 OFF';
-      $('autoBadge').className = 'auto-badge ' + (status.profile.autoShareEnabled ? 'on' : 'off');
-      $('autoBadge').title = status.profile.autoShareEnabled ? '운동 완료 시 자동 공유됩니다' : '자동 공유가 꺼져 있습니다';
-
-      $('todayStatus').textContent = status.post?.status === 'PUBLIC'
-        ? '오늘 오운완 인증을 남겼어요!'
-        : status.complete
-          ? '오늘 운동 완료! 내 운동 화면에서 오운완을 공유할 수 있어요.'
-          : '내 운동을 모두 완료하면 오운완을 공유할 수 있어요.';
+      if ($('settingsBtn')) $('settingsBtn').hidden = false;
+      renderTopExercises();
 
       $('message').textContent = '';
       await loadView();
@@ -205,10 +202,100 @@
       likeButton(button, id, result.liked, result.likeCount, false);
       const cached = feedCache.find(c => c.id === id);
       if (cached) { cached.liked = result.liked; cached.likeCount = result.likeCount; }
-      const cardBtn = document.querySelector(`.workout-card[data-post-id="${id}"] .like-button`);
+      const row = document.querySelector(`.workout-card[data-post-id="${id}"]`);
+      const cardBtn = row?.querySelector('.like-button');
       if (cardBtn && cardBtn !== button) likeButton(cardBtn, id, result.liked, result.likeCount, isOwn);
+      const likeBadge = row?.querySelector('[data-like-badge]');
+      if (likeBadge) likeBadge.textContent = result.likeCount > 0 ? `❤️ ${result.likeCount}` : '';
       if (detail?.id === id) { detail.liked = result.liked; detail.likeCount = result.likeCount; }
     });
+  }
+
+  function findCatalogItem(name) {
+    if (!name || typeof window.EQUIPMENT_CATALOG === 'undefined') return null;
+    const canonicalName = (typeof window.resolveExerciseCanonical === 'function')
+      ? window.resolveExerciseCanonical(name)
+      : name;
+    return window.EQUIPMENT_CATALOG.find(e => e.name === canonicalName || e.name === name)
+      || window.EQUIPMENT_CATALOG.find(e => (e.aliases || []).includes(name))
+      || null;
+  }
+
+  function computeTopExercises(items) {
+    const counts = new Map();
+    (items || []).forEach(item => {
+      const names = Array.isArray(item.exerciseNames) ? item.exerciseNames : [];
+      names.forEach(rawName => {
+        const cleaned = String(rawName || '').trim();
+        if (!cleaned) return;
+        const canonical = (typeof window.resolveExerciseCanonical === 'function')
+          ? (window.resolveExerciseCanonical(cleaned) || cleaned)
+          : cleaned;
+        counts.set(canonical, (counts.get(canonical) || 0) + 1);
+      });
+    });
+
+    if (counts.size > 0) {
+      return Array.from(counts.entries())
+        .sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0], 'ko'))
+        .slice(0, 5)
+        .map(([name, count], idx) => ({ rank: idx + 1, name, count }));
+    }
+
+    if (Array.isArray(window.OUWAN_POPULAR_EXERCISES) && window.OUWAN_POPULAR_EXERCISES.length > 0) {
+      return window.OUWAN_POPULAR_EXERCISES.slice(0, 5).map((entry, idx) => ({
+        rank: entry.rank || idx + 1,
+        name: entry.name,
+        count: entry.count
+      }));
+    }
+
+    return [];
+  }
+
+  function renderTopExercises() {
+    const section = $('topExercisesSection');
+    const list = $('topExercisesList');
+    if (!section || !list) return;
+
+    const top5 = computeTopExercises(feedCache);
+    if (!top5.length) {
+      section.hidden = true;
+      list.replaceChildren();
+      return;
+    }
+
+    list.innerHTML = top5.map(entry => {
+      const catalogItem = findCatalogItem(entry.name);
+      const category = catalogItem?.category || '';
+      const rankClass = entry.rank <= 3 ? ` rank-${entry.rank}` : '';
+      return `
+        <li class="top-exercise-row">
+          <span class="top-rank-badge${rankClass}">${entry.rank}</span>
+          ${catalogItem
+            ? `<button type="button" class="top-exercise-name-btn" data-top-ex="${escape(entry.name)}" title="${escape(entry.name)} 동작 가이드 보기">${escape(entry.name)}</button>`
+            : `<span class="top-exercise-name">${escape(entry.name)}</span>`}
+          ${category ? `<span class="top-exercise-cat">${escape(category)}</span>` : ''}
+          <strong class="top-exercise-count">${entry.count}회</strong>
+        </li>
+      `;
+    }).join('');
+
+    list.querySelectorAll('[data-top-ex]').forEach(btn => {
+      btn.onclick = () => openExerciseDiagram(btn.dataset.topEx);
+    });
+
+    section.hidden = false;
+  }
+
+  function syncToggleAllButton() {
+    const btn = $('toggleAllFeedBtn');
+    const feedEl = $('feed');
+    if (!btn || !feedEl) return;
+    const rows = feedEl.querySelectorAll(':scope > details.workout-row');
+    btn.hidden = rows.length === 0;
+    const allOpen = rows.length > 0 && Array.prototype.every.call(rows, d => d.open);
+    btn.setAttribute('aria-expanded', String(allOpen));
   }
 
   async function loadView(append = false) {
@@ -257,24 +344,39 @@
 
     result.items.forEach(item => {
       feedCache.push(item);
-      const card = document.createElement('article');
-      card.className = 'workout-card';
+      const card = document.createElement('details');
+      card.className = 'workout-card workout-row';
       card.dataset.postId = item.id;
+      const summaryParts = [];
+      if (Array.isArray(item.categories) && item.categories.length) summaryParts.push(item.categories.join('·'));
+      summaryParts.push(`${item.exerciseCount}종목`);
+      if (Number(item.totalWeight) > 0) summaryParts.push(volume(item.totalWeight));
+      const summaryLine = summaryParts.join(' · ');
+
       card.innerHTML = `
-        <div class="card-head">
-          <strong>${avatar(item.nickname)} ${escape(item.nickname)}${item.isOwn ? ' · 나' : ''} ${levelBadge(item.fitnessLevel)}</strong>
-          <time>${escape(item.date)}</time>
-        </div>
-        <div class="tags">오운완! · ${item.categories.map(escape).join(' · ')}</div>
-        ${item.hasPhoto ? `<img class="post-photo" src="${GymAuth.photoUrl(item.id, item.photoVersion)}" alt="${escape(item.nickname)}님의 운동 사진" loading="lazy">` : ''}
-        <div class="card-summary">${item.exerciseCount}<small>종목</small> / ${item.setCount}<small>완료 세트</small></div>
-        <strong class="volume">총 중량 ${volume(item.totalWeight)}</strong>
-        <p class="exercise-names">${item.exerciseNames.map(escape).join(' · ')}</p>
-        <div class="card-actions">
-          <button class="like-button"></button>
-          <button class="detail-button">상세보기</button>
-          <button class="code-button">코드 복사</button>
-          <button class="instagram-button">인스타 공유</button>
+        <summary class="workout-row-summary">
+          <span class="row-author">${avatar(item.nickname)} ${escape(item.nickname)}${item.isOwn ? ' · 나' : ''}</span>
+          <span class="row-summary-text">${escape(summaryLine)}</span>
+          <span class="row-meta">
+            <span class="row-like-badge" data-like-badge>${item.likeCount > 0 ? `❤️ ${item.likeCount}` : ''}</span>
+            <time class="row-date">${escape(formatDateLabel(item.date))}</time>
+            <span class="row-toggle-label"><span class="label-open">펼치기</span><span class="label-close">접기</span></span>
+          </span>
+        </summary>
+        <div class="workout-row-body">
+          <div class="card-head">
+            <span class="row-body-badges">${levelBadge(item.fitnessLevel)} <span class="tags">오운완! · ${item.categories.map(escape).join(' · ')}</span></span>
+            <time>${escape(item.date)}</time>
+          </div>
+          ${item.hasPhoto ? `<img class="post-photo" src="${GymAuth.photoUrl(item.id, item.photoVersion)}" alt="${escape(item.nickname)}님의 운동 사진" loading="lazy">` : ''}
+          <div class="card-summary">${item.exerciseCount}<small>종목</small> / ${item.setCount}<small>완료 세트</small> · <strong class="volume">총 중량 ${volume(item.totalWeight)}</strong></div>
+          <p class="exercise-names">${item.exerciseNames.map(escape).join(' · ')}</p>
+          <div class="card-actions">
+            <button class="like-button"></button>
+            <button class="detail-button">상세보기</button>
+            <button class="code-button">코드 복사</button>
+            <button class="instagram-button">인스타 공유</button>
+          </div>
         </div>
       `;
       likeButton(card.querySelector('.like-button'), item.id, item.liked, item.likeCount, item.isOwn);
@@ -287,6 +389,8 @@
     cursor = result.nextCursor;
     $('moreBtn').hidden = !cursor;
     $('emptyFeed').hidden = $('feed').childElementCount > 0;
+    syncToggleAllButton();
+    renderTopExercises();
   }
 
   function exerciseVolume(ex) {
@@ -802,6 +906,18 @@
   $('rankingMore').onclick = e => busy(e.currentTarget, () => loadView(true));
   $('moreBtn').onclick = e => busy(e.currentTarget, () => loadView(true));
   $('refreshBtn').onclick = e => busy(e.currentTarget, boot);
+
+  if ($('toggleAllFeedBtn')) {
+    $('toggleAllFeedBtn').onclick = () => {
+      const btn = $('toggleAllFeedBtn');
+      const expand = btn.getAttribute('aria-expanded') !== 'true';
+      $('feed').querySelectorAll(':scope > details.workout-row').forEach(d => { d.open = expand; });
+      syncToggleAllButton();
+    };
+  }
+  $('feed').addEventListener('toggle', event => {
+    if (event.target.matches?.('details.workout-row')) syncToggleAllButton();
+  }, { capture: true });
 
   $('settingsBtn').onclick = () => {
     $('settingsNickname').value = status.profile.nickname;

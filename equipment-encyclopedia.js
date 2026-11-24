@@ -5588,14 +5588,25 @@ const OUWAN_POPULAR_EXERCISES = [
   { name: "숄더프레스 머신", count: 1, rank: 30 }
 ];
 
+function applyOuwanMetricsToCatalog() {
+  OUWAN_POPULAR_EXERCISES.forEach(ou => {
+    const item = EQUIPMENT_CATALOG.find(e => e.name === ou.name);
+    if (item) {
+      item.ouwanRank = ou.rank;
+      item.ouwanCount = ou.count;
+    }
+  });
+}
+
 // Attach Ouwan metrics to EQUIPMENT_CATALOG
-OUWAN_POPULAR_EXERCISES.forEach(ou => {
-  const item = EQUIPMENT_CATALOG.find(e => e.name === ou.name);
-  if (item) {
-    item.ouwanRank = ou.rank;
-    item.ouwanCount = ou.count;
-  }
-});
+applyOuwanMetricsToCatalog();
+
+function applyRemoteEncyclopediaCatalog(remoteItems) {
+  if (!Array.isArray(remoteItems) || remoteItems.length === 0) return false;
+  EQUIPMENT_CATALOG.splice(0, EQUIPMENT_CATALOG.length, ...remoteItems);
+  applyOuwanMetricsToCatalog();
+  return true;
+}
 
 // Helper to resolve any slang, alias, or raw user name into canonical catalog name
 function resolveExerciseCanonical(name) {
@@ -5632,3 +5643,4 @@ window.OUWAN_POPULAR_EXERCISES = OUWAN_POPULAR_EXERCISES;
 window.resolveExerciseCanonical = resolveExerciseCanonical;
 window.getExerciseSvgIcon = getExerciseSvgIcon;
 window.getExerciseAlternatives = getExerciseAlternatives;
+window.applyRemoteEncyclopediaCatalog = applyRemoteEncyclopediaCatalog;

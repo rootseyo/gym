@@ -172,12 +172,18 @@ const EXERCISE_DATABASE = [
   { name: '로잉머신', category: '유산소', type: 'cardio', weight: 2.0, reps: 15, restSeconds: 30 }
 ];
 
-// Merge expanded 168-item EQUIPMENT_CATALOG into EXERCISE_DATABASE for unified lookup
-if (typeof EQUIPMENT_CATALOG !== 'undefined' && Array.isArray(EQUIPMENT_CATALOG)) {
+// Merge expanded EQUIPMENT_CATALOG into EXERCISE_DATABASE for unified lookup
+function syncExerciseDatabaseFromCatalog() {
+  if (typeof EQUIPMENT_CATALOG === 'undefined' || !Array.isArray(EQUIPMENT_CATALOG)) return;
   EQUIPMENT_CATALOG.forEach(item => {
     const existing = EXERCISE_DATABASE.find(db => db.name.toLowerCase() === item.name.toLowerCase());
     if (existing) {
       existing.id = item.id;
+      existing.category = item.category;
+      existing.type = item.category === '유산소' ? 'cardio' : 'strength';
+      existing.weight = item.defaultWeight;
+      existing.reps = item.defaultReps;
+      existing.restSeconds = item.restSeconds;
       existing.aliases = item.aliases || [];
       existing.equipCategory = item.equipCategory;
       existing.alternatives = item.alternatives || [];
@@ -196,6 +202,49 @@ if (typeof EQUIPMENT_CATALOG !== 'undefined' && Array.isArray(EQUIPMENT_CATALOG)
       });
     }
   });
+}
+
+const ENCYCLOPEDIA_CACHE_KEY = 'fittracker_encyclopedia_cache_v1';
+
+function applyEncyclopediaCatalogItems(items) {
+  if (typeof window.applyRemoteEncyclopediaCatalog === 'function' && window.applyRemoteEncyclopediaCatalog(items)) {
+    syncExerciseDatabaseFromCatalog();
+    const modal = document.getElementById('addExerciseModal');
+    const encPanel = document.getElementById('encyclopediaPanel');
+    if (modal && !modal.classList.contains('hidden') && encPanel && !encPanel.classList.contains('hidden')) {
+      renderEquipmentEncyclopedia();
+    }
+  }
+}
+
+async function loadRemoteEncyclopediaCatalog() {
+  try {
+    const cachedRaw = localStorage.getItem(ENCYCLOPEDIA_CACHE_KEY);
+    if (cachedRaw) {
+      const cached = JSON.parse(cachedRaw);
+      if (cached && Array.isArray(cached.items) && cached.items.length > 0) {
+        applyEncyclopediaCatalogItems(cached.items);
+      }
+    }
+  } catch (_) {}
+
+  if (typeof fetch !== 'function') return;
+  try {
+    const res = await fetch('https://admin.brightnetworks.kr/api/gym/encyclopedia', { cache: 'no-store' });
+    if (!res.ok) return;
+    const data = await res.json();
+    if (data && Array.isArray(data.items) && data.items.length > 0) {
+      applyEncyclopediaCatalogItems(data.items);
+      try {
+        localStorage.setItem(ENCYCLOPEDIA_CACHE_KEY, JSON.stringify({ items: data.items, fetchedAt: Date.now() }));
+      } catch (_) {}
+    }
+  } catch (_) {}
+}
+
+syncExerciseDatabaseFromCatalog();
+if (typeof window !== 'undefined' && typeof document !== 'undefined') {
+  loadRemoteEncyclopediaCatalog();
 }
 
 function getDefaultRestForExercise(name, category) {

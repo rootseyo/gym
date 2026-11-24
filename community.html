@@ -27,13 +27,15 @@
   <header>
     <a class="back" href="/">← 내 운동</a>
     <span class="brand">FitTracker</span>
-    <button id="refreshBtn">새로고침</button>
+    <div class="header-actions">
+      <button id="settingsBtn" class="settings-btn" hidden>내 설정</button>
+      <button id="refreshBtn">새로고침</button>
+    </div>
   </header>
 
   <section class="hero">
     <p class="eyebrow">ONE MORE DAY. ONE MORE WIN.</p>
     <h1>오늘도, 오운완!</h1>
-    <p>오늘의 노력을 남기고, 서로의 꾸준함을 응원해요.</p>
   </section>
 
   <p id="message" role="status" aria-live="polite"></p>
@@ -62,30 +64,32 @@
   </section>
 
   <section id="boardPanel" hidden>
-    <div class="sharing-bar">
-      <div class="profile-row">
-        <span id="myAvatar" class="profile-avatar"></span>
-        <strong id="myNickname" class="profile-nickname"></strong>
-        <span id="myLevel" class="profile-level"></span>
-        <span id="autoBadge" class="auto-badge"></span>
+    <section id="topExercisesSection" class="top-exercises-card" aria-labelledby="topExercisesTitle" hidden>
+      <div class="top-exercises-head">
+        <h2 id="topExercisesTitle">🔥 오운완 운동 TOP 5</h2>
+        <span id="topExercisesMeta" class="top-exercises-meta">많이 운동한 종목</span>
       </div>
-      <button id="settingsBtn" class="settings-btn">내 설정</button>
-    </div>
-
-    <p id="todayStatus" class="today-status"></p>
+      <ol id="topExercisesList" class="top-exercises-list"></ol>
+    </section>
 
     <nav class="community-tabs" aria-label="커뮤니티">
-      <button data-tab="feed" aria-pressed="true">오운완 피드</button>
+      <button data-tab="feed" aria-pressed="true">오운완 게시판</button>
       <button data-tab="days" aria-pressed="false">🏆 오운왕</button>
       <button data-tab="likes" aria-pressed="false"><span class="tab-heart">❤️</span> 좋아요왕</button>
     </nav>
 
     <div id="feedPanel">
       <div class="list-heading">
-        <h2>오늘의 노력, 함께 응원해요</h2>
-        <span>최근 운동순 · 공유한 기록만 공개</span>
+        <h2>오운완 게시판</h2>
+        <div class="list-heading-actions">
+          <span class="list-sub">최근 운동순</span>
+          <button id="toggleAllFeedBtn" type="button" class="toggle-all-btn" aria-expanded="false" hidden>
+            <span class="expand-label">전체 펼치기</span>
+            <span class="collapse-label">전체 접기</span>
+          </button>
+        </div>
       </div>
-      <div id="feed" class="feed"></div>
+      <div id="feed" class="feed" aria-label="오운완 게시판 목록"></div>
       <p id="emptyFeed" class="empty" hidden>아직 오운완이 없어요. 첫 인증을 남겨보세요!</p>
       <button id="moreBtn" class="more" hidden>더 보기</button>
     </div>

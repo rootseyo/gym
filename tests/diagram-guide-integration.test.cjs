@@ -64,3 +64,11 @@ test('community.html and community.js integrate exercise diagram modal and encyc
   assert.ok(commJs.includes('ouwan-enc-guide-btn'), 'community.js must render guide button in exercise rows');
   assert.ok(commJs.includes('openExerciseDiagram'), 'community.js must define openExerciseDiagram');
 });
+
+test('equipment-encyclopedia.js and app.js support remote encyclopedia catalog sync', () => {
+  const encJs = fs.readFileSync(path.join(__dirname, '..', 'equipment-encyclopedia.js'), 'utf8');
+  assert.ok(encJs.includes('function applyRemoteEncyclopediaCatalog'), 'Must define applyRemoteEncyclopediaCatalog');
+  assert.ok(encJs.includes('window.applyRemoteEncyclopediaCatalog = applyRemoteEncyclopediaCatalog'), 'Must expose applyRemoteEncyclopediaCatalog');
+  assert.ok(appJs.includes('https://admin.brightnetworks.kr/api/gym/encyclopedia'), 'app.js must sync encyclopedia from admin API');
+  assert.ok(appJs.includes('function loadRemoteEncyclopediaCatalog'), 'app.js must define loadRemoteEncyclopediaCatalog');
+});

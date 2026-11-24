@@ -76,25 +76,33 @@ header {
   align-items: center;
   justify-content: space-between;
   gap: 12px;
-  padding: 16px 0;
+  padding: 12px 0;
+}
+
+.header-actions {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  flex-shrink: 0;
 }
 
 .brand { font-weight: 800; letter-spacing: -0.5px; }
-.back { text-decoration: none; }
+.back { text-decoration: none; white-space: nowrap; }
 
-.hero { padding: 24px 0 16px; }
+.hero { padding: 8px 0 10px; }
 .eyebrow {
-  font-size: 12px;
+  font-size: 11px;
   font-weight: 800;
-  letter-spacing: 2px;
+  letter-spacing: 1.8px;
   color: var(--accent);
+  margin: 0;
 }
 
 h1 {
-  font-size: clamp(28px, 5vw, 48px);
-  letter-spacing: -1.5px;
+  font-size: clamp(22px, 4vw, 32px);
+  letter-spacing: -1px;
   line-height: 1.2;
-  margin: 8px 0 12px;
+  margin: 4px 0 0;
 }
 
 h2 { font-size: 20px; letter-spacing: -0.5px; }
@@ -154,89 +162,148 @@ input[type=checkbox] {
 }
 
 /* ==========================================================================
-   1. 상단 프로필 바: 닉네임, 헬스 초보, 내설정 한 줄 레이아웃
+   1. 오운완 운동 TOP 5 (상단 한 줄씩) & 헤더 설정 버튼
    ========================================================================== */
-.sharing-bar {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 8px;
-  padding: 8px 14px;
-  background: #112922;
-  border: 1px solid #234f40;
-  border-radius: 12px;
-  flex-wrap: nowrap;
-}
-
-.profile-row {
-  display: flex;
-  align-items: center;
-  gap: 7px;
-  min-width: 0;
-  flex: 1;
-  overflow: hidden;
-  white-space: nowrap;
-}
-
-.profile-avatar {
-  font-size: 18px;
-  line-height: 1;
-  flex-shrink: 0;
-}
-
-.profile-nickname {
-  font-size: 14.5px;
-  font-weight: 750;
-  color: var(--text);
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  flex-shrink: 1;
-}
-
-.profile-level {
-  display: inline-flex;
-  align-items: center;
-  white-space: nowrap;
-  padding: 2px 7px;
-  border: 1px solid #36546d;
-  border-radius: 999px;
-  background: #172638;
-  color: #bcd8ef;
-  font-size: 11px;
-  font-weight: 700;
-  flex-shrink: 0;
-}
-
-.auto-badge {
-  font-size: 11px;
-  color: var(--muted);
-  white-space: nowrap;
-  flex-shrink: 0;
-  padding: 2px 6px;
-  border-radius: 6px;
-  background: rgba(255, 255, 255, 0.05);
-}
-
-.auto-badge.on {
-  color: #63ebce;
-  background: rgba(99, 235, 206, 0.12);
-  border: 1px solid rgba(99, 235, 206, 0.25);
-}
-
 .settings-btn {
   flex-shrink: 0;
   white-space: nowrap;
   font-size: 12.5px;
-  padding: 5px 12px;
-  min-height: 32px;
-  border-radius: 8px;
+  padding: 6px 11px;
+  min-height: 36px;
+  border-radius: 9px;
 }
 
-.today-status {
+.top-exercises-card {
+  background: var(--surface);
+  border: 1px solid #244740;
+  border-radius: 14px;
+  padding: 12px 14px;
+  margin-bottom: 10px;
+  background-image: linear-gradient(180deg, rgba(99, 235, 206, 0.06), rgba(99, 235, 206, 0));
+}
+
+.top-exercises-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.top-exercises-head h2 {
+  margin: 0;
+  font-size: 15px;
+  font-weight: 800;
+  letter-spacing: -0.3px;
+  white-space: nowrap;
+}
+
+.top-exercises-meta {
+  font-size: 11.5px;
   color: var(--muted);
-  font-size: 13px;
-  margin: 10px 0 4px;
+  white-space: nowrap;
+}
+
+.top-exercises-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.top-exercise-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 34px;
+  padding: 5px 10px;
+  border-radius: 9px;
+  background: rgba(12, 19, 31, 0.72);
+  border: 1px solid rgba(40, 52, 69, 0.85);
+  flex-wrap: nowrap;
+  overflow: hidden;
+}
+
+.top-rank-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  border-radius: 6px;
+  background: #1b2738;
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+  flex-shrink: 0;
+}
+
+.top-rank-badge.rank-1 {
+  background: rgba(255, 204, 0, 0.2);
+  color: #ffd54f;
+  border: 1px solid rgba(255, 204, 0, 0.45);
+}
+
+.top-rank-badge.rank-2 {
+  background: rgba(203, 213, 225, 0.16);
+  color: #e2e8f0;
+  border: 1px solid rgba(203, 213, 225, 0.35);
+}
+
+.top-rank-badge.rank-3 {
+  background: rgba(251, 146, 60, 0.18);
+  color: #fdba74;
+  border: 1px solid rgba(251, 146, 60, 0.4);
+}
+
+.top-exercise-name,
+.top-exercise-name-btn {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 13.5px;
+  font-weight: 650;
+  color: var(--text);
+}
+
+.top-exercise-name-btn {
+  display: block;
+  text-align: left;
+  background: transparent;
+  border: 0;
+  padding: 0;
+  min-height: 0;
+  border-radius: 4px;
+}
+
+.top-exercise-name-btn:hover {
+  color: var(--accent);
+  border-color: transparent;
+}
+
+.top-exercise-cat {
+  font-size: 10.5px;
+  color: #92a4bc;
+  background: #111a28;
+  border: 1px solid #23344a;
+  padding: 1px 6px;
+  border-radius: 999px;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.top-exercise-count {
+  font-size: 12.5px;
+  font-weight: 800;
+  color: var(--accent);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+  flex-shrink: 0;
 }
 
 /* ==========================================================================
@@ -273,14 +340,19 @@ input[type=checkbox] {
 }
 
 /* ==========================================================================
-   피드 및 카드
+   피드 및 한 줄 펼치기 리스트
    ========================================================================== */
 .list-heading {
   display: flex;
   justify-content: space-between;
   align-items: center;
   gap: 10px;
-  margin: 18px 0 10px;
+  margin: 14px 0 10px;
+}
+
+.list-heading h2 {
+  margin: 0;
+  font-size: 17px;
 }
 
 .list-heading span {
@@ -288,26 +360,178 @@ input[type=checkbox] {
   color: var(--muted);
 }
 
+.list-heading-actions {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.toggle-all-btn {
+  font-size: 11.5px;
+  padding: 4px 9px;
+  min-height: 28px;
+  border-radius: 7px;
+  white-space: nowrap;
+}
+
+.toggle-all-btn[aria-expanded="true"] .expand-label,
+.toggle-all-btn[aria-expanded="false"] .collapse-label {
+  display: none;
+}
+
 .feed {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
 }
 
 .workout-card {
   background: var(--surface);
   border: 1px solid var(--line);
-  border-radius: 16px;
-  padding: 18px;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
+  border-radius: 12px;
   overflow-wrap: anywhere;
   transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
 .workout-card:hover {
   border-color: #3b4d66;
+}
+
+.workout-card[open] {
+  border-color: #385866;
+}
+
+.workout-row-summary {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 44px;
+  padding: 9px 12px;
+  cursor: pointer;
+  user-select: none;
+  flex-wrap: nowrap;
+  overflow: hidden;
+}
+
+.workout-row-summary::-webkit-details-marker {
+  display: none;
+}
+
+.workout-row-summary::before {
+  content: "";
+  inline-size: 14px;
+  block-size: 14px;
+  flex-shrink: 0;
+  background-color: var(--accent);
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E") no-repeat center / contain;
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E") no-repeat center / contain;
+  rotate: -90deg;
+}
+
+details.workout-row[open] > .workout-row-summary::before {
+  rotate: 0deg;
+}
+
+.row-author {
+  font-size: 13.5px;
+  font-weight: 750;
+  color: var(--text);
+  white-space: nowrap;
+  flex-shrink: 0;
+  max-width: 42%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.row-summary-text {
+  flex: 1;
+  min-width: 0;
+  font-size: 12.5px;
+  color: var(--muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.row-meta {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+
+.row-like-badge {
+  font-size: 11.5px;
+  color: #ff7a98;
+  font-variant-numeric: tabular-nums;
+}
+
+.row-like-badge:empty {
+  display: none;
+}
+
+.row-date {
+  font-size: 11.5px;
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+}
+
+.row-toggle-label {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--accent);
+  background: rgba(99, 235, 206, 0.1);
+  border: 1px solid rgba(99, 235, 206, 0.25);
+  border-radius: 6px;
+  padding: 2px 6px;
+}
+
+details.workout-row[open] .row-toggle-label .label-open,
+details.workout-row:not([open]) .row-toggle-label .label-close {
+  display: none;
+}
+
+details.workout-row::details-content {
+  interpolate-size: allow-keywords;
+  overflow: clip;
+  contain: layout;
+}
+
+details.workout-row:not([open])::details-content {
+  block-size: 0;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .workout-row-summary::before {
+    transition: rotate 0.2s ease;
+  }
+  details.workout-row::details-content {
+    transition: block-size, content-visibility, display;
+    transition-duration: 0.24s;
+    transition-timing-function: ease-in-out;
+    transition-behavior: allow-discrete;
+  }
+}
+
+.workout-row-body {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 12px 14px 14px;
+  border-top: 1px solid var(--line);
+  background: rgba(11, 17, 27, 0.45);
+  border-radius: 0 0 12px 12px;
+}
+
+.row-body-badges {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+  min-width: 0;
 }
 
 .card-head {
@@ -319,24 +543,24 @@ input[type=checkbox] {
 
 .card-head time {
   color: var(--muted);
-  font-size: 12.5px;
+  font-size: 12px;
+  white-space: nowrap;
 }
 
 .card-summary {
-  font-size: 20px;
+  font-size: 15.5px;
   font-weight: 750;
 }
 
 .card-summary small {
   display: inline;
-  font-size: 12.5px;
+  font-size: 12px;
   font-weight: 400;
 }
 
 .exercise-names {
   color: var(--muted);
   margin: 0;
-  flex: 1;
   font-size: 13px;
   line-height: 1.5;
 }
@@ -912,34 +1136,45 @@ hr {
    미디어 쿼리 (모바일 최적화)
    ========================================================================== */
 @media (max-width: 640px) {
-  .feed { grid-template-columns: 1fr; }
   .panel { padding: 18px; }
   .brand { display: none; }
-  .hero { padding-top: 16px; }
-  .list-heading {
-    align-items: flex-start;
-    flex-direction: column;
-    gap: 2px;
-  }
-  .list-heading h2 { margin-bottom: 0; font-size: 18px; }
+  .hero { padding-top: 4px; }
+  .list-heading h2 { margin-bottom: 0; font-size: 16px; }
   dialog { padding: 16px; }
 }
 
 @media (max-width: 480px) {
   .community-shell { width: min(100% - 20px, 1040px); }
-  .sharing-bar {
-    padding: 7px 10px;
-    gap: 6px;
-  }
-  .profile-row { gap: 5px; }
-  .profile-avatar { font-size: 17px; }
-  .profile-nickname { font-size: 13.5px; }
-  .profile-level { font-size: 10px; padding: 2px 5px; }
-  .auto-badge { display: none; }
   .settings-btn {
     font-size: 11.5px;
+    padding: 5px 8px;
+    min-height: 32px;
+  }
+  .top-exercises-card {
+    padding: 10px 11px;
+  }
+  .top-exercise-row {
     padding: 4px 8px;
-    min-height: 28px;
+    gap: 6px;
+  }
+  .top-exercise-name,
+  .top-exercise-name-btn {
+    font-size: 13px;
+  }
+  .workout-row-summary {
+    padding: 8px 10px;
+    gap: 6px;
+  }
+  .row-author {
+    font-size: 13px;
+    max-width: 44%;
+  }
+  .row-summary-text {
+    font-size: 12px;
+  }
+  .row-toggle-label {
+    font-size: 10.5px;
+    padding: 2px 5px;
   }
   .detail-actions button {
     font-size: 11.5px;
